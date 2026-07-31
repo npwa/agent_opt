@@ -85,11 +85,24 @@ export OLLAMA_HOST=127.0.0.1:11435  # route through instrumentation proxy
 ollama launch opencode --model qwen3.6-32k`
 ```
 
-## Generate the report
+## Generate the initial report
 
 This will generate a Markdown report for each test showing TTFT, throughput, and resource utilization.
 
 ```bash
 python3 join_metrics.py
 python3 report.py
+```
+
+----
+
+## Quantization / GPU-layer-fit experiment
+
+The first pass on performance improvement is to reduce num_ctx (e.g., 16k instead of 32k) to
+make sure the quantization better fits the GeForce RTX 3080 10GB VRAM.  
+Create a new model:
+
+```
+ollama create qwen3.6-16k -f Modelfile2
+ollama launch opencode --model qwen3.6-16k
 ```
