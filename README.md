@@ -3,7 +3,18 @@
 ## Initial Assumptions for this Project
 
 The target user is a developer using a local agent for coding and some research/benchmarks,
-prioritizing privacy and offline capability over raw throughput.
+prioritizing privacy and offline capability over raw throughput. The initial assignment was
+to use `Panther Lake` system with 64 GB unified memory and Intel `Arc B390` but after entering
+CPM, I no longer had access to this hardware and relied on my home desktop with the
+following features:
+
+|Feature | Description|
+|------|-
+|CPU   | 11th Gen Intel Core i7-11700K @ 3.60GHz |
+|Memory| 64GiB, 4 x 16GiB DIMM DDR4 Synchronous 2667 MHz (0.4 ns) |
+|Disk  | 1TB NVME (64 bits, 33MHz); 2TB SSD |
+|GPU   | Nvidia GeForce RTX 3080 - 10G VRAM |
+
 
 ## Model selection
 
@@ -11,7 +22,7 @@ Initially, I used `qwen2.5:14b-instruct` but this model doesn't fully fit into m
 so a large chunk was running on CPU. This led to sluggish performance, about 4.47 tokens per
 second. I should expect more than 40tok/s if the model fits into VRAM.
 
-The model `qwen2.5:14b-instruct-q4_K_M` performed better on the sample prompt `produce a c-code
+The model `qwen2.5:14b-instruct-q4_K_M` performed better on the sample prompt `produce a C-code
 function to calculate the square root of a floating-point number` and I saw it processing the prompt
 1423.73 tok/s and generating 31.63 tok/s. 
 
@@ -67,11 +78,11 @@ Per-query performance metrics (time-to-first-token, input/output tok/s, and GPU/
 Setup instrumentation:
 1. Set up proxy to track the timing of API calls for each test.
 ```
-python3 metrics_proxy.py   # terminal 1 — leave running
+python3 metrics_proxy.py        # terminal 1 — leave running
 ```
 2. Start the sampler to record usage stats.
 ```
-rm samples.csv ; python3 sampler.py     # terminal 2 — leave running
+rm samples.csv ; python3 sampler.py   # terminal 2 — leave running
 ```
 3. Record the test name before each run so reports are grouped by test.
 ```
@@ -96,13 +107,100 @@ python3 report.py
 
 ----
 
-## Quantization / GPU-layer-fit experiment
+## First pass: Quantization / GPU-layer-fit experiment
 
-The first pass on performance improvement is to reduce num_ctx (e.g., 16k instead of 32k) to
-make sure the quantization better fits the GeForce RTX 3080 10GB VRAM.  
+I attempted a performance improvement to reduce num_ctx (e.g., 16k instead of 32k) to
+make sure the quantization better fits the GeForce RTX 3080 10GB VRAM with less need to offload inference to CPU.
+
 Create a new model:
 
 ```
 ollama create qwen3.6-16k -f Modelfile2
 ollama launch opencode --model qwen3.6-16k
+```
+
+## Second Pass: enable Web search, add to MCP for OpenCode
+
+I selected a self-hosted SearXNG instance (the actual search engine), and an MCP bridge that
+exposes it to OpenCode as a tool. SearXNG's default config only returns HTML, so I added a
+custom `settings.yml` to explicitly enable JSON format.
+
+```bash
+mkdir -p ~/work/searxng-config
+cat > ~/work/searxng-config/settings.yml << EOF
+use_default_settings: true
+search:
+  formats:
+    - html
+    - json
+server:
+  secret_key: "AgenitcPoniesinthewinter"
+  limiter: false
+outgoing:
+  request_timeout: 10.0
+  max_request_timeout: 15.0
+  proxies:
+    all://:
+      - http://proxy-dmz.intel.com:911
+  extra_proxy_timeout: 10
+EOF
+```
+
+Then start the docker on port 8090 since port 8080 is taken by Ollama web UI
+
+```bash
+docker run -d --name searxng -p 8090:8080  \
+  -v ~/work/searxng-config/settings.yml:/etc/searxng/settings.yml:ro  \
+  searxng/searxng
+```
+
+> use `curl "http://localhost:8090/search?q=test&format=json"` to verify it's serving JSON correctly.
+
+Once it is running, we can add it as MCP bridge to OpenCode:
+
+```bash
+opencode mcp add
+```
+
+When prompted:  
+- Name: `searxng`  
+- Command: `npx -y mcp-searxng`  
+
+Since it's not letting us enter the environment, we need to edit the config file manually as follows:
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": "allow",
+  "provider": {
+    ... 
+ },
+  "mcp": {
+    "searxng": {
+      "type": "local",
+	"command": ["npx", "-y", "mcp-searxng"],
+	"environment": {
+	    "SEARXNG_URL": "http://localhost:8090"
+	},
+	"enabled": true
+    }
+  }
+}
+
+```
+
+This command to confirm it is registered correctly:
+
+```bash
+opencode mcp list
+```
+
+Expected output:
+```
+┌  MCP Servers
+│
+●  ✓ searxng connected
+│      npx -y mcp-searxng
+│
+└  1 server(s)
 ```

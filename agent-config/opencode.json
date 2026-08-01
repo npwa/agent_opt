@@ -9,11 +9,21 @@
         "baseURL": "http://localhost:11435/v1"
       },
       "models": {
-        "qwen3.6": {
-           "name": "qwen3.6-32k",
-	   "tool_call": true
-        }
+          "qwen2.5:14b-instruct": {
+              "name": "qwen2.5:14b-instruct",
+	      "tool_call": true
+          }
       }
+    }
+  },
+  "mcp": {
+    "searxng": {
+      "type": "local",
+	"command": ["npx", "-y", "mcp-searxng"],
+	"environment": {
+	    "SEARXNG_URL": "http://localhost:8090"
+	},
+	"enabled": true
     }
   }
 }
