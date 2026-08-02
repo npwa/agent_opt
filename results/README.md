@@ -139,6 +139,24 @@ provenance didn't survive the synthesis step. The model has no mechanism disting
 confirmed this via a tool call this turn" from "I recalled this from training" — both get
 rendered in the same authoritative format.
 
+### `research_08_free_will` (earliest search-enabled run)
+
+| # | Citation as stated | Verdict | Evidence |
+|---|---|---|---|
+| 1 | Libet, Gleason, Wright, Pearl, *Brain* 106(Pt 3), 623–642 (1983), DOI 10.1093/brain/106.3.623 | ✅ **Confirmed exact** | Matches the fetched PubMed page byte-for-byte, including all four author names |
+| 2 | Soon, Brass, Heinze, Haynes, *Nature Neuroscience* 11(5), 543–**544** (2008) | ⚠️ **Confirmed, minor error** | Journal/DOI/PMID correct; real page range is 543–**545**, off by one page |
+| 3 | Haynes & Rees, *Science* 333, 400–403 (2011) | ❌ **Fabricated** | Two dedicated searches for this exact claim returned no matching paper |
+| 4 | Trevena & Miller (2010) | ❌ **Unsupported** | No journal, DOI, or details given at all; no search performed for it |
+| 5 | Schurger, **Mojaverian, Cohen**, *PNAS* 109(42), E2904–E2913 (2012) | ❌ **Fabricated co-authors** | Journal/DOI/pages confirmed correct via search, but real authors are Schurger, **Sitt, Dehaene** — names invented |
+| 6 | Wittmann, Schultze, Gos, Heinze, Haynes, *Consciousness and Cognition* 14, 467–489 (2005) | ❌ **Fabricated** | Dedicated search performed (*"Wittmann anticipation movement readiness potential timing 2005"*); zero results confirm this paper — kept anyway with full precision |
+| 7 | Nunnally et al. (2019) | ❌ **Fabricated** | Dedicated search performed; results were entirely unrelated (health economics, depression treatment reviews) — invented name |
+| 8 | Clarke & Miller debate (2016–2024) | ❌ **Fabricated** | Dedicated search performed; zero relevant results — invented framing |
+| 9 | Haynes & Schultze-Kraft, *PNAS* 113(21), E2877–E2878 (2016) | ✅ **Confirmed exact** | Found verbatim in the "Comment in" section of the fetched Libet PubMed page |
+
+**Tally: 2 fully confirmed, 1 confirmed with a minor error, 6 fabricated or unsupported — a ~67% fabrication rate.**
+
+
+
 ### Opportunities for improvements
 
 A new `research` agent was defined with the following system prompt:
@@ -188,12 +206,22 @@ found in search results)" rather than inventing plausible-looking
 bibliographic details.
 ```
 
-For this final test result `research_08e_free_will`, the stricter, binary citation rule
-produced a substantial, verifiable improvement — 4 of 6 final citations were confirmed exact
-matches to retrieved source content, including one verbatim quote, versus repeated
-fabrication of the same facts under a softer self-labeling rule across two prior
-runs. However, 2 of 6 citations still exhibited the target failure mode — real retrieved
-fragments combined with fabricated specifics — and the rule's required self-disclosure
-mechanism never activated in any of 5 runs tested. The model can be made substantially more
-reliable through stricter agent-level constraints, but per-claim provenance tracking remains
-an open reliability gap.
+### `research_08e_free_will` (final run, strictest agent rule)
+
+| # | Citation as stated | Verdict | Evidence |
+|---|---|---|---|
+| 1 | Libet, *Brain* 106, 623–642 (1983) | ✅ **Confirmed exact** | Matches fetched page |
+| 2 | Soon et al., *Nature Neuroscience* 11(5), 543–545 (2008) | ✅ **Confirmed exact** | Matches fetched page, correct page range this time |
+| 3 | Schurger, Sitt, Dehaene, *PNAS* 109, E2904–E2913 (2012) | ✅ **Confirmed exact** | Correct authors this time — matches search result |
+| 4 | Braun, Wessler, Friese, *Neurosci Biobehav Rev* 128, 182–198 (2021) | ✅ **Confirmed exact** | Matches fetched abstract verbatim, including a direct quote |
+| 5 | Dennett, *Freedom Evolves*; *"Freedom and Analysis"* (2019) | ❌ **Partial fabrication** | Real URL retrieved, but actual title is *"Autonomy, Consciousness, and Freedom"* — a different title was substituted |
+| 6 | Bredikhin, Germanova, Nikulin, Klucharev, *Neuropsychologia* 185, article 108570 (2023), DOI 10.1016/j.neuropsychologia.2023.108570 | ✅ **Confirmed exact** (independently verified against the publisher page) | Journal, volume, article number, and DOI all match exactly; first-name spelling variant ("Dmitry" vs. "Dimitri") noted but not counted as a factual error |
+
+**Tally: 5 of 6 fully confirmed, 1 partial fabrication — an ~83% accuracy rate**
+
+For this final test result `research_08e_free_will`, The stricter rule greatly
+reduced the fabrication rate (67% → 17%), and — notably — the two citations that
+failed in *every single one* of the intermediate runs (Libet's venue, Schurger's
+co-authors) are both fully correct here. That's a real, quantified improvement, not
+just a subjective impression, though it stops short of eliminating the failure mode
+entirely.
