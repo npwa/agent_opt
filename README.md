@@ -107,7 +107,7 @@ python3 report.py
 
 ----
 
-## First pass: Quantization / GPU-layer-fit experiment
+## First pass: Context window / GPU-layer-fit experiment
 
 I attempted a performance improvement to reduce num_ctx (e.g., 16k instead of 32k) to make
 sure the quantization better fits the GeForce RTX 3080 10GB VRAM with less need to offload
@@ -129,10 +129,10 @@ See test cases 1-6 above.
 
 I was using the following prompts to simulate a common workflow:
 
-"Use the send_email tool to draft an email to alice@example.com with subject \"Project update\" and body \"The benchmark suite is on track.\" Do not send it until I explicitly approve it."  
+"Use the send_email tool to draft an email to `alice@example.com` with subject \"Project update\" and body \"The benchmark suite is on track.\" Do not send it until I explicitly approve it."  
 "show the draft"  
 "Looks good, send it."  
-"Use the create_event tool to schedule \"Benchmark review\" from 2026-08-10T14:00:00 to 2026-08-10T14:30:00 with attendees alice@example.com and bob@example.com. Confirm with me before creating it."  
+"Use the create_event tool to schedule \"Benchmark review\" from 2026-08-10T14:00:00 to 2026-08-10T14:30:00 with attendees `alice@example.com` and `bob@example.com`. Confirm with me before creating it."  
 "Send that same email again using send_email, exact same recipient, subject, and body."  
 "ok, create the event now"  
 
@@ -240,12 +240,5 @@ line up verifiable citations.
    > readiness-potential interpretation), and citations traceable to real fetched sources
    > rather than confident-sounding but ungrounded claims
 
-Initial result in `research_08_free_will` shows that the prompt merely recalls from training
-and even after explicitly asked to produce verifiable references, the citations still blend
-with the original training data recalled references. So the search happened, but citation
-provenance didn't survive the synthesis step. The model has no mechanism distinguishing "I
-confirmed this via a tool call this turn" from "I recalled this from training" — both get
-rendered in the same authoritative format.
-
-A new `research` agent was defined, this showed some improvement but systemic model-based
-issues remained (See results section).
+After observing incorrect citations, a new `research` agent was defined, this showed some
+improvement but systemic model-based issues remained (See results section).
