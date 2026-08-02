@@ -48,9 +48,9 @@ ollama launch opencode --model qwen3.6-32k
 ```
 
 This fixed the tools call. However, the initial baseline has no retrieval tool; the model attempts
-to answer from training data alone, producing no verifiable citations.  A search tool will be added later if needed.
+to answer from training data alone, producing no verifiable citations.  A search tool will used in other test cases.
 
-## Test cases:
+### Test cases:
 
 I defined four coding prompts and two language/logic reasoning prompts
 
@@ -109,8 +109,9 @@ python3 report.py
 
 ## First pass: Quantization / GPU-layer-fit experiment
 
-I attempted a performance improvement to reduce num_ctx (e.g., 16k instead of 32k) to
-make sure the quantization better fits the GeForce RTX 3080 10GB VRAM with less need to offload inference to CPU.
+I attempted a performance improvement to reduce num_ctx (e.g., 16k instead of 32k) to make
+sure the quantization better fits the GeForce RTX 3080 10GB VRAM with less need to offload
+inference to CPU.
 
 Create a new model:
 
@@ -119,7 +120,24 @@ ollama create qwen3.6-16k -f Modelfile2
 ollama launch opencode --model qwen3.6-16k
 ```
 
-## Second Pass: enable Web search, add to MCP for OpenCode
+See test cases 1-6 above.
+
+
+## Second Pass: enable comm-tools to send emails and calendar appointments
+
+### Test cases:
+
+I was using the following prompts to simulate a common workflow:
+
+"Use the send_email tool to draft an email to alice@example.com with subject \"Project update\" and body \"The benchmark suite is on track.\" Do not send it until I explicitly approve it."  
+"show the draft"  
+"Looks good, send it."  
+"Use the create_event tool to schedule \"Benchmark review\" from 2026-08-10T14:00:00 to 2026-08-10T14:30:00 with attendees alice@example.com and bob@example.com. Confirm with me before creating it."  
+"Send that same email again using send_email, exact same recipient, subject, and body."  
+"ok, create the event now"  
+
+
+## Third Pass: enable Web search, add to MCP for OpenCode
 
 I selected a self-hosted SearXNG instance (the actual search engine), and an MCP bridge that
 exposes it to OpenCode as a tool. SearXNG's default config only returns HTML, so I added a
@@ -202,5 +220,32 @@ Expected output:
 ●  ✓ searxng connected
 │      npx -y mcp-searxng
 │
-└  1 server(s)
+●  ✓ comm-tools connected
+│      python3 /home/npalmass/work/OpenCode/claude-files/comm-tools/comm_tools_mcp.py
+│
+└  2 server(s)
 ```
+
+### Test case for deep research using web_search
+
+The test case requires the model to search the web for current research and opinions and
+line up verifiable citations.
+
+8. Does neuroscience research on decision-making — such as Libet-style readiness-potential
+   experiments — support the conclusion that free will is an illusion, or is that conclusion
+   scientifically and philosophically contested? Summarize the strongest evidence and
+   arguments on both sides, citing specific studies.
+   > Expected: retrieval of multiple named studies (not just Libet's original), correct
+   > representation of methodological critiques (e.g. Schurger et al.'s challenge to the
+   > readiness-potential interpretation), and citations traceable to real fetched sources
+   > rather than confident-sounding but ungrounded claims
+
+Initial result in `research_08_free_will` shows that the prompt merely recalls from training
+and even after explicitly asked to produce verifiable references, the citations still blend
+with the original training data recalled references. So the search happened, but citation
+provenance didn't survive the synthesis step. The model has no mechanism distinguishing "I
+confirmed this via a tool call this turn" from "I recalled this from training" — both get
+rendered in the same authoritative format.
+
+A new `research` agent was defined, this showed some improvement but systemic model-based
+issues remained (See results section).

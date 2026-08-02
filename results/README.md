@@ -82,3 +82,118 @@ a garbled tool call) and a real verification-integrity regression (`dir_stats`, 
 it didn't visibly run). That's a stronger, more nuanced finding than "16k is faster" — it
 suggests the latency/GPU-utilization improvement from the first comparison may come with a
 reliability cost on tool-call formatting and self-verification.
+
+----
+
+## Communication tools test
+
+The MCP tool `comm_tools_mcp.py` was used to simulate email and calendar communication
+workflows.  An earlier version of `comm_tools_mcp.py` failed the duplicate-detection testing
+because the model reformatted a semantically-identical attendee list differently across two
+separate confirmed calls (whitespace and ordering), producing different hashes and allowing a
+duplicate calendar event through. This was fixed by normalizing list-valued fields before
+hashing.
+
+While the recorded run `comms_07_confirm_send` was successful, the model goes twice into an
+elaborate, entirely fabricated tangent — inventing a fictitious tool error ("Got a weird
+response from a tool") and invented system date ("Sun May 09 2025" vs. "September 10,
+2026"). Despite this, the model still landed on the correct final action both times.
+
+### Opportunities for improvements
+
+**Call count is high relative to the actual work done.** `report-comm.md` shows **36 model
+calls** for a workflow that's conceptually four tool invocations (preview email, confirm
+email, preview event, confirm event) plus a handful of user turns. Looking at the transcript,
+the pattern is consistent: after almost every tool call, the model spends a second, separate
+generation call just to restate the tool's own output in prose — e.g., calling `send_email`,
+then immediately generating a whole new turn that says nothing more than "Email drafted but
+not sent." That's a real, avoidable doubling of calls (and therefore latency and GPU/CPU time)
+for information the tool output already contained
+
+The GPU (38%)/CPU (29%) utilization for this task set looks consistent with earlier benchmarks.
+
+Reducing the call count could have been accomplished by instructing the user to use specifc
+phrasing in the prompt to avoid extra tools calls, but I did not want to burden the user and
+instead decided to use a dedicated custom agent for this task, with a specific system prompt
+that gets loaded into every session automatically. `~/.config/opencode/agent/comms.md`. The
+command `opencode agent list` will then show `comms` listed as `primary`.
+
+Unfortunately, `ollama launch opencode --agent comms` is not supported by the version of
+ollama I was using, so I had to use opencode on the command line and use `--continue` to stay
+in the same session during repeated calls. The log file of the second run
+`comms_07b_confirm_send` was `session-terminal_78f.md`.
+
+**Bottom line:** using a specific system prompt was successful in reducing the number of model
+calls from 36 to 12 calls — a 67% reduction. As expected, GPU, CPU, and RAM utilization all
+stayed in the same range across both runs, but the practical impact is total wall-clock time
+for the whole workflow, which the per-call averages don't show directly: 36 calls × 14.8s ≈
+533s (~8.9 min) before, versus 12 calls × 16.52s ≈ 198s (~3.3 min) after — roughly a **63%
+reduction in total time to complete the same task sequence.**
+
+## Deep research test
+
+Initial result in `research_08_free_will` shows that the prompt merely recalls from training
+and even after explicitly asked to produce verifiable references, the citations still blend
+with the original training data recalled references. So the search happened, but citation
+provenance didn't survive the synthesis step. The model has no mechanism distinguishing "I
+confirmed this via a tool call this turn" from "I recalled this from training" — both get
+rendered in the same authoritative format.
+
+### Opportunities for improvements
+
+A new `research` agent was defined with the following system prompt:
+
+```
+For any question requiring citation of specific studies, papers, or
+sources, use the searxng_searxng_web_search tool before producing any
+claims — do not answer from memory first.
+
+Verification is per-claim, not per-turn: having searched once this
+session does not verify every citation you go on to mention. For each
+specific citation (author, year, title, or finding) in your final
+answer, you must have either (a) retrieved that specific claim via a
+search or web_url_read call this turn, with the result actually
+supporting it, or (b) labeled it "(unverified — from training data)".
+If a search for a specific claim comes back without confirming it, do
+not keep the claim as-is — either search again with different terms,
+drop it, or label it unverified.
+```
+
+This method showed intial promise, but it exhausted the context window and generated output
+was cut off after only 74 tokens.  So I increased the context window to 64k and tried again.
+
+Over three runs, this system prompt made little difference, citations were still mangled
+with incorrect details from training data. Likely the result of model quality and overal
+parameter size.
+
+In the final run, I modified the research system prompt to be even more strict:
+
+```
+You must use the searxng_searxng_web_search tool before making any factual
+or citation claim in your answer — do not answer from memory first.
+
+Every citation you include (author names, publication year, journal or
+venue, title, page numbers, DOI) must come DIRECTLY from text you
+actually retrieved this turn via searxng_searxng_web_search or
+searxng_web_url_read. Do not reconstruct, guess, or complete a citation
+from memory, even partially. Do not fill in an author's name, a journal
+title, or a page range unless that exact detail appeared verbatim in a
+search result or fetched page you retrieved this turn — mixing a
+correctly-remembered detail with a guessed one is not allowed.
+
+If you cannot find the specific bibliographic details for a study in
+your search results, do not produce a formal citation for it. Instead,
+describe the finding in plain language and write "(citation details not
+found in search results)" rather than inventing plausible-looking
+bibliographic details.
+```
+
+For this final test result `research_08e_free_will`, the stricter, binary citation rule
+produced a substantial, verifiable improvement — 4 of 6 final citations were confirmed exact
+matches to retrieved source content, including one verbatim quote, versus repeated
+fabrication of the same facts under a softer self-labeling rule across two prior
+runs. However, 2 of 6 citations still exhibited the target failure mode — real retrieved
+fragments combined with fabricated specifics — and the rule's required self-disclosure
+mechanism never activated in any of 5 runs tested. The model can be made substantially more
+reliable through stricter agent-level constraints, but per-claim provenance tracking remains
+an open reliability gap.
