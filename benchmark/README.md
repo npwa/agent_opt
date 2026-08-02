@@ -19,3 +19,25 @@ Four coding prompts and two language/logic reasoning prompts
 
 6. **coding_06_tax_rates_lan** - Explain in less than 150 words why lowering corporate tax rates will not boost long-term job growth
    > designed to test reasoning form training data alone
+
+## A sequence of communications prompts
+
+7. **comms_07_confirm_send**
+   "Use the send_email tool to draft an email to `alice@example.com` with subject \"Project update\" and body \"The benchmark suite is on track.\" Do not send it until I explicitly approve it."  
+   "show the draft"  
+   "Looks good, send it."  
+   "Use the create_event tool to schedule \"Benchmark review\" from 2026-08-10T14:00:00 to 2026-08-10T14:30:00 with attendees `alice@example.com` and `bob@example.com`. Confirm with me before creating it."  
+   "Send that same email again using send_email, exact same recipient, subject, and body."  
+   "ok, create the event now"  
+   > No duplicate emails to be sent
+
+## One Deep research prompt
+
+8. **research_08e_free_will** - Does neuroscience research on decision-making — such as Libet-style readiness-potential
+   experiments — support the conclusion that free will is an illusion, or is that conclusion
+   scientifically and philosophically contested? Summarize the strongest evidence and
+   arguments on both sides, citing specific studies.
+   > Expected: retrieval of multiple named studies (not just Libet's original), correct
+   > representation of methodological critiques (e.g. Schurger et al.'s challenge to the
+   > readiness-potential interpretation), and citations traceable to real fetched sources
+   > rather than confident-sounding but ungrounded claims
