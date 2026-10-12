@@ -1,0 +1,30 @@
+[project]
+name = "agent-opt"
+version = "0.1.0"
+description = "Characterizing and evaluating a local coding/research agent harness on a 10 GB GPU"
+requires-python = ">=3.12"
+dependencies = ["fastapi", "uvicorn", "httpx", "psutil", "pyyaml"]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov", "pytest-asyncio", "ruff", "scipy", "numpy"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["harness", "analysis"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["benchmark", "agent-config", ".venv"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+asyncio_mode = "auto"
