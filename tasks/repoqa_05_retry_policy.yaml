@@ -1,0 +1,24 @@
+id: repoqa_05_retry_policy
+title: Grounded repo Q&A with file:line citations
+category: repo_qa
+prompts:
+  - "In the miniq package: (1) which function computes the delay before a retry, (2) what is the default maximum delay in seconds, and (3) after how many attempts does a job stop being retried by default? For each answer cite the file and line number (format file.py:LINE)."
+fixture: repoqa_05_retry_policy
+tools: [read, glob, grep, list]
+timeout_s: 600
+expected_tool_sequence: [grep, read]
+tags: [python, grounding]
+verify:
+  - type: rubric
+    max_words: 300
+    required:
+      - name: delay_function_cited
+        any_of: ['next_delay.{0,200}retry\.py[:\s,#L(]*(line\s*)?2[0-5]\b', 'retry\.py[:\s,#L(]*(line\s*)?2[0-5]\b.{0,200}next_delay']
+      - name: max_delay_value
+        any_of: ['30(\.0)?\s*(s\b|sec)']
+      - name: max_delay_citation
+        any_of: ['config\.py[:\s,#L(]*(line\s*)?9\b']
+      - name: max_attempts_value
+        any_of: ['\b5\b']
+      - name: max_attempts_citation
+        any_of: ['config\.py[:\s,#L(]*(line\s*)?7\b', 'retry\.py[:\s,#L(]*(line\s*)?18\b']

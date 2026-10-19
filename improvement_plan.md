@@ -22,6 +22,12 @@ CI/CD and local agentic deployment).
   M0 adjustments: manifest now records the project-local llama.cpp commit (`LLAMA_CPP_DIR`, default `~/work/agent_opt_ad/llama.cpp`); `.gitignore` covers editor backup/lock files.
   Prompt changes vs v0: tasks 02–04 now name the output file and use relative paths (workdir is a temp copy of the fixture); task 03 writes `compress.c`.
 
+- **M1 step 2 done (2026-10-18):** six new tasks (`bugfix_01`, `refactor_02`, `c_ringbuf_03`, `logtriage_04`, `repoqa_05`, `longctx_06`) → suite is 14 tasks. Fixtures in `fixtures/tasks/`, hidden verifier assets and deterministic generators in `fixtures/verify/`. Schema gained `py_test` (hidden stdlib-unittest file) and `setup` (commands run in the workdir before the agent, e.g. log generation). Python fixtures use stdlib `unittest`, since the box has no system pytest.
+  Reference ring buffer for golden-good kept in `fixtures/golden/`. Not yet validated against real runs: rubric regexes for tasks 04–06 (calibration in step 4).
+
+- **M1 step 3 done (2026-10-18):** verifiers for all 14 tasks in `harness/verifiers/` (`rubric`, `compile_run`, `c_test`, `py_test`, `command`, `comms`), `harness/sandbox.py` (rlimits, process-group kill, scratch copies), `harness/workdir.py` (fixture + `setup`), CLI `python -m harness.verifiers <task> <workdir>`. Golden-good/bad fixtures in `fixtures/golden/` (every task has ≥1 good and ≥1 bad; 37 variants); 93 tests, 86 % coverage.
+  Notes: network isolation (`unshare -rn`) is unavailable on this box, so verifier runs are limited by rlimits only (`RunResult.network_isolated` records it). C hidden tests are built with ASan/UBSan (the first ring-buffer bad variant passed without it). Comms verifier reads `email_store.json`/`calendar_store.json`; **M2 runner must give each trial its own comm-tools state dir** (the MCP server currently writes stores and the dedup file next to its script).
+
 ---
 
 ## 1. Where the project stands today

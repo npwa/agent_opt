@@ -1,0 +1,28 @@
+id: logtriage_04_pool_exhaustion
+title: Find the root cause of an outage in a 5 MB log
+category: log_triage
+prompts:
+  - "The file app.log (about 5 MB, one day of service logs) contains an outage. Do not read the whole file into context; use grep/sed/awk. Tell me: (1) when the first real error burst started and on which host, (2) the root cause, and (3) which batch job or user is responsible. Ignore unrelated noise."
+setup:
+  - "python3 $TASK_VERIFY_DIR/gen_log.py ."
+tools: [read, bash, glob, grep, list]
+timeout_s: 1200
+expected_tool_sequence: [grep]
+tags: [log, tools, large-file]
+verify:
+  - type: rubric
+    max_words: 400
+    required:
+      - name: start_time
+        any_of: ["03:17:4[0-9]"]
+      - name: first_host
+        any_of: ["api-07"]
+      - name: root_cause
+        any_of: ["pool exhaust", "connection pool", "out of connections", "connections exhausted"]
+      - name: culprit_job
+        any_of: ["reconcile-ledger"]
+      - name: culprit_user
+        any_of: ["svc-batch"]
+    forbidden:
+      - name: red_herring_as_cause
+        regex: "(?i)root cause[^.\\n]{0,80}TLS"

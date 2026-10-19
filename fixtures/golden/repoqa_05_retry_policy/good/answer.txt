@@ -1,0 +1,1 @@
+(1) RetryPolicy.next_delay in miniq/retry.py:20 computes the exponential backoff (see retry.py:22-23). (2) The default maximum delay is 30.0 seconds, set by RETRY_MAX_DELAY_S at config.py:9. (3) Jobs stop being retried after 5 attempts (RETRY_MAX_ATTEMPTS, config.py:7; checked in retry.py:18).

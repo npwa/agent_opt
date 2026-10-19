@@ -1,0 +1,1 @@
+The function is not correct. It does not handle negative input (a negative value is outside the domain and the loop misbehaves). The tolerance is an absolute epsilon that does not scale with the magnitude of x, so large or tiny values converge badly. It can also loop forever (infinite loop) when the iteration never converges within the tolerance.

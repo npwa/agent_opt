@@ -16,6 +16,8 @@ Schema (all unknown keys are rejected):
     category: code_gen                  # one of CATEGORIES
     prompts: [ "..." ]                  # >= 1 user turns, sent in order
     fixture: coding_02_fizzbuzz_gen     # optional dir under fixtures/tasks/, copied to a temp workdir
+    setup: ["python3 $TASK_VERIFY_DIR/gen_log.py ."]  # optional shell commands run in the workdir
+                                        # before the agent starts; $TASK_VERIFY_DIR = hidden assets
     agent: default                      # OpenCode agent name
     tools: [bash, read, write, edit]    # optional allow-list of built-in tools (omit = all)
     mcp: [searxng]                      # optional MCP servers the task may use
@@ -51,11 +53,12 @@ VERIFIERS: dict[str, tuple[set[str], set[str]]] = {
     "rubric": (set(), {"target", "min_words", "max_words", "required", "forbidden"}),
     "compile_run": ({"sources"}, {"cflags", "expect_lines", "expect_exit", "run_timeout_s"}),
     "c_test": ({"sources", "test_source"}, {"cflags", "run_timeout_s"}),
+    "py_test": ({"test_source"}, {"run_timeout_s"}),
     "command": ({"cmd"}, {"expect_exit", "stdout_contains", "run_timeout_s"}),
     "python": ({"callable"}, {"args"}),
 }
 TOP_REQUIRED = {"id", "title", "category", "prompts", "timeout_s", "verify"}
-TOP_OPTIONAL = {"fixture", "agent", "tools", "mcp", "env", "expected_tool_sequence", "tags"}
+TOP_OPTIONAL = {"fixture", "setup", "agent", "tools", "mcp", "env", "expected_tool_sequence", "tags"}
 
 
 class TaskSpecError(ValueError):
@@ -75,6 +78,7 @@ class TaskSpec:
     timeout_s: int
     verify: list[dict[str, Any]]
     fixture: str | None = None
+    setup: list[str] = field(default_factory=list)
     agent: str = "default"
     tools: list[str] | None = None
     mcp: list[str] = field(default_factory=list)
@@ -203,7 +207,7 @@ def validate_spec(data: Any, *, filename_stem: str | None = None) -> list[str]:
             for t in data["tools"]:
                 if t not in TOOLS:
                     errs.append(f"tools: unknown tool '{t}' (expected one of {sorted(TOOLS)})")
-    for k in ("mcp", "tags"):
+    for k in ("mcp", "tags", "setup"):
         if k in data and not _is_str_list(data[k]):
             errs.append(f"{k}: must be a list of strings")
     if "expected_tool_sequence" in data and not _is_str_list(data["expected_tool_sequence"]):
@@ -253,7 +257,7 @@ def check_assets(spec: TaskSpec, fixtures_root: Path, verify_root: Path) -> list
     if spec.fixture and not (Path(fixtures_root) / spec.fixture).is_dir():
         errs.append(f"{spec.id}: fixture dir '{fixtures_root}/{spec.fixture}' not found")
     for v in spec.verify:
-        if v["type"] == "c_test" and not (Path(verify_root) / spec.id / v["test_source"]).is_file():
+        if v["type"] in ("c_test", "py_test") and not (Path(verify_root) / spec.id / v["test_source"]).is_file():
             errs.append(f"{spec.id}: test_source '{verify_root}/{spec.id}/{v['test_source']}' not found")
     return errs
 

@@ -52,6 +52,8 @@ NEGATIVE = {
     "rubric_bad_regex": (
         mutate(verify=[{"type": "rubric", "required": [{"name": "x", "any_of": ["("]}]}]), "valid regexes"),
     "rubric_min_gt_max": (mutate(verify=[{"type": "rubric", "min_words": 9, "max_words": 3}]), "min_words > max_words"),
+    "bad_setup": (mutate(setup="echo hi"), "setup"),
+    "py_test_missing_source": (mutate(verify=[{"type": "py_test"}]), "requires 'test_source'"),
     "bad_env": (mutate(env={"A": 1}), "env"),
     "not_a_mapping": (["a"], "top level must be a mapping"),
 }
@@ -108,7 +110,9 @@ def test_check_assets_reports_missing(tmp_path):
 def test_committed_tasks_are_valid_and_complete():
     specs = taskspec.load_all(TASKS)
     ids = {s.id for s in specs}
-    assert len(specs) == 8
+    assert len(specs) == 14
+    assert {s.category for s in specs} >= {
+        "bugfix", "refactor", "log_triage", "repo_qa", "long_context", "code_gen"}
     assert {"coding_01_my_sqrt_review", "comms_07_confirm_send", "research_08e_free_will"} <= ids
     for s in specs:
         assert taskspec.check_assets(s, ROOT / "fixtures/tasks", ROOT / "fixtures/verify") == []

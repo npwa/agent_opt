@@ -1,0 +1,26 @@
+id: longctx_06_tidal_report
+title: Summarise a ~12k-token report (stresses num_ctx)
+category: long_context
+prompts:
+  - "Read report.md completely and write a summary of at most 200 words. It must cover: the main equipment failure and its cause, total energy delivered, the budget outcome, the environmental finding, the recommendation by the lead engineer, and the final decision."
+fixture: longctx_06_tidal_report
+tools: [read, glob, list]
+timeout_s: 1200
+expected_tool_sequence: [read]
+tags: [long-context, summarisation]
+verify:
+  - type: rubric
+    max_words: 220
+    required:
+      - name: failure_cause
+        any_of: ["bearing seal", "seal.{0,40}corro", "corro.{0,40}seal"]
+      - name: energy
+        any_of: ['18\.7']
+      - name: budget
+        any_of: ['12\.4', '4\.55']
+      - name: environment
+        any_of: ['no (statistically )?significant', 'p ?= ?0\.41', 'no measurable']
+      - name: engineer_recommendation
+        any_of: ["duplex", "Marchetti"]
+      - name: decision
+        any_of: ["Phase 2.{0,120}(approved|contingent)", "(approved|contingent).{0,120}Phase 2"]

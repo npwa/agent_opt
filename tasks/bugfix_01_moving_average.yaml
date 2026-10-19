@@ -1,0 +1,13 @@
+id: bugfix_01_moving_average
+title: Fix a failing unit test (off-by-one in moving average)
+category: bugfix
+prompts:
+  - "The tests in test_stats_utils.py are failing. Run them with 'python3 -m unittest', find the bug in stats_utils.py and fix it. Do not modify the tests."
+fixture: bugfix_01_moving_average
+tools: [read, write, edit, bash, glob, grep, list]
+timeout_s: 900
+expected_tool_sequence: [bash, read, edit, bash]
+tags: [python, short]
+verify:
+  - type: py_test
+    test_source: test_hidden.py

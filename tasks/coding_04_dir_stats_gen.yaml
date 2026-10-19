@@ -16,3 +16,7 @@ verify:
   - type: command
     cmd: "bash dir_stats.sh /nonexistent_dir_for_test"
     expect_exit: 1
+  - type: command
+    cmd: "mkdir -p t/sub1 t/sub2 && printf abc > t/a && printf defgh > t/b && : > t/c && printf zz > t/sub1/deep && bash dir_stats.sh t"
+    expect_exit: 0
+    stdout_contains: ["Files: 3", "Directories: 2", "Total Size: 8 bytes"]

@@ -1,0 +1,19 @@
+id: refactor_02_rename_price
+title: Multi-file rename with tests and docs kept green
+category: refactor
+prompts:
+  - "Rename the function calc_price to compute_total_price everywhere in this project (definition, all call sites, tests and README). Behaviour must not change and the tests must still pass: run them with 'python3 -m unittest'."
+fixture: refactor_02_rename_price
+tools: [read, write, edit, bash, glob, grep, list]
+timeout_s: 900
+expected_tool_sequence: [grep, edit, bash]
+tags: [python, multi-file]
+verify:
+  - type: py_test
+    test_source: test_hidden.py
+  - type: command
+    cmd: "python3 -m unittest -q"
+    expect_exit: 0
+  - type: command
+    cmd: "! grep -rn calc_price --include=*.py --include=*.md ."
+    expect_exit: 0
