@@ -34,7 +34,8 @@ PROXY_URL = "http://localhost:11435/v1"
 SEARXNG_URL = "http://localhost:8090"
 
 
-def build_config(spec: TaskSpec, model: str, comm_tools_dir: Path | None) -> dict:
+def build_config(spec: TaskSpec, model: str, comm_tools_dir: Path | None,
+                 trial_id: str | None = None) -> dict:
     model_id = model.split("/", 1)[1]
     cfg: dict = {
         "permission": "allow",
@@ -47,6 +48,9 @@ def build_config(spec: TaskSpec, model: str, comm_tools_dir: Path | None) -> dic
         }},
         "mcp": {},
     }
+    if trial_id:  # logged (and stripped) by the proxy so every LLM call maps to a trial
+        cfg["provider"]["ollama"]["options"]["headers"] = {"X-Trial-Id": trial_id,
+                                                           "X-Task-Id": spec.id}
     if spec.tools is not None:
         cfg["tools"] = {t: t in spec.tools for t in sorted(TOOLS)}
     if "searxng" in spec.mcp:
@@ -153,7 +157,8 @@ def calibrate_one(spec: TaskSpec, args, out: Path, scratch: Path) -> dict:
     cfg_dir = run_dir / "opencode-config"
     shutil.copytree(ROOT / "agent-config/agent", cfg_dir / "agent")
     cfg_path = run_dir / "opencode.json"
-    cfg_path.write_text(json.dumps(build_config(spec, args.model, comm_dir), indent=2))
+    trial_id = f"cal-{spec.id}-{time.strftime('%Y%m%dT%H%M%S')}"
+    cfg_path.write_text(json.dumps(build_config(spec, args.model, comm_dir, trial_id), indent=2))
     xdg = scratch / "xdg"
     env = {**os.environ, "OPENCODE_CONFIG": str(cfg_path), "OPENCODE_CONFIG_DIR": str(cfg_dir),
            "XDG_CONFIG_HOME": str(xdg / "config"), "XDG_DATA_HOME": str(xdg / "data"),
@@ -171,7 +176,7 @@ def calibrate_one(spec: TaskSpec, args, out: Path, scratch: Path) -> dict:
     verdict = run_verifiers(spec, ctx)
     fixture = ROOT / "fixtures/tasks" / spec.fixture if spec.fixture else None
     record = {
-        "task": spec.id, "model": args.model, **run,
+        "task": spec.id, "trial_id": trial_id, "model": args.model, **run,
         "steps": ev["steps"], "tokens_in": ev["tokens_in"], "tokens_out": ev["tokens_out"],
         "tool_sequence": ev["tools"], "tool_errors": ev["tool_errors"],
         "expected_tool_sequence": spec.expected_tool_sequence,

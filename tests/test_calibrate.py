@@ -60,3 +60,10 @@ def test_changed_files_skips_binaries(tmp_path):
     (work / "prog").write_bytes(b"\x7fELF\x00\x01")
     (work / "a.c").write_text("int x;")
     assert list(calibrate.changed_files(None, work)) == ["a.c"]
+
+
+def test_build_config_trial_headers():
+    spec = load_task(ROOT / "tasks/coding_05_scientific_lan.yaml")
+    opts = calibrate.build_config(spec, "ollama/m", None, "t-1")["provider"]["ollama"]["options"]
+    assert opts["headers"] == {"X-Trial-Id": "t-1", "X-Task-Id": spec.id}
+    assert "headers" not in calibrate.build_config(spec, "ollama/m", None)["provider"]["ollama"]["options"]

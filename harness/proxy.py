@@ -9,9 +9,19 @@ Point OpenCode's provider baseURL at this proxy instead of Ollama directly:
     Ollama native:   http://localhost:11434/v1
     Through proxy:   http://localhost:11435/v1
 
-The proxy forwards every request unchanged (plus enabling stream usage
-reporting) to Ollama, and logs one JSON line per request to metrics.jsonl
-with timing and token-count data.
+Default mode (AGENT_OPT_PASSTHROUGH=1): a passive observer. Request and response
+bytes are forwarded untouched; the proxy only timestamps chunks and, after the stream
+ends, reads Ollama's own usage fields for token counts. Nothing is injected, so the
+request seen by Ollama is byte-identical to the client's (the class of bugs behind the
+three instrumentation failures documented in the v0 notes cannot occur).
+
+Legacy mode (AGENT_OPT_PASSTHROUGH=0): the v0 behaviour (forces stream=true, re-chunks
+the SSE stream line by line, writes last_request/last_response debug dumps). Kept only to
+reproduce v0 numbers.
+
+Trial identification: clients may send X-Trial-Id / X-Task-Id headers (set through the
+OpenCode provider options). They are logged and stripped before forwarding; the task
+falls back to the current_task.txt label file.
 
 Requires: pip install fastapi uvicorn httpx
 Run:      python metrics_proxy.py
@@ -28,6 +38,10 @@ from fastapi import FastAPI, Request
 from fastapi.responses import StreamingResponse
 
 OLLAMA_BASE = os.environ.get("OLLAMA_BASE", "http://localhost:11434")
+PASSTHROUGH = os.environ.get("AGENT_OPT_PASSTHROUGH", "1") != "0"
+OWN_HEADERS = ("x-trial-id", "x-task-id")
+HOP_HEADERS = ("host", "content-length", "accept-encoding", "connection", "transfer-encoding")
+RESP_DROP_HEADERS = ("content-length", "transfer-encoding", "content-encoding", "connection")
 DATA_DIR = Path(os.environ.get("AGENT_OPT_DATA_DIR", Path.cwd()))
 LOG_PATH = DATA_DIR / "metrics.jsonl"
 TASK_LABEL_PATH = DATA_DIR / "current_task.txt"
@@ -51,8 +65,97 @@ def log_record(record: dict) -> None:
         f.write(json.dumps(record) + "\n")
 
 
+def usage_from_bytes(raw: bytes) -> tuple[int | None, int | None]:
+    """Last usage object in an SSE stream or a plain JSON body -> (prompt, completion) tokens."""
+    prompt = completion = None
+    text = raw.decode("utf-8", errors="replace")
+    candidates = []
+    for line in text.splitlines():
+        line = line.strip()
+        if line.startswith("data:") and "[DONE]" not in line:
+            candidates.append(line[len("data:"):].strip())
+    if not candidates:
+        candidates = [text]
+    for cand in candidates:
+        try:
+            usage = json.loads(cand).get("usage")
+        except (json.JSONDecodeError, AttributeError):
+            continue
+        if usage:
+            prompt = usage.get("prompt_tokens", prompt)
+            completion = usage.get("completion_tokens", completion)
+    return prompt, completion
+
+
+def approx_completion_tokens(raw: bytes) -> int:
+    text = raw.decode("utf-8", errors="replace")
+    return len(" ".join(re.findall(r'"content":"(.*?)"(?<!\\)', text)).split())
+
+
+async def passthrough(path: str, request: Request):
+    body = await request.body()
+    is_chat = "chat/completions" in path
+    trial_id = request.headers.get("x-trial-id")
+    task = request.headers.get("x-task-id") or current_task_label()
+    headers = {k: v for k, v in request.headers.items()
+               if k.lower() not in HOP_HEADERS + OWN_HEADERS}
+    url = f"{OLLAMA_BASE}/{path}"
+    if request.url.query:
+        url += f"?{request.url.query}"
+    t_start = time.monotonic()
+    wall_start = time.time()
+    upstream = await client.send(
+        client.build_request(request.method, url, content=body, headers=headers), stream=True)
+    out_headers = {k: v for k, v in upstream.headers.items() if k.lower() not in RESP_DROP_HEADERS}
+
+    async def relay():
+        t_first = None
+        n_chunks = 0
+        raw = bytearray()
+        finished = False
+        try:
+            async for chunk in upstream.aiter_raw():
+                if t_first is None and b"data:" in chunk and b"[DONE]" not in chunk:
+                    t_first = time.monotonic()
+                n_chunks += 1
+                if is_chat:
+                    raw += chunk
+                yield chunk
+            finished = True
+        finally:
+            await upstream.aclose()
+            if is_chat:
+                t_end = time.monotonic()
+                prompt, completion = usage_from_bytes(bytes(raw))
+                approx = completion is None
+                if approx:
+                    completion = approx_completion_tokens(bytes(raw))
+                rec = {
+                    "task": task, "trial_id": trial_id, "wall_start": wall_start,
+                    "ttft_s": None if t_first is None else round(t_first - t_start, 4),
+                    "total_s": round(t_end - t_start, 4),
+                    "prompt_tokens": prompt, "completion_tokens": completion,
+                    "completion_tokens_is_approx": approx,
+                    "status": upstream.status_code, "chunks": n_chunks,
+                    "aborted": not finished,
+                }
+                if rec["ttft_s"] and prompt:
+                    rec["input_tok_s"] = round(prompt / rec["ttft_s"], 2)
+                if completion and t_first and t_end > t_first:
+                    rec["output_tok_s"] = round(completion / (t_end - t_first), 2)
+                log_record(rec)
+
+    return StreamingResponse(relay(), status_code=upstream.status_code, headers=out_headers)
+
+
 @app.api_route("/{path:path}", methods=["GET", "POST", "HEAD"])
 async def proxy(path: str, request: Request):
+    if PASSTHROUGH:
+        return await passthrough(path, request)
+    return await legacy(path, request)
+
+
+async def legacy(path: str, request: Request):
     body_bytes = await request.body()
     is_chat = "chat/completions" in path
 
@@ -75,7 +178,8 @@ async def proxy(path: str, request: Request):
             pass
 
     url = f"{OLLAMA_BASE}/{path}"
-    task_label = current_task_label()
+    task_label = request.headers.get("x-task-id") or current_task_label()
+    trial_id = request.headers.get("x-trial-id")
     t_start = time.monotonic()
     ts_start_wall = time.time()
 
@@ -95,7 +199,7 @@ async def proxy(path: str, request: Request):
     # fails with "Too much data for declared Content-Length".
     forward_headers = {
         k: v for k, v in request.headers.items()
-        if k.lower() not in ("host", "content-length")
+        if k.lower() not in ("host", "content-length") + OWN_HEADERS
     }
 
     if not is_chat:
@@ -154,6 +258,7 @@ async def proxy(path: str, request: Request):
 
         record = {
             "task": task_label,
+            "trial_id": trial_id,
             "wall_start": ts_start_wall,
             "ttft_s": None if t_first_token is None else round(t_first_token - t_start, 4),
             "total_s": round(t_end - t_start, 4),

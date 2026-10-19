@@ -31,6 +31,9 @@ CI/CD and local agentic deployment).
 - **M1 step 4 done (2026-10-19):** calibration smoke run of all 14 tasks with `harness/calibrate.py`, record in `results/v1/calibration/` (README has the table and findings). 11 pass at 32k, 3 fail: `coding_06` (over the word limit) and `refactor_02` (left a docstring) are genuine model failures; `research_08e` fails twice at 32k (lost the task once; ran out of context once) and passes at 64k. No verifier false positives/negatives found. Timeouts set to 5 × observed (min 300 s); three `expected_tool_sequence` values corrected. SearXNG now works (its proxy setting was removed); **learned:** `opencode run` hangs unless stdin is `/dev/null`.
   Ready to tag `m1` after committing.
 
+- **Post-M1 review (2026-10-19):** a review of M0–M1 before starting M2 found two items to fix first, now done: (1) calls could not be attributed to a trial → the generated OpenCode config sends `X-Trial-Id`/`X-Task-Id` headers, the proxy logs and strips them (`trial_id` is also a column in `join_metrics`); (2) the proxy was not a passive observer → new default passthrough mode forwards request and response bytes untouched, reads Ollama's usage fields afterwards and writes no debug dumps (v0 behaviour kept behind `AGENT_OPT_PASSTHROUGH=0`); the three fault-injection tests of §7.2 are in `tests/test_proxy.py`. Verified end to end with one real task (7 proxy calls = 7 OpenCode steps, all attributed, task passes).
+  Still open from the review, to decide before M4: the time budget (n = 10 ≈ 6 h per configuration at 32k, so the sweep is ≈ 35–40 h and N1's 3 h target does not hold), the ceiling effect (11 of 14 tasks pass at n = 1), and handling of `research_08e` (needs 64k).
+
 ---
 
 ## 1. Where the project stands today

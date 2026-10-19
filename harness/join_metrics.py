@@ -20,7 +20,7 @@ from pathlib import Path
 DATA_DIR = Path(os.environ.get("AGENT_OPT_DATA_DIR", Path.cwd()))
 
 FIELDS = [
-    "task", "wall_start", "ttft_s", "total_s", "prompt_tokens", "completion_tokens",
+    "task", "trial_id", "wall_start", "ttft_s", "total_s", "prompt_tokens", "completion_tokens",
     "completion_tokens_is_approx", "input_tok_s", "output_tok_s",
     "avg_gpu_util_pct", "avg_cpu_pct", "avg_ram_pct",
 ]
