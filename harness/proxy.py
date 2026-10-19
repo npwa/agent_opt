@@ -125,6 +125,7 @@ async def passthrough(path: str, request: Request):
     async def relay():
         t_first = None
         n_chunks = 0
+        chunk_t: list[float] = []  # arrival offsets (s since request start), for inter-token latency
         raw = bytearray()
         finished = False
         try:
@@ -133,6 +134,7 @@ async def passthrough(path: str, request: Request):
                     t_first = time.monotonic()
                 n_chunks += 1
                 if is_chat:
+                    chunk_t.append(round(time.monotonic() - t_start, 3))
                     raw += chunk
                 yield chunk
             finished = True
@@ -151,7 +153,7 @@ async def passthrough(path: str, request: Request):
                     "total_s": round(t_end - t_start, 4),
                     "prompt_tokens": prompt, "completion_tokens": completion,
                     "completion_tokens_is_approx": approx,
-                    "status": upstream.status_code, "chunks": n_chunks,
+                    "status": upstream.status_code, "chunks": n_chunks, "chunk_t": chunk_t,
                     "aborted": not finished,
                 }
                 if rec["ttft_s"] and prompt:

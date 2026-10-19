@@ -214,3 +214,11 @@ async def test_passthrough_logs_request_params_and_attempt(monkeypatch, tmp_path
 def test_request_params_ignores_garbage():
     assert proxy.request_params(b"not json") == {}
     assert proxy.request_params(b"[1,2]") == {}
+
+
+async def test_passthrough_logs_chunk_arrival_offsets(monkeypatch, tmp_path):
+    c, _ = passthrough_client(monkeypatch, tmp_path, split(SSE, 40))
+    await c.post("/v1/chat/completions", json={"model": "m"})
+    rec = last_record(tmp_path)
+    assert len(rec["chunk_t"]) == rec["chunks"] == len(split(SSE, 40))
+    assert rec["chunk_t"] == sorted(rec["chunk_t"]) and rec["chunk_t"][0] >= 0

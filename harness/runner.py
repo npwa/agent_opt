@@ -38,6 +38,7 @@ import yaml
 
 from harness import calibrate, manifest
 from harness.taskspec import TaskSpec, load_task
+from harness.telemetry import GpuSampler
 from harness.verifiers import VerifyContext, run_verifiers
 from harness.workdir import prepare_workdir
 
@@ -332,6 +333,8 @@ def main() -> int:
     r.add_argument("--force-plan", action="store_true")
     r.add_argument("--rerun-harness-failed", action="store_true",
                    help="delete records of trials that ended as harness_failed so they run again")
+    r.add_argument("--gpu-hz", type=float, default=10.0, help="NVML sampling rate (F8)")
+    r.add_argument("--no-gpu", action="store_true", help="do not sample the GPU")
     r.add_argument("--dry-run", action="store_true")
     r.add_argument("--no-preflight", action="store_true")
     st = sub.add_parser("status")
@@ -359,7 +362,10 @@ def main() -> int:
         for rec in (a.out / "trials").glob("*/record.json") if (a.out / "trials").exists() else []:
             if json.loads(rec.read_text()).get("status") == "harness_failed":
                 rec.unlink()
+    sampler = None if a.no_gpu else GpuSampler(a.out / "gpu_samples.csv", a.gpu_hz)
     try:
+        if sampler:
+            sampler.start()
         run_all(configs, specs, a.n, a.seed, a.out, a.scratch, metrics, a.max_retries,
                 a.limit, a.force_plan)
     except PlanMismatchError as e:
@@ -368,6 +374,11 @@ def main() -> int:
     except KeyboardInterrupt:
         print("\ninterrupted - run the same command again to resume", file=sys.stderr)
         return 130
+    finally:
+        if sampler:
+            sampler.stop()
+            if sampler.error:
+                print(f"WARNING: GPU sampler stopped early: {sampler.error!r}", file=sys.stderr)
     print(status_table(a.out))
     return 0
 
