@@ -1,0 +1,18 @@
+id: coding_04_dir_stats_gen
+title: Directory statistics bash script
+category: code_gen
+prompts:
+  - "Write the bash script requested in dir_stats.md. Save it as dir_stats.sh"
+fixture: coding_04_dir_stats_gen
+tools: [read, write, edit, bash, glob, list]
+timeout_s: 900
+expected_tool_sequence: [read, write]
+tags: [bash, short]
+verify:
+  - type: command
+    cmd: "bash dir_stats.sh . | head -n 3"
+    expect_exit: 0
+    stdout_contains: ["Files: ", "Directories: ", "Total Size: "]
+  - type: command
+    cmd: "bash dir_stats.sh /nonexistent_dir_for_test"
+    expect_exit: 1

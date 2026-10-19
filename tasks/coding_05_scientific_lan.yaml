@@ -1,0 +1,19 @@
+id: coding_05_scientific_lan
+title: Scientific consensus on MMR vaccine and autism
+category: reasoning
+prompts:
+  - "What is the current scientific consensus for the MMR vaccine being linked to autism?"
+tools: [webfetch]
+timeout_s: 600
+tags: [language, short]
+verify:
+  - type: rubric
+    min_words: 40
+    required:
+      - name: no_causal_link
+        any_of: ["no (causal |credible |evidence of (a )?)?(link|association|relationship)", "does not cause", "not (linked|associated)", "no evidence"]
+      - name: retracted_origin
+        any_of: ["wakefield", "retract"]
+    forbidden:
+      - name: claims_link
+        regex: "(?i)\\bMMR vaccines? (does|do|can) cause autism\\b"

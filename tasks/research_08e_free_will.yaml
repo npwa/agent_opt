@@ -1,0 +1,23 @@
+id: research_08e_free_will
+title: Deep research - neuroscience and free will
+category: research
+prompts:
+  - "Does neuroscience research on decision-making - such as Libet-style readiness-potential experiments - support the conclusion that free will is an illusion, or is that conclusion scientifically and philosophically contested? Summarize the strongest evidence and arguments on both sides, citing specific studies."
+agent: research
+mcp: [searxng]
+tools: [webfetch]
+timeout_s: 2400
+expected_tool_sequence: [searxng_searxng_web_search]
+tags: [citations, web]
+verify:
+  - type: rubric
+    min_words: 250
+    required:
+      - name: libet
+        any_of: ["libet"]
+      - name: schurger
+        any_of: ["schurger"]
+      - name: another_study
+        any_of: ["soon", "haynes", "fried", "maoz"]
+      - name: contested
+        any_of: ["contested", "disagree", "critique", "criticis", "debate"]

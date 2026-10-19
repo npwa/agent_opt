@@ -1,0 +1,19 @@
+id: coding_01_my_sqrt_review
+title: Review a float square-root function
+category: code_review
+prompts:
+  - "Review the file my_sqrt.c in the working directory and check if the function correctly calculates the square root of a float number."
+fixture: coding_01_my_sqrt_review
+tools: [read, glob, grep, list]
+timeout_s: 600
+expected_tool_sequence: [read]
+tags: [c, review]
+verify:
+  - type: rubric
+    required:
+      - name: negative_input
+        any_of: ["negative", "< ?0", "domain"]
+      - name: tolerance_not_scaled
+        any_of: ["toleran", "epsilon", "absolute error", "relative"]
+      - name: infinite_loop
+        any_of: ["infinite loop", "never terminat", "not converge", "loop forever", "may not terminate"]

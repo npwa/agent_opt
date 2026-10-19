@@ -1,0 +1,15 @@
+id: coding_02_fizzbuzz_gen
+title: Generate FizzBuzz in C from requirements
+category: code_gen
+prompts:
+  - "Read the requirements in the file fizzbuzz.md and create C code for it. Write it to the file fizzbuzz.c"
+fixture: coding_02_fizzbuzz_gen
+tools: [read, write, edit, bash, glob, list]
+timeout_s: 900
+expected_tool_sequence: [read, write]
+tags: [c, short]
+verify:
+  - type: compile_run
+    sources: [fizzbuzz.c]
+    cflags: ["-Wall", "-Werror"]
+    expect_lines: ["2", "3 fizz", "5 buzz", "15 fizz buzz"]

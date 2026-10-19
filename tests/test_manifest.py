@@ -32,3 +32,11 @@ def test_write_manifest_roundtrip(tmp_path):
     m = {"gpu": {"name": "x"}, "models": {"qwen": "abc"}}
     manifest.write_manifest(tmp_path / "platform.yaml", m)
     assert yaml.safe_load((tmp_path / "platform.yaml").read_text()) == m
+
+
+def test_llama_cpp_info(monkeypatch, tmp_path):
+    monkeypatch.setenv("LLAMA_CPP_DIR", str(tmp_path))
+    monkeypatch.setattr(manifest, "_run", lambda cmd: "b2f036c0f")
+    assert manifest.llama_cpp_info() == {"dir": str(tmp_path), "commit": "b2f036c0f"}
+    monkeypatch.setattr(manifest, "_run", lambda cmd: None)
+    assert manifest.llama_cpp_info()["commit"] == manifest.UNAVAILABLE

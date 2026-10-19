@@ -18,6 +18,10 @@ CI/CD and local agentic deployment).
 - **M0 done (2026-10-12):** tag `v0-first-pass`, `results/v0/`, package skeleton, CI, ported proxy/sampler/report with tests, `harness/manifest.py`.
   Deviations: `join_metrics.py` was never committed in v0, so `harness/join_metrics.py` is a reconstruction from the `report.py` column contract; no raw v0 data exists, so characterization tests use synthetic fixtures.
 
+- **M1 step 1 done (2026-10-18):** task YAML schema + validator (`harness/taskspec.py`, `python -m harness.taskspec`), 8 existing tasks converted to `tasks/*.yaml` with fixtures in `fixtures/tasks/`, 21 negative-case tests. Verifier types so far: `rubric`, `compile_run`, `c_test`, `command`, `python`; hidden verifier assets go in `fixtures/verify/<id>/` (only `coding_03` has one so far); `harness.verifiers.comms` is referenced but not yet written (step 3).
+  M0 adjustments: manifest now records the project-local llama.cpp commit (`LLAMA_CPP_DIR`, default `~/work/agent_opt_ad/llama.cpp`); `.gitignore` covers editor backup/lock files.
+  Prompt changes vs v0: tasks 02–04 now name the output file and use relative paths (workdir is a temp copy of the fixture); task 03 writes `compress.c`.
+
 ---
 
 ## 1. Where the project stands today

@@ -11,6 +11,7 @@ soft (value "unavailable") so the manifest can be produced on a CI box too.
 
 import argparse
 import json
+import os
 import platform
 import re
 import subprocess
@@ -61,6 +62,13 @@ def model_digests(base: str = "http://localhost:11434") -> dict[str, str]:
         return {}
 
 
+def llama_cpp_info() -> dict:
+    """Commit of the project-local llama.cpp checkout (LLAMA_CPP_DIR) used for M5 experiments."""
+    d = Path(os.environ.get("LLAMA_CPP_DIR", "~/work/agent_opt_ad/llama.cpp")).expanduser()
+    commit = _run(["git", "-C", str(d), "rev-parse", "--short=9", "HEAD"])
+    return {"dir": str(d), "commit": commit or UNAVAILABLE}
+
+
 def build_manifest() -> dict:
     return {
         "created_utc": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -69,6 +77,7 @@ def build_manifest() -> dict:
         "python": platform.python_version(),
         "ollama": tool_version(["ollama", "--version"]),
         "opencode": tool_version(["opencode", "--version"]),
+        "llama_cpp": llama_cpp_info(),
         "models": model_digests(),
     }
 
