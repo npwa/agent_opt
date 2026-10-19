@@ -136,6 +136,7 @@ def build_trace(record: dict, ev_steps: list[dict], proxy_rows: list[dict],
             "n_chunks": px.get("chunks"), "first_token_skew_s": first_token_skew,
             "itl_p50_ms": percentile(deltas, 50), "itl_p99_ms": percentile(deltas, 99),
             "tool_names": [t["tool"] for t in ev["tools"]], "tool_latency_s": tool_lat,
+            "tools": ev["tools"], "oc_step_start": ev["start"], "oc_step_finish": ev["finish"],
             "tool_errors": sum(t["status"] == "error" for t in ev["tools"]),
             "gap_s": gap_s,
             "gpu_busy_pct_llm": llm["busy_pct"], "gpu_power_w_llm": llm["power_w"],
@@ -143,7 +144,10 @@ def build_trace(record: dict, ev_steps: list[dict], proxy_rows: list[dict],
             "gpu_busy_pct_gap": gap["busy_pct"], "gpu_samples_gap": gap["n"],
             "idle_gap_s": gap_s * gap["idle_frac"] if gap["idle_frac"] is not None else None,
         })
+    unmatched = [{"start": e["start"], "finish": e["finish"]} for e in ev_steps[n:]
+                 if e["finish"] is not None]
     summary = {
+        "wall_start": record.get("wall_start"), "wall_end": wall_end,
         "wall_s": (wall_end - record["wall_start"]) if wall_end and record.get("wall_start") else None,
         "n_steps": len(steps),
         "llm_s": sum(s["llm_s"] for s in steps),
@@ -158,7 +162,8 @@ def build_trace(record: dict, ev_steps: list[dict], proxy_rows: list[dict],
     }
     return {"trial_id": tid, "task": record.get("task"), "config": record.get("config"),
             "attempt": record.get("attempt"), "status": record.get("status"),
-            "summary": summary, "steps": steps, "warnings": warnings}
+            "summary": summary, "steps": steps, "unmatched_event_steps": unmatched,
+            "warnings": warnings}
 
 
 def build_trial_trace(trial_dir: Path, metrics: Path, samples: GpuSamples | None) -> dict | None:
