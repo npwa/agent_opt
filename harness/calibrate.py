@@ -35,7 +35,8 @@ SEARXNG_URL = "http://localhost:8090"
 
 
 def build_config(spec: TaskSpec, model: str, comm_tools_dir: Path | None,
-                 trial_id: str | None = None) -> dict:
+                 trial_id: str | None = None, attempt: int | None = None,
+                 model_options: dict | None = None) -> dict:
     model_id = model.split("/", 1)[1]
     cfg: dict = {
         "permission": "allow",
@@ -49,8 +50,12 @@ def build_config(spec: TaskSpec, model: str, comm_tools_dir: Path | None,
         "mcp": {},
     }
     if trial_id:  # logged (and stripped) by the proxy so every LLM call maps to a trial
-        cfg["provider"]["ollama"]["options"]["headers"] = {"X-Trial-Id": trial_id,
-                                                           "X-Task-Id": spec.id}
+        headers = {"X-Trial-Id": trial_id, "X-Task-Id": spec.id}
+        if attempt is not None:
+            headers["X-Attempt"] = str(attempt)
+        cfg["provider"]["ollama"]["options"]["headers"] = headers
+    if model_options:  # sampling options such as seed/temperature
+        cfg["provider"]["ollama"]["models"][model_id]["options"] = dict(model_options)
     if spec.tools is not None:
         cfg["tools"] = {t: t in spec.tools for t in sorted(TOOLS)}
     if "searxng" in spec.mcp:

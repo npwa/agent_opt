@@ -199,3 +199,18 @@ def test_usage_from_bytes_takes_last_usage():
     raw = b'data: {"usage":{"prompt_tokens":1,"completion_tokens":1}}\n\ndata: {"usage":{"prompt_tokens":5,"completion_tokens":6}}\n\n'
     assert proxy.usage_from_bytes(raw) == (5, 6)
     assert proxy.usage_from_bytes(b"garbage") == (None, None)
+
+
+async def test_passthrough_logs_request_params_and_attempt(monkeypatch, tmp_path):
+    c, captured = passthrough_client(monkeypatch, tmp_path, [SSE])
+    await c.post("/v1/chat/completions",
+                 json={"model": "m", "seed": 7, "temperature": 0.0, "messages": [{"role": "user"}]},
+                 headers={"X-Trial-Id": "t", "X-Attempt": "2"})
+    rec = last_record(tmp_path)
+    assert rec["req"] == {"model": "m", "temperature": 0.0, "seed": 7}
+    assert rec["attempt"] == "2" and "x-attempt" not in captured[0].headers
+
+
+def test_request_params_ignores_garbage():
+    assert proxy.request_params(b"not json") == {}
+    assert proxy.request_params(b"[1,2]") == {}

@@ -39,7 +39,7 @@ from fastapi.responses import StreamingResponse
 
 OLLAMA_BASE = os.environ.get("OLLAMA_BASE", "http://localhost:11434")
 PASSTHROUGH = os.environ.get("AGENT_OPT_PASSTHROUGH", "1") != "0"
-OWN_HEADERS = ("x-trial-id", "x-task-id")
+OWN_HEADERS = ("x-trial-id", "x-task-id", "x-attempt")
 HOP_HEADERS = ("host", "content-length", "accept-encoding", "connection", "transfer-encoding")
 RESP_DROP_HEADERS = ("content-length", "transfer-encoding", "content-encoding", "connection")
 DATA_DIR = Path(os.environ.get("AGENT_OPT_DATA_DIR", Path.cwd()))
@@ -87,6 +87,18 @@ def usage_from_bytes(raw: bytes) -> tuple[int | None, int | None]:
     return prompt, completion
 
 
+def request_params(body: bytes) -> dict:
+    """Sampling-relevant request fields, observed read-only (the body is never modified)."""
+    try:
+        data = json.loads(body)
+    except (json.JSONDecodeError, UnicodeDecodeError):
+        return {}
+    if not isinstance(data, dict):
+        return {}
+    keys = ("model", "temperature", "top_p", "top_k", "seed", "max_tokens", "stream")
+    return {k: data[k] for k in keys if k in data}
+
+
 def approx_completion_tokens(raw: bytes) -> int:
     text = raw.decode("utf-8", errors="replace")
     return len(" ".join(re.findall(r'"content":"(.*?)"(?<!\\)', text)).split())
@@ -96,7 +108,9 @@ async def passthrough(path: str, request: Request):
     body = await request.body()
     is_chat = "chat/completions" in path
     trial_id = request.headers.get("x-trial-id")
+    attempt = request.headers.get("x-attempt")
     task = request.headers.get("x-task-id") or current_task_label()
+    req_params = request_params(body) if is_chat else {}
     headers = {k: v for k, v in request.headers.items()
                if k.lower() not in HOP_HEADERS + OWN_HEADERS}
     url = f"{OLLAMA_BASE}/{path}"
@@ -131,7 +145,8 @@ async def passthrough(path: str, request: Request):
                 if approx:
                     completion = approx_completion_tokens(bytes(raw))
                 rec = {
-                    "task": task, "trial_id": trial_id, "wall_start": wall_start,
+                    "task": task, "trial_id": trial_id, "attempt": attempt,
+                    "wall_start": wall_start, "req": req_params,
                     "ttft_s": None if t_first is None else round(t_first - t_start, 4),
                     "total_s": round(t_end - t_start, 4),
                     "prompt_tokens": prompt, "completion_tokens": completion,
