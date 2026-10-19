@@ -1,0 +1,42 @@
+{
+  "task": "bugfix_01_moving_average",
+  "model": "ollama/qwen3.6-32k",
+  "elapsed_s": 99.1,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 6,
+  "tokens_in": 68817,
+  "tokens_out": 1205,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_tool_sequence": [
+    "bash",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "expected_sequence_matched": true,
+  "spec_timeout_s": 900,
+  "suggested_timeout_s": 300,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 5 tests pass now. The bug was on line 9 of `stats_utils.py` \u2014 the `range` upper bound was missing the `+1`, causing the loop to skip the last valid window position.",
+  "files": [
+    "stats_utils.py"
+  ]
+}

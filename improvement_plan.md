@@ -28,6 +28,9 @@ CI/CD and local agentic deployment).
 - **M1 step 3 done (2026-10-18):** verifiers for all 14 tasks in `harness/verifiers/` (`rubric`, `compile_run`, `c_test`, `py_test`, `command`, `comms`), `harness/sandbox.py` (rlimits, process-group kill, scratch copies), `harness/workdir.py` (fixture + `setup`), CLI `python -m harness.verifiers <task> <workdir>`. Golden-good/bad fixtures in `fixtures/golden/` (every task has ≥1 good and ≥1 bad; 37 variants); 93 tests, 86 % coverage.
   Notes: network isolation (`unshare -rn`) is unavailable on this box, so verifier runs are limited by rlimits only (`RunResult.network_isolated` records it). C hidden tests are built with ASan/UBSan (the first ring-buffer bad variant passed without it). Comms verifier reads `email_store.json`/`calendar_store.json`; **M2 runner must give each trial its own comm-tools state dir** (the MCP server currently writes stores and the dedup file next to its script).
 
+- **M1 step 4 done (2026-10-19):** calibration smoke run of all 14 tasks with `harness/calibrate.py`, record in `results/v1/calibration/` (README has the table and findings). 11 pass at 32k, 3 fail: `coding_06` (over the word limit) and `refactor_02` (left a docstring) are genuine model failures; `research_08e` fails twice at 32k (lost the task once; ran out of context once) and passes at 64k. No verifier false positives/negatives found. Timeouts set to 5 × observed (min 300 s); three `expected_tool_sequence` values corrected. SearXNG now works (its proxy setting was removed); **learned:** `opencode run` hangs unless stdin is `/dev/null`.
+  Ready to tag `m1` after committing.
+
 ---
 
 ## 1. Where the project stands today

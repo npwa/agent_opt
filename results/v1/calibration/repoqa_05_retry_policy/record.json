@@ -1,0 +1,35 @@
+{
+  "task": "repoqa_05_retry_policy",
+  "model": "ollama/qwen3.6-32k",
+  "elapsed_s": 67.1,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 43478,
+  "tokens_out": 527,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_tool_sequence": [
+    "grep",
+    "read"
+  ],
+  "expected_sequence_matched": false,
+  "spec_timeout_s": 600,
+  "suggested_timeout_s": 240,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "65 words, all checks ok"
+    }
+  ],
+  "final_answer": "Here are the answers to the three questions:\n\n**(1) Function that computes the delay before a retry:**\n\n`miniq/retry.py:20` \u2014 RetryPolicy's `next_delay()` method (not `should_retry()`, which only returns bool).\nThe actual delay is computed in `retry.py:22\u201325`: exponential backoff with jitter.\n\n**(2) Default maximum delay:**\n\n`miniq/config.py:9` \u2014 `RETRY_MAX_DELAY_S = 30.0` (30 seconds).\n\n**(3) Default maximum attempts before a job stops being retried:**\n\n`miniq/config.py:7` \u2014 `RETRY_MAX_ATTEMPTS = 5`.",
+  "files": []
+}

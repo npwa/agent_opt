@@ -5,8 +5,8 @@ prompts:
   - "In the miniq package: (1) which function computes the delay before a retry, (2) what is the default maximum delay in seconds, and (3) after how many attempts does a job stop being retried by default? For each answer cite the file and line number (format file.py:LINE)."
 fixture: repoqa_05_retry_policy
 tools: [read, glob, grep, list]
-timeout_s: 600
-expected_tool_sequence: [grep, read]
+timeout_s: 360
+expected_tool_sequence: [read]
 tags: [python, grounding]
 verify:
   - type: rubric

@@ -158,10 +158,6 @@ server:
 outgoing:
   request_timeout: 10.0
   max_request_timeout: 15.0
-  proxies:
-    all://:
-      - http://proxy-dmz.intel.com:911
-  extra_proxy_timeout: 10
 EOF
 ```
 

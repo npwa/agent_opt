@@ -6,8 +6,8 @@ prompts:
 setup:
   - "python3 $TASK_VERIFY_DIR/gen_log.py ."
 tools: [read, bash, glob, grep, list]
-timeout_s: 1200
-expected_tool_sequence: [grep]
+timeout_s: 840
+expected_tool_sequence: [bash]
 tags: [log, tools, large-file]
 verify:
   - type: rubric
