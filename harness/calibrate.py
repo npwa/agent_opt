@@ -36,7 +36,7 @@ SEARXNG_URL = "http://localhost:8090"
 
 def build_config(spec: TaskSpec, model: str, comm_tools_dir: Path | None,
                  trial_id: str | None = None, attempt: int | None = None,
-                 model_options: dict | None = None) -> dict:
+                 model_options: dict | None = None, base_url: str = PROXY_URL) -> dict:
     model_id = model.split("/", 1)[1]
     cfg: dict = {
         "permission": "allow",
@@ -44,7 +44,7 @@ def build_config(spec: TaskSpec, model: str, comm_tools_dir: Path | None,
         "small_model": model,
         "provider": {"ollama": {
             "npm": "@ai-sdk/openai-compatible", "name": "Ollama",
-            "options": {"baseURL": PROXY_URL},
+            "options": {"baseURL": base_url},
             "models": {model_id: {"name": model_id, "tool_call": True}},
         }},
         "mcp": {},

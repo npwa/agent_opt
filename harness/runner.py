@@ -24,6 +24,7 @@ Design rules
 import argparse
 import hashlib
 import json
+import math
 import os
 import random
 import shutil
@@ -79,8 +80,8 @@ def load_config(path: Path) -> RunConfig:
 
 # ---- planning ------------------------------------------------------------------------------
 
-def trial_id(config_id: str, task_id: str, k: int) -> str:
-    return f"{config_id}__{task_id}__{k:02d}"
+def trial_id(config_id: str, task_id: str, k: int, instrumented: bool = True) -> str:
+    return f"{config_id}__{task_id}__{'' if instrumented else 'p'}{k:02d}"
 
 
 def trial_seed(run_seed: int, tid: str) -> int:
@@ -92,13 +93,18 @@ def spec_hash(path: Path) -> str:
 
 
 def build_plan(configs: list[RunConfig], specs: list[TaskSpec], n: int, run_seed: int,
-               tasks_dir: Path) -> dict:
-    trials = [{"trial_id": trial_id(c.id, s.id, k), "config": c.id, "task": s.id, "k": k}
-              for c in configs for s in specs for k in range(n)]
+               tasks_dir: Path, parity_fraction: float = 0.0) -> dict:
+    """Instrumented trials plus, per (config, task) cell, ceil(parity_fraction * n) trials that
+    bypass the proxy (talk to Ollama directly) for the instrumentation parity check (F7)."""
+    n_parity = math.ceil(parity_fraction * n) if parity_fraction > 0 else 0
+    trials = [{"trial_id": trial_id(c.id, s.id, k, inst), "config": c.id, "task": s.id, "k": k,
+               "instrumented": inst}
+              for c in configs for s in specs
+              for inst, count in ((True, n), (False, n_parity)) for k in range(count)]
     random.Random(run_seed).shuffle(trials)
     return {
         "created_utc": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "run_seed": run_seed, "n": n,
+        "run_seed": run_seed, "n": n, "parity_fraction": parity_fraction,
         "configs": {c.id: c.__dict__ for c in configs},
         "tasks": {s.id: spec_hash(tasks_dir / f"{s.id}.yaml") for s in specs},
         "order": trials,
@@ -109,7 +115,8 @@ def load_or_create_plan(out: Path, plan: dict, force: bool = False) -> dict:
     path = out / "plan.json"
     if path.exists():
         old = json.loads(path.read_text())
-        same = all(old[k] == plan[k] for k in ("run_seed", "n", "configs", "tasks"))
+        same = (all(old[k] == plan[k] for k in ("run_seed", "n", "configs", "tasks"))
+                and old.get("parity_fraction", 0.0) == plan["parity_fraction"])
         if not same and not force:
             raise PlanMismatchError(
                 f"{path} was created with different seed/n/configs/tasks; use a new --out "
@@ -151,6 +158,7 @@ def proxy_errors(metrics: Path, tid: str, attempt: int) -> list[int]:
 
 
 def classify(run: dict, ev: dict, verdict, upstream_bad: list[int]) -> tuple[str, str | None]:
+    # (upstream_bad is always empty for uninstrumented trials: there is no proxy to ask)
     """-> (status, harness_reason). status in pass/fail/timeout/harness_error."""
     if upstream_bad:
         return "harness_error", f"upstream_error:{sorted(set(upstream_bad))}"
@@ -168,7 +176,8 @@ def classify(run: dict, ev: dict, verdict, upstream_bad: list[int]) -> tuple[str
 # ---- executing one attempt ------------------------------------------------------------------
 
 def preflight(specs: list[TaskSpec], proxy_url: str = "http://localhost:11435",
-              searxng_url: str = "http://localhost:8090") -> list[str]:
+              searxng_url: str = "http://localhost:8090", need_direct: bool = False,
+              ollama_url: str = "http://localhost:11434") -> list[str]:
     problems = []
 
     def reachable(url: str) -> bool:
@@ -181,13 +190,18 @@ def preflight(specs: list[TaskSpec], proxy_url: str = "http://localhost:11435",
     if not reachable(f"{proxy_url}/v1/models"):
         problems.append(f"proxy/Ollama not reachable at {proxy_url} "
                         "(start: python -m uvicorn harness.proxy:app --port 11435)")
+    if need_direct and not reachable(f"{ollama_url}/api/tags"):
+        problems.append(f"Ollama not reachable at {ollama_url} (needed for uninstrumented parity trials)")
     if any("searxng" in s.mcp for s in specs) and not reachable(searxng_url):
         problems.append(f"SearXNG not reachable at {searxng_url} (docker start searxng)")
     return problems
 
 
+OLLAMA_DIRECT_URL = "http://localhost:11434/v1"
+
+
 def run_attempt(spec: TaskSpec, cfg: RunConfig, tid: str, attempt: int, seed: int | None,
-                trial_dir: Path, scratch: Path, metrics: Path) -> dict:
+                trial_dir: Path, scratch: Path, metrics: Path, instrumented: bool = True) -> dict:
     run_dir = scratch / tid
     shutil.rmtree(run_dir, ignore_errors=True)
     events = trial_dir / "events.jsonl"
@@ -211,7 +225,9 @@ def run_attempt(spec: TaskSpec, cfg: RunConfig, tid: str, attempt: int, seed: in
         options["seed"] = seed
     opencode_json = run_dir / "opencode.json"
     opencode_json.write_text(json.dumps(
-        calibrate.build_config(spec, cfg.model, comm_dir, tid, attempt, options), indent=2))
+        calibrate.build_config(
+            spec, cfg.model, comm_dir, tid if instrumented else None, attempt, options,
+            base_url=calibrate.PROXY_URL if instrumented else OLLAMA_DIRECT_URL), indent=2))
     xdg = scratch / "xdg"
     env = {**os.environ, "OPENCODE_CONFIG": str(opencode_json), "OPENCODE_CONFIG_DIR": str(cfg_dir),
            "XDG_CONFIG_HOME": str(xdg / "config"), "XDG_DATA_HOME": str(xdg / "data"),
@@ -223,7 +239,8 @@ def run_attempt(spec: TaskSpec, cfg: RunConfig, tid: str, attempt: int, seed: in
     ctx = VerifyContext(workdir=work, verify_root=ROOT / "fixtures/verify", spec=spec,
                         final_answer=ev["final_text"], state_dir=comm_dir)
     verdict = run_verifiers(spec, ctx)
-    status, reason = classify(run, ev, verdict, proxy_errors(metrics, tid, attempt))
+    upstream_bad = proxy_errors(metrics, tid, attempt) if instrumented else []
+    status, reason = classify(run, ev, verdict, upstream_bad)
     fixture = ROOT / "fixtures/tasks" / spec.fixture if spec.fixture else None
     files = calibrate.changed_files(fixture, work)
     for name, text in files.items():
@@ -253,7 +270,8 @@ def run_trial(spec: TaskSpec, cfg: RunConfig, item: dict, run_seed: int, out: Pa
     attempts = []
     final: dict = {}
     for attempt in range(1, max_retries + 2):
-        res = attempt_fn(spec, cfg, tid, attempt, seed, trial_dir, scratch, metrics)
+        res = attempt_fn(spec, cfg, tid, attempt, seed, trial_dir, scratch, metrics,
+                         instrumented=item.get("instrumented", True))
         attempts.append({k: res.get(k) for k in ("attempt", "status", "reason", "started_utc")})
         if res["status"] != "harness_error":
             final = res
@@ -265,6 +283,7 @@ def run_trial(spec: TaskSpec, cfg: RunConfig, item: dict, run_seed: int, out: Pa
         final = {"status": "harness_failed", "reason": attempts[-1]["reason"]}
     record = {
         "trial_id": tid, "task": spec.id, "config": cfg.id, "model": cfg.model, "k": item["k"],
+        "instrumented": item.get("instrumented", True),
         "seed": seed, "run_seed": run_seed, **final, "attempts": attempts,
     }
     tmp = trial_dir / "record.json.tmp"
@@ -294,8 +313,9 @@ def status_table(out: Path) -> str:
 def run_all(configs: list[RunConfig], specs: list[TaskSpec], n: int, run_seed: int, out: Path,
             scratch: Path, metrics: Path, max_retries: int = 2, limit: int | None = None,
             force_plan: bool = False, tasks_dir: Path = ROOT / "tasks", attempt_fn=run_attempt,
-            log=print) -> dict:
-    plan = load_or_create_plan(out, build_plan(configs, specs, n, run_seed, tasks_dir), force_plan)
+            log=print, parity_fraction: float = 0.0) -> dict:
+    plan = load_or_create_plan(
+        out, build_plan(configs, specs, n, run_seed, tasks_dir, parity_fraction), force_plan)
     by_cfg = {c.id: c for c in configs}
     by_task = {s.id: s for s in specs}
     if not (out / "platform.yaml").exists():
@@ -328,6 +348,10 @@ def main() -> int:
     r.add_argument("--scratch", type=Path, required=True)
     r.add_argument("--proxy-data", type=Path, help="proxy data dir holding metrics.jsonl "
                    "(default: <out>/proxy)")
+    r.add_argument("--parity-fraction", type=float, default=0.0,
+                   help="per (config, task) cell run ceil(fraction * n) extra trials directly against "
+                        "Ollama (no proxy) and compare them with the instrumented ones (F7); "
+                        "plan suggests 0.2")
     r.add_argument("--max-retries", type=int, default=2)
     r.add_argument("--limit", type=int, help="run at most this many pending trials, then stop")
     r.add_argument("--force-plan", action="store_true")
@@ -350,12 +374,12 @@ def main() -> int:
     configs = [load_config(p) for p in a.configs]
     metrics = (a.proxy_data or a.out / "proxy") / "metrics.jsonl"
     if a.dry_run:
-        plan = build_plan(configs, specs, a.n, a.seed, ROOT / "tasks")
+        plan = build_plan(configs, specs, a.n, a.seed, ROOT / "tasks", a.parity_fraction)
         for item in plan["order"]:
             print(item["trial_id"])
         print(f"{len(plan['order'])} trials")
         return 0
-    if not a.no_preflight and (problems := preflight(specs)):
+    if not a.no_preflight and (problems := preflight(specs, need_direct=a.parity_fraction > 0)):
         print("preflight failed:\n  - " + "\n  - ".join(problems), file=sys.stderr)
         return 2
     if a.rerun_harness_failed:
@@ -367,7 +391,7 @@ def main() -> int:
         if sampler:
             sampler.start()
         run_all(configs, specs, a.n, a.seed, a.out, a.scratch, metrics, a.max_retries,
-                a.limit, a.force_plan)
+                a.limit, a.force_plan, parity_fraction=a.parity_fraction)
     except PlanMismatchError as e:
         print(e, file=sys.stderr)
         return 2
@@ -380,6 +404,13 @@ def main() -> int:
             if sampler.error:
                 print(f"WARNING: GPU sampler stopped early: {sampler.error!r}", file=sys.stderr)
     print(status_table(a.out))
+    if a.parity_fraction > 0:
+        from analysis import parity
+
+        res = parity.parity_check(parity.load_records(a.out))
+        (a.out / "parity.json").write_text(json.dumps(res, indent=2))
+        (a.out / "parity.md").write_text(parity.to_markdown(res))
+        print(parity.to_markdown(res))
     return 0
 
 

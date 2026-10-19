@@ -171,8 +171,8 @@ def build_trial_trace(trial_dir: Path, metrics: Path, samples: GpuSamples | None
     if not rec_path.exists():
         return None
     record = json.loads(rec_path.read_text())
-    if record.get("status") == "harness_failed":
-        return None
+    if record.get("status") == "harness_failed" or record.get("instrumented") is False:
+        return None  # no proxy records exist for harness failures / uninstrumented parity trials
     attempt = record.get("attempt", 1)
     return build_trace(record, load_event_steps(Path(trial_dir) / "events.jsonl"),
                        load_proxy_rows(metrics, record["trial_id"], attempt), samples)

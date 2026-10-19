@@ -116,7 +116,7 @@ def test_proxy_errors_filters_trial_attempt_and_ignores_aborts(tmp_path):
 def stub(statuses, calls):
     it = iter(statuses)
 
-    def fn(spec, cfg, tid, attempt, seed, trial_dir, scratch, metrics):
+    def fn(spec, cfg, tid, attempt, seed, trial_dir, scratch, metrics, instrumented=True):
         calls.append((tid, attempt, seed))
         st = next(it)
         return {"status": st, "reason": "boom" if st == "harness_error" else None,
