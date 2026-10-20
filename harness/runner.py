@@ -200,6 +200,20 @@ def preflight(specs: list[TaskSpec], proxy_url: str = "http://localhost:11435",
 OLLAMA_DIRECT_URL = "http://localhost:11434/v1"
 
 
+COMM_STATE_FILES = ("email_store.json", "calendar_store.json")
+
+
+def save_comm_state(comm_dir: Path | None, trial_dir: Path) -> None:
+    """Keep the mock comm-tools stores: the comms verifier reads them, so replay needs them."""
+    if comm_dir is None:
+        return
+    for name in COMM_STATE_FILES:
+        if (comm_dir / name).is_file():
+            dest = trial_dir / "artifacts" / "comm_state"
+            dest.mkdir(parents=True, exist_ok=True)
+            shutil.copy(comm_dir / name, dest / name)
+
+
 def run_attempt(spec: TaskSpec, cfg: RunConfig, tid: str, attempt: int, seed: int | None,
                 trial_dir: Path, scratch: Path, metrics: Path, instrumented: bool = True) -> dict:
     run_dir = scratch / tid
@@ -247,6 +261,7 @@ def run_attempt(spec: TaskSpec, cfg: RunConfig, tid: str, attempt: int, seed: in
         dest = trial_dir / "artifacts" / name
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_text(text)
+    save_comm_state(comm_dir, trial_dir)
     shutil.rmtree(run_dir, ignore_errors=True)
     return {
         "status": status, "reason": reason, "attempt": attempt, "started_utc": started_utc,

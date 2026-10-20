@@ -1,0 +1,196 @@
+{
+  "baseline": "baseline_32k",
+  "categories": {
+    "coding_01_my_sqrt_review": "code_review",
+    "coding_05_scientific_lan": "reasoning",
+    "coding_06_tax_rates_lan": "reasoning"
+  },
+  "cells": {
+    "baseline_32k|coding_01_my_sqrt_review": {
+      "harness_failed": 0,
+      "median_ci": [
+        109.3,
+        337.2
+      ],
+      "median_s": 120.8,
+      "n": 5,
+      "passes": 3,
+      "rate": 0.6,
+      "timeouts": 0,
+      "times": [
+        176.4,
+        337.2,
+        120.5,
+        109.3,
+        120.8
+      ],
+      "wilson": [
+        0.2307242812760128,
+        0.882379225767352
+      ]
+    },
+    "baseline_32k|coding_05_scientific_lan": {
+      "harness_failed": 0,
+      "median_ci": [
+        57.0,
+        77.8
+      ],
+      "median_s": 63.1,
+      "n": 5,
+      "passes": 5,
+      "rate": 1.0,
+      "timeouts": 0,
+      "times": [
+        57.0,
+        77.8,
+        63.1,
+        61.7,
+        63.4
+      ],
+      "wilson": [
+        0.5655175352168251,
+        1.0
+      ]
+    },
+    "baseline_32k|coding_06_tax_rates_lan": {
+      "harness_failed": 0,
+      "median_ci": [
+        61.8,
+        76.8
+      ],
+      "median_s": 65.0,
+      "n": 5,
+      "passes": 1,
+      "rate": 0.2,
+      "timeouts": 0,
+      "times": [
+        64.0,
+        76.8,
+        65.0,
+        61.8,
+        74.9
+      ],
+      "wilson": [
+        0.03622410863243014,
+        0.6244653702374747
+      ]
+    }
+  },
+  "common_tasks": [
+    "coding_01_my_sqrt_review",
+    "coding_05_scientific_lan",
+    "coding_06_tax_rates_lan"
+  ],
+  "comparisons": [],
+  "configs": [
+    "baseline_32k"
+  ],
+  "created_utc": "2026-10-19T05:57:36Z",
+  "decomposition": {},
+  "n": 5,
+  "name": "parity_pilot",
+  "overview": {
+    "baseline_32k": {
+      "harness_failed": 0,
+      "n": 15,
+      "n_common": 15,
+      "passes": 9,
+      "passes_common": 9,
+      "rate_common": 0.6,
+      "suite_hi": 491.79999999999995,
+      "suite_lo": 228.1,
+      "suite_s": 248.9,
+      "timeouts": 0,
+      "wilson": [
+        0.357468301206246,
+        0.8017550385865841
+      ],
+      "wilson_common": [
+        0.357468301206246,
+        0.8017550385865841
+      ]
+    }
+  },
+  "parity": {
+    "cells": [
+      {
+        "config": "baseline_32k",
+        "median_instrumented_s": 120.8,
+        "median_parity_s": 105.2,
+        "n_instrumented": 5,
+        "n_parity": 5,
+        "task": "coding_01_my_sqrt_review"
+      },
+      {
+        "config": "baseline_32k",
+        "median_instrumented_s": 63.1,
+        "median_parity_s": 64.4,
+        "n_instrumented": 5,
+        "n_parity": 5,
+        "task": "coding_05_scientific_lan"
+      },
+      {
+        "config": "baseline_32k",
+        "median_instrumented_s": 65.0,
+        "median_parity_s": 63.3,
+        "n_instrumented": 5,
+        "n_parity": 5,
+        "task": "coding_06_tax_rates_lan"
+      }
+    ],
+    "n_instrumented_in_cells": 15,
+    "n_pairs": 15,
+    "n_parity_trials": 15,
+    "parity_without_instrumented_partner": 0,
+    "success": {
+      "instrumented": {
+        "ci": [
+          0.357468301206246,
+          0.8017550385865841
+        ],
+        "n": 15,
+        "rate": 0.6
+      },
+      "parity": {
+        "ci": [
+          0.357468301206246,
+          0.8017550385865841
+        ],
+        "n": 15,
+        "rate": 0.6
+      },
+      "verdict": "ok"
+    },
+    "time": {
+      "ci": [
+        0.882476808401795,
+        1.0728995223659987
+      ],
+      "ratio": 0.9722934348388519,
+      "tolerance": 0.05,
+      "verdict": "inconclusive"
+    },
+    "verdict": "inconclusive"
+  },
+  "parity_fraction": 1.0,
+  "parity_trials": 15,
+  "platform": {
+    "cuda": "13.0",
+    "driver": "580.126.09",
+    "gpu": "NVIDIA GeForce RTX 3080",
+    "llama_cpp": "b2f036c0f",
+    "ollama": "0.32.5",
+    "opencode": "1.18.11",
+    "python": "3.12.3"
+  },
+  "run_seed": 21,
+  "tasks": [
+    "coding_01_my_sqrt_review",
+    "coding_05_scientific_lan",
+    "coding_06_tax_rates_lan"
+  ],
+  "trials": {
+    "harness_failed": 0,
+    "measured": 15
+  }
+}

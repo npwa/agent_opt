@@ -11,3 +11,25 @@ jobs:
       - run: pip install -e ".[dev]"
       - run: ruff check .
       - run: pytest --cov=harness --cov=analysis
+
+  # Re-derive every analysis result (verifier replay, trace join, parity, statistics, report) from the
+  # recorded fixture runs - no GPU, no model - and require byte-for-byte equality with the golden copies.
+  replay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev]"
+      - name: Replay recorded runs and compare with the golden outputs
+        run: |
+          for n in parity_pilot traced_pilot; do
+            python -m harness.replay --run "fixtures/replay/$n" --out "replay-out/$n"
+            diff -r "replay-out/$n" "fixtures/replay/$n/expected"
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: replay-reports
+          path: replay-out

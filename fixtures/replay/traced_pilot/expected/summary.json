@@ -1,0 +1,145 @@
+{
+  "baseline": "baseline_32k",
+  "categories": {
+    "bugfix_01_moving_average": "bugfix",
+    "coding_05_scientific_lan": "reasoning"
+  },
+  "cells": {
+    "baseline_32k|bugfix_01_moving_average": {
+      "harness_failed": 0,
+      "median_ci": [
+        111.5,
+        111.5
+      ],
+      "median_s": 111.5,
+      "n": 1,
+      "passes": 1,
+      "rate": 1.0,
+      "timeouts": 0,
+      "times": [
+        111.5
+      ],
+      "wilson": [
+        0.20654931437723745,
+        1.0
+      ]
+    },
+    "baseline_32k|coding_05_scientific_lan": {
+      "harness_failed": 0,
+      "median_ci": [
+        53.2,
+        53.2
+      ],
+      "median_s": 53.2,
+      "n": 1,
+      "passes": 1,
+      "rate": 1.0,
+      "timeouts": 0,
+      "times": [
+        53.2
+      ],
+      "wilson": [
+        0.20654931437723745,
+        1.0
+      ]
+    }
+  },
+  "common_tasks": [
+    "bugfix_01_moving_average",
+    "coding_05_scientific_lan"
+  ],
+  "comparisons": [],
+  "configs": [
+    "baseline_32k"
+  ],
+  "created_utc": "2026-10-19T05:23:02Z",
+  "decomposition": {
+    "baseline_32k": {
+      "all": {
+        "n": 2,
+        "pct": {
+          "decode": 22.61381024188714,
+          "harness": 2.6159995709831017,
+          "prefill": 74.76654650661713,
+          "tool": 0.0036436726362864993,
+          "unattributed": 7.876341001666382e-09
+        },
+        "wall_s": 164.67017102241516
+      },
+      "categories": {
+        "bugfix": {
+          "n": 1,
+          "not_ok": 0,
+          "pct": {
+            "decode": 25.13697641674086,
+            "harness": 2.08507919727714,
+            "prefill": 72.77256365538787,
+            "tool": 0.005380613942161923,
+            "unattributed": 1.1665196183922486e-07
+          },
+          "wall_s": 111.51221823692322
+        },
+        "reasoning": {
+          "n": 1,
+          "not_ok": 0,
+          "pct": {
+            "decode": 17.3208325707248,
+            "harness": 3.7297390112138817,
+            "prefill": 78.94942863836928,
+            "tool": 0.0,
+            "unattributed": -2.2030796885394464e-07
+          },
+          "wall_s": 53.15795278549194
+        }
+      },
+      "first_call_share_pct": 92.41253575156223,
+      "flagged": [],
+      "gpu_duty_pct": 86.57881096770849
+    }
+  },
+  "n": 1,
+  "name": "traced_pilot",
+  "overview": {
+    "baseline_32k": {
+      "harness_failed": 0,
+      "n": 2,
+      "n_common": 2,
+      "passes": 2,
+      "passes_common": 2,
+      "rate_common": 1.0,
+      "suite_hi": 164.7,
+      "suite_lo": 164.7,
+      "suite_s": 164.7,
+      "timeouts": 0,
+      "wilson": [
+        0.34238022750665303,
+        1.0
+      ],
+      "wilson_common": [
+        0.34238022750665303,
+        1.0
+      ]
+    }
+  },
+  "parity": null,
+  "parity_fraction": 0.0,
+  "parity_trials": 0,
+  "platform": {
+    "cuda": "13.0",
+    "driver": "580.126.09",
+    "gpu": "NVIDIA GeForce RTX 3080",
+    "llama_cpp": "b2f036c0f",
+    "ollama": "0.32.5",
+    "opencode": "1.18.11",
+    "python": "3.12.3"
+  },
+  "run_seed": 5,
+  "tasks": [
+    "bugfix_01_moving_average",
+    "coding_05_scientific_lan"
+  ],
+  "trials": {
+    "harness_failed": 0,
+    "measured": 2
+  }
+}

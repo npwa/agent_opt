@@ -1,0 +1,32 @@
+{
+  "created_utc": "2026-10-19T05:23:02Z",
+  "run_seed": 5,
+  "n": 1,
+  "configs": {
+    "baseline_32k": {
+      "id": "baseline_32k",
+      "model": "ollama/qwen3.6-32k",
+      "description": "qwen3.6 35B-A3B, num_ctx 32768 (Modelfile), default sampling, per-trial seed",
+      "seed_mode": "per_trial",
+      "options": {}
+    }
+  },
+  "tasks": {
+    "bugfix_01_moving_average": "77cbc459dd06",
+    "coding_05_scientific_lan": "e580b39876fc"
+  },
+  "order": [
+    {
+      "trial_id": "baseline_32k__bugfix_01_moving_average__00",
+      "config": "baseline_32k",
+      "task": "bugfix_01_moving_average",
+      "k": 0
+    },
+    {
+      "trial_id": "baseline_32k__coding_05_scientific_lan__00",
+      "config": "baseline_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 0
+    }
+  ]
+}
