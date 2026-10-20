@@ -22,7 +22,10 @@ Time decomposition of an agent run (F6): where does wall-clock go?
               ``ok`` says whether it does.
 
 Also reported: GPU duty cycle (share of wall-clock with utilisation above the idle threshold),
-mean utilisation during prefill vs decode windows, and an energy estimate.
+mean utilisation during prefill vs decode windows, and an energy estimate. These are NVML
+numbers: NVML counts a sample window as busy if *any* kernel ran in it, so on this CPU-offloaded
+model it overstates real GPU work by roughly 5x (Nsight Systems pilot: ~10 % GPU-active vs ~50 %
+NVML utilisation, see results/v1/nsys_pilot). Treat them as "GPU not idle", not as busy time.
 """
 
 import argparse
