@@ -1,6 +1,91 @@
-# Local Agent Optimization: An OpenCode + Ollama Proof of Concept
+# Agent_opt: characterizing a local coding/research agent on a 10 GB GPU
 
-## Project Scope and Setup
+**Question.** Where does the time go when a local AI coding agent (OpenCode driving an Ollama model) works on a
+10 GB graphics card, and which changes make it faster or better without making it worse? Everything runs locally
+(RTX 3080, 10 GB; no cloud models), and every claim is meant to come with a sample size, a confidence interval
+and a way to re-derive it from the recorded runs.
+
+For a non-technical overview see the slide deck [`Doc/Agent_opt.pptx`](Doc/Agent_opt.pptx). The full plan,
+requirements and progress log are in [`improvement_plan.md`](improvement_plan.md); the original direction and its
+limits are in [`DIRECTION.md`](DIRECTION.md).
+
+## Status
+
+| Milestone | What | State |
+|---|---|---|
+| M0 | Baseline freeze, package scaffolding, CI, platform manifest (tag `m0`) | done |
+| M1 | 14 executable tasks with verifiers, sandbox, golden tests, calibration run (tag `m1`) | done |
+| M2 | Trial runner, trace join, 10 Hz GPU telemetry, time decomposition, parity check, Nsight capture (tag `m2`) | done |
+| M3 | Statistics, report generator, replay mode with golden fixtures and a CI job (tag `m3`) | done |
+| M4 | Baseline campaign: whole suite, n = 10, 32k vs 16k re-check | next |
+| M5 | Lever experiments: context/KV size, prompt budget, speculative decoding, second model, agent configs | planned |
+| M6 | Automated citation verifier and research evaluation | planned |
+| M7 | Write-up (README, deck, results) | planned |
+
+No baseline numbers are published yet; M4 produces them. What exists so far is tooling plus small pilots:
+`results/v1/calibration/` (one run of every task), `results/v1/parity_pilot/` (does the proxy distort results?)
+and `results/v1/nsys_pilot/` (what the GPU does, kernel by kernel).
+
+## Repository map
+
+| Path | Contents |
+|---|---|
+| `harness/` | the measurement tooling: `runner` (seeded, resumable trials), `proxy` (passive metrics proxy), `telemetry` (NVML sampler), `trace` and `decompose` (per-step timeline and time breakdown), `verifiers` + `sandbox` (automatic pass/fail), `taskspec`, `replay`, `nsys`, `manifest` |
+| `analysis/` | `stats` (Wilson, bootstrap, Mann-Whitney, Holm), `parity`, `report` + `svg` (Markdown and inline-SVG HTML report) |
+| `tasks/` | the 14 task specs (YAML): prompts, tool permissions, timeout, verifiers |
+| `fixtures/` | task inputs (`tasks/`), hidden verifier assets (`verify/`), known-good/bad examples (`golden/`), recorded traces (`traces/`) and the replay runs with committed golden outputs (`replay/`) |
+| `configs/` | run configurations (`baseline_32k.yaml`) |
+| `agent-config/` | OpenCode agents, the mock email/calendar MCP tools, Modelfiles, SearXNG settings |
+| `benchmark/` | the v0 scripts, kept for reference |
+| `results/` | v0 reports (`results/v0/`, `report-*.md`) and v1 data (`results/v1/`) |
+| `tests/` | unit, golden and end-to-end tests (no GPU needed) |
+
+## Quickstart
+
+Requirements: Python 3.12, [OpenCode](https://opencode.ai), Ollama with the `qwen3.6-32k` model
+(see `agent-config/Modelfile`), an NVIDIA GPU with drivers for the live runs. SearXNG
+(`docker start searxng`, see below) is only needed for the research task, Nsight Systems only for `harness.nsys`.
+
+```bash
+python3 -m venv .venv && . .venv/bin/activate
+pip install -e ".[dev,gpu]"      # "gpu" adds the NVML bindings for live runs
+ruff check . && pytest           # unit, golden and replay tests; no GPU required
+```
+
+**Live run** (needs the GPU box):
+
+```bash
+OUT=results/v1/baseline
+mkdir -p $OUT/proxy
+AGENT_OPT_DATA_DIR=$OUT/proxy python -m uvicorn harness.proxy:app --host 127.0.0.1 --port 11435 &   # metrics proxy
+python -m harness.runner run --configs configs/baseline_32k.yaml --n 10 --seed 1 \
+    --out $OUT --scratch /tmp/agent_opt_scratch --parity-fraction 0.2    # resumable: re-run the same command to continue
+python -m harness.runner status --out $OUT
+python -m harness.trace --run $OUT && python -m harness.decompose --run $OUT   # per-step timeline, time breakdown
+python -m analysis.report --run $OUT                                          # RESULTS.md + report.html
+```
+
+Use `--tasks <id> ...` to run a subset and `--dry-run` to see the randomized trial order first. Run
+`python -m harness.manifest` to record the hardware/software manifest.
+
+**Re-derive results from recorded runs** (no GPU, no model):
+
+```bash
+python -m harness.replay --run fixtures/replay/parity_pilot --out /tmp/replay
+diff -r /tmp/replay fixtures/replay/parity_pilot/expected     # byte-for-byte equal to the committed golden output
+```
+
+Other entry points: `python -m harness.taskspec` (validate the task specs), `python -m harness.verifiers <task> <workdir>`
+(re-run a task's checks), `python -m harness.nsys capture --task <id> --out <dir> --scratch <dir>` (Nsight Systems).
+
+Notes: `opencode run` blocks unless stdin is `/dev/null` (the runner handles this); the runner uses an isolated OpenCode
+config and does not touch your global one.
+
+---
+
+## First pass (v0): the OpenCode + Ollama proof of concept
+
+### Project Scope and Setup
 
 The target user is a developer using a local agent for coding and some research/benchmarks,
 prioritizing privacy and offline capability over raw throughput. The original scope called
@@ -17,7 +102,7 @@ to generalize, and where they won't) - with the following features:
 | GPU     | Nvidia GeForce RTX 3080 - 10G VRAM                       |
 
 
-## Model selection
+### Model selection
 
 Initially, I used `qwen2.5:14b-instruct` but this model doesn't fully fit into my 3080's 10GB VRAM,
 so a large chunk was running on CPU. This led to sluggish performance, about 4.47 tokens per
@@ -51,7 +136,10 @@ ollama launch opencode --model qwen3.6-32k
 This fixed the tools call. However, the initial baseline has no retrieval tool; the model attempts
 to answer from training data alone, producing no verifiable citations.  A search tool will used in other test cases.
 
-### Test cases:
+#### Test cases:
+
+> The suite has since grown to 14 executable tasks in `tasks/` (fixtures in `fixtures/`). The six coding/reasoning
+> prompts below are tasks 01 to 06 of it, with the output file names made explicit.
 
 I defined four coding prompts and two language/logic reasoning prompts
 
@@ -68,13 +156,18 @@ I defined four coding prompts and two language/logic reasoning prompts
 6. Explain in less than 150 words why lowering corporate tax rates will not boost long-term job growth
    > designed to test reasoning from training data alone
 
-## Methodology
+### Methodology
 
 > This is an AI assisted summary of the setup issues encountered during instrumentation:
 
 Per-query performance metrics (time-to-first-token, input/output tok/s, and GPU/CPU/RAM utilization) were captured via a lightweight logging proxy inserted between OpenCode and Ollama's OpenAI-compatible endpoint, with a background sampler recording system resource utilization at one-second intervals for later correlation against each request's timestamps. This approach proved to carry a real, non-obvious risk that is worth stating explicitly rather than treating as a solved implementation detail: the instrumentation layer itself was, over the course of development, the source of multiple failure modes that were difficult to distinguish from genuine model or agent-harness problems. A Content-Length mismatch in the proxy caused every request to fail outright after the request body was modified; a missing SSE blank-line delimiter caused generation to complete successfully while the client received no usable stream, producing silent, errorless non-output; and - most subtly - injecting a `stream_options` flag to obtain exact token counts altered how Ollama's compatibility layer split model output between reasoning and final-answer fields, causing well-formed responses to appear as empty, failing turns purely as an artifact of the measurement setup. Each of these was initially indistinguishable from a real model or harness limitation, and each cost significant time to isolate precisely because the instrumentation was positioned to observe the same signal it could also corrupt. The methodological implication is that any benchmark relying on a custom instrumentation or proxy layer must budget for this class of risk explicitly: a proxy in the request path is not a passive observer, and apparent model failures, degraded output, or missing results should be cross-checked against an uninstrumented baseline before being attributed to the model or agent harness under test.
 
-## Run test cases: ollama launch opencode:
+### Run test cases: ollama launch opencode:
+
+> **Historical.** This is the manual v0 procedure. The scripts below now live in `harness/`
+> (`python -m harness.proxy` etc.) and the whole loop is automated by `python -m harness.runner`;
+> see the quickstart above. `join_metrics.py` was never committed in v0 and has been reconstructed as
+> `harness/join_metrics.py`.
 
 Setup instrumentation:
 1. Set up proxy to track the timing of API calls for each test.
@@ -97,7 +190,7 @@ export OLLAMA_HOST=127.0.0.1:11435  # route through instrumentation proxy
 ollama launch opencode --model qwen3.6-32k`
 ```
 
-## Generate the initial report
+### Generate the initial report
 
 This will generate a Markdown report for each test showing TTFT, throughput, and resource utilization.
 
@@ -108,7 +201,7 @@ python3 report.py
 
 ----
 
-## First pass: Context window / GPU-layer-fit experiment
+### First pass: Context window / GPU-layer-fit experiment
 
 I attempted a performance improvement to reduce num_ctx (e.g., 16k instead of 32k) to make
 sure the quantization better fits the GeForce RTX 3080 10GB VRAM with less need to offload
@@ -124,9 +217,9 @@ ollama launch opencode --model qwen3.6-16k
 See test cases 1-6 above.
 
 
-## Second Pass: enable comm-tools to send emails and calendar appointments
+### Second Pass: enable comm-tools to send emails and calendar appointments
 
-### Test cases:
+#### Test cases:
 
 I was using the following prompts to simulate a common workflow:
 
@@ -138,7 +231,7 @@ I was using the following prompts to simulate a common workflow:
 "ok, create the event now"  
 
 
-## Third Pass: enable Web search, add to MCP for OpenCode
+### Third Pass: enable Web search, add to MCP for OpenCode
 
 I selected a self-hosted SearXNG instance (the actual search engine), and an MCP bridge that
 exposes it to OpenCode as a tool. SearXNG's default config only returns HTML, so I added a
@@ -223,7 +316,7 @@ Expected output:
 └  2 server(s)
 ```
 
-### Test case for deep research using web_search
+#### Test case for deep research using web_search
 
 The test case requires the model to search the web for current research and opinions and
 line up verifiable citations.
@@ -238,4 +331,4 @@ line up verifiable citations.
    > rather than confident-sounding but ungrounded claims
 
 After observing incorrect citations, a new `research` agent was defined, this showed some
-improvement but systemic model-based issues remained (See results section).
+improvement but systemic model-based issues remained (see `results/README.md`).
