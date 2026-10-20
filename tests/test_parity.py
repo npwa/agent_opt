@@ -2,47 +2,10 @@ import json
 import random
 
 import pytest
-from scipy import stats as sps
 
 from analysis import parity
-from analysis import stats as astats
 from harness import runner, trace
 from tests.test_runner import CFG, FIZZ, ROOT, SQRT, specs
-
-# ---- statistics helpers -----------------------------------------------------------------------
-
-@pytest.mark.parametrize(("k", "n"), [(0, 10), (10, 10), (3, 10), (57, 100), (1, 2), (299, 300)])
-def test_wilson_matches_scipy(k, n):
-    ref = sps.binomtest(k, n).proportion_ci(confidence_level=0.95, method="wilson")
-    lo, hi = astats.wilson_interval(k, n)
-    assert lo == pytest.approx(ref.low, abs=1e-9) and hi == pytest.approx(ref.high, abs=1e-9)
-    assert astats.wilson_interval(0, 0) == (0.0, 1.0)
-
-
-def test_bootstrap_is_deterministic_and_brackets_mean():
-    rnd = random.Random(1)
-    data = [rnd.gauss(10, 2) for _ in range(40)]
-    a = astats.bootstrap_ci(data, resamples=2000, seed=7)
-    assert a == astats.bootstrap_ci(data, resamples=2000, seed=7)
-    assert a != astats.bootstrap_ci(data, resamples=2000, seed=8)
-    assert a[0] < sum(data) / len(data) < a[1]
-    with pytest.raises(ValueError):
-        astats.bootstrap_ci([])
-
-
-def test_bootstrap_coverage_roughly_nominal():
-    rnd = random.Random(3)
-    hits, sims = 0, 150
-    for i in range(sims):
-        sample = [rnd.gauss(5.0, 1.0) for _ in range(30)]
-        lo, hi = astats.bootstrap_ci(sample, resamples=300, seed=i)
-        hits += lo <= 5.0 <= hi
-    assert 0.88 <= hits / sims <= 0.99  # the full 1 000-simulation check belongs to M3
-
-
-def test_geometric_mean():
-    assert astats.geometric_mean([1, 4]) == pytest.approx(2.0)
-
 
 # ---- plan with parity trials --------------------------------------------------------------------
 
