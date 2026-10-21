@@ -46,15 +46,20 @@ window and was deliberately run at 32k) against the four 10/10 tasks. Runtimes v
 **Where the time goes.** Across all trials, 54 % of wall-clock is prefill (the model reading its prompt before
 the first token), 43 % is decode, tool execution is 0.9 % and harness overhead 2.4 %; nothing is left unattributed.
 The split depends strongly on the task type: long-context and reasoning tasks are 80 % prefill, code generation
-is 60 % decode. The first LLM call of a session accounts for 72 % of all prefill time (about 39 % of total
-wall-clock). That fits the roughly 10k-token tool/system prompt being processed in full on the first call and
-served mostly from the prefix cache afterwards; M5 will confirm this per call from Ollama's `prompt_eval_count`.
+is 60 % decode. The first LLM call of each trial is 62 % of all prefill seconds (72 % on average per trial) and 33 % of all
+measured time: every trial starts with a cold 10k-token prompt at about 250 tokens/s (about 40 s), and all later
+calls reuse that prompt from the cache (97 % of it, median). No prefix is reused *between* trials, even when the
+same task runs twice in a row (`results/v1/baseline/promptbudget.md`).
 
 ![Where the time goes](results/v1/baseline/figures/time_by_task_type.svg)
 
 **What this changes about the earlier pilots**
 - The "about 75 % prefill" from the two-trial pilot does not hold suite-wide (54 %; 37-81 % by task type). It was
   a property of the short, read-heavy tasks in that pilot.
+- The 10k-token first prompt is about 51 % tool schemas, 26 % a skills list, 22 % OpenCode's base system prompt.
+  The skills list comes from the author's `~/.claude/skills`, i.e. **the baseline prompt leaked the author's
+  personal setup** (12 skills; about 2.4k tokens, roughly 10 s of cold prefill per trial). It does not change the
+  conclusions above but makes the baseline machine-dependent; fixing it needs a re-baseline (see `improvement_plan.md`).
 - Tool execution is negligible (about 1 %), confirmed: the "GPU idle while tools run" story does not apply to this suite.
 - NVML reports the GPU as non-idle for 95 % of wall-clock, but that is "any kernel in the sample window"; the
   Nsight pilot (two trials) found real kernel-active time during decode to be far lower, so GPU *utilisation* and
