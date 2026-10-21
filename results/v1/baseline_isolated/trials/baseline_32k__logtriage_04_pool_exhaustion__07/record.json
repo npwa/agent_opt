@@ -1,0 +1,59 @@
+{
+  "trial_id": "baseline_32k__logtriage_04_pool_exhaustion__07",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 7,
+  "instrumented": true,
+  "seed": 625924900,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T19:02:50Z",
+  "wall_start": 1792609370.4617035,
+  "wall_end": 1792609499.4136264,
+  "elapsed_s": 128.7,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 6,
+  "tokens_in": 81580,
+  "tokens_out": 1970,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "276 words, all checks ok"
+    }
+  ],
+  "final_answer": "Here's the outage analysis from `app.log`:\n\n---\n\n**1) First error burst \u2014 timestamp and host**\n\nThe first (and only real) error burst began at:\n\n- **`2026-01-18T03:17:42Z` on `api-07`**\n\nThis was the initial `ERROR` that triggered a cascade: dozens of `503 upstream=db pool exhausted (max=20)` errors raged across **all eight API hosts** (`api-01` through `api-08`) for roughly **17 minutes**, peaking at ~243 error lines in the window `03:17:42 \u2013 03:17:59`.\n\nThe earlier TLS error on `api-02` at `02:41:07Z` was a single isolated event \u2014 not part of a burst. The `WARN` cache misses and slow requests before the outage are normal background noise.\n\n---\n\n**2) Root cause**\n\n**Database connection pool exhaustion.** The pool max is **20 connections**. All 20 were seized and never released by one long-running job, so every other service (`api-01`\u2013`api-08`) that needed a connection got a `503`.\n\n---\n\n**3) Responsible batch job / user**\n\n| Field | Value |\n|-------|-------|\n| **Job** | `reconcile-ledger` (host: `batch-01`) |\n| **User** | `svc-batch` |\n| **Start** | `2026-01-18T03:15:03Z` \u2014 acquired all 20 DB connections, one every 5 seconds |\n| **Duration** | ~26 minutes (`03:15:03 \u2192 03:41:30`) with rows=48,210,112 |\n\nThe timeline is unambiguous: the job grabbed connections 1/20 through 20/20 between `03:15:03` and `03:16:39`. By **03:17:42** (about 90 seconds after acquiring the last connection), the remaining services ran out \u2014 first on `api-07`, then cascading to all hosts. Connections were only released at `03:41:30Z`, ~24 minutes into the outage window.\n\n---\n\n**Summary:** A single `reconcile-ledger` batch job (user `svc-batch`) consumed the entire DB connection pool and held it for 26 minutes, causing a total service outage across all API hosts from `03:17:42Z` to roughly `03:41:30Z`.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-21T19:02:50Z"
+    }
+  ]
+}

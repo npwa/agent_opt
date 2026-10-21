@@ -104,11 +104,38 @@ def is_subsequence(want: list[str], got: list[str]) -> bool:
     return all(any(w == g or g.endswith("_" + w) for g in it) for w in want)
 
 
+POLL_S = 2.0
+
+
+def _wait(p: subprocess.Popen, remaining: float, events: Path, stall_s: float | None, busy) -> int | str:
+    """Wait for ``p``: its exit code, or "timeout", or "stalled" (no events, GPU idle and no child working
+    for ``stall_s`` seconds; ``busy(pid)`` reports GPU or child activity)."""
+    deadline = time.monotonic() + remaining
+    size = events.stat().st_size if events.exists() else 0
+    last_active = time.monotonic()
+    while True:
+        left = deadline - time.monotonic()
+        if left <= 0:
+            return "timeout"
+        try:
+            return p.wait(timeout=min(POLL_S, left))
+        except subprocess.TimeoutExpired:
+            pass
+        if not stall_s:
+            continue
+        now = time.monotonic()
+        new_size = events.stat().st_size if events.exists() else 0
+        if new_size != size or (busy is not None and busy(p.pid)):
+            size, last_active = new_size, now
+        elif now - last_active >= stall_s:
+            return "stalled"
+
+
 def run_opencode(spec: TaskSpec, work: Path, run_dir: Path, env: dict, model: str,
-                 max_s: int, events: Path) -> dict:
+                 max_s: int, events: Path, stall_s: float | None = None, busy=None) -> dict:
     session = None
     started = time.monotonic()
-    timed_out = False
+    timed_out = stalled = False
     codes = []
     for prompt in spec.prompts:
         cmd = ["opencode", "run", "--title", spec.id, "--format", "json", "--dir", str(work),
@@ -125,17 +152,17 @@ def run_opencode(spec: TaskSpec, work: Path, run_dir: Path, env: dict, model: st
         with open(events, "ab") as out, open(run_dir / "stderr.txt", "ab") as err:
             p = subprocess.Popen(cmd, env=env, cwd=work, stdin=subprocess.DEVNULL, stdout=out,
                                  stderr=err, start_new_session=True)
-            try:
-                codes.append(p.wait(timeout=remaining))
-            except subprocess.TimeoutExpired:
+            result = _wait(p, remaining, events, stall_s, busy)
+            if isinstance(result, str):
                 os.killpg(p.pid, signal.SIGKILL)
                 p.wait()
-                timed_out = True
+                timed_out, stalled = result == "timeout", result == "stalled"
                 codes.append(-9)
                 break
+            codes.append(result)
         session = session or parse_events(events)["session"]
     return {"elapsed_s": round(time.monotonic() - started, 1), "timed_out": timed_out,
-            "exit_codes": codes}
+            "stalled": stalled, "exit_codes": codes}
 
 
 def changed_files(fixture: Path | None, work: Path, limit: int = 20_000) -> dict[str, str]:

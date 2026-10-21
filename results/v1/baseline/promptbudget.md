@@ -4,10 +4,10 @@
 
 ## Prefill and cache
 
-- Cold prefill rate (first calls): **250 tok/s** (min 237, max 253); first call = 10142 prompt tokens = 40.6 s.
-- Follow-up calls: ttft = 1.10 s + new tokens / rate (median abs. error 0.25 s); 97 % of the prompt is served from cache (median).
+- Cold prefill rate: **253 tok/s** (fitted on follow-up calls). First call = 10142 prompt tokens; ttft median 40.6 s (min 37.0, max 44.2); 140 cold, 0 warm.
+- Follow-up calls: ttft = 1.12 s + new tokens / rate (median abs. error 0.23 s); 97 % of the prompt is served from cache (median).
 - First calls are 62 % of all prefill time (5677 s of 9150 s). That is 33 % of the summed trial time.
-- Cross-trial reuse: 99 % of first calls run within 5 % of the cold rate; rate relative to cold is 1.00 after a different task and 1.00 after the same task (n = 10). A value near 1.00 means no prefix is reused between trials.
+- Cross-trial reuse: 100 % of first calls are fully cold. Speed-up of a first call over a full cold prefill (median; 1.0 = no reuse): 1.0 after a different task, 1.0 after the same task (n = 10).
 
 ## Prompt components (one captured first call)
 

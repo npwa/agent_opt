@@ -47,33 +47,61 @@ def _median(xs: list[float]) -> float:
     return st.median(xs) if xs else float("nan")
 
 
-def call_model(calls: dict[tuple[str, str], list[dict]]) -> dict:
-    """Fit ttft = overhead + new_tokens / rate and report how much of the prompt is served from cache."""
-    firsts = [v[0] for v in calls.values() if v]
-    first_rates = [c["prompt_tokens"] / c["ttft_s"] for c in firsts]
-    rate = _median(first_rates)
-    # follow-up calls: new tokens since the previous call's prompt (previous reply + tool results)
-    pairs = []  # (new_tokens, ttft)
+def _ols(pairs: list[tuple[float, float]]) -> tuple[float, float] | None:
+    """Least-squares y = a + b x; None when x has no spread."""
+    n = len(pairs)
+    if n < 3:
+        return None
+    mx, my = sum(x for x, _ in pairs) / n, sum(y for _, y in pairs) / n
+    sxx = sum((x - mx) ** 2 for x, _ in pairs)
+    if sxx <= 0:
+        return None
+    b = sum((x - mx) * (y - my) for x, y in pairs) / sxx
+    return my - b * mx, b
+
+
+def _followups(calls: dict[tuple[str, str], list[dict]]) -> list[tuple[int, float, int]]:
+    """(new tokens since the previous call of the session, ttft, prompt tokens) for every follow-up call."""
+    out = []
     for v in calls.values():
         for prev, cur in zip(v, v[1:], strict=False):
             new = cur["prompt_tokens"] - prev["prompt_tokens"]
             if new >= 0:
-                pairs.append((new, cur["ttft_s"], cur["prompt_tokens"]))
+                out.append((new, cur["ttft_s"], cur["prompt_tokens"]))
+    return out
+
+
+def cold_rate(calls: dict[tuple[str, str], list[dict]]) -> float:
+    """Cold prefill rate in tokens/s. Estimated from follow-up calls (ttft against new tokens, whose prefix is
+    cached), because first calls can be warm; falls back to the median first-call rate if that fit is unusable."""
+    fit = _ols([(n, t) for n, t, _ in _followups(calls)])
+    if fit and fit[1] > 0:
+        return 1.0 / fit[1]
+    firsts = [v[0] for v in calls.values() if v]
+    return _median([c["prompt_tokens"] / c["ttft_s"] for c in firsts])
+
+
+def call_model(calls: dict[tuple[str, str], list[dict]]) -> dict:
+    """Fit ttft = overhead + new_tokens / rate and report how much of the prompt is served from cache."""
+    firsts = [v[0] for v in calls.values() if v]
+    rate = cold_rate(calls)
+    pairs = _followups(calls)
     overhead = _median([t - n / rate for n, t, _ in pairs]) if pairs else 0.0
     errs = [abs(t - (overhead + n / rate)) for n, t, _ in pairs]
-    cached_share = []
-    for _n, t, p in pairs:
-        uncached = min(p, max(0.0, (t - overhead) * rate))
-        cached_share.append(1 - uncached / p)
+    cached_share = [1 - min(p, max(0.0, (t - overhead) * rate)) / p for _, t, p in pairs]
+    first_cold = [c for c in firsts if c["ttft_s"] >= 0.85 * c["prompt_tokens"] / rate]  # within 15 % of a full cold prefill
     total_first = sum(c["ttft_s"] for c in firsts)
     total_follow = sum(t for _, t, _ in pairs)
     return {
         "trials": len(calls),
         "calls": sum(len(v) for v in calls.values()),
-        "cold_rate_tok_s": {"median": rate, "min": min(first_rates, default=float("nan")),
-                            "max": max(first_rates, default=float("nan"))},
+        "cold_rate_tok_s": rate,
         "first_call_prompt_tokens_median": _median([c["prompt_tokens"] for c in firsts]),
-        "first_call_ttft_s_median": _median([c["ttft_s"] for c in firsts]),
+        "first_call_ttft_s": {"median": _median([c["ttft_s"] for c in firsts]),
+                              "min": min((c["ttft_s"] for c in firsts), default=float("nan")),
+                              "max": max((c["ttft_s"] for c in firsts), default=float("nan"))},
+        "first_calls_cold": len(first_cold),
+        "first_calls_warm": len(firsts) - len(first_cold),
         "followup_overhead_s": overhead,
         "followup_model_median_abs_err_s": _median(errs),
         "followup_cached_share_of_prompt_median": _median(cached_share),
@@ -83,22 +111,21 @@ def call_model(calls: dict[tuple[str, str], list[dict]]) -> dict:
     }
 
 
-def cross_trial_reuse(calls: dict[tuple[str, str], list[dict]]) -> dict:
-    """Do first calls reuse a prefix cached by an earlier trial? Compare their rate with the cold rate."""
+def cross_trial_reuse(calls: dict[tuple[str, str], list[dict]], rate: float | None = None) -> dict:
+    """Do first calls reuse a prefix cached by an earlier trial? Compare their ttft with a full cold prefill."""
+    rate = rate or cold_rate(calls)
     firsts = sorted((v[0] for v in calls.values() if v), key=lambda c: c["wall_start"])
-    rates = [c["prompt_tokens"] / c["ttft_s"] for c in firsts]
-    cold = _median(rates)
-    same, other = [], []
-    for prev, cur in zip(firsts, firsts[1:], strict=False):
-        (same if prev.get("task") == cur.get("task") else other).append(cur["prompt_tokens"] / cur["ttft_s"])
+    speedup = [(c["prompt_tokens"] / rate) / c["ttft_s"] for c in firsts]  # 1.0 = fully cold, > 1 = prefix reused
+    prev_task = [None, *[c.get("task") for c in firsts[:-1]]]
+    same = [s for s, c, p in zip(speedup, firsts, prev_task, strict=True) if p is not None and p == c.get("task")]
+    other = [s for s, c, p in zip(speedup, firsts, prev_task, strict=True) if p is not None and p != c.get("task")]
     return {
         "first_calls": len(firsts),
-        "rate_vs_cold_median_ratio_same_task_as_previous": _median(same) / cold if same else None,
+        "speedup_vs_cold_median_same_task_as_previous": _median(same) if same else None,
         "n_same_task_as_previous": len(same),
-        "rate_vs_cold_median_ratio_other_task": _median(other) / cold if other else None,
+        "speedup_vs_cold_median_other_task": _median(other) if other else None,
         "n_other_task": len(other),
-        "fraction_of_first_calls_within_5pct_of_cold": sum(abs(r / cold - 1) <= 0.05 for r in rates) / len(rates)
-        if rates else None,
+        "fraction_of_first_calls_cold": sum(s < 1.15 for s in speedup) / len(speedup) if speedup else None,
     }
 
 
@@ -165,23 +192,24 @@ def component_budget(body: dict, prompt_tokens: int) -> dict:
 # ---- report -------------------------------------------------------------------------------------------------------------
 
 def render(run: str, model: dict, reuse: dict, elapsed_total: float | None, comp: dict | None) -> str:
-    cr = model["cold_rate_tok_s"]
     L = [f"# Prompt budget: {run}", "",
          f"{model['trials']} trials, {model['calls']} LLM calls (proxy records).", "",
          "## Prefill and cache", "",
-         f"- Cold prefill rate (first calls): **{cr['median']:.0f} tok/s** (min {cr['min']:.0f}, max {cr['max']:.0f}); "
-         f"first call = {model['first_call_prompt_tokens_median']:.0f} prompt tokens = {model['first_call_ttft_s_median']:.1f} s.",
+         f"- Cold prefill rate: **{model['cold_rate_tok_s']:.0f} tok/s** (fitted on follow-up calls). First call = "
+         f"{model['first_call_prompt_tokens_median']:.0f} prompt tokens; ttft median {model['first_call_ttft_s']['median']:.1f} s "
+         f"(min {model['first_call_ttft_s']['min']:.1f}, max {model['first_call_ttft_s']['max']:.1f}); "
+         f"{model['first_calls_cold']} cold, {model['first_calls_warm']} warm.",
          f"- Follow-up calls: ttft = {model['followup_overhead_s']:.2f} s + new tokens / rate "
          f"(median abs. error {model['followup_model_median_abs_err_s']:.2f} s); "
          f"{model['followup_cached_share_of_prompt_median'] * 100:.0f} % of the prompt is served from cache (median).",
          f"- First calls are {model['first_call_share_of_prefill'] * 100:.0f} % of all prefill time "
          f"({model['first_call_ttft_total_s']:.0f} s of {model['first_call_ttft_total_s'] + model['followup_ttft_total_s']:.0f} s)."
          + (f" That is {model['first_call_ttft_total_s'] / elapsed_total * 100:.0f} % of the summed trial time." if elapsed_total else ""),
-         f"- Cross-trial reuse: {reuse['fraction_of_first_calls_within_5pct_of_cold'] * 100:.0f} % of first calls run within 5 % of "
-         f"the cold rate; rate relative to cold is {reuse['rate_vs_cold_median_ratio_other_task']:.2f} after a different task and "
-         + (f"{reuse['rate_vs_cold_median_ratio_same_task_as_previous']:.2f} after the same task "
-            f"(n = {reuse['n_same_task_as_previous']}). " if reuse["rate_vs_cold_median_ratio_same_task_as_previous"] is not None else "n/a. ")
-         + "A value near 1.00 means no prefix is reused between trials."]
+         f"- Cross-trial reuse: {reuse['fraction_of_first_calls_cold'] * 100:.0f} % of first calls are fully cold. Speed-up of a first "
+         f"call over a full cold prefill (median; 1.0 = no reuse): "
+         + (f"{reuse['speedup_vs_cold_median_other_task']:.1f} after a different task" if reuse["speedup_vs_cold_median_other_task"] is not None else "n/a after a different task")
+         + (f", {reuse['speedup_vs_cold_median_same_task_as_previous']:.1f} after the same task (n = {reuse['n_same_task_as_previous']})."
+            if reuse["speedup_vs_cold_median_same_task_as_previous"] is not None else ".")]
     if comp:
         L += ["", "## Prompt components (one captured first call)", "",
               f"{comp['prompt_tokens']} prompt tokens, {comp['chars_total']} characters "

@@ -1,0 +1,61 @@
+{
+  "trial_id": "baseline_32k__coding_04_dir_stats_gen__p01",
+  "task": "coding_04_dir_stats_gen",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": false,
+  "seed": 1981520361,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T18:13:21Z",
+  "wall_start": 1792606401.4752522,
+  "wall_end": 1792606434.6555898,
+  "elapsed_s": 33.2,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 31000,
+  "tokens_out": 767,
+  "tool_sequence": [
+    "read",
+    "write",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Done. The script at `/tmp/agent_opt_scratch/baseline_32k__coding_04_dir_stats_gen__p01/work/dir_stats.sh`:\n\n- Accepts a directory path as `$1` (defaults to `.`)\n- Prints an error to stderr and exits with code 1 if the directory doesn't exist\n- Non-recursively counts regular files, subdirectories, and total file size in bytes\n- Outputs in the exact required format",
+  "files": [
+    "dir_stats.sh"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-21T18:13:21Z"
+    }
+  ]
+}

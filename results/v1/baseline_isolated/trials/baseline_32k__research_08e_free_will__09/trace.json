@@ -1,0 +1,169 @@
+{
+  "trial_id": "baseline_32k__research_08e_free_will__09",
+  "task": "research_08e_free_will",
+  "config": "baseline_32k",
+  "attempt": 1,
+  "status": "fail",
+  "summary": {
+    "wall_start": 1792595130.9911788,
+    "wall_end": 1792595243.3078134,
+    "wall_s": 112.31663465499878,
+    "n_steps": 3,
+    "llm_s": 108.3408,
+    "ttft_s": 84.4198,
+    "decode_s": 23.921,
+    "tool_s": 4.912999868392944,
+    "gap_s": 1.5119819641113281,
+    "idle_gap_s": 0.0,
+    "prefill_tokens": 45298,
+    "decode_tokens": 829,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "baseline_32k__research_08e_free_will__09#a1:1",
+      "t_start": 1792595133.4550314,
+      "t_end": 1792595144.0474315,
+      "ttft_s": 2.6808,
+      "llm_s": 10.5924,
+      "decode_s": 7.9116,
+      "prefill_tokens": 7646,
+      "decode_tokens": 272,
+      "prefill_tok_s": 2852.13,
+      "decode_tok_s": 34.38,
+      "n_chunks": 97,
+      "first_token_skew_s": 0.025168657302856445,
+      "itl_p50_ms": 29.999999999999805,
+      "itl_p99_ms": 1570.7999999999997,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 2.609999895095825,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792595140.69,
+          "end": 1792595141.608,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792595142.24,
+          "end": 1792595143.154,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792595144.015,
+          "end": 1792595144.793,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792595136.161,
+      "oc_step_finish": 1792595144.808,
+      "tool_errors": 0,
+      "gap_s": 0.779487133026123,
+      "gpu_busy_pct_llm": 31.57547169811321,
+      "gpu_power_w_llm": 117.98490566037735,
+      "gpu_samples_llm": 106,
+      "gpu_busy_pct_gap": 17.0,
+      "gpu_samples_gap": 8,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 2,
+      "llm_call_id": "baseline_32k__research_08e_free_will__09#a1:2",
+      "t_start": 1792595144.8269186,
+      "t_end": 1792595171.8672185,
+      "ttft_s": 20.1951,
+      "llm_s": 27.0403,
+      "decode_s": 6.845199999999998,
+      "prefill_tokens": 12947,
+      "decode_tokens": 244,
+      "prefill_tok_s": 641.1,
+      "decode_tok_s": 35.65,
+      "n_chunks": 29,
+      "first_token_skew_s": 0.012981414794921875,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 1827.5900000000017,
+      "tool_names": [
+        "searxng_web_url_read",
+        "searxng_web_url_read",
+        "searxng_web_url_read",
+        "searxng_web_url_read"
+      ],
+      "tool_latency_s": 2.302999973297119,
+      "tools": [
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792595167.098,
+          "end": 1792595167.639,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792595168.476,
+          "end": 1792595169.391,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792595169.858,
+          "end": 1792595170.375,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792595171.843,
+          "end": 1792595172.173,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792595165.035,
+      "oc_step_finish": 1792595172.186,
+      "tool_errors": 1,
+      "gap_s": 0.3400449752807617,
+      "gpu_busy_pct_llm": 78.43333333333334,
+      "gpu_power_w_llm": 129.32296296296295,
+      "gpu_samples_llm": 270,
+      "gpu_busy_pct_gap": 20.0,
+      "gpu_samples_gap": 4,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 3,
+      "llm_call_id": "baseline_32k__research_08e_free_will__09#a1:3",
+      "t_start": 1792595172.2072635,
+      "t_end": 1792595242.9153636,
+      "ttft_s": 61.5439,
+      "llm_s": 70.7081,
+      "decode_s": 9.164200000000001,
+      "prefill_tokens": 24705,
+      "decode_tokens": 313,
+      "prefill_tok_s": 401.42,
+      "decode_tok_s": 34.15,
+      "n_chunks": 301,
+      "first_token_skew_s": 0.011836528778076172,
+      "itl_p50_ms": 28.999999999996362,
+      "itl_p99_ms": 58.009999999992765,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792595233.763,
+      "oc_step_finish": 1792595242.928,
+      "tool_errors": 0,
+      "gap_s": 0.39244985580444336,
+      "gpu_busy_pct_llm": 87.39745403111739,
+      "gpu_power_w_llm": 133.8192362093352,
+      "gpu_samples_llm": 707,
+      "gpu_busy_pct_gap": 21.0,
+      "gpu_samples_gap": 4,
+      "idle_gap_s": 0.0
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

@@ -1,0 +1,50 @@
+{
+  "trial_id": "baseline_32k__repoqa_05_retry_policy__05",
+  "task": "repoqa_05_retry_policy",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 5,
+  "instrumented": true,
+  "seed": 1946517152,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T15:42:23Z",
+  "wall_start": 1792597343.8731928,
+  "wall_end": 1792597370.1377857,
+  "elapsed_s": 26.3,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 32166,
+  "tokens_out": 476,
+  "tool_sequence": [
+    "glob",
+    "grep",
+    "read",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "27 words, all checks ok"
+    }
+  ],
+  "final_answer": "1. **Function that computes the delay:** `next_delay`, `miniq/retry.py:20`\n2. **Default maximum delay:** 30 seconds, `miniq/config.py:9`\n3. **Default max attempts before giving up:** 5, `miniq/config.py:7` (consumed in `miniq/retry.py:9`)",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-21T15:42:23Z"
+    }
+  ]
+}

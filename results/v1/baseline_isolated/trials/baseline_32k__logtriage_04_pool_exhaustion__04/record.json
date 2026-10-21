@@ -1,0 +1,54 @@
+{
+  "trial_id": "baseline_32k__logtriage_04_pool_exhaustion__04",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 4,
+  "instrumented": true,
+  "seed": 443645301,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T18:34:23Z",
+  "wall_start": 1792607663.3400419,
+  "wall_end": 1792607767.6383896,
+  "elapsed_s": 104.0,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 78103,
+  "tokens_out": 1532,
+  "tool_sequence": [
+    "read",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "288 words, all checks ok"
+    }
+  ],
+  "final_answer": "Here are the answers based on the log evidence:\n\n---\n\n### (1) First real error burst \u2014 when and which host\n\nThe first real error of the outage burst was:\n\n> **`2026-01-18T03:17:42Z` on `api-07`:** `\"db pool exhausted (max=20) waiting=14 path=/v1/orders\"`\n\nWithin seconds this cascaded across all hosts (api-01 through api-08), producing hundreds of 503 errors over the following minutes. The isolated TLS handshake error at `02:41:07Z` on `api-02` was incidental noise \u2014 a single peer reset that did not cascade or affect services afterward.\n\n---\n\n### (2) Root cause\n\n**Database connection pool exhaustion.** Services were trying to acquire DB connections from a pool with `max=20`, but all 20 slots were held with none being released. When the web request timeout was exceeded, subsequent requests started returning `503 upstream=db pool exhausted`.\n\n---\n\n### (3) Responsible batch job / user\n\n**`batch-01` running `reconcile-ledger` under user `svc-batch`**\n\nAt **`2026-01-18T03:15:03Z`**, this job started and acquired all 20 DB connections from the primary pool. It acquired them 5 seconds apart (from `03:15:04Z` through `03:16:39Z=`) and **never released any of them**. This left zero connections available for the live service traffic, which is why all API hosts hit pool exhaustion starting 2-3 minutes later as their connection timeouts fired and began propagating errors to each other.\n\n---\n\n### Timeline summary\n\n| Time | Event |\n|---|---|\n| `03:15:03Z` | `batch-01 (svc-batch / reconcile-ledger)` starts, grabs connections 1\u201320 over the next 96 seconds, holds them all |\n| `03:17:42Z` | First web request fails with pool exhaustion on `api-07` (`/v1/orders`) |\n| `03:17:43+Z` | Rapid cascade: all API servers (api-01 through api-08) begin returning 503 |\n| `03:17\u201303:18Z` | ~299 additional db pool exhaustion errors across all hosts (the visible portion of the burst) |",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-21T18:34:23Z"
+    }
+  ]
+}

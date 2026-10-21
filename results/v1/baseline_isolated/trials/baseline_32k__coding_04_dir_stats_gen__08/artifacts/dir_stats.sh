@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+dir="${1:-.}"
+
+if [ ! -d "$dir" ]; then
+  echo "Error: Directory not found" >&2
+  exit 1
+fi
+
+file_count=0
+dir_count=0
+total_size=0
+
+for entry in "$dir"/*; do
+  # Handle empty directory (glob returns literal pattern)
+  [ -e "$entry" ] || continue
+
+  if [ -f "$entry" ]; then
+    file_count=$((file_count + 1))
+    size=$(stat -c '%s' "$entry")
+    total_size=$((total_size + size))
+  elif [ -d "$entry" ]; then
+    dir_count=$((dir_count + 1))
+  fi
+done
+
+echo "Files: $file_count"
+echo "Directories: $dir_count"
+echo "Total Size: $total_size bytes"

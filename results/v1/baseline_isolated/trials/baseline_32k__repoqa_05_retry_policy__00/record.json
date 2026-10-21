@@ -1,0 +1,50 @@
+{
+  "trial_id": "baseline_32k__repoqa_05_retry_policy__00",
+  "task": "repoqa_05_retry_policy",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "seed": 252474420,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T15:07:23Z",
+  "wall_start": 1792595243.354636,
+  "wall_end": 1792595282.0982563,
+  "elapsed_s": 38.7,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 24750,
+  "tokens_out": 859,
+  "tool_sequence": [
+    "glob",
+    "grep",
+    "read",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "59 words, all checks ok"
+    }
+  ],
+  "final_answer": "1. **Function that computes retry delay:** `miniq/retry.py:20` \u2014 `RetryPolicy.next_delay()` (exponential backoff with jitter)\n\n2. **Default maximum delay:** `miniq/config.py:9` \u2014 30 seconds (`RETRY_MAX_DELAY_S = 30.0`)\n\n3. **Default max retries before stopping:** `miniq/retry.py:18` + `miniq/config.py:7` \u2014 the job is retried while `attempt < max_attempts` (default 5), so `should_retry(4)` returns True but `should_retry(5)` returns False, meaning retries stop after the **5th attempt**.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-21T15:07:23Z"
+    }
+  ]
+}

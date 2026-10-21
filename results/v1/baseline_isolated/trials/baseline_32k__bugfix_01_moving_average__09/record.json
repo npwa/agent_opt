@@ -1,0 +1,53 @@
+{
+  "trial_id": "baseline_32k__bugfix_01_moving_average__09",
+  "task": "bugfix_01_moving_average",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 9,
+  "instrumented": true,
+  "seed": 318013025,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T15:08:02Z",
+  "wall_start": 1792595282.1490088,
+  "wall_end": 1792595308.9656422,
+  "elapsed_s": 26.8,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 32922,
+  "tokens_out": 453,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "read",
+    "edit"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "The bug is on line 9 of `stats_utils.py`. The range should use `- window + 1` to include the last window position.\nThe bug was an off-by-one error on line 9 of `stats_utils.py`: `range(len(values) - window)` excluded the last valid window position. Fixed to `range(len(values) - window + 1)`.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-21T15:08:02Z"
+    }
+  ]
+}

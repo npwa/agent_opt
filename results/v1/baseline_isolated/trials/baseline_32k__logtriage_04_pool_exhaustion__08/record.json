@@ -1,0 +1,53 @@
+{
+  "trial_id": "baseline_32k__logtriage_04_pool_exhaustion__08",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 8,
+  "instrumented": true,
+  "seed": 497761413,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T15:09:22Z",
+  "wall_start": 1792595362.1457217,
+  "wall_end": 1792595499.912772,
+  "elapsed_s": 137.5,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 87449,
+  "tokens_out": 1661,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "242 words, all checks ok"
+    }
+  ],
+  "final_answer": "Here's the analysis of the outage in `app.log`:\n\n**1. When & where did the first error burst start?**\n\nThe first real error was at **`api-07`** on **`2026-01-18T03:17:42Z`**:\n```\nERROR api-07 db pool exhausted (max=20) waiting=14 path=/v1/orders\n```\n\nWithin seconds, cascading 503 errors hit every API host (`api-01` through `api-08`) - a total burst spanning ~`2026-01-18T03:17:42Z` to `2026-01-18T03:40-something`, when the pool was finally released.\n\n**2. Root cause:**\n\nThe database connection pool (`pool=primary`, max=20) was **fully consumed and never released**. All 20 connections were held, so every incoming API request that needed a DB connection got a 503 \"db pool exhausted.\"\n\n**3. Which batch job / user is responsible:**\n\n**`batch-01`**, job **`reconcile-ledger`**, running as user **`svc-batch`** (line 44947):\n```\n2026-01-18T03:15:03Z INFO batch-01 job reconcile-ledger started user=svc-batch db_conns=20\n```\n\nThis job acquired all 20 connections (`acquired connection 20/20 from pool=primary` at `03:16:39Z`) and held them exclusively. Meanwhile, the normal API requests from `api-01` through `api-08` had nothing to fall back on during their `/v1/orders` and other DB-backed calls. The connections were finally released when the job finished at `03:41:30Z`.\n\nThe window between the last connection being acquired (03:16:39Z) and the first 503 errors (03:17:42Z) was only **about 1 minute** - once the pool hit 20/20, the cascade to all API hosts happened almost immediately.\n\n---\n\n**TL;DR:** The `svc-batch` user's `reconcile-ledger` job on `batch-01` hogged all 20 database connections and never released them, causing a full service outage across all API hosts from **03:16:39Z to 03:41:30Z**.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-21T15:09:22Z"
+    }
+  ]
+}

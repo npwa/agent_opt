@@ -1,0 +1,55 @@
+{
+  "trial_id": "baseline_32k__logtriage_04_pool_exhaustion__03",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 3,
+  "instrumented": true,
+  "seed": 480107021,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T15:44:28Z",
+  "wall_start": 1792597468.4326918,
+  "wall_end": 1792597561.6599104,
+  "elapsed_s": 92.9,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 72513,
+  "tokens_out": 1241,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "119 words, all checks ok"
+    }
+  ],
+  "final_answer": "Here's the full outage diagnosis:\n\n**1. First error burst:** `2026-01-18T03:17:42Z` on **api-07** (the first `db pool exhausted` event), immediately cascading to all api hosts with 503 errors through ~03:18+.\n\n**2. Root cause:** Database connection pool exhaustion (max=20). The `reconcile-ledger` batch job on **batch-01** acquired all 20 connections by `03:16:39Z` and held them for over 25 minutes without releasing any, starving the API server pool.\n\n**3. Responsible party:** Batch job **`reconcile-ledger`** run by user **`svc-batch`** on host **batch-01**. It acquired connections 1/20 through 20/20 one per 5 seconds (lines around 44961-45884), and only finished/released them at `03:41:30Z` (~26 minutes later).\n\nThe \"noise\" earlier in the log was just normal cache-miss warnings and occasional slow requests \u2014 unrelated to the outage.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-21T15:44:28Z"
+    }
+  ]
+}

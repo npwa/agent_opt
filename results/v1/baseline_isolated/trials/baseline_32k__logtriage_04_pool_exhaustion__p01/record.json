@@ -1,0 +1,56 @@
+{
+  "trial_id": "baseline_32k__logtriage_04_pool_exhaustion__p01",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": false,
+  "seed": 34519520,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T15:58:11Z",
+  "wall_start": 1792598291.5449224,
+  "wall_end": 1792598398.7604933,
+  "elapsed_s": 106.9,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 63535,
+  "tokens_out": 1742,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "257 words, all checks ok"
+    }
+  ],
+  "final_answer": "Now let me look at what preceded the outage and identify the batch job responsible:\nHere are the findings from `app.log`:\n\n**(1) First real error burst**\n\nThe first error burst started at **`2026-01-18T03:17:42Z` on host `api-07`**:\n```\nERROR api-07 db pool exhausted (max=20) waiting=14 path=/v1/orders\n```\nWithin 1 second, the error cascade hit all API hosts (api-01 through api-08), producing a flood of `503 upstream=db pool exhausted` responses. In total there were **302 ERROR/FATAL lines** during the outage window.\n\n---\n\n**(2) Root cause**\n\n**Database connection pool exhaustion.** The pool limit is 20 connections (`max=20`). All 20 connections were sequentially acquired by a long-running job, leaving zero available for the API servers. Each API request that landed after all connections were taken backlogged (queue grew to 14+ waiting) and then failed with 503.\n\n---\n\n**(3) Responsible batch job**\n\nBatch: **`batch-01`**, job: **`reconcile-ledger`**, user: **`svc-batch`**.\n\nTimeline of the culprit:\n```\n03:15:03Z  reconcile-ledger started          db_conns=20\n03:15:04Z  acquired connection  1/20\n03:15:14Z  acquired connection  2/20  (every 5 seconds)\n...progressive acquisition every 5s...\n03:16:39Z  acquired connection 20/20  (all connections grabbed)\n03:17:42Z  api-07 hits first ERROR \u2014 pool exhausted \u2190 outage starts\n```\n\nThe job held all 20 DB connections from `03:15:03Z` through `03:41:30Z` (~26 minutes). The outage window at the API layer ran from `03:17:42Z` until it presumably subsided once the batch job released connections.\n\n**Noise excluded:** The single TLS handshake error on api-02 at `T02:41:07Z` is unrelated \u2014 no cascading errors, only a 1-liner. The thousands of `WARN cache miss` and `WARN slow request` entries throughout the day are also background noise.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-21T15:58:11Z"
+    }
+  ]
+}

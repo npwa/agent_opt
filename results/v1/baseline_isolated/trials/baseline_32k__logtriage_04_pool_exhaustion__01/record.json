@@ -1,0 +1,60 @@
+{
+  "trial_id": "baseline_32k__logtriage_04_pool_exhaustion__01",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "seed": 782193270,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T17:52:51Z",
+  "wall_start": 1792605171.918677,
+  "wall_end": 1792605311.13553,
+  "elapsed_s": 138.9,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 86651,
+  "tokens_out": 1967,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "314 words, all checks ok"
+    }
+  ],
+  "final_answer": "Now let me check around the period when batch-01 finished and when the outage recovered.<|mask_end|>\nNow I have the complete picture. Here's the analysis:\n\n**1. First real error burst: `2026-01-18T03:17:42Z` across all api hosts (api-01 through api-08)**\n\nThe first `ERROR` is actually at `02:41:07Z` on `api-02` (a single TLS handshake failure), but that's a one-off noise event. The real outage burst starts at `03:17:42Z` when `api-07` logged `db pool exhausted (max=20) waiting=14 path=/v1/orders`, and within seconds all 8 API hosts (`api-01` through `api-08`) started returning 503 errors. The burst lasted from `03:17:42Z` to approximately `03:19:22Z` (~2 minutes).\n\n**2. Root cause: Database connection pool exhaustion**\n\nThe primary DB has a connection pool maxed at 20 connections. All 20 were held by a single batch job, leaving zero for the web API. The API hosts then couldn't acquire any connection and returned 503 errors across the board.\n\n**3. Which batch job / user is responsible: `batch-01` running job `reconcile-ledger`, user=`svc-batch`**\n\nAt `03:15:03Z`, `batch-01` started the `reconcile-ledger` job (user=`svc-batch`) with `db_conns=20`. It then acquired all 20 connections from the primary pool one by one between `03:15:04Z` and `03:16:39Z`, holding them for ~26 minutes. The job didn't release any connections until it finished at `03:41:30Z`. During that hold, all 20 connections were occupied, starving the API hosts of DB access.\n\n**TL;DR:**\n- **Outage started:** `2026-01-18T03:17:42Z`, affecting all hosts (api-01 through api-08)\n- **Root cause:** The 20-connection primary DB pool was fully occupied by a long-running batch job that never released its connections until completion\n- **Responsible party:** Batch job `reconcile-ledger` on host `batch-01`, run by user `svc-batch`, which started at `03:15:03Z` and consumed all 20 pool connections, holding them for ~26 minutes until finalizing 48M rows at `03:41:30Z`\n\n**The fix:** Either reduce the batch job's connection allocation (e.g., `db_conns=5`), add pool monitoring/alerting before exhaustion hits zero, or schedule this 48M-row reconciliation during off-peak hours with connection release/retry logic.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-21T17:52:51Z"
+    }
+  ]
+}

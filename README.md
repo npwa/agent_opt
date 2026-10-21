@@ -17,7 +17,7 @@ limits are in [`DIRECTION.md`](DIRECTION.md).
 | M1 | 14 executable tasks with verifiers, sandbox, golden tests, calibration run (tag `m1`) | done |
 | M2 | Trial runner, trace join, 10 Hz GPU telemetry, time decomposition, parity check, Nsight capture (tag `m2`) | done |
 | M3 | Statistics, report generator, replay mode with golden fixtures and a CI job (tag `m3`) | done |
-| M4 | Baseline campaign: whole suite, n = 10, 32k vs 16k re-check | M4.1 done (32k baseline, 168 trials); M4.2 (16k) next |
+| M4 | Baseline campaign: whole suite, n = 10, 32k vs 16k re-check | M4.1 done (two 168-trial baselines: first and isolated); M4.2 (16k) next |
 | M5 | Lever experiments: context/KV size, prompt budget, speculative decoding, second model, agent configs | planned |
 | M6 | Automated citation verifier and research evaluation | planned |
 | M7 | Write-up (README, deck, results) | planned |
@@ -27,48 +27,61 @@ distort results?) and `results/v1/nsys_pilot/` (what the GPU does, kernel by ker
 
 ## Baseline results (M4.1)
 
-Whole suite, `qwen3.6` at 32k context, 10 trials per task, run in a seeded random order on the RTX 3080 (about
-5.5 hours; no harness failures, no retries). 140 measured trials plus 28 uninstrumented parity trials. Everything
-below is derived from `results/v1/baseline/`; the full report is `RESULTS.md` / `report.html` there, and
-`python -m analysis.figures --run results/v1/baseline` regenerates the figures.
+The whole suite (`qwen3.6` at 32k context, 10 trials per task, seeded random order, RTX 3080; 140 measured plus
+28 uninstrumented parity trials) was run twice:
 
-**Reliability: one run is not enough.** 104 of 140 trials passed (74 %, 95 % CI 66-81 %). Only four tasks passed
-every time; most of the rest sit between 60 % and 90 %, and two tasks mostly fail. The earlier one-run calibration saw 11 of
-the 14 tasks pass; at n = 10 only four are reliable.
+| Run | Setup | Where |
+|---|---|---|
+| first | OpenCode as installed: its prompt included a skills list read from the author's `~/.claude` (a leak found by the prompt-budget analysis) | `results/v1/baseline/` |
+| **isolated** (the reference baseline from here on) | same suite, OpenCode isolated with `OPENCODE_DISABLE_CLAUDE_CODE=1` | `results/v1/baseline_isolated/` |
 
-![Pass rate per task](results/v1/baseline/figures/pass_rate_by_task.svg)
+Everything below is from the isolated run unless stated; the side-by-side comparison with confidence intervals is
+`results/v1/baseline_isolated/COMPARISON.md`, the full report `RESULTS.md` / `report.html` next to it, and
+`python -m analysis.figures --run <dir>` regenerates the figures.
 
-With n = 10 the intervals are wide (8/10 is 49-94 %), so only the extremes are clearly different from each other:
-`coding_06_tax_rates_lan` (3/10, fails the word limit) and `research_08e_free_will` (1/10, needs the 64k context
-window and was deliberately run at 32k) against the four 10/10 tasks. Runtimes vary too: `c_ringbuf_03` took
-109 s to 975 s across its ten trials.
+**Reliability: one run is not enough.** 99 of 140 trials passed (71 %, 95 % CI 63-78 %; first run 74 %, difference
+-3.6 pp, CI -13.9 to +6.9: no measurable change, but a drop of more than 5 pp cannot be excluded). Only four tasks
+passed every time (`bugfix_01`, `coding_04`, `comms_07`, `longctx_06`); `c_ringbuf_03`, `coding_06` and
+`research_08e` (which needs the 64k context window, deliberately run at 32k) passed 3 of 10. The earlier one-run
+calibration saw 11 of 14 tasks pass; at n = 10 only four are reliable. With n = 10 the intervals are wide (8/10 is
+49-94 %), and no single task differs significantly between the two runs.
 
-**Where the time goes.** Across all trials, 54 % of wall-clock is prefill (the model reading its prompt before
-the first token), 43 % is decode, tool execution is 0.9 % and harness overhead 2.4 %; nothing is left unattributed.
-The split depends strongly on the task type: long-context and reasoning tasks are 80 % prefill, code generation
-is 60 % decode. The first LLM call of each trial is 62 % of all prefill seconds (72 % on average per trial) and 33 % of all
-measured time: every trial starts with a cold 10k-token prompt at about 250 tokens/s (about 40 s), and all later
-calls reuse that prompt from the cache (97 % of it, median). No prefix is reused *between* trials, even when the
-same task runs twice in a row (`results/v1/baseline/promptbudget.md`).
+![Pass rate per task](results/v1/baseline_isolated/figures/pass_rate_by_task.svg)
 
-![Where the time goes](results/v1/baseline/figures/time_by_task_type.svg)
+**Removing the leaked prompt block made trials about 42 % faster.** Pooled over the 14 tasks and normalised per
+task, the median time ratio isolated/first is 0.58 (95 % CI 0.52-0.63, Mann-Whitney p < 1e-19); the mean time per
+trial fell from 123 s to 97 s (-22 %, the long `c_ringbuf_03` and `research_08e` trials did not change). The first
+prompt shrank from 10.1k to 7.3k tokens, and the cause of most of the speed-up is not the 2.8k tokens: in the first
+run every trial started with a cold prefill (about 40 s at 253 tokens/s) because no prefix was reused between
+trials, in the isolated run 130 of 140 first calls took about 2.7 s. The tokens alone would explain about 11 s per
+trial of the 26 s saved; the rest is prefix caching, whose mechanism is not yet confirmed (plan item P12). The
+effect depends on trial order: the cold first calls (10 of 140; all 9 that follow another trial) involve the two tasks with
+their own tool sets (`comms_07`, `research_08e`), and a one-off session in a new project would still pay about 29 s of cold prefill.
+
+**Where the time goes (isolated run).** 33 % of wall-clock is prefill (54 % in the first run), **60 % is decode**
+(43 %), tool execution is 3.4 % (5.7 % for code generation) and harness overhead 3 %; nothing is unattributed. Decode
+now dominates most task types; long-context and log-triage tasks are still prefill-heavy (71 % / 64 %).
+The prompt itself is 68 % tool schemas (about 5k tokens: `bash` 1.3k, `task` 0.9k, `todowrite` 0.6k), 29 % OpenCode's
+base system prompt and 2 % skills. Details: `promptbudget.md` in each run directory.
+
+![Where the time goes](results/v1/baseline_isolated/figures/time_by_task_type.svg)
 
 **What this changes about the earlier pilots**
-- The "about 75 % prefill" from the two-trial pilot does not hold suite-wide (54 %; 37-81 % by task type). It was
-  a property of the short, read-heavy tasks in that pilot.
-- The 10k-token first prompt is about 51 % tool schemas, 26 % a skills list, 22 % OpenCode's base system prompt.
-  The skills list comes from the author's `~/.claude/skills`, i.e. **the baseline prompt leaked the author's
-  personal setup** (12 skills; about 2.4k tokens, roughly 10 s of cold prefill per trial). It does not change the
-  conclusions above but makes the baseline machine-dependent; fixing it needs a re-baseline (see `improvement_plan.md`).
-- Tool execution is negligible (about 1 %), confirmed: the "GPU idle while tools run" story does not apply to this suite.
-- NVML reports the GPU as non-idle for 95 % of wall-clock, but that is "any kernel in the sample window"; the
+- The "about 75 % prefill" from the two-trial pilot does not hold: 54 % suite-wide in the first run, 33 % once the
+  prompt is isolated (and 11-71 % by task type).
+- Tool execution is small (1-3 %): the "GPU idle while tools run" story does not apply to this suite.
+- NVML reports the GPU as non-idle for about 90 % of wall-clock, but that is "any kernel in the sample window"; the
   Nsight pilot (two trials) found real kernel-active time during decode to be far lower, so GPU *utilisation* and
   GPU *efficiency* must not be conflated. The Nsight capture has not been repeated at baseline scale.
+- Prefill levers (trimmed prompts) now matter less for back-to-back runs, decode levers more (see the plan, M5).
 
-**Caveats.** Instrumentation parity is still inconclusive (time ratio 1.06, 95 % CI 0.96-1.19, tolerance ±5 %,
-only 28 parity trials, two per task; success rate is consistent: 74 % vs 68 %). The baseline covers one
-configuration, so no comparison is made yet. The 32k vs 16k comparison and the re-check of the v0 claims are
-M4.2 and not yet run.
+**Caveats.** Instrumentation parity is still inconclusive (isolated run: uninstrumented/instrumented time ratio
+0.87, 95 % CI 0.73-1.01 against a ±5 % tolerance, 28 parity trials; it was 1.06 in the first run, so the direction is
+not stable and noise is the likeliest explanation; success 61 % vs 71 %). One parity trial hung waiting for Ollama and
+was recorded as a timeout; it was kept in `results/v1/baseline_isolated/hung_trials/`, re-run after a stall detector was
+added to the runner (a trial with no events, an idle GPU and no working child process for 5 minutes is now a retried
+harness failure, `--stall-s`), and the re-run passed. One configuration only: the 32k vs 16k comparison and the re-check
+of the v0 claims (M4.2) are not yet run.
 
 ## Repository map
 

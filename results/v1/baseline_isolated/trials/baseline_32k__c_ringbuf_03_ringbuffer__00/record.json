@@ -1,0 +1,60 @@
+{
+  "trial_id": "baseline_32k__c_ringbuf_03_ringbuffer__00",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "seed": 1254865634,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T18:04:26Z",
+  "wall_start": 1792605866.757166,
+  "wall_end": 1792606174.2489195,
+  "elapsed_s": 307.5,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 11,
+  "tokens_in": 124205,
+  "tokens_out": 9024,
+  "tool_sequence": [
+    "read",
+    "glob",
+    "read",
+    "write",
+    "write",
+    "read",
+    "write",
+    "write",
+    "write",
+    "write",
+    "write"
+  ],
+  "tool_errors": 3,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": false,
+      "detail": "=================================================================\n==1926781==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x502000000018 at pc 0x76d8552fb303 bp 0x7ffd9d765470 sp 0x7ffd9d764c18\nWRITE of size 4 at 0x502000000018 thread T0\n    #0 0x76d8552fb302 in memcpy ../../../../src/li"
+    }
+  ],
+  "final_answer": "Let me just write a clean test and compile:\nLet me check what happened:\n\n<|mask_end|>\n\nThe test file got cut off. Let me simplify and get it working:",
+  "files": [
+    "ringbuf.c",
+    "test.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-21T18:04:26Z"
+    }
+  ]
+}

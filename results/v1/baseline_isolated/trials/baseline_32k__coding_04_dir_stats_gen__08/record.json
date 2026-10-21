@@ -1,0 +1,64 @@
+{
+  "trial_id": "baseline_32k__coding_04_dir_stats_gen__08",
+  "task": "coding_04_dir_stats_gen",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 8,
+  "instrumented": true,
+  "seed": 332394560,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T18:51:16Z",
+  "wall_start": 1792608676.413111,
+  "wall_end": 1792608725.6256351,
+  "elapsed_s": 49.2,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 7,
+  "tokens_in": 55829,
+  "tokens_out": 1190,
+  "tool_sequence": [
+    "read",
+    "write",
+    "glob",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Script created and verified. It handles:\n- Default to `.` when no argument given\n- Error message to stderr + exit 1 for non-existent directories\n- Non-recursive counting of files, subdirectories, and total size\n- Exact output format as specified",
+  "files": [
+    "dir_stats.sh"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-21T18:51:16Z"
+    }
+  ]
+}

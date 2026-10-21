@@ -1,0 +1,53 @@
+{
+  "trial_id": "baseline_32k__bugfix_01_moving_average__03",
+  "task": "bugfix_01_moving_average",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 3,
+  "instrumented": true,
+  "seed": 1397525084,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T16:48:56Z",
+  "wall_start": 1792601336.2996078,
+  "wall_end": 1792601376.7942305,
+  "elapsed_s": 40.5,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 33771,
+  "tokens_out": 904,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Tests pass now. The bug was on line 9 of `stats_utils.py`: `range(len(values) - window)` was off by one \u2014 it should be `range(len(values) - window + 1)` to include the last valid starting position for the sliding window.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-21T16:48:56Z"
+    }
+  ]
+}

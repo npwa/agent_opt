@@ -295,3 +295,12 @@ def test_config_options_and_seed_reach_opencode_config(tmp_path):
     cfg = calibrate.build_config(sp, "ollama/m", None, "t", 2, {"seed": 9, "temperature": 0.0})
     assert cfg["provider"]["ollama"]["models"]["m"]["options"] == {"seed": 9, "temperature": 0.0}
     assert cfg["provider"]["ollama"]["options"]["headers"]["X-Attempt"] == "2"
+
+
+def test_stalled_trial_is_a_retried_harness_failure_not_an_outcome(fake_oc, monkeypatch):
+    monkeypatch.setattr(runner.calibrate, "POLL_S", 0.2)
+    monkeypatch.setattr(runner, "STALL_S", 1.0)
+    monkeypatch.setattr(runner.stall, "make_probe", lambda: (lambda pid: False))
+    rec = fake_oc("hang_after_step", max_retries=1)  # one step, then silence
+    assert rec["status"] == "harness_failed" and rec["reason"] == "stalled"
+    assert len(rec["attempts"]) == 2 and all(a["reason"] == "stalled" for a in rec["attempts"])

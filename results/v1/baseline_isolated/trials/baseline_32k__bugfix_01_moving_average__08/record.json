@@ -1,0 +1,54 @@
+{
+  "trial_id": "baseline_32k__bugfix_01_moving_average__08",
+  "task": "bugfix_01_moving_average",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 8,
+  "instrumented": true,
+  "seed": 782646976,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T16:06:49Z",
+  "wall_start": 1792598809.8891292,
+  "wall_end": 1792598841.8160884,
+  "elapsed_s": 31.9,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 41925,
+  "tokens_out": 576,
+  "tool_sequence": [
+    "read",
+    "bash",
+    "read",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 5 tests pass now. The bug was an off-by-one error in `stats_utils.py:9` \u2014 `range(len(values) - window)` was missing the last window because it excluded the final index. Changed to `range(len(values) - window + 1)` so all possible full windows are included.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-21T16:06:49Z"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "trial_id": "baseline_32k__refactor_02_rename_price__05",
+  "task": "refactor_02_rename_price",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 5,
+  "instrumented": true,
+  "seed": 1146372580,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T16:12:49Z",
+  "wall_start": 1792599169.7642555,
+  "wall_end": 1792599270.1827884,
+  "elapsed_s": 100.4,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 8,
+  "tokens_in": 78037,
+  "tokens_out": 2609,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "read",
+    "read",
+    "read",
+    "read",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "read",
+    "edit",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 2,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": false,
+      "detail": "exit 1 != 0: "
+    }
+  ],
+  "final_answer": "Done. Renamed `calc_price` to `compute_total_price` in 5 files: `pricing.py`, `cart.py`, `report.py`, `test_cart.py`, and `README.md`. All 4 tests pass.",
+  "files": [
+    "README.md",
+    "cart.py",
+    "pricing.py",
+    "report.py",
+    "test_cart.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-21T16:12:49Z"
+    }
+  ]
+}

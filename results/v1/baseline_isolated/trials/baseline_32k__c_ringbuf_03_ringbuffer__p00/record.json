@@ -1,0 +1,69 @@
+{
+  "trial_id": "baseline_32k__c_ringbuf_03_ringbuffer__p00",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": false,
+  "seed": 663688915,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T19:49:06Z",
+  "wall_start": 1792612146.8149285,
+  "wall_end": 1792612749.6532521,
+  "elapsed_s": 602.8,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 19,
+  "tokens_in": 211524,
+  "tokens_out": 16905,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "glob",
+    "bash",
+    "bash",
+    "bash",
+    "write",
+    "bash",
+    "bash",
+    "edit",
+    "edit",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "edit",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 3,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All tests passed. Here's a summary of what was done:\n\n**`ringbuf.c`** \u2014 all 9 functions implemented:\n- Internal struct with circular buffer fields (`buf`, `cap`, `sz`, `rd`, `wr`) kept opaque in the .c file\n- `inc()` helper safely wraps indices within `[0, cap)` \n- Write/Read/Wrap-around logic handles partial fills and boundary crossing correctly\n- All NULL-safety cases handled per spec\n\n**Test coverage**: 17 checks including edge cases (NULL args, capacity 0), basic FIFO operations, wrap-around write/read, peek (non-destructive), and clear. Compiled cleanly with `-std=c11 -Wall -Werror`.",
+  "files": [
+    "ringbuf.c",
+    "test_ringbuf.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-21T19:49:06Z"
+    }
+  ]
+}

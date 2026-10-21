@@ -1,0 +1,466 @@
+{
+  "trial_id": "baseline_32k__research_08e_free_will__02",
+  "task": "research_08e_free_will",
+  "config": "baseline_32k",
+  "attempt": 1,
+  "status": "fail",
+  "summary": {
+    "wall_start": 1792606577.3572237,
+    "wall_end": 1792606859.3411682,
+    "wall_s": 281.98394441604614,
+    "n_steps": 9,
+    "llm_s": 270.8886,
+    "ttft_s": 175.27949999999998,
+    "decode_s": 95.6091,
+    "tool_s": 26.8270001411438,
+    "gap_s": 8.60444951057434,
+    "idle_gap_s": 3.2817599094006025,
+    "prefill_tokens": 160577,
+    "decode_tokens": 3289,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "baseline_32k__research_08e_free_will__02#a1:1",
+      "t_start": 1792606579.8481183,
+      "t_end": 1792606591.7514184,
+      "ttft_s": 2.5714,
+      "llm_s": 11.9033,
+      "decode_s": 9.3319,
+      "prefill_tokens": 7646,
+      "decode_tokens": 295,
+      "prefill_tok_s": 2973.48,
+      "decode_tok_s": 31.61,
+      "n_chunks": 117,
+      "first_token_skew_s": 0.012481689453125,
+      "itl_p50_ms": 31.999999999999808,
+      "itl_p99_ms": 1862.9499999999991,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 1.7820003032684326,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792606587.896,
+          "end": 1792606588.637,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792606589.84,
+          "end": 1792606590.223,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792606591.73,
+          "end": 1792606592.388,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792606582.432,
+      "oc_step_finish": 1792606592.405,
+      "tool_errors": 0,
+      "gap_s": 0.6732809543609619,
+      "gpu_busy_pct_llm": 24.95798319327731,
+      "gpu_power_w_llm": 118.30336134453782,
+      "gpu_samples_llm": 119,
+      "gpu_busy_pct_gap": 20.0,
+      "gpu_samples_gap": 7,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 2,
+      "llm_call_id": "baseline_32k__research_08e_free_will__02#a1:2",
+      "t_start": 1792606592.4246993,
+      "t_end": 1792606598.0395994,
+      "ttft_s": 2.0976,
+      "llm_s": 5.6149,
+      "decode_s": 3.5172999999999996,
+      "prefill_tokens": 7989,
+      "decode_tokens": 125,
+      "prefill_tok_s": 3808.64,
+      "decode_tok_s": 35.54,
+      "n_chunks": 48,
+      "first_token_skew_s": 0.006700754165649414,
+      "itl_p50_ms": 28.000000000000025,
+      "itl_p99_ms": 1095.779999999999,
+      "tool_names": [
+        "searxng_searxng_instance_info",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 0.7160000801086426,
+      "tools": [
+        {
+          "tool": "searxng_searxng_instance_info",
+          "start": 1792606598.015,
+          "end": 1792606598.032,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792606597.383,
+          "end": 1792606598.082,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792606594.529,
+      "oc_step_finish": 1792606598.101,
+      "tool_errors": 0,
+      "gap_s": 0.080108642578125,
+      "gpu_busy_pct_llm": 39.55357142857143,
+      "gpu_power_w_llm": 124.53928571428571,
+      "gpu_samples_llm": 56,
+      "gpu_busy_pct_gap": 19.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 3,
+      "llm_call_id": "baseline_32k__research_08e_free_will__02#a1:3",
+      "t_start": 1792606598.119708,
+      "t_end": 1792606610.941708,
+      "ttft_s": 7.4549,
+      "llm_s": 12.822,
+      "decode_s": 5.367099999999999,
+      "prefill_tokens": 9658,
+      "decode_tokens": 194,
+      "prefill_tok_s": 1295.52,
+      "decode_tok_s": 36.15,
+      "n_chunks": 33,
+      "first_token_skew_s": 0.006392002105712891,
+      "itl_p50_ms": 28.00000000000047,
+      "itl_p99_ms": 2256.18,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 2.494000196456909,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792606608.679,
+          "end": 1792606610.111,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792606610.917,
+          "end": 1792606611.979,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792606605.581,
+      "oc_step_finish": 1792606611.999,
+      "tool_errors": 0,
+      "gap_s": 1.0757391452789307,
+      "gpu_busy_pct_llm": 65.28125,
+      "gpu_power_w_llm": 128.78359375,
+      "gpu_samples_llm": 128,
+      "gpu_busy_pct_gap": 10.909090909090908,
+      "gpu_samples_gap": 11,
+      "idle_gap_s": 0.48897233876315027
+    },
+    {
+      "step": 4,
+      "llm_call_id": "baseline_32k__research_08e_free_will__02#a1:4",
+      "t_start": 1792606612.0174472,
+      "t_end": 1792606640.4379473,
+      "ttft_s": 21.229,
+      "llm_s": 28.4205,
+      "decode_s": 7.191500000000001,
+      "prefill_tokens": 15399,
+      "decode_tokens": 257,
+      "prefill_tok_s": 725.38,
+      "decode_tok_s": 35.74,
+      "n_chunks": 34,
+      "first_token_skew_s": 0.010552644729614258,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 2270.719999999999,
+      "tool_names": [
+        "searxng_web_url_read",
+        "searxng_web_url_read",
+        "searxng_web_url_read"
+      ],
+      "tool_latency_s": 3.7069997787475586,
+      "tools": [
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792606635.916,
+          "end": 1792606636.711,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792606638.111,
+          "end": 1792606638.784,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792606640.413,
+          "end": 1792606642.652,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792606633.257,
+      "oc_step_finish": 1792606642.663,
+      "tool_errors": 1,
+      "gap_s": 2.243814468383789,
+      "gpu_busy_pct_llm": 78.86971830985915,
+      "gpu_power_w_llm": 131.88450704225352,
+      "gpu_samples_llm": 284,
+      "gpu_busy_pct_gap": 7.434782608695652,
+      "gpu_samples_gap": 23,
+      "idle_gap_s": 1.170685809591542
+    },
+    {
+      "step": 5,
+      "llm_call_id": "baseline_32k__research_08e_free_will__02#a1:5",
+      "t_start": 1792606642.6817617,
+      "t_end": 1792606663.8896618,
+      "ttft_s": 16.4614,
+      "llm_s": 21.2079,
+      "decode_s": 4.7464999999999975,
+      "prefill_tokens": 19661,
+      "decode_tokens": 172,
+      "prefill_tok_s": 1194.37,
+      "decode_tok_s": 36.24,
+      "n_chunks": 44,
+      "first_token_skew_s": 0.005838155746459961,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 1796.3399999999988,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 2.7839999198913574,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792606661.995,
+          "end": 1792606664.093,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792606663.868,
+          "end": 1792606664.554,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792606659.149,
+      "oc_step_finish": 1792606664.578,
+      "tool_errors": 0,
+      "gap_s": 0.7083134651184082,
+      "gpu_busy_pct_llm": 79.80188679245283,
+      "gpu_power_w_llm": 131.3004716981132,
+      "gpu_samples_llm": 212,
+      "gpu_busy_pct_gap": 18.857142857142858,
+      "gpu_samples_gap": 7,
+      "idle_gap_s": 0.10118763787405831
+    },
+    {
+      "step": 6,
+      "llm_call_id": "baseline_32k__research_08e_free_will__02#a1:6",
+      "t_start": 1792606664.5979753,
+      "t_end": 1792606674.2801752,
+      "ttft_s": 2.0677,
+      "llm_s": 9.6822,
+      "decode_s": 7.6145,
+      "prefill_tokens": 19936,
+      "decode_tokens": 269,
+      "prefill_tok_s": 9641.63,
+      "decode_tok_s": 35.33,
+      "n_chunks": 90,
+      "first_token_skew_s": 0.007324934005737305,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 1743.5599999999993,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 1.8220000267028809,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792606670.904,
+          "end": 1792606671.322,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792606672.513,
+          "end": 1792606673.292,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792606674.255,
+          "end": 1792606674.88,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792606666.673,
+      "oc_step_finish": 1792606674.89,
+      "tool_errors": 0,
+      "gap_s": 0.628288984298706,
+      "gpu_busy_pct_llm": 35.628865979381445,
+      "gpu_power_w_llm": 119.87216494845362,
+      "gpu_samples_llm": 97,
+      "gpu_busy_pct_gap": 7.333333333333333,
+      "gpu_samples_gap": 6,
+      "idle_gap_s": 0.418859322865804
+    },
+    {
+      "step": 7,
+      "llm_call_id": "baseline_32k__research_08e_free_will__02#a1:7",
+      "t_start": 1792606674.9084642,
+      "t_end": 1792606685.8338642,
+      "ttft_s": 2.0535,
+      "llm_s": 10.9254,
+      "decode_s": 8.8719,
+      "prefill_tokens": 20260,
+      "decode_tokens": 316,
+      "prefill_tok_s": 9866.08,
+      "decode_tok_s": 35.62,
+      "n_chunks": 35,
+      "first_token_skew_s": 0.005035877227783203,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 2093.0699999999997,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search",
+        "searxng_web_url_read",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 9.77999997138977,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792606681.664,
+          "end": 1792606682.497,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792606683.676,
+          "end": 1792606684.854,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792606685.808,
+          "end": 1792606686.116,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792606679.735,
+          "end": 1792606687.196,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792606676.967,
+      "oc_step_finish": 1792606687.209,
+      "tool_errors": 1,
+      "gap_s": 1.3973970413208008,
+      "gpu_busy_pct_llm": 34.45871559633027,
+      "gpu_power_w_llm": 120.75229357798165,
+      "gpu_samples_llm": 109,
+      "gpu_busy_pct_gap": 11.0,
+      "gpu_samples_gap": 14,
+      "idle_gap_s": 0.6986985206604004
+    },
+    {
+      "step": 8,
+      "llm_call_id": "baseline_32k__research_08e_free_will__02#a1:8",
+      "t_start": 1792606687.2312613,
+      "t_end": 1792606726.5522614,
+      "ttft_s": 31.8878,
+      "llm_s": 39.321,
+      "decode_s": 7.433199999999999,
+      "prefill_tokens": 28660,
+      "decode_tokens": 261,
+      "prefill_tok_s": 898.78,
+      "decode_tok_s": 35.11,
+      "n_chunks": 58,
+      "first_token_skew_s": 0.007938861846923828,
+      "itl_p50_ms": 29.000000000003467,
+      "itl_p99_ms": 2002.3999999999999,
+      "tool_names": [
+        "searxng_web_url_read",
+        "searxng_web_url_read",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 3.741999864578247,
+      "tools": [
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792606722.575,
+          "end": 1792606723.745,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792606724.35,
+          "end": 1792606725.524,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792606726.526,
+          "end": 1792606727.924,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792606719.127,
+      "oc_step_finish": 1792606727.942,
+      "tool_errors": 0,
+      "gap_s": 1.4117469787597656,
+      "gpu_busy_pct_llm": 82.67175572519083,
+      "gpu_power_w_llm": 135.02188295165394,
+      "gpu_samples_llm": 393,
+      "gpu_busy_pct_gap": 15.0,
+      "gpu_samples_gap": 14,
+      "idle_gap_s": 0.4033562796456473
+    },
+    {
+      "step": 9,
+      "llm_call_id": "baseline_32k__research_08e_free_will__02#a1:9",
+      "t_start": 1792606727.9640083,
+      "t_end": 1792606858.9554083,
+      "ttft_s": 89.4562,
+      "llm_s": 130.9914,
+      "decode_s": 41.5352,
+      "prefill_tokens": 31368,
+      "decode_tokens": 1400,
+      "prefill_tok_s": 350.65,
+      "decode_tok_s": 33.71,
+      "n_chunks": 1351,
+      "first_token_skew_s": 0.011791706085205078,
+      "itl_p50_ms": 28.999999999996362,
+      "itl_p99_ms": 59.99999999999531,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792606817.432,
+      "oc_step_finish": 1792606858.974,
+      "tool_errors": 0,
+      "gap_s": 0.3857598304748535,
+      "gpu_busy_pct_llm": 73.72824427480916,
+      "gpu_power_w_llm": 131.1871755725191,
+      "gpu_samples_llm": 1310,
+      "gpu_busy_pct_gap": 21.0,
+      "gpu_samples_gap": 4,
+      "idle_gap_s": 0.0
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

@@ -1,0 +1,50 @@
+{
+  "trial_id": "baseline_32k__repoqa_05_retry_policy__02",
+  "task": "repoqa_05_retry_policy",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 2,
+  "instrumented": true,
+  "seed": 383136242,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T18:37:58Z",
+  "wall_start": 1792607878.2006814,
+  "wall_end": 1792607905.719999,
+  "elapsed_s": 27.5,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 23360,
+  "tokens_out": 597,
+  "tool_sequence": [
+    "glob",
+    "grep",
+    "read",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": false,
+      "detail": "missing 'max_delay_value'"
+    }
+  ],
+  "final_answer": "1. **Function that computes the delay**: `miniq/retry.py:20` \u2014 the `next_delay()` method implements exponential backoff.\n\n2. **Default maximum delay**: `30.0` seconds, defined in `miniq/config.py:9`.\n\n3. **Default max retry attempts**: `5`, defined in `miniq/config.py:7`; a job stops being retried when `attempt >= max_attempts` per `miniq/retry.py:18`.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-21T18:37:58Z"
+    }
+  ]
+}

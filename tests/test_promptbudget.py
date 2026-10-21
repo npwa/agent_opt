@@ -28,7 +28,8 @@ def test_cold_rate_and_followup_model(metrics):
     calls = pb.load_calls(metrics)
     assert len(calls) == 3 and all(len(v) == 3 for v in calls.values())
     m = pb.call_model(calls)
-    assert m["cold_rate_tok_s"]["median"] == pytest.approx(250)
+    assert m["cold_rate_tok_s"] == pytest.approx(250)
+    assert m["first_calls_cold"] == 3 and m["first_calls_warm"] == 0
     assert m["followup_overhead_s"] == pytest.approx(1.0)
     assert m["followup_model_median_abs_err_s"] == pytest.approx(0, abs=1e-9)
     assert m["first_call_ttft_total_s"] == pytest.approx(120)
@@ -37,17 +38,27 @@ def test_cold_rate_and_followup_model(metrics):
 
 def test_no_cross_trial_reuse_detected(metrics):
     r = pb.cross_trial_reuse(pb.load_calls(metrics))
-    assert r["fraction_of_first_calls_within_5pct_of_cold"] == 1.0
-    assert r["rate_vs_cold_median_ratio_other_task"] == pytest.approx(1.0)
+    assert r["fraction_of_first_calls_cold"] == 1.0
+    assert r["speedup_vs_cold_median_other_task"] == pytest.approx(1.0)
     assert r["n_same_task_as_previous"] == 1
 
 
-def test_cross_trial_reuse_detected(tmp_path):
-    rows = [_rec("t0", "a", 0, 10000, 40.0), _rec("t1", "a", 100, 10000, 10.0)]  # second call 4x faster
+def test_warm_first_calls_do_not_bias_the_cold_rate(tmp_path):
+    rows = []
+    for i in range(6):  # most first calls are warm (2.5 s for 10k tokens); follow-ups reveal the true rate
+        t0 = 1000 * i
+        rows += [_rec(f"t{i}", "a" if i % 2 else "b", t0, 10000, 2.5 if i else 40.0),
+                 _rec(f"t{i}", "a" if i % 2 else "b", t0 + 50, 10400, 1.0 + 400 / 250),
+                 _rec(f"t{i}", "a" if i % 2 else "b", t0 + 60, 12300, 1.0 + 1900 / 250)]
     p = tmp_path / "m.jsonl"
     p.write_text("\n".join(json.dumps(r) for r in rows))
-    r = pb.cross_trial_reuse(pb.load_calls(p))
-    assert r["rate_vs_cold_median_ratio_same_task_as_previous"] > 1.5
+    calls = pb.load_calls(p)
+    assert pb.cold_rate(calls) == pytest.approx(250)
+    m = pb.call_model(calls)
+    assert m["first_calls_cold"] == 1 and m["first_calls_warm"] == 5
+    r = pb.cross_trial_reuse(calls)
+    assert r["fraction_of_first_calls_cold"] == pytest.approx(1 / 6)
+    assert r["speedup_vs_cold_median_other_task"] > 10
 
 
 SYSTEM = "BASE" * 100 + "<env>\n  cwd /x\n</env>\n" + "Skills provide specialized instructions\n<available_skills><skill>a</skill><skill>b</skill></available_skills>"

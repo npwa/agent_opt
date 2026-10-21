@@ -1,0 +1,52 @@
+{
+  "trial_id": "baseline_32k__bugfix_01_moving_average__04",
+  "task": "bugfix_01_moving_average",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 4,
+  "instrumented": true,
+  "seed": 1922319068,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T17:39:43Z",
+  "wall_start": 1792604383.473733,
+  "wall_end": 1792604433.290783,
+  "elapsed_s": 49.8,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 24783,
+  "tokens_out": 1276,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "edit"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "The bug is on line 9 of `stats_utils.py`. The loop uses `range(len(values) - window)` which excludes the final valid window position. It needs `+ 1` to include it.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-21T17:39:43Z"
+    }
+  ]
+}

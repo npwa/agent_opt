@@ -37,7 +37,7 @@ from pathlib import Path
 
 import yaml
 
-from harness import calibrate, manifest
+from harness import calibrate, manifest, stall
 from harness.manifest import OPENCODE_ISOLATION_ENV
 from harness.taskspec import TaskSpec, load_task
 from harness.telemetry import GpuSampler
@@ -47,6 +47,7 @@ from harness.workdir import prepare_workdir
 ROOT = Path(__file__).resolve().parent.parent
 FINAL_STATUSES = {"pass", "fail", "timeout", "harness_failed"}
 CONFIG_KEYS = {"id", "model", "description", "seed_mode", "options"}
+STALL_S = 300.0  # no events + idle GPU + no working child for this long = stalled trial (0 disables); set by --stall-s
 
 
 class PlanMismatchError(RuntimeError):
@@ -161,6 +162,8 @@ def proxy_errors(metrics: Path, tid: str, attempt: int) -> list[int]:
 def classify(run: dict, ev: dict, verdict, upstream_bad: list[int]) -> tuple[str, str | None]:
     # (upstream_bad is always empty for uninstrumented trials: there is no proxy to ask)
     """-> (status, harness_reason). status in pass/fail/timeout/harness_error."""
+    if run.get("stalled"):
+        return "harness_error", "stalled"  # OpenCode waited on a response that never came: never an outcome
     if upstream_bad:
         return "harness_error", f"upstream_error:{sorted(set(upstream_bad))}"
     if ev["steps"] == 0 and not ev["tools"] and not ev["final_text"]:
@@ -249,7 +252,8 @@ def run_attempt(spec: TaskSpec, cfg: RunConfig, tid: str, attempt: int, seed: in
            "XDG_STATE_HOME": str(xdg / "state"), "XDG_CACHE_HOME": str(xdg / "cache"),
            **OPENCODE_ISOLATION_ENV}
 
-    run = calibrate.run_opencode(spec, work, run_dir, env, cfg.model, spec.timeout_s, events)
+    run = calibrate.run_opencode(spec, work, run_dir, env, cfg.model, spec.timeout_s, events,
+                                 stall_s=STALL_S, busy=stall.make_probe() if STALL_S else None)
     wall_end = time.time()
     ev = calibrate.parse_events(events)
     ctx = VerifyContext(workdir=work, verify_root=ROOT / "fixtures/verify", spec=spec,
@@ -354,6 +358,7 @@ def run_all(configs: list[RunConfig], specs: list[TaskSpec], n: int, run_seed: i
 
 
 def main() -> int:
+    global STALL_S
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     r = sub.add_parser("run")
@@ -370,6 +375,9 @@ def main() -> int:
                         "Ollama (no proxy) and compare them with the instrumented ones (F7); "
                         "plan suggests 0.2")
     r.add_argument("--max-retries", type=int, default=2)
+    r.add_argument("--stall-s", type=float, default=STALL_S,
+                   help="end a trial as a harness failure after this many seconds without events, GPU activity "
+                        "or a working child process (default %(default)s; 0 disables)")
     r.add_argument("--limit", type=int, help="run at most this many pending trials, then stop")
     r.add_argument("--force-plan", action="store_true")
     r.add_argument("--rerun-harness-failed", action="store_true",
@@ -407,6 +415,7 @@ def main() -> int:
     try:
         if sampler:
             sampler.start()
+        STALL_S = a.stall_s
         run_all(configs, specs, a.n, a.seed, a.out, a.scratch, metrics, a.max_retries,
                 a.limit, a.force_plan, parity_fraction=a.parity_fraction)
     except PlanMismatchError as e:
