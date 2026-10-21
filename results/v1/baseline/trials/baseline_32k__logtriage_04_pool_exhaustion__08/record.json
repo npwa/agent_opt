@@ -1,0 +1,55 @@
+{
+  "trial_id": "baseline_32k__logtriage_04_pool_exhaustion__08",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 8,
+  "instrumented": true,
+  "seed": 497761413,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-20T19:01:59Z",
+  "wall_start": 1792522919.5259812,
+  "wall_end": 1792523083.3380713,
+  "elapsed_s": 163.5,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 10,
+  "tokens_in": 157395,
+  "tokens_out": 2360,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": false,
+      "detail": "missing 'culprit_user'"
+    }
+  ],
+  "final_answer": "Found it. Let me confirm the final connection grab:\nThe outage investigation is complete. Here are the results:\n\n---\n\n**(1) First real error burst \u2014 time and host**\n\n- **Timestamp:** `2026-01-18T03:17:42Z`\n- **Host:** `api-07` (first to report it), but the outage simultaneously hit all API hosts \u2014 `api-01` through `api-08` were all returning 503s within seconds\n\nThe burst pattern shows a slow cascade: first a single connection exhaustion on `api-07`, then in under 1 second (lines 46566\u201346577) the whole fleet started failing.\n\n---\n\n**(2) Root cause**\n\n**Database connection pool exhaustion.**\n\nThe pool had a fixed max of **20 connections**. The scheduled batch job `batch-01` (task: `reconcile-ledger`) sequentially acquired all 20 connections over a ~4 minute window (`03:15:04` to `03:16:39`), each acquisition spaced 5 seconds apart. It never released any connection until the job completed at `03:41:30Z`.\n\nMeanwhile, API servers were trying to acquire connections for regular traffic but none remained available. The first `api-07` got a partial failure at `03:17:42Z`, then all APIs returned 503 errors rapidly from `03:17:43Z` through at least `03:19:22Z`.\n\nThe gap between the last connection acquired (`03:16:39Z`) and the first error burst (`03:17:42Z`) is ~63 seconds \u2014 the time it took for API request queuing to saturate and start failing.\n\n---\n\n**(3) Responsible batch job / user**\n\n- **Job:** `reconcile-ledger`\n- **Worker:** `batch-01`\n- **Total rows processed:** 48,210,112\n- **Impact window:** `03:17:42Z` (first error) to `03:41:30Z` (`~24 minutes`). The pool didn't free until the job finished.\n\n**Key failure mode:** A single long-running batch job monolithically consumed the entire database connection pool, starving all foreground user-facing API requests with no timeout or backpressure mechanism.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-20T19:01:59Z"
+    }
+  ]
+}

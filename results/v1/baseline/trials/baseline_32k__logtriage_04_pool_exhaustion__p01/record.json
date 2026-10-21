@@ -1,0 +1,54 @@
+{
+  "trial_id": "baseline_32k__logtriage_04_pool_exhaustion__p01",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": false,
+  "seed": 34519520,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-20T20:06:08Z",
+  "wall_start": 1792526768.6515713,
+  "wall_end": 1792526898.6436973,
+  "elapsed_s": 129.7,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 84080,
+  "tokens_out": 1262,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "202 words, all checks ok"
+    }
+  ],
+  "final_answer": "Here are the findings:\n\n**(1) First real error burst:** `2026-01-18T03:17:42Z` on **api-07** with `db pool exhausted (max=20) waiting=14 path=/v1/orders`, immediately followed by cascading 503 errors across all api hosts (api-01 through api-08). The burst started at line 46553 \u2014 a single line detonated into hundreds of errors within seconds.\n\n**(2) Root cause:** Database connection pool exhaustion. The primary DB pool has `max=20` connections, and the batch job **batch-01** acquired all 20 connections sequentially between `03:15:04Z` and `03:16:39Z`, holding them exclusively. When real API traffic for `/v1/orders` arrived at `03:17:42Z`, zero connections remained \u2014 every request failed with 503 `upstream=db pool exhausted`.\n\n**(3) Responsible entity:** Batch job **reconcile-ledger** running on host **batch-01**, under user `svc-batch`. It opened all 20 DB connections (one every ~5 seconds from `03:15:04Z` to `03:16:39Z`) and held them for the entire job duration (~26 minutes, finishing at `03:41:30Z` with 48.2M rows processed). The connection leak is that it consumed the *entire* primary pool instead of leaving capacity for live API traffic.\n\nPre-existing noise (interspersed cache misses and slow-request warnings on various api hosts from `02:00\u201303:15Z`) are unrelated \u2014 they're gradual cache-eviction artifacts, not errors. The TLS handshake reset at `02:41Z` (line 24502, isolated to one client) is also noise.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-20T20:06:08Z"
+    }
+  ]
+}

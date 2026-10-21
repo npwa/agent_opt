@@ -1,0 +1,68 @@
+{
+  "trial_id": "baseline_32k__c_ringbuf_03_ringbuffer__04",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 4,
+  "instrumented": true,
+  "seed": 2108669682,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T00:18:54Z",
+  "wall_start": 1792541934.0080163,
+  "wall_end": 1792542392.2485852,
+  "elapsed_s": 458.2,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 17,
+  "tokens_in": 315311,
+  "tokens_out": 11547,
+  "tool_sequence": [
+    "read",
+    "glob",
+    "glob",
+    "glob",
+    "read",
+    "read",
+    "write",
+    "bash",
+    "edit",
+    "write",
+    "bash",
+    "write",
+    "write",
+    "bash",
+    "write",
+    "write",
+    "write",
+    "write",
+    "write"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "The previous writes got corrupted. Let me properly write the test file:",
+  "files": [
+    "ringbuf.c",
+    "ringbuf_main.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-21T00:18:54Z"
+    }
+  ]
+}

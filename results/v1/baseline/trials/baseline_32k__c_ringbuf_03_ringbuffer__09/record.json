@@ -1,0 +1,57 @@
+{
+  "trial_id": "baseline_32k__c_ringbuf_03_ringbuffer__09",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 9,
+  "instrumented": true,
+  "seed": 241539432,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-20T20:59:49Z",
+  "wall_start": 1792529989.1289513,
+  "wall_end": 1792530228.4313092,
+  "elapsed_s": 239.3,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 8,
+  "tokens_in": 102761,
+  "tokens_out": 5869,
+  "tool_sequence": [
+    "read",
+    "glob",
+    "read",
+    "glob",
+    "write",
+    "write",
+    "write",
+    "write",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": false,
+      "detail": "FAIL line 22: rb_size(rb) == 6\nFAIL line 23: rb_peek(rb, out, 3) == 3 && memcmp(out, \"abc\", 3) == 0\nFAIL line 24: rb_size(rb) == 6\nFAIL line 25: rb_read(rb, out, 4) == 4 && memcmp(out, \"abcd\", 4) == 0\nFAIL line 29: rb_size(rb) == 8\nFAIL line 30: rb_write(rb, (const uint8_t *)\"Z\", 1) == 0\nFAIL line 3"
+    }
+  ],
+  "final_answer": "Compiles clean. Now a test:",
+  "files": [
+    "ringbuf.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-20T20:59:49Z"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "trial_id": "baseline_32k__c_ringbuf_03_ringbuffer__06",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 6,
+  "instrumented": true,
+  "seed": 345039690,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-20T18:48:04Z",
+  "wall_start": 1792522084.6565099,
+  "wall_end": 1792522323.5529783,
+  "elapsed_s": 238.9,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 11,
+  "tokens_in": 181515,
+  "tokens_out": 5092,
+  "tool_sequence": [
+    "read",
+    "read",
+    "glob",
+    "read",
+    "read",
+    "bash",
+    "write",
+    "write",
+    "read",
+    "write",
+    "bash",
+    "read",
+    "bash"
+  ],
+  "tool_errors": 2,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": false,
+      "detail": "In file included from test_ringbuf.c:5:\nringbuf.c:44:15: error: \u2018do_read_chunk\u2019 defined but not used [-Werror=unused-function]\n   44 | static size_t do_read_chunk(ringbuf_t *rb, size_t n)\n      |               ^~~~~~~~~~~~~\ncc1: all warnings being treated as errors"
+    }
+  ],
+  "final_answer": "",
+  "files": [
+    "ringbuf.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-20T18:48:04Z"
+    }
+  ]
+}

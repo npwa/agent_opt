@@ -1,0 +1,56 @@
+{
+  "trial_id": "baseline_32k__c_ringbuf_03_ringbuffer__p01",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": false,
+  "seed": 220282981,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-20T22:47:42Z",
+  "wall_start": 1792536462.1921625,
+  "wall_end": 1792536759.7725897,
+  "elapsed_s": 297.6,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 7,
+  "tokens_in": 94746,
+  "tokens_out": 7831,
+  "tool_sequence": [
+    "read",
+    "read",
+    "glob",
+    "write",
+    "write",
+    "write",
+    "write",
+    "write"
+  ],
+  "tool_errors": 1,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": false,
+      "detail": "In file included from test_ringbuf.c:5:\nringbuf.c: In function \u2018rb_clear\u2019:\nringbuf.c:42:27: error: statement with no effect [-Werror=unused-value]\n   42 | { if (rb) { rb->wpos = 0; rb rpos = 0; rb->filled = 0; } }\n      |                           ^~\nringbuf.c:42:29: error: expected \u2018;\u2019 before \u2018rpos"
+    }
+  ],
+  "final_answer": "I keep introducing bugs when writing long code from memory. Let me write the implementation correctly in one careful shot:",
+  "files": [
+    "ringbuf.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-20T22:47:42Z"
+    }
+  ]
+}

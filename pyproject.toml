@@ -6,7 +6,7 @@ requires-python = ">=3.12"
 dependencies = ["fastapi", "uvicorn", "httpx", "psutil", "pyyaml"]
 
 [project.optional-dependencies]
-gpu = ["nvidia-ml-py"]
+gpu = ["nvidia-ml-py", "mcp"]   # mcp: the comm-tools MCP server runs under the active python3
 dev = ["pytest", "pytest-cov", "pytest-asyncio", "ruff", "scipy", "numpy"]
 
 [build-system]

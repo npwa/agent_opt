@@ -1,0 +1,65 @@
+{
+  "trial_id": "baseline_32k__coding_04_dir_stats_gen__05",
+  "task": "coding_04_dir_stats_gen",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 5,
+  "instrumented": true,
+  "seed": 1728128524,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T00:17:18Z",
+  "wall_start": 1792541838.6353729,
+  "wall_end": 1792541933.9323585,
+  "elapsed_s": 95.3,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 8,
+  "tokens_in": 86897,
+  "tokens_out": 1375,
+  "tool_sequence": [
+    "read",
+    "write",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Script created at `dir_stats.sh`. All requirements verified:\n\n- Accepts directory path argument, defaults to current directory\n- Prints error to stderr and exits with code 1 for non-existent directories\n- Counts regular files (excluding symlinks) and subdirectories (non-recursively), sums file sizes in bytes\n- Outputs in the exact required format",
+  "files": [
+    "dir_stats.sh"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-21T00:17:18Z"
+    }
+  ]
+}

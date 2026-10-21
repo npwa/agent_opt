@@ -1,0 +1,54 @@
+{
+  "trial_id": "baseline_32k__bugfix_01_moving_average__02",
+  "task": "bugfix_01_moving_average",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 2,
+  "instrumented": true,
+  "seed": 669426102,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-20T23:40:42Z",
+  "wall_start": 1792539642.2657607,
+  "wall_end": 1792539720.5730445,
+  "elapsed_s": 78.3,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 56688,
+  "tokens_out": 815,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "edit",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 5 tests now pass. The bug was in `stats_utils.py:9` - the loop range was off by one, missing the last valid starting position of each window. Fixed by adding `+ 1`.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-20T23:40:42Z"
+    }
+  ]
+}

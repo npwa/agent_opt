@@ -1,0 +1,53 @@
+{
+  "trial_id": "baseline_32k__bugfix_01_moving_average__p01",
+  "task": "bugfix_01_moving_average",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": false,
+  "seed": 610185164,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-20T21:30:14Z",
+  "wall_start": 1792531814.8887336,
+  "wall_end": 1792531887.7870383,
+  "elapsed_s": 72.9,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 44985,
+  "tokens_out": 692,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 5 tests pass. The off-by-one error on line 9 was causing `range(len(values) - window)` to exclude the last valid sliding window position.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-20T21:30:14Z"
+    }
+  ]
+}

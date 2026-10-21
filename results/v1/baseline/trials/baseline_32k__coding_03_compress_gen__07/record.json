@@ -1,0 +1,51 @@
+{
+  "trial_id": "baseline_32k__coding_03_compress_gen__07",
+  "task": "coding_03_compress_gen",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 7,
+  "instrumented": true,
+  "seed": 1465688940,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-20T23:35:33Z",
+  "wall_start": 1792539333.6889963,
+  "wall_end": 1792539406.642731,
+  "elapsed_s": 73.0,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 41568,
+  "tokens_out": 735,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "write"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "File `compress.c` written with the `compress_string` function that performs run-length compression per the requirements in `compress.md`.",
+  "files": [
+    "compress.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-20T23:35:33Z"
+    }
+  ]
+}

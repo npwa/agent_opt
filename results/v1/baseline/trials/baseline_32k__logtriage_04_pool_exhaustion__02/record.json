@@ -1,0 +1,61 @@
+{
+  "trial_id": "baseline_32k__logtriage_04_pool_exhaustion__02",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 2,
+  "instrumented": true,
+  "seed": 1466907264,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-20T23:57:35Z",
+  "wall_start": 1792540655.7930028,
+  "wall_end": 1792540874.054704,
+  "elapsed_s": 218.0,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 7,
+  "tokens_in": 116509,
+  "tokens_out": 2175,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": false,
+      "detail": "missing 'culprit_user'"
+    }
+  ],
+  "final_answer": "## Incident Summary: Database Connection Pool Exhaustion\n\n**Duration:** ~2 minutes (03:17:42 to 03:19:22 UTC) on 2026-01-18\n\n**Root cause:** The `reconcile-ledger` batch job (`batch-01`) started at 03:15:03 and **acquired all 20 connections** from the `primary` DB pool, holding them without releasing. This left zero connections available for API servers (api-01 through api-08).\n\n### Timeline\n\n| Time | Event |\n|------|-------|\n| **03:15:03** | `batch-01 reconcile-ledger` started, requested 20 DB connections |\n| **03:15:04 - 03:16:34** | Batch acquired all 20 connections one by one (one every ~5s) |\n| **03:17:42** | First `db pool exhausted` ERROR on api-07 (`waiting=14`) |\n| **03:17:43 - 03:19:22** | Sustained cascade of 503 errors across api-01 through api-08 |\n| **~03:19:23** | Errors stopped (batch job likely completed or connections released) |\n\n### Impact\n\n- **302 ERROR events**, all `upstream=db pool exhausted (max=20)` \u2014 503 responses returned to users\n- Affected endpoints: `/v1/orders`, `/v1/cart`, `/v1/users`, `/v1/search`, `/v1/items`\n- All API servers impacted (api-01 through api-08)\n- `batch-01` was the sole offender holding all connections without releasing them back to the pool\n\n### Recommendation\n\nThe batch job `reconcile-ledger` should **not** grab the full connection pool at startup. Consider:\n1. Capping batch DB connections (e.g., max 5 instead of 20) so API traffic isn't starved\n2. Adding connection timeout/priority logic so API requests pre-empt batch queries\n3. Running reconciliation during off-peak hours",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-20T23:57:35Z"
+    }
+  ]
+}

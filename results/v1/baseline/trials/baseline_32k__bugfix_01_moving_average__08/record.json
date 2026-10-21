@@ -1,0 +1,53 @@
+{
+  "trial_id": "baseline_32k__bugfix_01_moving_average__08",
+  "task": "bugfix_01_moving_average",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 8,
+  "instrumented": true,
+  "seed": 782646976,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-20T20:20:55Z",
+  "wall_start": 1792527655.4713135,
+  "wall_end": 1792527721.0489738,
+  "elapsed_s": 65.6,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 44927,
+  "tokens_out": 478,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 5 tests pass. The bug was an off-by-one error in the loop range on line 9 of `stats_utils.py`. It was using `len(values) - window` instead of `len(values) - window + 1`, which skipped the last valid window position.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-20T20:20:55Z"
+    }
+  ]
+}

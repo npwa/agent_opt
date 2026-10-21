@@ -1,0 +1,54 @@
+{
+  "trial_id": "baseline_32k__logtriage_04_pool_exhaustion__04",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 4,
+  "instrumented": true,
+  "seed": 443645301,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-20T23:25:39Z",
+  "wall_start": 1792538739.355321,
+  "wall_end": 1792538932.5709777,
+  "elapsed_s": 192.9,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 70026,
+  "tokens_out": 1510,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "337 words, all checks ok"
+    }
+  ],
+  "final_answer": "Now let me find what triggered this \u2014 checking pre-burst context and the batch/user responsible:\n**Root Cause: `svc-batch` (batch-01) consumed the entire DB connection pool, starving all API servers.**\n\nHere's the timeline of events:\n\n| Time | Event | Significance |\n|------|-------|-------------|\n| **03:15:03** | batch-01 started `reconcile-ledger` with `db_conns=20` | Batch job intentionally grabbed **all** 20 connections (pool max = 20) |\n| **03:15:04\u201316:39** | Batch acquired connections 1/20 through 20/20 over ~95 seconds | The job serially acquired one connection every ~5 seconds, filling the entire pool before processing began |\n| **03:17:42** | api-07 first error: `db pool exhausted (max=20) waiting=14` | After 4 minutes of the batch holding all connections, API servers could no longer get DB connections |\n| **03:17:43\u201319:22** | 160+ `503 upstream=db pool exhausted` errors across api-01 through api-08 | All 8 API servers affected \u2014 complete outage for ~2 minutes |\n| **03:41:30** | batch-01 finished, released all connections | Service restored after the batch job completed (~26 minutes) |\n\n**Key findings:**\n\n1. **The `reconcile-ledger` batch job is misconfigured.** It acquired and held 20 DB connections *before* doing any work (connections were acquired over 95 seconds with no processing logs in between). The pool max capacity is 20 \u2014 the batch consumed everything.\n\n2. **No connection isolation/prioritization.** The batch job shared the same `primary` connection pool with API traffic and had equal priority, starving production requests.\n\n3. **The first ERROR at 03:17:42 was preceded by a critical warning at 03:13:04:** `batch-01: WARN [connection] pool utilization high (19/20)`. This warning fired at T+181 seconds but the batch continued acquiring connections without throttling or backoff.\n\n4. **Outage duration:** 03:17:42 to 03:19:22 for errors to stop (~1 min 40s of active failures, though pool remained exhausted until job released at 03:41:30). All 8 API nodes were affected equally.\n\n**Likely trigger:** The batch was not given its own dedicated DB connection pool, and there's no mechanism preventing a background job from monopolizing shared pool capacity during peak hours (03:00\u201304:00 still had significant traffic).",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-20T23:25:39Z"
+    }
+  ]
+}

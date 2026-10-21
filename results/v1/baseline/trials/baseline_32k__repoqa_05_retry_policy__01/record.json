@@ -1,0 +1,49 @@
+{
+  "trial_id": "baseline_32k__repoqa_05_retry_policy__01",
+  "task": "repoqa_05_retry_policy",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "seed": 1298081268,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T00:26:32Z",
+  "wall_start": 1792542392.388561,
+  "wall_end": 1792542453.6582928,
+  "elapsed_s": 61.3,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 31646,
+  "tokens_out": 422,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": false,
+      "detail": "missing 'max_delay_value'"
+    }
+  ],
+  "final_answer": "Here are the answers (showing both the function/constant definition and its config default):\n\n**1. Which function computes the delay before a retry?**\n`miniq/retry.py:20` \u2014 the `next_delay()` method on `RetryPolicy`. It computes exponential backoff as `base * 2**(attempt-1)`, capped at `max_delay`, with jitter applied.\n\n**2. What is the default maximum delay in seconds?**\n`30.0` seconds, from `miniq/config.py:9` (`RETRY_MAX_DELAY_S = 30.0`).\n\n**3. After how many attempts does a job stop being retried by default?**\n`5` attempts, via `miniq/retry.py:18` \u2014 `should_retry()` returns `attempt < self.max_attempts`, and `max_attempts` defaults from `miniq/config.py:7` (`RETRY_MAX_ATTEMPTS = 5`).",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-21T00:26:32Z"
+    }
+  ]
+}

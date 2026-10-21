@@ -1,0 +1,57 @@
+{
+  "trial_id": "baseline_32k__logtriage_04_pool_exhaustion__06",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 6,
+  "instrumented": true,
+  "seed": 1321133187,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-20T23:53:35Z",
+  "wall_start": 1792540415.1778877,
+  "wall_end": 1792540560.103463,
+  "elapsed_s": 144.6,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 6,
+  "tokens_in": 108239,
+  "tokens_out": 1740,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "202 words, all checks ok"
+    }
+  ],
+  "final_answer": "## Outage Report\n\n### (1) First error burst \u2014 time & host\n\n**`2026-01-18T03:17:42Z` on `api-07`** \u2014 the first line is:\n```\nERROR api-07 db pool exhausted (max=20) waiting=14 path=/v1/orders\n```\nWithin ~90 seconds the error cascaded across all API hosts (`api-01` through `api-08`), producing **301** db-pool-exhaustion errors between `03:17:42Z` and `03:19:22Z`.\n\n### (2) Root cause\n\nThe PostgreSQL connection pool (max=20) was fully consumed \u2014 all 20 connections held open for an extended period \u2014 so new frontend requests waiting on a connection timed out after 14+ seconds, returning 503. The burst of 301 errors over ~2 minutes is the symptom; the cause was connections never being released.\n\n### (3) Responsible job / user\n\n`batch-01`, job **`reconcile-ledger`** (user=`svc-batch`).\n\nTimeline:\n```\n03:15:03Z  reconcile-ledger started, db_conns=20\n03:15:04Z \u2013 03:16:39Z  acquired connections 1/20 \u2026 20/20 (one every 5s, no releases)\n                          pool fully consumed\n03:17:42Z  first downstream 503 from pool exhaustion\n03:41:30Z  reconcile-ledger finished (rows=48210112), finally released_conns=20\n```\n\nThe job held every connection in the shared pool for **~26 minutes** without returning any, starving all other services. A proper fix would be to either give batch jobs their own isolated connection pool or enforce a per-job connection limit well under the global max (e.g., \u226410 of 20).",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-20T23:53:35Z"
+    }
+  ]
+}

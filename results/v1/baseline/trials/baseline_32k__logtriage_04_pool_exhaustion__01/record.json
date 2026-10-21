@@ -1,0 +1,54 @@
+{
+  "trial_id": "baseline_32k__logtriage_04_pool_exhaustion__01",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "seed": 782193270,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-20T22:11:20Z",
+  "wall_start": 1792534280.012937,
+  "wall_end": 1792534437.2591722,
+  "elapsed_s": 157.0,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 93267,
+  "tokens_out": 1666,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "205 words, all checks ok"
+    }
+  ],
+  "final_answer": "Here are the findings from `app.log` (72,324 lines, 02:00\u201304:00 UTC on 2026-01-18):\n\n### (1) First real error burst \u2014 time & host\n\nThe **first actual error** was on **api-07** at **`T03:17:42Z`**:\n```\nERROR api-07 db pool exhausted (max=20) waiting=14 path=/v1/orders\n```\nWithin seconds, the error cascade hit **all hosts** (api-01 through api-08), producing hundreds of `503 upstream=db pool exhausted` errors per second across the cluster.\n\n*(Earlier at T02:41:07Z there was a single isolated TLS handshake failure on api-02 \u2014 unrelated noise, not part of the outage.)*\n\n### (2) Root cause\n\n**DB connection pool exhaustion.** The pool had `max=20` connections and all 20 were held open by a long-running batch job that never released them. Meanwhile normal API traffic on the same pool kept arriving, hitting `waiting=14` requests and starting to time out with 503s once the pool was saturated.\n\n### (3) Responsible batch/job/user\n\n**Host `batch-01`** ran the **`reconcile-ledger`** job as user **`svc-batch`**:\n- Started at **`T03:15:03Z`** with `db_conns=20` (grabbed all 20 connections from the pool)\n- Acquired them one-by-one over ~24 seconds until pool was drained to 0/20\n- Did not release any connections\n\nThe job finally finished at **`T03:41:30Z`** (`rows=48210112`, `released_conns=20`), after which errors stopped. The outage window was roughly **03:17\u201303:41 UTC (~24 minutes)**.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-20T22:11:20Z"
+    }
+  ]
+}

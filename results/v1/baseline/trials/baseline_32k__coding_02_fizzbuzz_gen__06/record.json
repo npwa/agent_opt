@@ -1,0 +1,50 @@
+{
+  "trial_id": "baseline_32k__coding_02_fizzbuzz_gen__06",
+  "task": "coding_02_fizzbuzz_gen",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 6,
+  "instrumented": true,
+  "seed": 1506292473,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-20T22:25:16Z",
+  "wall_start": 1792535116.2000275,
+  "wall_end": 1792535191.5040598,
+  "elapsed_s": 75.3,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 51707,
+  "tokens_out": 862,
+  "tool_sequence": [
+    "read",
+    "glob",
+    "bash",
+    "read"
+  ],
+  "tool_errors": 1,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "compile_run",
+      "passed": false,
+      "detail": "missing ['fizzbuzz.c']"
+    }
+  ],
+  "final_answer": "```c\n#include <stdio.h>\n\nint main(void) {\n    for (int i = 1; i <= 100; i++) {\n        printf(\"%d\", i);\n        if (i % 3 == 0)\n            printf(\" fizz\");\n        if (i % 5 == 0)\n            printf(\" buzz\");\n        printf(\"\\n\");\n    }\n    return 0;\n}\n```\n\nThis prints each number 1-100, appending \" fizz\" when divisible by 3 and \" buzz\" when divisible by 5. Multiples of 15 (e.g., 15) output as `15 fizz buzz`.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-20T22:25:16Z"
+    }
+  ]
+}

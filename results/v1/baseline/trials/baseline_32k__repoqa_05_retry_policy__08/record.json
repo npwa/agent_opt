@@ -1,0 +1,50 @@
+{
+  "trial_id": "baseline_32k__repoqa_05_retry_policy__08",
+  "task": "repoqa_05_retry_policy",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 8,
+  "instrumented": true,
+  "seed": 274632026,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-20T20:26:57Z",
+  "wall_start": 1792528017.18273,
+  "wall_end": 1792528084.1665208,
+  "elapsed_s": 67.0,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 32016,
+  "tokens_out": 620,
+  "tool_sequence": [
+    "glob",
+    "grep",
+    "read",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "77 words, all checks ok"
+    }
+  ],
+  "final_answer": "1. **Which function computes the delay before a retry?**\n   `miniq/retry.py:20` \u2014 the `next_delay()` method of `RetryPolicy` (exponential backoff with jitter)\n\n2. **Default maximum delay in seconds?**\n   `miniq/config.py:9` \u2014 30.0 seconds (`RETRY_MAX_DELAY_S`)\n\n3. **After how many attempts does a job stop being retried by default?**\n   `miniq/retry.py:18` combined with `miniq/config.py:7` \u2014 `max_attempts = config.RETRY_MAX_ATTEMPTS` equals 5, so retry stops when `attempt >= 5`. The job gets up to 4 retries and is not retried again on the **5th** attempt.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-20T20:26:57Z"
+    }
+  ]
+}

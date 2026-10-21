@@ -1,0 +1,57 @@
+{
+  "trial_id": "baseline_32k__logtriage_04_pool_exhaustion__09",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 9,
+  "instrumented": true,
+  "seed": 662538328,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-20T23:14:25Z",
+  "wall_start": 1792538065.3333294,
+  "wall_end": 1792538224.2991033,
+  "elapsed_s": 158.7,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 97943,
+  "tokens_out": 1474,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "207 words, all checks ok"
+    }
+  ],
+  "final_answer": "Let me check the end of the outage window and confirm there's nothing else significant.\nHere's the outage analysis:\n\n**(1) First real error burst: `2026-01-18T03:17:42Z` on `api-07`**\n\nThe first ERROR line was at that timestamp:\n```\napi-07 db pool exhausted (max=20) waiting=14 path=/v1/orders\n```\nWithin seconds the cascade hit **all** api nodes (api-01 through api-08). The burst lasted roughly 24 minutes, with `jobid`/`req=` lines filling up until ~`T03:41:30Z`.\n\n**(2) Root cause: DB connection pool exhaustion on the `primary` pool**\n\nThe pool max was **20 connections**. All 20 were held by a single long-running batch job and never released, so every real API request got `503 upstream=db pool exhausted (max=20)` waiting=14+.\n\n**(3) Responsible: `batch-01` / `reconcile-ledger` job, user `svc-batch`**\n\nAt `T03:15:03Z` the batch job started:\n```\nINFO batch-01 job reconcile-ledger started user=svc-batch db_conns=20\n```\nIt then acquired all 20 connections one-by-one (every ~5 seconds, connections 1/20 through 20/20) and held them \u2014 with zero `connection released` events until the job finished at `T03:41:30Z`.\n\n**Chronology:**\n- `T03:15:03Z` \u2014 `batch-01` (`svc-batch`) started `reconcile-ledger`, grabbed all 20 DB connections\n- `T03:16:39Z` \u2014 last connection acquired (20/20), pool fully depleted\n- `T03:17:42Z` \u2014 first errors hit (api-07 \u2192 cascade to all api nodes)\n- `T03:41:30Z` \u2014 job finished (`rows=48210112`, `released_conns=20`), pool recovered",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-20T23:14:25Z"
+    }
+  ]
+}

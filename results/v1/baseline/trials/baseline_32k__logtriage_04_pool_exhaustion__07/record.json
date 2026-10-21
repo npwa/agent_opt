@@ -1,0 +1,59 @@
+{
+  "trial_id": "baseline_32k__logtriage_04_pool_exhaustion__07",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 7,
+  "instrumented": true,
+  "seed": 625924900,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T00:11:41Z",
+  "wall_start": 1792541501.1515906,
+  "wall_end": 1792541669.3284955,
+  "elapsed_s": 167.9,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 6,
+  "tokens_in": 107026,
+  "tokens_out": 2292,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "267 words, all checks ok"
+    }
+  ],
+  "final_answer": "Here are the three findings from `app.log`:\n\n## (1) First real error burst \u2014 time & host\n\n| Event | Timestamp | Host |\n|---|---|---|\n| Batch job started, hoarding all connections | `2026-01-18T03:15:03Z` | `batch-01` |\n| First db-pool error (the burst) | **`03:17:42Z`** | **`api-07`** \u2014 `db pool exhausted (max=20) waiting=14 path=/v1/orders` |\n| Cascading to api-03, api-08, api-04, \u2026 | `03:17:43Z` | all api-* hosts |\n| Last error in the burst | `03:19:22Z` | (api-05) |\n\nThe single TLS/handshake error at `02:41:07Z` on `api-02` is **unrelated noise** \u2014 a transient network glitch, not part of the outage.\n\n## (2) Root cause\n\n**Database connection pool exhaustion.** The primary DB pool has 20 connections. The batch job acquired all 20 and held them for ~26 minutes without releasing any:\n\n```\n03:15:03Z batch-01 job reconcile-ledger started user=svc-batch db_conns=20\n03:15:04Z ... connection 1/20 from pool=primary\n           ... (monotonically to 20/20 by 03:16:39Z)\n03:41:30Z batch-01 job reconcile-ledger finished rows=48210112 released_conns=20\n```\n\nWith every connection held, the API nodes had **zero** database connections available \u2014 all subsequent writes and queries failed with 503.\n\n## (3) Responsible entity\n\n| Field | Value |\n|---|---|\n| Host | `batch-01` |\n| Job | **`reconcile-ledger`** |\n| User / service account | **`svc-batch`** |\n| Rows processed | 48,210,112 (held all 20 DB connections for the entire duration) |\n\nThe `reconcile-ledger` batch job grabbed the full pool upfront (`db_conns=20`) and held it until completion. A fix would be to split it into smaller chunks with connection release between batches, or give the batch job its own dedicated pool separate from the API nodes.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-21T00:11:41Z"
+    }
+  ]
+}

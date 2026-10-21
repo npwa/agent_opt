@@ -1,0 +1,57 @@
+{
+  "trial_id": "baseline_32k__logtriage_04_pool_exhaustion__03",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 3,
+  "instrumented": true,
+  "seed": 480107021,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-20T19:49:56Z",
+  "wall_start": 1792525796.7045617,
+  "wall_end": 1792525939.2691705,
+  "elapsed_s": 142.3,
+  "timed_out": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 86235,
+  "tokens_out": 1719,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "256 words, all checks ok"
+    }
+  ],
+  "final_answer": "All the pieces are clear. Here's the outage analysis:\n\n**(1) First real error burst: 2026-01-18T03:17:42Z on `api-07`** (then cascading across api-01 through api-08).\n\n**(2) Root cause: Database connection pool exhaustion.** The shared DB pool has a hard limit of **max=20** connections. At 03:15:03, the `batch-01 host ran a `reconcile-ledger` job (`svc-batch` user) that systematically acquired all 20 connections from the primary pool over ~4 minutes (one every 5 seconds), holding them for ~26 minutes without releasing any. By **03:17:42Z** the pool was completely drained, and `api-07` hit `db pool exhausted (max=20)` on `/v1/orders`. This immediately cascaded to a massive 503 error burst across all API hosts \u2014 302 ERROR lines in rapid succession \u2014 because none of the application servers could obtain a DB connection for live traffic.\n\n**(3) Responsible entity:** The `reconcile-ledger` batch job, run by user **`svc-batch`** on host **`batch-01`**. It consumed all 20 connections and didn't release them until the job finished at 03:41:30Z \u2014 well after the outage window.\n\n| Detail | Value |\n|---|---|\n| First error timestamp | `2026-01-18T03:17:42Z` |\n| First host impacted | `api-07` |\n| Root cause | DB pool exhausted (all 20 connections held by one job) |\n| Responsible job/user | `reconcile-ledger` / `svc-batch` on `batch-01` |\n| Burst duration | ~24 minutes (03:17:42 \u2192 03:41:30Z) |\n| Total ERROR lines | 302 |\n\n**Fix:** The batch job should use a separate DB connection pool (not the shared app pool), or at minimum cap its connections well below 20 so live traffic can still connect.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-20T19:49:56Z"
+    }
+  ]
+}
