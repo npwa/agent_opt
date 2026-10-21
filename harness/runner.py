@@ -27,6 +27,7 @@ import json
 import math
 import os
 import random
+import re
 import shutil
 import sys
 import time
@@ -38,6 +39,7 @@ from pathlib import Path
 import yaml
 
 from harness import calibrate, manifest, stall
+from harness import server as serverlib
 from harness.manifest import OPENCODE_ISOLATION_ENV
 from harness.taskspec import TaskSpec, load_task
 from harness.telemetry import GpuSampler
@@ -46,7 +48,7 @@ from harness.workdir import prepare_workdir
 
 ROOT = Path(__file__).resolve().parent.parent
 FINAL_STATUSES = {"pass", "fail", "timeout", "harness_failed"}
-CONFIG_KEYS = {"id", "model", "description", "seed_mode", "options"}
+CONFIG_KEYS = {"id", "model", "description", "seed_mode", "options", "server"}
 STALL_S = 300.0  # no events + idle GPU + no working child for this long = stalled trial (0 disables); set by --stall-s
 
 
@@ -61,6 +63,7 @@ class RunConfig:
     description: str = ""
     seed_mode: str = "per_trial"
     options: dict = field(default_factory=dict)
+    server: dict | None = None  # settings of a private Ollama server for this config (harness/server.py)
 
 
 def load_config(path: Path) -> RunConfig:
@@ -77,6 +80,8 @@ def load_config(path: Path) -> RunConfig:
         raise ValueError(f"{path}: seed_mode must be per_trial or none")
     if not str(data["id"]).replace("_", "").replace("-", "").isalnum():
         raise ValueError(f"{path}: id must be alphanumeric/_/-")
+    if "server" in data and (errs := serverlib.validate_server(data["server"])):
+        raise ValueError(f"{path}: " + "; ".join(errs))
     return RunConfig(**data)
 
 
@@ -112,6 +117,14 @@ def build_plan(configs: list[RunConfig], specs: list[TaskSpec], n: int, run_seed
                                   (False, math.ceil(parity_fraction * per_task[s.id]) if parity_fraction > 0 else 0))
               for k in range(count)]
     random.Random(run_seed).shuffle(trials)
+    # configurations that need their own Ollama server run in blocks (a server restart per trial would be
+    # absurd); the block order is seeded and trials stay shuffled inside a block. With a single group
+    # (no server settings) this is a no-op, so the order of plain runs is unchanged.
+    group_of = {c.id: serverlib.group_key(c.server) for c in configs}
+    groups = sorted(set(group_of.values()))
+    random.Random(f"groups:{run_seed}").shuffle(groups)
+    if len(groups) > 1:
+        trials = [t for g in groups for t in trials if group_of[t["config"]] == g]
     return {
         "created_utc": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "run_seed": run_seed, "n": n, "parity_fraction": parity_fraction, "trials_per_task": per_task,
@@ -190,7 +203,7 @@ def classify(run: dict, ev: dict, verdict, upstream_bad: list[int]) -> tuple[str
 
 def preflight(specs: list[TaskSpec], proxy_url: str = "http://localhost:11435",
               searxng_url: str = "http://localhost:8090", need_direct: bool = False,
-              ollama_url: str = "http://localhost:11434") -> list[str]:
+              ollama_url: str = "http://localhost:11434", private_server: bool = False) -> list[str]:
     problems = []
 
     def reachable(url: str) -> bool:
@@ -205,12 +218,20 @@ def preflight(specs: list[TaskSpec], proxy_url: str = "http://localhost:11435",
                         "(start: python -m uvicorn harness.proxy:app --port 11435)")
     if need_direct and not reachable(f"{ollama_url}/api/tags"):
         problems.append(f"Ollama not reachable at {ollama_url} (needed for uninstrumented parity trials)")
+    if private_server:
+        if shutil.which("ollama") is None:
+            problems.append("`ollama` not found on PATH (needed for configurations with a `server:` section)")
+        if not reachable(f"{ollama_url}/api/tags"):
+            problems.append(f"system Ollama not reachable at {ollama_url} (it owns the model store the private server uses)")
+        if reachable(f"http://{serverlib.PRIVATE_HOST}/api/tags"):
+            problems.append(f"{serverlib.PRIVATE_HOST} is already in use (private Ollama for `server:` configurations)")
     if any("searxng" in s.mcp for s in specs) and not reachable(searxng_url):
         problems.append(f"SearXNG not reachable at {searxng_url} (docker start searxng)")
     return problems
 
 
-OLLAMA_DIRECT_URL = "http://localhost:11434/v1"
+DEFAULT_DIRECT_URL = "http://localhost:11434/v1"
+OLLAMA_DIRECT_URL = DEFAULT_DIRECT_URL  # where uninstrumented (parity) trials go; run_all points it at a managed server
 
 
 COMM_STATE_FILES = ("email_store.json", "calendar_store.json")
@@ -348,10 +369,33 @@ def status_table(out: Path, by_task: bool = False) -> str:
     return line
 
 
+def _set_direct_url(url: str) -> None:
+    global OLLAMA_DIRECT_URL
+    OLLAMA_DIRECT_URL = url
+
+
+def key_slug(config_id: str) -> str:
+    return re.sub(r"[^A-Za-z0-9_.-]", "_", config_id)
+
+
+def recorded_servers(out: Path) -> set[str]:
+    """Configurations whose server facts are already in platform.yaml (resumed runs record them once)."""
+    p = out / "platform.yaml"
+    try:
+        return set((yaml.safe_load(p.read_text()) or {}).get("servers", {}))
+    except (OSError, yaml.YAMLError):
+        return set()
+
+
 def run_all(configs: list[RunConfig], specs: list[TaskSpec], n: int, run_seed: int, out: Path,
             scratch: Path, metrics: Path, max_retries: int = 2, limit: int | None = None,
             force_plan: bool = False, tasks_dir: Path = ROOT / "tasks", attempt_fn=run_attempt,
-            log=print, parity_fraction: float = 0.0, use_task_trials: bool = True) -> dict:
+            log=print, parity_fraction: float = 0.0, use_task_trials: bool = True,
+            server_factory=None) -> dict:
+    """Run the pending trials of the plan. Configurations with a ``server`` section run on a private Ollama
+    server that is started when their block of trials begins and stopped when it ends (``server_factory``
+    builds it, default harness.server.ManagedServer; the proxy is pointed at it via upstream.txt)."""
+    server_factory = server_factory or serverlib.ManagedServer
     plan = load_or_create_plan(
         out, build_plan(configs, specs, n, run_seed, tasks_dir, parity_fraction, use_task_trials), force_plan)
     by_cfg = {c.id: c for c in configs}
@@ -360,22 +404,51 @@ def run_all(configs: list[RunConfig], specs: list[TaskSpec], n: int, run_seed: i
         manifest.write_manifest(out / "platform.yaml")
     ran = 0
     order = plan["order"]
-    for pos, item in enumerate(order):
-        if is_done(out, item["trial_id"]):
-            continue
-        # trial order is randomised but back-to-back, so the previous trial's prompt cache can speed this
-        # trial up (first-call prefill): record the predecessor so analyses can use it as a covariate
-        item = {**item, "prev_trial_id": order[pos - 1]["trial_id"] if pos else None,
-                "prev_task": order[pos - 1]["task"] if pos else None}
-        if limit is not None and ran >= limit:
-            break
-        log(f"[{time.strftime('%H:%M:%S')}] {item['trial_id']}")
-        rec = run_trial(by_task[item["task"]], by_cfg[item["config"]], item, run_seed, out,
-                        scratch, metrics, max_retries, attempt_fn)
-        ran += 1
-        log(f"    -> {rec['status']}"
-            f"{' (' + str(rec.get('reason')) + ')' if rec.get('reason') else ''}"
-            f" {rec.get('elapsed_s', '-')}s attempts={len(rec['attempts'])}")
+    upstream = metrics.parent / "upstream.txt"
+    active, active_key, facts_by_key = None, None, {}
+    recorded = recorded_servers(out)
+    try:
+        for pos, item in enumerate(order):
+            if is_done(out, item["trial_id"]):
+                continue
+            if limit is not None and ran >= limit:
+                break
+            cfg = by_cfg[item["config"]]
+            key = serverlib.group_key(cfg.server)
+            if key != active_key:  # next block of trials: switch the Ollama server
+                if active:
+                    active.stop()
+                    active = None
+                upstream.unlink(missing_ok=True)
+                _set_direct_url(DEFAULT_DIRECT_URL)
+                if cfg.server is not None:
+                    log(f"starting private Ollama for {cfg.id}: {cfg.server}")
+                    active = server_factory(cfg.server, cfg.model.split("/", 1)[1], out / "servers" / f"{key_slug(cfg.id)}.log")
+                    facts_by_key[key] = active.start()
+                    upstream.parent.mkdir(parents=True, exist_ok=True)
+                    upstream.write_text(active.url)
+                    _set_direct_url(active.v1)
+                    if facts_by_key[key].get("not_as_requested"):
+                        log("WARNING: server did not apply every setting: " + "; ".join(facts_by_key[key]["not_as_requested"]))
+                active_key = key
+            if cfg.server is not None and cfg.id not in recorded:
+                serverlib.record_server(out / "platform.yaml", cfg.id, facts_by_key[key])
+                recorded.add(cfg.id)
+            # trial order is randomised but back-to-back, so the previous trial's prompt cache can speed this
+            # trial up (first-call prefill): record the predecessor so analyses can use it as a covariate
+            item = {**item, "prev_trial_id": order[pos - 1]["trial_id"] if pos else None,
+                    "prev_task": order[pos - 1]["task"] if pos else None}
+            log(f"[{time.strftime('%H:%M:%S')}] {item['trial_id']}")
+            rec = run_trial(by_task[item["task"]], cfg, item, run_seed, out, scratch, metrics, max_retries, attempt_fn)
+            ran += 1
+            log(f"    -> {rec['status']}"
+                f"{' (' + str(rec.get('reason')) + ')' if rec.get('reason') else ''}"
+                f" {rec.get('elapsed_s', '-')}s attempts={len(rec['attempts'])}")
+    finally:
+        if active:
+            active.stop()
+        upstream.unlink(missing_ok=True)
+        _set_direct_url(DEFAULT_DIRECT_URL)
     return plan
 
 
@@ -442,7 +515,8 @@ def main() -> int:
         print("trials per task: " + ", ".join(f"{t}={k}" for t, k in plan["trials_per_task"].items()))
         print(f"{len(plan['order'])} trials")
         return 0
-    if not a.no_preflight and (problems := preflight(specs, need_direct=a.parity_fraction > 0)):
+    if not a.no_preflight and (problems := preflight(specs, need_direct=a.parity_fraction > 0,
+                                                      private_server=any(c.server is not None for c in configs))):
         print("preflight failed:\n  - " + "\n  - ".join(problems), file=sys.stderr)
         return 2
     if a.rerun_harness_failed:

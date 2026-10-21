@@ -88,6 +88,15 @@ def capture_request(trial_id: str, attempt: str | None, body: bytes) -> str:
     return rel
 
 
+def upstream_base() -> str:
+    """Where requests go: <data dir>/upstream.txt (written by the runner for a configuration that runs on
+    its own Ollama server) or OLLAMA_BASE. Read per request, so the runner can switch servers between trials."""
+    try:
+        return (DATA_DIR / "upstream.txt").read_text().strip().rstrip("/") or OLLAMA_BASE
+    except FileNotFoundError:
+        return OLLAMA_BASE
+
+
 def log_record(record: dict) -> None:
     with open(LOG_PATH, "a") as f:
         f.write(json.dumps(record) + "\n")
@@ -141,7 +150,7 @@ async def passthrough(path: str, request: Request):
     req_params = request_params(body) if is_chat else {}
     headers = {k: v for k, v in request.headers.items()
                if k.lower() not in HOP_HEADERS + OWN_HEADERS}
-    url = f"{OLLAMA_BASE}/{path}"
+    url = f"{upstream_base()}/{path}"
     if request.url.query:
         url += f"?{request.url.query}"
     t_start = time.monotonic()
@@ -224,7 +233,7 @@ async def legacy(path: str, request: Request):
         except json.JSONDecodeError:
             pass
 
-    url = f"{OLLAMA_BASE}/{path}"
+    url = f"{upstream_base()}/{path}"
     task_label = request.headers.get("x-task-id") or current_task_label()
     trial_id = request.headers.get("x-trial-id")
     t_start = time.monotonic()

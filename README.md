@@ -96,11 +96,11 @@ of the v0 claims (M4.2) are not yet run.
 
 | Path | Contents |
 |---|---|
-| `harness/` | the measurement tooling: `runner` (seeded, resumable trials), `proxy` (passive metrics proxy), `telemetry` (NVML sampler), `trace` and `decompose` (per-step timeline and time breakdown), `verifiers` + `sandbox` (automatic pass/fail), `taskspec`, `replay`, `promptreplay` (time prompt variants from captured requests), `nsys`, `manifest` |
+| `harness/` | the measurement tooling: `runner` (seeded, resumable trials), `proxy` (passive metrics proxy), `telemetry` (NVML sampler), `trace` and `decompose` (per-step timeline and time breakdown), `verifiers` + `sandbox` (automatic pass/fail), `taskspec`, `replay`, `promptreplay` (time prompt variants from captured requests), `server` (per-configuration Ollama server settings), `nsys`, `manifest` |
 | `analysis/` | `stats` (Wilson, bootstrap, Mann-Whitney, Holm), `parity`, `report` + `svg` (Markdown and inline-SVG HTML report), `figures` (standalone SVG charts), `compare_runs`, `claims` (verification-claim check) |
 | `tasks/` | the 14 task specs (YAML): prompts, tool permissions, timeout, verifiers |
 | `fixtures/` | task inputs (`tasks/`), hidden verifier assets (`verify/`), known-good/bad examples (`golden/`), recorded traces (`traces/`) and the replay runs with committed golden outputs (`replay/`) |
-| `configs/` | run configurations (`baseline_32k.yaml`) |
+| `configs/` | run configurations: `baseline_32k.yaml` and the `sweep/` set (context size, KV cache type, flash attention, fit margin) |
 | `agent-config/` | OpenCode agents, the mock email/calendar MCP tools, Modelfiles, SearXNG settings |
 | `benchmark/` | the v0 scripts, kept for reference |
 | `results/` | v0 reports (`results/v0/`, `report-*.md`) and v1 data (`results/v1/`) |
@@ -140,6 +140,15 @@ n = 10 for every task). `status --by-task` shows progress per task, and every tr
 trial's id and task (`prev_trial_id`, `prev_task`): the randomized order is back-to-back, so a trial's first call can
 be served from the previous trial's prompt cache, which analyses can use as a covariate. Run
 `python -m harness.manifest` to record the hardware/software manifest.
+
+**Server settings per configuration.** A config with a `server:` section (`num_ctx`, `kv_cache_type`,
+`flash_attention`, `num_parallel`, `fit_target_mib`; see `configs/sweep/` and `harness/server.py`) runs on a private
+`ollama serve` that the runner starts with exactly those settings when the config's block of trials begins, points
+the proxy and the parity trials at it, and stops afterwards; what the server actually did (layers offloaded, KV
+cache, flash attention) is read back from its log into `platform.yaml`. Configs with different server settings run
+in separate blocks (seeded order; trials are still shuffled inside a block). `python -m harness.server survey
+--configs configs/sweep/*.yaml --out <dir>` starts each server once without running trials (results:
+`results/v1/server_survey/`).
 
 **Re-derive results from recorded runs** (no GPU, no model):
 

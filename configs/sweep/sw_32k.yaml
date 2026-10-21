@@ -1,0 +1,7 @@
+# Private-server baseline for the sweep (explicit defaults); the model has num_ctx 32768 from agent-config/Modelfile.
+id: sw_32k
+model: ollama/qwen3.6-32k
+description: qwen3.6 35B-A3B, 32k context, KV f16, on a private Ollama (reference for the sweep)
+seed_mode: per_trial
+server:
+  num_ctx: 32768

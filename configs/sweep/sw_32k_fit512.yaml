@@ -1,0 +1,8 @@
+# Keep only 512 MiB of VRAM free when llama.cpp decides how many layers' experts stay on the GPU (default margin about 1.9 GB).
+id: sw_32k_fit512
+model: ollama/qwen3.6-32k
+description: 32k context, llama.cpp fit margin 512 MiB (more expert layers on the GPU, less headroom)
+seed_mode: per_trial
+server:
+  num_ctx: 32768
+  fit_target_mib: 512
