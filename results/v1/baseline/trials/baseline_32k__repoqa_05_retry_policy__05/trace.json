@@ -1,0 +1,141 @@
+{
+  "trial_id": "baseline_32k__repoqa_05_retry_policy__05",
+  "task": "repoqa_05_retry_policy",
+  "config": "baseline_32k",
+  "attempt": 1,
+  "status": "pass",
+  "summary": {
+    "wall_start": 1792525605.501879,
+    "wall_end": 1792525670.478495,
+    "wall_s": 64.97661590576172,
+    "n_steps": 3,
+    "llm_s": 62.9531,
+    "ttft_s": 47.8937,
+    "decode_s": 15.059399999999997,
+    "tool_s": 0.034999847412109375,
+    "gap_s": 0.17056918144226074,
+    "idle_gap_s": 0.0,
+    "prefill_tokens": 31712,
+    "decode_tokens": 573,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "baseline_32k__repoqa_05_retry_policy__05#a1:1",
+      "t_start": 1792525607.3548257,
+      "t_end": 1792525650.5709257,
+      "ttft_s": 40.5625,
+      "llm_s": 43.2161,
+      "decode_s": 2.6535999999999973,
+      "prefill_tokens": 10173,
+      "decode_tokens": 95,
+      "prefill_tok_s": 250.8,
+      "decode_tok_s": 35.8,
+      "n_chunks": 30,
+      "first_token_skew_s": 0.016674280166625977,
+      "itl_p50_ms": 28.999999999996362,
+      "itl_p99_ms": 1324.5199999999973,
+      "tool_names": [
+        "glob"
+      ],
+      "tool_latency_s": 0.015999794006347656,
+      "tools": [
+        {
+          "tool": "glob",
+          "start": 1792525650.558,
+          "end": 1792525650.574,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792525647.934,
+      "oc_step_finish": 1792525650.591,
+      "tool_errors": 0,
+      "gap_s": 0.046256303787231445,
+      "gpu_busy_pct_llm": 93.48148148148148,
+      "gpu_power_w_llm": 130.6,
+      "gpu_samples_llm": 432,
+      "gpu_busy_pct_gap": 21.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 2,
+      "llm_call_id": "baseline_32k__repoqa_05_retry_policy__05#a1:2",
+      "t_start": 1792525650.617182,
+      "t_end": 1792525655.578582,
+      "ttft_s": 3.487,
+      "llm_s": 4.9614,
+      "decode_s": 1.4744000000000002,
+      "prefill_tokens": 10403,
+      "decode_tokens": 107,
+      "prefill_tok_s": 2983.37,
+      "decode_tok_s": 72.57,
+      "n_chunks": 3,
+      "first_token_skew_s": 0.018817901611328125,
+      "itl_p50_ms": 737.0000000000001,
+      "itl_p99_ms": 1429.86,
+      "tool_names": [
+        "read",
+        "read"
+      ],
+      "tool_latency_s": 0.01900005340576172,
+      "tools": [
+        {
+          "tool": "read",
+          "start": 1792525654.119,
+          "end": 1792525654.13,
+          "status": "completed"
+        },
+        {
+          "tool": "read",
+          "start": 1792525655.555,
+          "end": 1792525655.563,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792525654.123,
+      "oc_step_finish": 1792525655.593,
+      "tool_errors": 0,
+      "gap_s": 0.03299522399902344,
+      "gpu_busy_pct_llm": 52.95918367346939,
+      "gpu_power_w_llm": 126.26938775510203,
+      "gpu_samples_llm": 49,
+      "gpu_busy_pct_gap": 20.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 3,
+      "llm_call_id": "baseline_32k__repoqa_05_retry_policy__05#a1:3",
+      "t_start": 1792525655.6115773,
+      "t_end": 1792525670.3871772,
+      "ttft_s": 3.8442,
+      "llm_s": 14.7756,
+      "decode_s": 10.9314,
+      "prefill_tokens": 11136,
+      "decode_tokens": 371,
+      "prefill_tok_s": 2896.83,
+      "decode_tok_s": 33.94,
+      "n_chunks": 355,
+      "first_token_skew_s": 0.006222724914550781,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 58.00000000000067,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792525659.462,
+      "oc_step_finish": 1792525670.403,
+      "tool_errors": 0,
+      "gap_s": 0.09131765365600586,
+      "gpu_busy_pct_llm": 41.50675675675676,
+      "gpu_power_w_llm": 121.0364864864865,
+      "gpu_samples_llm": 148,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

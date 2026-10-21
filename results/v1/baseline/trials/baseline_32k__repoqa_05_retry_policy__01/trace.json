@@ -1,0 +1,141 @@
+{
+  "trial_id": "baseline_32k__repoqa_05_retry_policy__01",
+  "task": "repoqa_05_retry_policy",
+  "config": "baseline_32k",
+  "attempt": 1,
+  "status": "fail",
+  "summary": {
+    "wall_start": 1792542392.388561,
+    "wall_end": 1792542453.6582928,
+    "wall_s": 61.269731760025024,
+    "n_steps": 3,
+    "llm_s": 59.289199999999994,
+    "ttft_s": 48.2922,
+    "decode_s": 10.996999999999996,
+    "tool_s": 0.059000253677368164,
+    "gap_s": 0.19004344940185547,
+    "idle_gap_s": 0.0,
+    "prefill_tokens": 31646,
+    "decode_tokens": 422,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "baseline_32k__repoqa_05_retry_policy__01#a1:1",
+      "t_start": 1792542394.1790495,
+      "t_end": 1792542436.6881495,
+      "ttft_s": 40.7733,
+      "llm_s": 42.5091,
+      "decode_s": 1.7357999999999976,
+      "prefill_tokens": 10173,
+      "decode_tokens": 61,
+      "prefill_tok_s": 249.5,
+      "decode_tok_s": 35.14,
+      "n_chunks": 29,
+      "first_token_skew_s": 0.015650510787963867,
+      "itl_p50_ms": 28.999999999996362,
+      "itl_p99_ms": 692.2400000000011,
+      "tool_names": [
+        "glob"
+      ],
+      "tool_latency_s": 0.018000125885009766,
+      "tools": [
+        {
+          "tool": "glob",
+          "start": 1792542436.675,
+          "end": 1792542436.693,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792542434.968,
+      "oc_step_finish": 1792542436.711,
+      "tool_errors": 0,
+      "gap_s": 0.047048091888427734,
+      "gpu_busy_pct_llm": 95.56338028169014,
+      "gpu_power_w_llm": 130.668779342723,
+      "gpu_samples_llm": 426,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 2,
+      "llm_call_id": "baseline_32k__repoqa_05_retry_policy__01#a1:2",
+      "t_start": 1792542436.7351975,
+      "t_end": 1792542441.8878975,
+      "ttft_s": 3.5587,
+      "llm_s": 5.1527,
+      "decode_s": 1.5940000000000003,
+      "prefill_tokens": 10370,
+      "decode_tokens": 107,
+      "prefill_tok_s": 2913.99,
+      "decode_tok_s": 67.13,
+      "n_chunks": 3,
+      "first_token_skew_s": 0.020102262496948242,
+      "itl_p50_ms": 796.4999999999999,
+      "itl_p99_ms": 1546.6900000000003,
+      "tool_names": [
+        "read",
+        "read"
+      ],
+      "tool_latency_s": 0.0410001277923584,
+      "tools": [
+        {
+          "tool": "read",
+          "start": 1792542440.31,
+          "end": 1792542440.341,
+          "status": "completed"
+        },
+        {
+          "tool": "read",
+          "start": 1792542441.863,
+          "end": 1792542441.873,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792542440.314,
+      "oc_step_finish": 1792542441.903,
+      "tool_errors": 0,
+      "gap_s": 0.031885623931884766,
+      "gpu_busy_pct_llm": 30.576923076923077,
+      "gpu_power_w_llm": 125.31153846153846,
+      "gpu_samples_llm": 52,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 3,
+      "llm_call_id": "baseline_32k__repoqa_05_retry_policy__01#a1:3",
+      "t_start": 1792542441.919783,
+      "t_end": 1792542453.547183,
+      "ttft_s": 3.9602,
+      "llm_s": 11.6274,
+      "decode_s": 7.667199999999999,
+      "prefill_tokens": 11103,
+      "decode_tokens": 254,
+      "prefill_tok_s": 2803.65,
+      "decode_tok_s": 33.13,
+      "n_chunks": 241,
+      "first_token_skew_s": 0.006016731262207031,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 64.87999999999992,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792542445.886,
+      "oc_step_finish": 1792542453.56,
+      "tool_errors": 0,
+      "gap_s": 0.11110973358154297,
+      "gpu_busy_pct_llm": 43.706896551724135,
+      "gpu_power_w_llm": 120.94655172413792,
+      "gpu_samples_llm": 116,
+      "gpu_busy_pct_gap": 20.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

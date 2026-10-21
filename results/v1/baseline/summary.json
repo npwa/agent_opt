@@ -1,0 +1,779 @@
+{
+  "baseline": "baseline_32k",
+  "categories": {
+    "bugfix_01_moving_average": "bugfix",
+    "c_ringbuf_03_ringbuffer": "code_gen",
+    "coding_01_my_sqrt_review": "code_review",
+    "coding_02_fizzbuzz_gen": "code_gen",
+    "coding_03_compress_gen": "code_gen",
+    "coding_04_dir_stats_gen": "code_gen",
+    "coding_05_scientific_lan": "reasoning",
+    "coding_06_tax_rates_lan": "reasoning",
+    "comms_07_confirm_send": "comms",
+    "logtriage_04_pool_exhaustion": "log_triage",
+    "longctx_06_tidal_report": "long_context",
+    "refactor_02_rename_price": "refactor",
+    "repoqa_05_retry_policy": "repo_qa",
+    "research_08e_free_will": "research"
+  },
+  "cells": {
+    "baseline_32k|bugfix_01_moving_average": {
+      "harness_failed": 0,
+      "median_ci": [
+        66.1,
+        78.3
+      ],
+      "median_s": 72.0,
+      "n": 10,
+      "passes": 8,
+      "rate": 0.8,
+      "timeouts": 0,
+      "times": [
+        95.5,
+        73.6,
+        78.3,
+        71.2,
+        79.3,
+        66.2,
+        54.2,
+        66.6,
+        65.6,
+        72.8
+      ],
+      "wilson": [
+        0.49016247153664183,
+        0.9433178485456247
+      ]
+    },
+    "baseline_32k|c_ringbuf_03_ringbuffer": {
+      "harness_failed": 0,
+      "median_ci": [
+        212.5,
+        698.75
+      ],
+      "median_s": 351.5,
+      "n": 10,
+      "passes": 6,
+      "rate": 0.6,
+      "timeouts": 0,
+      "times": [
+        185.7,
+        446.3,
+        974.6,
+        951.2,
+        458.2,
+        579.2,
+        238.9,
+        256.7,
+        108.8,
+        239.3
+      ],
+      "wilson": [
+        0.31267376973365824,
+        0.8318196702937638
+      ]
+    },
+    "baseline_32k|coding_01_my_sqrt_review": {
+      "harness_failed": 0,
+      "median_ci": [
+        70.9,
+        85.8
+      ],
+      "median_s": 77.35,
+      "n": 10,
+      "passes": 6,
+      "rate": 0.6,
+      "timeouts": 0,
+      "times": [
+        48.5,
+        70.9,
+        95.2,
+        89.3,
+        80.4,
+        73.2,
+        74.3,
+        82.3,
+        83.4,
+        70.0
+      ],
+      "wilson": [
+        0.31267376973365824,
+        0.8318196702937638
+      ]
+    },
+    "baseline_32k|coding_02_fizzbuzz_gen": {
+      "harness_failed": 0,
+      "median_ci": [
+        69.25,
+        84.9
+      ],
+      "median_s": 78.3,
+      "n": 10,
+      "passes": 8,
+      "rate": 0.8,
+      "timeouts": 0,
+      "times": [
+        136.7,
+        58.0,
+        69.4,
+        81.3,
+        67.3,
+        84.9,
+        75.3,
+        82.9,
+        85.0,
+        71.2
+      ],
+      "wilson": [
+        0.49016247153664183,
+        0.9433178485456247
+      ]
+    },
+    "baseline_32k|coding_03_compress_gen": {
+      "harness_failed": 0,
+      "median_ci": [
+        65.0,
+        93.6
+      ],
+      "median_s": 77.6,
+      "n": 10,
+      "passes": 8,
+      "rate": 0.8,
+      "timeouts": 0,
+      "times": [
+        89.8,
+        89.2,
+        67.3,
+        65.0,
+        61.3,
+        82.2,
+        105.0,
+        73.0,
+        106.8,
+        64.7
+      ],
+      "wilson": [
+        0.49016247153664183,
+        0.9433178485456247
+      ]
+    },
+    "baseline_32k|coding_04_dir_stats_gen": {
+      "harness_failed": 0,
+      "median_ci": [
+        64.6,
+        95.3
+      ],
+      "median_s": 81.15,
+      "n": 10,
+      "passes": 10,
+      "rate": 1.0,
+      "timeouts": 0,
+      "times": [
+        126.7,
+        67.6,
+        89.3,
+        63.4,
+        58.8,
+        95.3,
+        95.8,
+        64.6,
+        85.3,
+        77.0
+      ],
+      "wilson": [
+        0.7224672001371107,
+        0.9999999999999999
+      ]
+    },
+    "baseline_32k|coding_05_scientific_lan": {
+      "harness_failed": 0,
+      "median_ci": [
+        49.05,
+        52.3
+      ],
+      "median_s": 50.05,
+      "n": 10,
+      "passes": 10,
+      "rate": 1.0,
+      "timeouts": 0,
+      "times": [
+        48.4,
+        49.8,
+        53.6,
+        51.0,
+        56.4,
+        49.7,
+        50.3,
+        49.7,
+        48.3,
+        51.6
+      ],
+      "wilson": [
+        0.7224672001371107,
+        0.9999999999999999
+      ]
+    },
+    "baseline_32k|coding_06_tax_rates_lan": {
+      "harness_failed": 0,
+      "median_ci": [
+        49.599999999999994,
+        52.452499999999965
+      ],
+      "median_s": 50.85,
+      "n": 10,
+      "passes": 3,
+      "rate": 0.3,
+      "timeouts": 0,
+      "times": [
+        52.2,
+        49.7,
+        51.0,
+        50.4,
+        53.2,
+        50.7,
+        53.9,
+        48.7,
+        51.9,
+        48.8
+      ],
+      "wilson": [
+        0.10779126740630099,
+        0.6032218525388546
+      ]
+    },
+    "baseline_32k|comms_07_confirm_send": {
+      "harness_failed": 0,
+      "median_ci": [
+        110.15,
+        113.9
+      ],
+      "median_s": 111.65,
+      "n": 10,
+      "passes": 10,
+      "rate": 1.0,
+      "timeouts": 0,
+      "times": [
+        155.9,
+        115.4,
+        108.7,
+        109.7,
+        111.4,
+        110.6,
+        112.4,
+        111.9,
+        113.7,
+        110.5
+      ],
+      "wilson": [
+        0.7224672001371107,
+        0.9999999999999999
+      ]
+    },
+    "baseline_32k|logtriage_04_pool_exhaustion": {
+      "harness_failed": 0,
+      "median_ci": [
+        142.2425,
+        178.2
+      ],
+      "median_s": 157.85,
+      "n": 10,
+      "passes": 8,
+      "rate": 0.8,
+      "timeouts": 0,
+      "times": [
+        115.5,
+        157.0,
+        218.0,
+        142.3,
+        192.9,
+        135.4,
+        144.6,
+        167.9,
+        163.5,
+        158.7
+      ],
+      "wilson": [
+        0.49016247153664183,
+        0.9433178485456247
+      ]
+    },
+    "baseline_32k|longctx_06_tidal_report": {
+      "harness_failed": 0,
+      "median_ci": [
+        100.8,
+        102.05
+      ],
+      "median_s": 101.4,
+      "n": 10,
+      "passes": 10,
+      "rate": 1.0,
+      "timeouts": 0,
+      "times": [
+        102.3,
+        101.6,
+        104.1,
+        100.7,
+        101.8,
+        101.2,
+        94.9,
+        102.0,
+        100.8,
+        101.0
+      ],
+      "wilson": [
+        0.7224672001371107,
+        0.9999999999999999
+      ]
+    },
+    "baseline_32k|refactor_02_rename_price": {
+      "harness_failed": 0,
+      "median_ci": [
+        88.05999999999999,
+        123.45
+      ],
+      "median_s": 111.25,
+      "n": 10,
+      "passes": 9,
+      "rate": 0.9,
+      "timeouts": 0,
+      "times": [
+        64.2,
+        132.9,
+        170.4,
+        114.0,
+        96.7,
+        105.6,
+        113.7,
+        108.8,
+        122.7,
+        67.4
+      ],
+      "wilson": [
+        0.5958499732047615,
+        0.9821237869049271
+      ]
+    },
+    "baseline_32k|repoqa_05_retry_policy": {
+      "harness_failed": 0,
+      "median_ci": [
+        63.97875,
+        76.69999999999999
+      ],
+      "median_s": 67.2,
+      "n": 10,
+      "passes": 7,
+      "rate": 0.7,
+      "timeouts": 0,
+      "times": [
+        59.5,
+        61.3,
+        64.0,
+        67.4,
+        72.3,
+        65.0,
+        81.1,
+        72.3,
+        67.0,
+        96.6
+      ],
+      "wilson": [
+        0.39677814746114537,
+        0.8922087325936989
+      ]
+    },
+    "baseline_32k|research_08e_free_will": {
+      "harness_failed": 0,
+      "median_ci": [
+        151.7,
+        284.54999999999995
+      ],
+      "median_s": 208.25,
+      "n": 10,
+      "passes": 1,
+      "rate": 0.1,
+      "timeouts": 0,
+      "times": [
+        466.0,
+        161.2,
+        255.7,
+        235.4,
+        252.7,
+        181.1,
+        151.7,
+        316.4,
+        151.2,
+        147.2
+      ],
+      "wilson": [
+        0.017876213095072896,
+        0.4041500267952385
+      ]
+    }
+  },
+  "common_tasks": [
+    "bugfix_01_moving_average",
+    "c_ringbuf_03_ringbuffer",
+    "coding_01_my_sqrt_review",
+    "coding_02_fizzbuzz_gen",
+    "coding_03_compress_gen",
+    "coding_04_dir_stats_gen",
+    "coding_05_scientific_lan",
+    "coding_06_tax_rates_lan",
+    "comms_07_confirm_send",
+    "logtriage_04_pool_exhaustion",
+    "longctx_06_tidal_report",
+    "refactor_02_rename_price",
+    "repoqa_05_retry_policy",
+    "research_08e_free_will"
+  ],
+  "comparisons": [],
+  "configs": [
+    "baseline_32k"
+  ],
+  "created_utc": "2026-10-20T18:43:23Z",
+  "decomposition": {
+    "baseline_32k": {
+      "all": {
+        "n": 140,
+        "pct": {
+          "decode": 42.712441429548264,
+          "harness": 2.4131923935401933,
+          "prefill": 54.016289944497885,
+          "tool": 0.8580762289764826,
+          "unattributed": 3.4371814985727127e-09
+        },
+        "wall_s": 17280.10329771042
+      },
+      "categories": {
+        "bugfix": {
+          "n": 10,
+          "not_ok": 0,
+          "pct": {
+            "decode": 27.173329086326152,
+            "harness": 2.7742576772970304,
+            "prefill": 70.04402995686533,
+            "tool": 0.008383220563235599,
+            "unattributed": 5.894825073776506e-08
+          },
+          "wall_s": 723.4873554706573
+        },
+        "code_gen": {
+          "n": 40,
+          "not_ok": 0,
+          "pct": {
+            "decode": 60.3276506831682,
+            "harness": 1.2808695293053696,
+            "prefill": 36.6382171988134,
+            "tool": 1.7532625679675242,
+            "unattributed": 2.074550638140637e-08
+          },
+          "wall_s": 6878.975814580917
+        },
+        "code_review": {
+          "n": 10,
+          "not_ok": 0,
+          "pct": {
+            "decode": 40.43822941326978,
+            "harness": 2.533448179254969,
+            "prefill": 57.02490720202298,
+            "tool": 0.00341525963612255,
+            "unattributed": -5.418383693141197e-08
+          },
+          "wall_s": 767.3911654949188
+        },
+        "comms": {
+          "n": 10,
+          "not_ok": 0,
+          "pct": {
+            "decode": 39.91294087716852,
+            "harness": 11.783282564180066,
+            "prefill": 48.27626250129449,
+            "tool": 0.027514124657447753,
+            "unattributed": -6.730052929362013e-08
+          },
+          "wall_s": 1160.2710545063019
+        },
+        "log_triage": {
+          "n": 10,
+          "not_ok": 0,
+          "pct": {
+            "decode": 33.172793198043706,
+            "harness": 1.475233087634496,
+            "prefill": 65.3499461553084,
+            "tool": 0.0020275857625211037,
+            "unattributed": -2.674912838085184e-08
+          },
+          "wall_s": 1598.659771680832
+        },
+        "long_context": {
+          "n": 10,
+          "not_ok": 0,
+          "pct": {
+            "decode": 17.309879885599226,
+            "harness": 1.9435011731582235,
+            "prefill": 80.74227993982846,
+            "tool": 0.004339073334780366,
+            "unattributed": -7.192068720760338e-08
+          },
+          "wall_s": 1010.4183342456818
+        },
+        "reasoning": {
+          "n": 20,
+          "not_ok": 0,
+          "pct": {
+            "decode": 16.445716841101373,
+            "harness": 3.7000882107476643,
+            "prefill": 79.7550708198852,
+            "tool": 0.09912412134237174,
+            "unattributed": 6.9233797246857235e-09
+          },
+          "wall_s": 1019.3274128437042
+        },
+        "refactor": {
+          "n": 10,
+          "not_ok": 0,
+          "pct": {
+            "decode": 44.10130175938097,
+            "harness": 1.9381379623051314,
+            "prefill": 53.948073442229706,
+            "tool": 0.01248675462864676,
+            "unattributed": 8.14555441306316e-08
+          },
+          "wall_s": 1096.3288626670837
+        },
+        "repo_qa": {
+          "n": 10,
+          "not_ok": 0,
+          "pct": {
+            "decode": 29.16943565538322,
+            "harness": 2.7703607418989873,
+            "prefill": 67.99228139308119,
+            "tool": 0.06792233024651184,
+            "unattributed": -1.2060989806961297e-07
+          },
+          "wall_s": 706.5782911777496
+        },
+        "research": {
+          "n": 10,
+          "not_ok": 0,
+          "pct": {
+            "decode": 30.118966267555127,
+            "harness": 1.3326614771773533,
+            "prefill": 67.44599765266618,
+            "tool": 1.1023745603358261,
+            "unattributed": 4.2265511361547314e-08
+          },
+          "wall_s": 2318.665235042572
+        }
+      },
+      "first_call_share_pct": 71.94479436174952,
+      "flagged": [],
+      "gpu_duty_pct": 95.3788075934361
+    }
+  },
+  "n": 10,
+  "name": "baseline",
+  "overview": {
+    "baseline_32k": {
+      "harness_failed": 0,
+      "n": 140,
+      "n_common": 140,
+      "passes": 104,
+      "passes_common": 104,
+      "rate_common": 0.7428571428571429,
+      "suite_hi": 2120.2525,
+      "suite_lo": 1303.9312499999999,
+      "suite_s": 1596.4,
+      "timeouts": 0,
+      "wilson": [
+        0.6646531891574827,
+        0.8080895135202311
+      ],
+      "wilson_common": [
+        0.6646531891574827,
+        0.8080895135202311
+      ]
+    }
+  },
+  "parity": {
+    "cells": [
+      {
+        "config": "baseline_32k",
+        "median_instrumented_s": 72.0,
+        "median_parity_s": 69.80000000000001,
+        "n_instrumented": 10,
+        "n_parity": 2,
+        "task": "bugfix_01_moving_average"
+      },
+      {
+        "config": "baseline_32k",
+        "median_instrumented_s": 351.5,
+        "median_parity_s": 358.55,
+        "n_instrumented": 10,
+        "n_parity": 2,
+        "task": "c_ringbuf_03_ringbuffer"
+      },
+      {
+        "config": "baseline_32k",
+        "median_instrumented_s": 77.35,
+        "median_parity_s": 76.55000000000001,
+        "n_instrumented": 10,
+        "n_parity": 2,
+        "task": "coding_01_my_sqrt_review"
+      },
+      {
+        "config": "baseline_32k",
+        "median_instrumented_s": 78.3,
+        "median_parity_s": 168.05,
+        "n_instrumented": 10,
+        "n_parity": 2,
+        "task": "coding_02_fizzbuzz_gen"
+      },
+      {
+        "config": "baseline_32k",
+        "median_instrumented_s": 77.6,
+        "median_parity_s": 120.39999999999999,
+        "n_instrumented": 10,
+        "n_parity": 2,
+        "task": "coding_03_compress_gen"
+      },
+      {
+        "config": "baseline_32k",
+        "median_instrumented_s": 81.15,
+        "median_parity_s": 85.15,
+        "n_instrumented": 10,
+        "n_parity": 2,
+        "task": "coding_04_dir_stats_gen"
+      },
+      {
+        "config": "baseline_32k",
+        "median_instrumented_s": 50.05,
+        "median_parity_s": 50.95,
+        "n_instrumented": 10,
+        "n_parity": 2,
+        "task": "coding_05_scientific_lan"
+      },
+      {
+        "config": "baseline_32k",
+        "median_instrumented_s": 50.85,
+        "median_parity_s": 59.55,
+        "n_instrumented": 10,
+        "n_parity": 2,
+        "task": "coding_06_tax_rates_lan"
+      },
+      {
+        "config": "baseline_32k",
+        "median_instrumented_s": 111.65,
+        "median_parity_s": 116.45,
+        "n_instrumented": 10,
+        "n_parity": 2,
+        "task": "comms_07_confirm_send"
+      },
+      {
+        "config": "baseline_32k",
+        "median_instrumented_s": 157.85,
+        "median_parity_s": 145.55,
+        "n_instrumented": 10,
+        "n_parity": 2,
+        "task": "logtriage_04_pool_exhaustion"
+      },
+      {
+        "config": "baseline_32k",
+        "median_instrumented_s": 101.4,
+        "median_parity_s": 103.0,
+        "n_instrumented": 10,
+        "n_parity": 2,
+        "task": "longctx_06_tidal_report"
+      },
+      {
+        "config": "baseline_32k",
+        "median_instrumented_s": 111.25,
+        "median_parity_s": 84.8,
+        "n_instrumented": 10,
+        "n_parity": 2,
+        "task": "refactor_02_rename_price"
+      },
+      {
+        "config": "baseline_32k",
+        "median_instrumented_s": 67.2,
+        "median_parity_s": 64.45,
+        "n_instrumented": 10,
+        "n_parity": 2,
+        "task": "repoqa_05_retry_policy"
+      },
+      {
+        "config": "baseline_32k",
+        "median_instrumented_s": 208.25,
+        "median_parity_s": 217.7,
+        "n_instrumented": 10,
+        "n_parity": 2,
+        "task": "research_08e_free_will"
+      }
+    ],
+    "n_instrumented_in_cells": 140,
+    "n_pairs": 28,
+    "n_parity_trials": 28,
+    "parity_without_instrumented_partner": 0,
+    "success": {
+      "instrumented": {
+        "ci": [
+          0.6646531891574827,
+          0.8080895135202311
+        ],
+        "n": 140,
+        "rate": 0.7428571428571429
+      },
+      "parity": {
+        "ci": [
+          0.49338843180857617,
+          0.8206675307750504
+        ],
+        "n": 28,
+        "rate": 0.6785714285714286
+      },
+      "verdict": "ok"
+    },
+    "time": {
+      "ci": [
+        0.9578044515789377,
+        1.1925905104329646
+      ],
+      "ratio": 1.0594233120501355,
+      "tolerance": 0.05,
+      "verdict": "inconclusive"
+    },
+    "verdict": "inconclusive"
+  },
+  "parity_fraction": 0.2,
+  "parity_trials": 28,
+  "platform": {
+    "cuda": "13.0",
+    "driver": "580.126.09",
+    "gpu": "NVIDIA GeForce RTX 3080",
+    "llama_cpp": "b2f036c0f",
+    "ollama": "0.32.5",
+    "opencode": "1.18.11",
+    "python": "3.12.3"
+  },
+  "run_seed": 1,
+  "tasks": [
+    "bugfix_01_moving_average",
+    "c_ringbuf_03_ringbuffer",
+    "coding_01_my_sqrt_review",
+    "coding_02_fizzbuzz_gen",
+    "coding_03_compress_gen",
+    "coding_04_dir_stats_gen",
+    "coding_05_scientific_lan",
+    "coding_06_tax_rates_lan",
+    "comms_07_confirm_send",
+    "logtriage_04_pool_exhaustion",
+    "longctx_06_tidal_report",
+    "refactor_02_rename_price",
+    "repoqa_05_retry_policy",
+    "research_08e_free_will"
+  ],
+  "trials": {
+    "harness_failed": 0,
+    "measured": 140
+  }
+}

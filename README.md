@@ -17,21 +17,60 @@ limits are in [`DIRECTION.md`](DIRECTION.md).
 | M1 | 14 executable tasks with verifiers, sandbox, golden tests, calibration run (tag `m1`) | done |
 | M2 | Trial runner, trace join, 10 Hz GPU telemetry, time decomposition, parity check, Nsight capture (tag `m2`) | done |
 | M3 | Statistics, report generator, replay mode with golden fixtures and a CI job (tag `m3`) | done |
-| M4 | Baseline campaign: whole suite, n = 10, 32k vs 16k re-check | next |
+| M4 | Baseline campaign: whole suite, n = 10, 32k vs 16k re-check | M4.1 done (32k baseline, 168 trials); M4.2 (16k) next |
 | M5 | Lever experiments: context/KV size, prompt budget, speculative decoding, second model, agent configs | planned |
 | M6 | Automated citation verifier and research evaluation | planned |
 | M7 | Write-up (README, deck, results) | planned |
 
-No baseline numbers are published yet; M4 produces them. What exists so far is tooling plus small pilots:
-`results/v1/calibration/` (one run of every task), `results/v1/parity_pilot/` (does the proxy distort results?)
-and `results/v1/nsys_pilot/` (what the GPU does, kernel by kernel).
+Earlier pilots: `results/v1/calibration/` (one run of every task), `results/v1/parity_pilot/` (does the proxy
+distort results?) and `results/v1/nsys_pilot/` (what the GPU does, kernel by kernel).
+
+## Baseline results (M4.1)
+
+Whole suite, `qwen3.6` at 32k context, 10 trials per task, run in a seeded random order on the RTX 3080 (about
+5.5 hours; no harness failures, no retries). 140 measured trials plus 28 uninstrumented parity trials. Everything
+below is derived from `results/v1/baseline/`; the full report is `RESULTS.md` / `report.html` there, and
+`python -m analysis.figures --run results/v1/baseline` regenerates the figures.
+
+**Reliability: one run is not enough.** 104 of 140 trials passed (74 %, 95 % CI 66-81 %). Only four tasks passed
+every time; most of the rest sit between 60 % and 90 %, and two tasks mostly fail. The earlier one-run calibration saw 11 of
+the 14 tasks pass; at n = 10 only four are reliable.
+
+![Pass rate per task](results/v1/baseline/figures/pass_rate_by_task.svg)
+
+With n = 10 the intervals are wide (8/10 is 49-94 %), so only the extremes are clearly different from each other:
+`coding_06_tax_rates_lan` (3/10, fails the word limit) and `research_08e_free_will` (1/10, needs the 64k context
+window and was deliberately run at 32k) against the four 10/10 tasks. Runtimes vary too: `c_ringbuf_03` took
+109 s to 975 s across its ten trials.
+
+**Where the time goes.** Across all trials, 54 % of wall-clock is prefill (the model reading its prompt before
+the first token), 43 % is decode, tool execution is 0.9 % and harness overhead 2.4 %; nothing is left unattributed.
+The split depends strongly on the task type: long-context and reasoning tasks are 80 % prefill, code generation
+is 60 % decode. The first LLM call of a session accounts for 72 % of all prefill time (about 39 % of total
+wall-clock). That fits the roughly 10k-token tool/system prompt being processed in full on the first call and
+served mostly from the prefix cache afterwards; M5 will confirm this per call from Ollama's `prompt_eval_count`.
+
+![Where the time goes](results/v1/baseline/figures/time_by_task_type.svg)
+
+**What this changes about the earlier pilots**
+- The "about 75 % prefill" from the two-trial pilot does not hold suite-wide (54 %; 37-81 % by task type). It was
+  a property of the short, read-heavy tasks in that pilot.
+- Tool execution is negligible (about 1 %), confirmed: the "GPU idle while tools run" story does not apply to this suite.
+- NVML reports the GPU as non-idle for 95 % of wall-clock, but that is "any kernel in the sample window"; the
+  Nsight pilot (two trials) found real kernel-active time during decode to be far lower, so GPU *utilisation* and
+  GPU *efficiency* must not be conflated. The Nsight capture has not been repeated at baseline scale.
+
+**Caveats.** Instrumentation parity is still inconclusive (time ratio 1.06, 95 % CI 0.96-1.19, tolerance ±5 %,
+only 28 parity trials, two per task; success rate is consistent: 74 % vs 68 %). The baseline covers one
+configuration, so no comparison is made yet. The 32k vs 16k comparison and the re-check of the v0 claims are
+M4.2 and not yet run.
 
 ## Repository map
 
 | Path | Contents |
 |---|---|
 | `harness/` | the measurement tooling: `runner` (seeded, resumable trials), `proxy` (passive metrics proxy), `telemetry` (NVML sampler), `trace` and `decompose` (per-step timeline and time breakdown), `verifiers` + `sandbox` (automatic pass/fail), `taskspec`, `replay`, `nsys`, `manifest` |
-| `analysis/` | `stats` (Wilson, bootstrap, Mann-Whitney, Holm), `parity`, `report` + `svg` (Markdown and inline-SVG HTML report) |
+| `analysis/` | `stats` (Wilson, bootstrap, Mann-Whitney, Holm), `parity`, `report` + `svg` (Markdown and inline-SVG HTML report), `figures` (standalone SVG charts) |
 | `tasks/` | the 14 task specs (YAML): prompts, tool permissions, timeout, verifiers |
 | `fixtures/` | task inputs (`tasks/`), hidden verifier assets (`verify/`), known-good/bad examples (`golden/`), recorded traces (`traces/`) and the replay runs with committed golden outputs (`replay/`) |
 | `configs/` | run configurations (`baseline_32k.yaml`) |
@@ -48,7 +87,7 @@ Requirements: Python 3.12, [OpenCode](https://opencode.ai), Ollama with the `qwe
 
 ```bash
 python3 -m venv .venv && . .venv/bin/activate
-pip install -e ".[dev,gpu]"      # "gpu" adds the NVML bindings for live runs
+pip install -e ".[dev,gpu]"      # "gpu" adds the NVML bindings and the MCP library the mock comm-tools server needs
 ruff check . && pytest           # unit, golden and replay tests; no GPU required
 ```
 
@@ -63,6 +102,7 @@ python -m harness.runner run --configs configs/baseline_32k.yaml --n 10 --seed 1
 python -m harness.runner status --out $OUT
 python -m harness.trace --run $OUT && python -m harness.decompose --run $OUT   # per-step timeline, time breakdown
 python -m analysis.report --run $OUT                                          # RESULTS.md + report.html
+python -m analysis.figures --run $OUT                                         # standalone SVG charts
 ```
 
 Use `--tasks <id> ...` to run a subset and `--dry-run` to see the randomized trial order first. Run

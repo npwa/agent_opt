@@ -1,0 +1,169 @@
+{
+  "trial_id": "baseline_32k__research_08e_free_will__08",
+  "task": "research_08e_free_will",
+  "config": "baseline_32k",
+  "attempt": 1,
+  "status": "fail",
+  "summary": {
+    "wall_start": 1792531559.9295065,
+    "wall_end": 1792531711.1624675,
+    "wall_s": 151.23296093940735,
+    "n_steps": 3,
+    "llm_s": 147.5086,
+    "ttft_s": 117.1928,
+    "decode_s": 30.315799999999996,
+    "tool_s": 6.898000001907349,
+    "gap_s": 1.39664888381958,
+    "idle_gap_s": 0.11370439529418946,
+    "prefill_tokens": 51811,
+    "decode_tokens": 1012,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "baseline_32k__research_08e_free_will__08#a1:1",
+      "t_start": 1792531562.2572186,
+      "t_end": 1792531613.0017185,
+      "ttft_s": 42.9551,
+      "llm_s": 50.7445,
+      "decode_s": 7.7894000000000005,
+      "prefill_tokens": 10462,
+      "decode_tokens": 254,
+      "prefill_tok_s": 243.56,
+      "decode_tok_s": 32.61,
+      "n_chunks": 86,
+      "first_token_skew_s": 0.01868128776550293,
+      "itl_p50_ms": 30.999999999998806,
+      "itl_p99_ms": 1635.2799999999975,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 2.5900001525878906,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792531609.72,
+          "end": 1792531611.267,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792531611.396,
+          "end": 1792531611.894,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792531612.977,
+          "end": 1792531613.522,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792531605.231,
+      "oc_step_finish": 1792531613.55,
+      "tool_errors": 0,
+      "gap_s": 0.5685219764709473,
+      "gpu_busy_pct_llm": 85.12992125984252,
+      "gpu_power_w_llm": 128.57874015748033,
+      "gpu_samples_llm": 508,
+      "gpu_busy_pct_gap": 16.8,
+      "gpu_samples_gap": 5,
+      "idle_gap_s": 0.11370439529418946
+    },
+    {
+      "step": 2,
+      "llm_call_id": "baseline_32k__research_08e_free_will__08#a1:2",
+      "t_start": 1792531613.5702405,
+      "t_end": 1792531639.6310406,
+      "ttft_s": 19.6736,
+      "llm_s": 26.0608,
+      "decode_s": 6.3872,
+      "prefill_tokens": 15624,
+      "decode_tokens": 224,
+      "prefill_tok_s": 794.16,
+      "decode_tok_s": 35.07,
+      "n_chunks": 18,
+      "first_token_skew_s": 0.006159543991088867,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 1655.0400000000004,
+      "tool_names": [
+        "searxng_web_url_read",
+        "searxng_web_url_read",
+        "searxng_web_url_read",
+        "searxng_web_url_read"
+      ],
+      "tool_latency_s": 4.307999849319458,
+      "tools": [
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792531635.277,
+          "end": 1792531636.913,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792531636.663,
+          "end": 1792531637.815,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792531638.229,
+          "end": 1792531639.353,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792531639.604,
+          "end": 1792531640.0,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792531633.25,
+      "oc_step_finish": 1792531640.034,
+      "tool_errors": 0,
+      "gap_s": 0.42424821853637695,
+      "gpu_busy_pct_llm": 76.41379310344827,
+      "gpu_power_w_llm": 128.62337164750957,
+      "gpu_samples_llm": 261,
+      "gpu_busy_pct_gap": 22.0,
+      "gpu_samples_gap": 4,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 3,
+      "llm_call_id": "baseline_32k__research_08e_free_will__08#a1:3",
+      "t_start": 1792531640.0552888,
+      "t_end": 1792531710.7585888,
+      "ttft_s": 54.5641,
+      "llm_s": 70.7033,
+      "decode_s": 16.139199999999995,
+      "prefill_tokens": 25725,
+      "decode_tokens": 534,
+      "prefill_tok_s": 471.46,
+      "decode_tok_s": 33.09,
+      "n_chunks": 516,
+      "first_token_skew_s": 0.011611223220825195,
+      "itl_p50_ms": 29.000000000010573,
+      "itl_p99_ms": 60.000000000000284,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792531694.631,
+      "oc_step_finish": 1792531710.773,
+      "tool_errors": 0,
+      "gap_s": 0.40387868881225586,
+      "gpu_busy_pct_llm": 80.93917963224894,
+      "gpu_power_w_llm": 130.20792079207922,
+      "gpu_samples_llm": 707,
+      "gpu_busy_pct_gap": 22.0,
+      "gpu_samples_gap": 4,
+      "idle_gap_s": 0.0
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}
