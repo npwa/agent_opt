@@ -3,8 +3,8 @@
 **Working title:** *Characterizing and Evaluating a Local Coding/Research Agent Harness on a 10 GB GPU*
 (upgrade of `agent_opt`, currently "OpenCode + Ollama proof of concept")
 
-**Status of this document:** planning only, nothing implemented. Written 2026-10-11 against the
-repo state at commit `358f22f` (read-only review of `~/work/agent_opt`).
+**Status of this document:** living plan. Written 2026-10-11 against commit `358f22f`; the progress log below
+records what is done (M0-M3, M4.1) and the 2026-10-21 revision of M4-M5 (time budget, harder tasks, second model).
 
 **Target roles:** JR2024262 (AI Inference Performance), JR2022556 (Agentic AI, HP code-gen),
 JR2023179 (Agent Architecture and Evaluation), JR2024664 (High Performance AI, CUDA agents).
@@ -58,6 +58,9 @@ CI/CD and local agentic deployment).
 - **M4 step 1 done (2026-10-20):** baseline campaign `results/v1/baseline/` (seed 1, 14 tasks × n = 10 at 32k, plus 28 uninstrumented parity trials = 168 trials, 5.5 h, resumable runner, 0 harness failures, 0 retries). Report, decomposition and traces generated (`harness.trace`, `harness.decompose`, `analysis.report`); new `analysis/figures.py` writes standalone SVG charts for the README. 104/140 pass (74 %, CI 66-81 %); per task: four at 10/10, one 9/10, four 8/10, 7/10, two 6/10, `coding_06` 3/10, `research_08e` 1/10 (needs 64k; run at 32k deliberately). Run time ≈ 123 s per trial (suite 5.5 h).
   **Findings:** (1) prefill is 54 % of wall-clock suite-wide (37 % code generation to 81 % long context), decode 43 %, tools 0.9 %, harness 2.4 %, unattributed 0 % - the pilot's "≈75 % prefill" was specific to those two read-heavy trials; (2) the first LLM call of a session is 72 % of prefill time (≈ 39 % of wall-clock); (3) NVML shows the GPU non-idle 95 % of wall-clock (coarse "any kernel" signal; kernel-active time was ≈ 10 % in the Nsight pilot, not repeated at this scale); (4) the n = 1 calibration run saw 11 of 14 tasks pass, yet only 4 pass every time at n = 10 (eight more pass 60-90 %); (5) parity still inconclusive (time ratio 1.06, CI 0.96-1.19, n = 28 parity trials; success 74 % vs 68 %).
   **Bug found and fixed during the run:** the mock `comm-tools` MCP server is started with `python3` from PATH; inside the venv that interpreter had no `mcp` module, so `comms_07` saw no `send_email` tool. `mcp` is now part of the `gpu` extra in `pyproject.toml`; the first (invalid) trials were discarded and the run restarted from scratch. M4.2 (16k) and M4.3 (per-category write-up) are next; the 16k run is ≈ 140 trials, about 4.5-5 h.
+
+- **Planning update (2026-10-21, no code or runs yet):** decisions taken after the baseline: (1) **time budget must come down** - a full pass is 4.8 h of trial time, dominated by `c_ringbuf_03` (1.2 h), `research_08e` (0.6 h) and `logtriage_04` (0.4 h); cutting the four always-pass tasks to n = 3 saves only ≈ 0.7 h, so the plan switches to *screen, then confirm* plus prompt-replay timing (see M4/M5 below; N1 revised). (2) **Some tasks must get harder** - four new tasks are added and the four 10/10 tasks become n = 3 regression guards; the original 14 stay untouched so the baseline remains comparable. (3) **`research_08e` is left to the sweep**: it is part of the screen at every context size, 64k included. (4) **Second model: `qwen3:8b`** (5.2 GB, fully GPU-resident, tool-capable, same family as the main model); `llama3.1:8b` stays an optional extra. gemma3:12b, phi4:14b and deepseek-coder-v2:16b are unusable (no tool capability in Ollama).
+  Gaps found while planning (now work items P1-P10 in M4.0): no verification-claim checker, no determinism test, runner has one global `n` and no per-config server settings, request bodies are not recorded (needed for prompt replay), `llama-server` is not built in the private llama.cpp clone, parity is inconclusive (28 trials, CI ±11 %).
 
 ---
 
@@ -137,7 +140,7 @@ IDs are used by the test plan (§7).
 
 | ID | Requirement |
 |---|---|
-| N1 | Full suite on one configuration finishes in ≤ 3 h on the RTX 3080 box; full sweep is resumable and runs unattended overnight |
+| N1 | *(revised 2026-10-21)* One configuration on the **core suite** finishes in ≤ 1.5 h on the RTX 3080 box; the **full suite** (≈ 5 h) is only run for the baseline and for confirming levers; sweeps are resumable and run unattended overnight |
 | N2 | All raw data (JSONL per trial) committed or reproducibly regenerable; summary tables regenerate from raw data with one command |
 | N3 | Every reported delta states n, median, 95 % CI, and the test used; no claims from n < 5 |
 | N4 | Python 3.12, type hints on new modules, `ruff` clean, `pytest` ≥ 85 % line coverage on the analysis/verifier code (not the model-dependent runner) |
@@ -206,21 +209,54 @@ Estimates assume ~10–12 h/week; total ≈ 4–5 weeks. Each milestone ends wit
 2. Report generator (F14); stacked time-decomposition bars, success-vs-time Pareto, per-task tables.
 3. Replay mode (F15) and CI job that runs the whole analysis on committed fixture traces.
 
-### M4 — Baseline characterization campaign (3–4 days, mostly unattended)
-1. Run suite × default config × n = 10 → `results/v1/baseline/`.
-2. Run the 32k vs 16k comparison again with n = 10; re-check the earlier claims (16k regression on fizzbuzz-style tasks, verification-honesty). Report whether the v0 conclusions survive.
-3. Publish the time-decomposition result for each task category.
+### M4 — Baseline characterization campaign (revised 2026-10-21; ≈ 2 weeks elapsed, mostly prerequisites)
 
-### M5 — Lever experiments (7–8 days)
-1. **Context/KV sizing** (F11): `num_ctx` × KV type × flash-attn; record VRAM, layers offloaded to CPU (Ollama log), decode tok/s, success.
-2. **Prompt-budget** (F13): measure tokens by prompt component per call; variants: (a) default, (b) trimmed tool schemas (only the tools a task needs), (c) shortened agent system prompt; confirm prefix-cache reuse via `prompt_eval_count` on consecutive calls; hypothesis: prefill is a large share of wall-clock in multi-step tasks, and trimming reduces it without lowering success.
-3. **Speculative decoding** (F12): pick a draft model of the same family and verify tokenizer identity before any timing; run `llama-server -md <draft>` against the same task traces (replayed prompts) so acceptance rate is measured on real agent output; split by output type (tool-call JSON, code, prose). Prediction to test: higher acceptance on structured tool calls than on prose; overall gain uncertain given the 10 GB limit (draft consumes VRAM). Report a negative result honestly if it occurs.
-4. **Second model** (F11): one comparison model at similar VRAM footprint; n = 10; same suite.
-5. **Agent config** (existing finding): re-verify `comms` agent call reduction (36 → 12) with n = 10 and add `coding` agent variant that mandates a verification step (targets the "claims tests it didn't run" regression); measure effect on false-verification claims via transcript check (did a `bash` tool call precede each "tests pass" claim?).
+**M4.1 — done:** full suite × `baseline_32k` × n = 10 → `results/v1/baseline/` (see progress log).
+
+**M4.0 — Prerequisites (before the next GPU campaign).** Items marked (GPU) need the card; all others are CPU-only.
+
+| # | Item | Output | Effort |
+|---|---|---|---|
+| P1 | **Verification-claim checker**: from a trial's events, find "tests pass / verified / works" claims in assistant text and check that a test/run command (`bash` tool call) preceded them; flag unverified claims | `analysis/claims.py` + golden tests; can be run on the 140 baseline trials right away | 1 d |
+| P2 | **Determinism test** (§7.3): same seed twice at `temperature 0` on 3 cheap tasks, compare token counts/verdicts; sets the noise floor used to size n (GPU, ≈ 30 min) | note in `results/v1/determinism/` | 0.5 d |
+| P3 | **Per-task n and a `core` suite**: `trials:` field per task (default = `--n`), `suite: [core]` tag, `--suite core`, plan/status aware of both | runner + schema + tests | 1 d |
+| P4 | **Per-config server settings**: config YAML `server: {num_ctx, kv_cache_type, flash_attention}`; the runner launches a private `ollama serve` with `OLLAMA_KV_CACHE_TYPE` / `OLLAMA_FLASH_ATTENTION` (pattern from `harness/nsys.py`), creates the Modelfile for `num_ctx`, records both in `platform.yaml`, and checks the Ollama log for layers offloaded and KV size | runner + tests with a fake server | 2 d |
+| P5 | **Four harder tasks** (new, originals untouched): stricter long-context question set (≥ 20k tokens, 6 questions), calendar-conflict email task, bug fix with hidden edge cases, tightly constrained code-generation task. Each gets golden good/bad fixtures; calibrate at n = 10 on `baseline_32k` aiming for 30-70 % pass (GPU, ≈ 1 h) | `tasks/*.yaml`, fixtures, `results/v1/baseline_hard/` | 2 d |
+| P6 | **`qwen3:8b` configuration** and smoke run (tool calls through OpenCode work, thinking tokens visible in the proxy records, one trial per task; GPU, ≈ 20 min) | `configs/qwen3_8b.yaml` | 0.5 d |
+| P7 | **Request capture + prompt replay**: proxy flag that writes request bodies for chosen trials (copy after forwarding, so passthrough stays byte-exact), and `harness/promptreplay.py` that replays a recorded call sequence against a server and reports TTFT/prefill per call (cold and warm cache). Makes prefill-only levers a minutes-long test | proxy flag, tool, tests | 2 d |
+| P8 | **Prompt-budget analysis**: tokens per component (system prompt, tool schemas, history) per call from captured requests; prefix-cache reuse from consecutive `prompt_eval_count` (the baseline's `metrics.jsonl` already holds these, so the cache question can be answered on existing data without the GPU) | `harness/promptbudget.py` + report section | 1 d |
+| P9 | **llama.cpp build and draft-model check**: build `llama-server` (CUDA) in `~/work/agent_opt_ad/llama.cpp`; compare tokenizer/vocab metadata of the main model GGUF with candidate drafts (qwen3:8b, smaller Qwen3 if available) | build note, `results/v1/spec_decode/vocab_check.md` | 1 d |
+| P10 | **Parity top-up**: the 28 parity trials gave a CI of ±11 % against a ±5 % tolerance. Add uninstrumented trials only on the lowest-variance tasks (chosen by baseline CV, ≈ 8 per task, ≈ 1 h GPU) instead of 20 % everywhere | `results/v1/baseline/` additions, parity report | 0.5 d |
+
+Suggested order: P1, P3, P8 (CPU-only, and P8 and P1 already produce results from the baseline data), then P4, P7, P9, then one GPU session for P2, P5, P6, P10 (≈ 3 h, overnight).
+
+**M4.2 — 16k vs 32k re-check (GPU, ≈ 6-7 h overnight):** `baseline_16k` on the 14 original tasks, n = 10 (≈ 4.7 h; the first full-n comparison, it validates the comparison method) plus the four new hard tasks at n = 10 on both 32k and 16k. Re-check the v0 claims: 16k regression on fizzbuzz-style tasks, and "claims tests pass without running them" (P1). Report whether the v0 conclusions survive.
+
+**M4.3 — Decomposition per category and GPU-active fraction (≈ 1.5 h GPU):** per-category tables exist for 32k; add one Nsight capture per task category (≈ 10-11 captures) to answer success criterion 4 (fraction of wall-clock the GPU is truly decoding), update README and deck. Tag `m4`.
+
+### M5 — Lever experiments (revised 2026-10-21: screen, then confirm; ≈ 8-10 days incl. ≈ 25 h of unattended GPU time)
+
+**Design.** *Stage A, screen:* every lever setting runs the **core suite** (tasks with a baseline pass rate of 30-90 %, plus two low-variance tasks and the new hard tasks; target ≤ 1.5 h) at n = 3-5. Screen results are *directional* (n < 5 is marked, nothing is claimed). *Stage B, confirm:* only levers that look promising, or that we intend to claim, are re-run on the full suite at n = 10 (≈ 5 h each) and judged by the §7.4 rule. The four always-pass tasks run at n = 3 in confirm runs as regression guards. *Prefill-only levers* (trimmed tool schemas, shorter agent prompt, KV settings) are first measured by **prompt replay** (P7), in minutes, then confirmed with a few full runs. One-factor-at-a-time from the baseline (32k, f16 KV, flash-attn on, default prompts); no full factorial.
+
+**Hypotheses written down before running** (decision rules in §7.4):
+- H1 (F13): trimming the tool schemas / shortening the agent prompt cuts first-call prefill by ≥ 20 % and total time by ≥ 10 % without lowering success by more than 5 pp.
+- H2 (F11): 16k keeps success but frees VRAM so more layers run on the GPU; 8k breaks long-context tasks; 64k is needed by `research_08e` and costs time elsewhere.
+- H3 (F11): q8_0 KV cache lowers VRAM at no measurable success cost; flash-attn off is slower.
+- H4 (F11): `qwen3:8b`, fully GPU-resident, is faster per trial but passes fewer of the hard tasks.
+- H5 (F12): speculative-decoding acceptance is higher on tool-call JSON than on prose; overall gain is small or negative because the draft model competes for VRAM.
+- H6 (existing finding): the `comms` agent prompt still cuts calls (36 → 12), and a `coding` agent that mandates a verification step lowers false "tests pass" claims (P1 measures this).
+
+**Screen budget:** ≈ 9 non-baseline settings × ≈ 1.5 h ≈ 13 h, confirm ≈ 2-3 levers × ≈ 5 h ≈ 10-15 h, so ≈ 25 h of GPU time instead of 35-40 h. If time runs short, cut in this order: second model, flash-attn, 8k.
+
+1. **Context/KV sizing** (F11): `num_ctx ∈ {8k, 16k, 64k}` against the 32k baseline, KV `q8_0`, flash-attn off (needs P4); record VRAM, layers offloaded to CPU (Ollama log), decode tok/s, success. `research_08e` is in the core suite so the sweep itself decides the 64k question.
+2. **Prompt-budget** (F13): tokens by component per call (P8); variants (a) default, (b) trimmed tool schemas, (c) shortened agent system prompt; confirm prefix-cache reuse via `prompt_eval_count`; replay-first, then confirm.
+3. **Speculative decoding** (F12): only after P9 shows a vocabulary-compatible draft; `llama-server -md <draft>` on replayed prompts (P7), acceptance rate split by output type (tool-call JSON, code, prose); greedy outputs must be token-identical with and without the draft before any timing is trusted. If no valid draft exists, report as blocked and use prompt-lookup/n-gram speculation instead.
+4. **Second model** (F11): `qwen3:8b` (P6), core suite at n = 5, confirm on the full suite if it is competitive; `llama3.1:8b` optional.
+5. **Agent config**: re-verify the `comms` call reduction at n = 10 and add the `coding` agent variant with a mandatory verification step; measure false-verification claims with P1.
 
 ### M6 — Citation verifier and research evaluation (4–5 days)
 1. Implement the verifier (F10): extract citations with a conservative regex + structured-output fallback; match against the run's retrieved pages (stored by the MCP bridge); produce a labelled table like the existing free-will audit.
-2. Build a **gold set**: the existing audited run (6 citations with known verdicts) plus ≥ 14 more research prompts audited manually once (keep the label file in git).
+2. Build a **gold set** *(needs the author's time for the manual audit: schedule it during M5 so it does not block M6)*: the existing audited run (6 citations with known verdicts) plus ≥ 14 more research prompts audited manually once (keep the label file in git).
 3. Measure verifier precision/recall against the gold set; target ≥ 90 % agreement.
 4. Evaluate: research agent without gate vs with **post-hoc gate** (drop/mark unverified citations and force a rewrite pass); measure fabricated-rate and answer usefulness (fact-coverage score).
 
@@ -278,6 +314,9 @@ Update README (lead with the result, not the setup; follows the lesson from `Evo
 | OpenCode/Ollama version drift mid-project | low | pin versions in `platform.yaml`, record digests |
 | Time decomposition has large unattributed bucket | medium | add finer events; if still > 5 %, state limitation |
 | Task verifiers too lenient/strict | medium | calibration runs in M1, golden-good/bad tests |
+| Screen runs (n = 3-5) are too noisy to rank levers | medium | screen only decides what to confirm; claims need the n = 10 confirm run; P2 measures the noise floor first |
+| New hard tasks are too hard (≈ 0 % pass) or still saturated | medium | calibrate at n = 10 on the baseline before use; adjust the verifier thresholds or fixtures, not the model |
+| Parity top-up on low-variance tasks does not generalise to the high-variance ones | low | state the scope of the parity claim; keep a small 20 % parity share in confirm runs |
 
 ## 8. Deliverables
 
@@ -312,6 +351,6 @@ Visual rules: titles state the finding; error bars on every comparison; at most 
 
 ## 10. Open questions for the author (decide before M1)
 
-1. Second model for the head-to-head: which model fits 10 GB at a comparable quant (same family preferred for the draft model too)?
+1. Second model for the head-to-head: **decided 2026-10-21: `qwen3:8b`** (fully GPU-resident, tool-capable, same family); `llama3.1:8b` optional.
 2. Is it acceptable to include one run set using a cloud model as a *reference only* (never as a fallback)? Default in this plan: **no**, to keep the original scope.
 3. Should the suite be renamed/published as a reusable benchmark (`local-agent-bench`), or stay inside `agent_opt`? Default: stay inside, extract later.
