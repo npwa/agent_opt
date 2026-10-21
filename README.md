@@ -75,6 +75,15 @@ base system prompt and 2 % skills. Details: `promptbudget.md` in each run direct
   GPU *efficiency* must not be conflated. The Nsight capture has not been repeated at baseline scale.
 - Prefill levers (trimmed prompts) now matter less for back-to-back runs, decode levers more (see the plan, M5).
 
+**Verification claims (`results/v1/*/claims.md`, `python -m analysis.claims --run <dir>`).** On the six
+code-producing tasks (code generation, bug fix, refactor; 60 trials per run) the agent ends with an explicit claim
+("all tests pass", "verified", "compiles cleanly") in 25 trials (42 %, CI 30-54 %) in both runs. In 24 of these 25 it had
+run code that exited 0 before saying so, and nothing was edited afterwards; once it claimed without running anything
+(`coding_04`). So the v0 observation, "claims tests pass without running them", is not reproduced in this setup: it is
+rare. What does occur is *over-claiming from weak self-checks*: 5 of 60 trials (8 %, CI 4-18 %; 2 of 60 in the first
+run) end with a claim although the hidden verifier fails, mostly `c_ringbuf_03` (3 of its 3 claims, all after the agent's
+own compile-and-run succeeded; the hidden tests use sanitizers and edge cases the agent did not try).
+
 **Caveats.** Instrumentation parity is still inconclusive (isolated run: uninstrumented/instrumented time ratio
 0.87, 95 % CI 0.73-1.01 against a ±5 % tolerance, 28 parity trials; it was 1.06 in the first run, so the direction is
 not stable and noise is the likeliest explanation; success 61 % vs 71 %). One parity trial hung waiting for Ollama and
@@ -88,7 +97,7 @@ of the v0 claims (M4.2) are not yet run.
 | Path | Contents |
 |---|---|
 | `harness/` | the measurement tooling: `runner` (seeded, resumable trials), `proxy` (passive metrics proxy), `telemetry` (NVML sampler), `trace` and `decompose` (per-step timeline and time breakdown), `verifiers` + `sandbox` (automatic pass/fail), `taskspec`, `replay`, `nsys`, `manifest` |
-| `analysis/` | `stats` (Wilson, bootstrap, Mann-Whitney, Holm), `parity`, `report` + `svg` (Markdown and inline-SVG HTML report), `figures` (standalone SVG charts) |
+| `analysis/` | `stats` (Wilson, bootstrap, Mann-Whitney, Holm), `parity`, `report` + `svg` (Markdown and inline-SVG HTML report), `figures` (standalone SVG charts), `compare_runs`, `claims` (verification-claim check) |
 | `tasks/` | the 14 task specs (YAML): prompts, tool permissions, timeout, verifiers |
 | `fixtures/` | task inputs (`tasks/`), hidden verifier assets (`verify/`), known-good/bad examples (`golden/`), recorded traces (`traces/`) and the replay runs with committed golden outputs (`replay/`) |
 | `configs/` | run configurations (`baseline_32k.yaml`) |
