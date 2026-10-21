@@ -96,7 +96,7 @@ of the v0 claims (M4.2) are not yet run.
 
 | Path | Contents |
 |---|---|
-| `harness/` | the measurement tooling: `runner` (seeded, resumable trials), `proxy` (passive metrics proxy), `telemetry` (NVML sampler), `trace` and `decompose` (per-step timeline and time breakdown), `verifiers` + `sandbox` (automatic pass/fail), `taskspec`, `replay`, `nsys`, `manifest` |
+| `harness/` | the measurement tooling: `runner` (seeded, resumable trials), `proxy` (passive metrics proxy), `telemetry` (NVML sampler), `trace` and `decompose` (per-step timeline and time breakdown), `verifiers` + `sandbox` (automatic pass/fail), `taskspec`, `replay`, `promptreplay` (time prompt variants from captured requests), `nsys`, `manifest` |
 | `analysis/` | `stats` (Wilson, bootstrap, Mann-Whitney, Holm), `parity`, `report` + `svg` (Markdown and inline-SVG HTML report), `figures` (standalone SVG charts), `compare_runs`, `claims` (verification-claim check) |
 | `tasks/` | the 14 task specs (YAML): prompts, tool permissions, timeout, verifiers |
 | `fixtures/` | task inputs (`tasks/`), hidden verifier assets (`verify/`), known-good/bad examples (`golden/`), recorded traces (`traces/`) and the replay runs with committed golden outputs (`replay/`) |

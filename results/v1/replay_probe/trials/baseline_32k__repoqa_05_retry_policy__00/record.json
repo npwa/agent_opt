@@ -1,0 +1,54 @@
+{
+  "trial_id": "baseline_32k__repoqa_05_retry_policy__00",
+  "task": "repoqa_05_retry_policy",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": null,
+  "prev_task": null,
+  "seed": 252474420,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T21:08:32Z",
+  "wall_start": 1792616912.6368272,
+  "wall_end": 1792617021.7811353,
+  "elapsed_s": 109.1,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 41700,
+  "tokens_out": 1333,
+  "tool_sequence": [
+    "glob",
+    "grep",
+    "read",
+    "read",
+    "read"
+  ],
+  "tool_errors": 1,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "41 words, all checks ok"
+    }
+  ],
+  "final_answer": "1. Function that computes retry delay: **`next_delay`** \u2014 `miniq/retry.py:20` (`def next_delay(self, attempt)`)\n\n2. Default maximum delay: **30 seconds** \u2014 `miniq/config.py:9` (`RETRY_MAX_DELAY_S = 30.0`)\n\n3. Retries stop after: **5 attempts** \u2014 `miniq/config.py:7` (`RETRY_MAX_ATTEMPTS = 5`, used in `miniq/retry.py:18` as `attempt < self.max_attempts`)",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-21T21:08:32Z"
+    }
+  ]
+}

@@ -222,3 +222,33 @@ async def test_passthrough_logs_chunk_arrival_offsets(monkeypatch, tmp_path):
     rec = last_record(tmp_path)
     assert len(rec["chunk_t"]) == rec["chunks"] == len(split(SSE, 40))
     assert rec["chunk_t"] == sorted(rec["chunk_t"]) and rec["chunk_t"][0] >= 0
+
+
+async def test_capture_writes_raw_request_bodies_after_forwarding(monkeypatch, tmp_path):
+    captured = []
+    c = make_wired(monkeypatch, tmp_path, [SSE], passthrough=True, captured=captured)
+    monkeypatch.setattr(proxy, "CAPTURE", "coding_02,other")
+    monkeypatch.setattr(proxy, "_SEQ", {})
+    body = b'{"model": "m",  "messages": [{"role": "user", "content": "hi"}]}  '  # odd spacing must survive
+    for tid in ("cfg__coding_02__00", "cfg__coding_02__00", "cfg__bugfix__00"):
+        r = await c.post("/v1/chat/completions", content=body, headers={"X-Trial-Id": tid, "X-Attempt": "1"})
+        assert r.content == SSE
+    f1, f2 = tmp_path / "requests/cfg__coding_02__00/a1_001.json", tmp_path / "requests/cfg__coding_02__00/a1_002.json"
+    assert f1.read_bytes() == body == f2.read_bytes()
+    assert not (tmp_path / "requests/cfg__bugfix__00").exists()  # not selected
+    recs = [json.loads(line) for line in (tmp_path / "metrics.jsonl").read_text().splitlines()]
+    assert [r.get("request_file") for r in recs] == ["requests/cfg__coding_02__00/a1_001.json",
+                                                     "requests/cfg__coding_02__00/a1_002.json", None]
+    assert all(captured[i].content == body for i in range(3))  # upstream saw the identical bytes
+
+
+async def test_capture_is_off_by_default_and_all_selects_everything(monkeypatch, tmp_path):
+    c = make_wired(monkeypatch, tmp_path, [SSE], passthrough=True, captured=[])
+    monkeypatch.setattr(proxy, "_SEQ", {})
+    await c.post("/v1/chat/completions", json={"model": "m"}, headers={"X-Trial-Id": "t1"})
+    assert not (tmp_path / "requests").exists()
+    monkeypatch.setattr(proxy, "CAPTURE", "all")
+    await c.post("/v1/chat/completions", json={"model": "m"}, headers={"X-Trial-Id": "t1"})
+    assert (tmp_path / "requests/t1/a1_001.json").exists()
+    await c.post("/v1/chat/completions", json={"model": "m"})  # no trial id: never captured
+    assert len(list((tmp_path / "requests").iterdir())) == 1

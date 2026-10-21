@@ -19,6 +19,12 @@ Legacy mode (AGENT_OPT_PASSTHROUGH=0): the v0 behaviour (forces stream=true, re-
 the SSE stream line by line, writes last_request/last_response debug dumps). Kept only to
 reproduce v0 numbers.
 
+Request capture (AGENT_OPT_CAPTURE, off by default; passthrough mode only): "all", or a comma-separated
+list of substrings of trial ids to capture. The raw request body of every chat call of a captured trial is
+written to <data dir>/requests/<trial_id>/a<attempt>_<seq>.json *after* the response stream has ended, so
+the forwarded bytes and the timings are not affected; the metrics record gets a ``request_file`` field.
+These bodies are what harness/promptreplay.py replays (cold/warm TTFT of prompt variants without the agent).
+
 Trial identification: clients may send X-Trial-Id / X-Task-Id headers (set through the
 OpenCode provider options). They are logged and stripped before forwarding; the task
 falls back to the current_task.txt label file.
@@ -42,6 +48,7 @@ PASSTHROUGH = os.environ.get("AGENT_OPT_PASSTHROUGH", "1") != "0"
 OWN_HEADERS = ("x-trial-id", "x-task-id", "x-attempt")
 HOP_HEADERS = ("host", "content-length", "accept-encoding", "connection", "transfer-encoding")
 RESP_DROP_HEADERS = ("content-length", "transfer-encoding", "content-encoding", "connection")
+CAPTURE = os.environ.get("AGENT_OPT_CAPTURE", "")
 DATA_DIR = Path(os.environ.get("AGENT_OPT_DATA_DIR", Path.cwd()))
 LOG_PATH = DATA_DIR / "metrics.jsonl"
 TASK_LABEL_PATH = DATA_DIR / "current_task.txt"
@@ -58,6 +65,27 @@ def current_task_label() -> str:
         return TASK_LABEL_PATH.read_text().strip() or "unlabeled"
     except FileNotFoundError:
         return "unlabeled"
+
+
+_SEQ: dict[tuple[str, str], int] = {}
+
+
+def capture_wanted(trial_id: str | None) -> bool:
+    spec = CAPTURE.strip()
+    if not spec or not trial_id:
+        return False
+    return spec == "all" or any(s and s in trial_id for s in spec.split(","))
+
+
+def capture_request(trial_id: str, attempt: str | None, body: bytes) -> str:
+    """Write the raw request body of one call; returns its path relative to the data directory."""
+    key = (trial_id, attempt or "1")
+    seq = _SEQ[key] = _SEQ.get(key, 0) + 1
+    rel = f"requests/{trial_id}/a{key[1]}_{seq:03d}.json"
+    path = DATA_DIR / rel
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(body)
+    return rel
 
 
 def log_record(record: dict) -> None:
@@ -160,6 +188,8 @@ async def passthrough(path: str, request: Request):
                     rec["input_tok_s"] = round(prompt / rec["ttft_s"], 2)
                 if completion and t_first and t_end > t_first:
                     rec["output_tok_s"] = round(completion / (t_end - t_first), 2)
+                if capture_wanted(trial_id):
+                    rec["request_file"] = capture_request(trial_id, attempt, body)
                 log_record(rec)
 
     return StreamingResponse(relay(), status_code=upstream.status_code, headers=out_headers)

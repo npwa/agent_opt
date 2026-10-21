@@ -1,0 +1,39 @@
+{
+  "created_utc": "2026-10-21T21:08:32Z",
+  "run_seed": 1,
+  "n": 1,
+  "parity_fraction": 0.0,
+  "trials_per_task": {
+    "coding_02_fizzbuzz_gen": 1,
+    "repoqa_05_retry_policy": 1
+  },
+  "configs": {
+    "baseline_32k": {
+      "id": "baseline_32k",
+      "model": "ollama/qwen3.6-32k",
+      "description": "qwen3.6 35B-A3B, num_ctx 32768 (Modelfile), default sampling, per-trial seed",
+      "seed_mode": "per_trial",
+      "options": {}
+    }
+  },
+  "tasks": {
+    "coding_02_fizzbuzz_gen": "518590ba1bd6",
+    "repoqa_05_retry_policy": "790e1276cd56"
+  },
+  "order": [
+    {
+      "trial_id": "baseline_32k__repoqa_05_retry_policy__00",
+      "config": "baseline_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "baseline_32k__coding_02_fizzbuzz_gen__00",
+      "config": "baseline_32k",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 0,
+      "instrumented": true
+    }
+  ]
+}
