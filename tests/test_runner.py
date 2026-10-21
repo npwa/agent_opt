@@ -199,6 +199,7 @@ mode = os.environ["FAKE_OC_MODE"]
 state = pathlib.Path(os.environ["FAKE_OC_STATE"])
 n = int(state.read_text()) if state.exists() else 0
 state.write_text(str(n + 1))
+pathlib.Path(str(state) + ".env").write_text(os.environ.get("OPENCODE_DISABLE_CLAUDE_CODE", "unset"))
 def ev(t, **part):
     print(json.dumps({{"type": t, "sessionID": "ses_fake", "part": part}}), flush=True)
 if mode == "crash" or (mode == "crash_then_ok" and n == 0):
@@ -246,6 +247,17 @@ def test_e2e_pass_records_everything(fake_oc, tmp_path):
     assert (tmp_path / "out/trials" / rec["trial_id"] / "artifacts/fizzbuzz.c").exists()
     assert (tmp_path / "out/trials" / rec["trial_id"] / "events.jsonl").exists()
     assert not (tmp_path / "scratch" / rec["trial_id"]).exists()  # workdir cleaned
+
+
+def test_e2e_opencode_runs_isolated_from_the_authors_claude_setup(fake_oc, tmp_path, monkeypatch):
+    monkeypatch.setenv("OPENCODE_DISABLE_CLAUDE_CODE", "0")  # even a user override must not leak into trials
+    fake_oc("ok")
+    assert (tmp_path / "calls.env").read_text() == "1"
+
+
+def test_manifest_records_isolation():
+    from harness import manifest
+    assert manifest.build_manifest()["opencode_isolation"] == {"OPENCODE_DISABLE_CLAUDE_CODE": "1"}
 
 
 def test_e2e_wrong_answer_is_fail_not_retried(fake_oc, tmp_path):

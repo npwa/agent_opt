@@ -62,6 +62,11 @@ def model_digests(base: str = "http://localhost:11434") -> dict[str, str]:
         return {}
 
 
+# OpenCode must not read the author's ~/.claude (skills list, CLAUDE.md): it adds a machine-specific block
+# to the system prompt of every call (found by the P8 prompt-budget analysis). Applied by runner and calibrate.
+OPENCODE_ISOLATION_ENV = {"OPENCODE_DISABLE_CLAUDE_CODE": "1"}
+
+
 def llama_cpp_info() -> dict:
     """Commit of the project-local llama.cpp checkout (LLAMA_CPP_DIR) used for M5 experiments."""
     d = Path(os.environ.get("LLAMA_CPP_DIR", "~/work/agent_opt_ad/llama.cpp")).expanduser()
@@ -77,6 +82,7 @@ def build_manifest() -> dict:
         "python": platform.python_version(),
         "ollama": tool_version(["ollama", "--version"]),
         "opencode": tool_version(["opencode", "--version"]),
+        "opencode_isolation": dict(OPENCODE_ISOLATION_ENV),
         "llama_cpp": llama_cpp_info(),
         "models": model_digests(),
     }

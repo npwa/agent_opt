@@ -38,6 +38,7 @@ from pathlib import Path
 import yaml
 
 from harness import calibrate, manifest
+from harness.manifest import OPENCODE_ISOLATION_ENV
 from harness.taskspec import TaskSpec, load_task
 from harness.telemetry import GpuSampler
 from harness.verifiers import VerifyContext, run_verifiers
@@ -245,7 +246,8 @@ def run_attempt(spec: TaskSpec, cfg: RunConfig, tid: str, attempt: int, seed: in
     xdg = scratch / "xdg"
     env = {**os.environ, "OPENCODE_CONFIG": str(opencode_json), "OPENCODE_CONFIG_DIR": str(cfg_dir),
            "XDG_CONFIG_HOME": str(xdg / "config"), "XDG_DATA_HOME": str(xdg / "data"),
-           "XDG_STATE_HOME": str(xdg / "state"), "XDG_CACHE_HOME": str(xdg / "cache")}
+           "XDG_STATE_HOME": str(xdg / "state"), "XDG_CACHE_HOME": str(xdg / "cache"),
+           **OPENCODE_ISOLATION_ENV}
 
     run = calibrate.run_opencode(spec, work, run_dir, env, cfg.model, spec.timeout_s, events)
     wall_end = time.time()

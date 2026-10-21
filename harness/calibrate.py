@@ -25,6 +25,7 @@ import sys
 import time
 from pathlib import Path
 
+from harness.manifest import OPENCODE_ISOLATION_ENV
 from harness.taskspec import TOOLS, TaskSpec, load_task
 from harness.verifiers import VerifyContext, run_verifiers
 from harness.workdir import prepare_workdir
@@ -167,7 +168,8 @@ def calibrate_one(spec: TaskSpec, args, out: Path, scratch: Path) -> dict:
     xdg = scratch / "xdg"
     env = {**os.environ, "OPENCODE_CONFIG": str(cfg_path), "OPENCODE_CONFIG_DIR": str(cfg_dir),
            "XDG_CONFIG_HOME": str(xdg / "config"), "XDG_DATA_HOME": str(xdg / "data"),
-           "XDG_STATE_HOME": str(xdg / "state"), "XDG_CACHE_HOME": str(xdg / "cache")}
+           "XDG_STATE_HOME": str(xdg / "state"), "XDG_CACHE_HOME": str(xdg / "cache"),
+           **OPENCODE_ISOLATION_ENV}
     (out / "proxy" / "current_task.txt").write_text(spec.id)
 
     rec_dir = out / spec.id
