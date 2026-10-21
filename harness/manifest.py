@@ -67,6 +67,19 @@ def model_digests(base: str = "http://localhost:11434") -> dict[str, str]:
 OPENCODE_ISOLATION_ENV = {"OPENCODE_DISABLE_CLAUDE_CODE": "1"}
 
 
+OLLAMA_LLAMA_SERVER = "/usr/local/lib/ollama/llama-server"
+
+
+def ollama_llama_server() -> str:
+    """Version line of the llama-server bundled with Ollama (the engine the baselines ran on; it prints to stderr)."""
+    try:
+        p = subprocess.run([OLLAMA_LLAMA_SERVER, "--version"], capture_output=True, text=True, timeout=10)
+    except (OSError, subprocess.SubprocessError):
+        return UNAVAILABLE
+    lines = (p.stdout + p.stderr).strip().splitlines()
+    return lines[0] if lines else UNAVAILABLE
+
+
 def llama_cpp_info() -> dict:
     """Commit of the project-local llama.cpp checkout (LLAMA_CPP_DIR) used for M5 experiments."""
     d = Path(os.environ.get("LLAMA_CPP_DIR", "~/work/agent_opt_ad/llama.cpp")).expanduser()
@@ -84,6 +97,7 @@ def build_manifest() -> dict:
         "opencode": tool_version(["opencode", "--version"]),
         "opencode_isolation": dict(OPENCODE_ISOLATION_ENV),
         "llama_cpp": llama_cpp_info(),
+        "ollama_llama_server": ollama_llama_server(),
         "models": model_digests(),
     }
 

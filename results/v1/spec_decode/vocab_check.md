@@ -1,0 +1,37 @@
+# Draft-model vocabulary check
+
+Target **qwen3.6-32k** (23.94 GB): architecture `qwen35moe`, tokenizer `gpt2` / `qwen35`, 248320 tokens (sha `187637dc29b507cd`), eos 248046, 12+ built-in multi-token-prediction tensors (`mtp.fc.weight`...).
+
+Rule (llama.cpp `common_speculative_are_compatible`): same vocabulary type, same add_bos/add_eos (and ids), vocabulary size within 128, identical token text from id 5 on. 'Same tokens' = the whole token list is identical.
+
+| Candidate | Origin | Size GB | Architecture | Tokenizer | Tokens | Compatible | Why not |
+|---|---|---:|---|---|---:|---|---|
+| qwen3.6-16k:latest | installed | 23.94 | qwen35moe | gpt2/qwen35 | 248320 | **yes** (same list) |  |
+| qwen3.6-32k:latest | installed | 23.94 | qwen35moe | gpt2/qwen35 | 248320 | **yes** (same list) |  |
+| qwen3.6-64k:latest | installed | 23.94 | qwen35moe | gpt2/qwen35 | 248320 | **yes** (same list) |  |
+| qwen3.6-8k:latest | installed | 23.94 | qwen35moe | gpt2/qwen35 | 248320 | **yes** (same list) |  |
+| qwen3.6-ngl16:latest | installed | 23.94 | qwen35moe | gpt2/qwen35 | 248320 | **yes** (same list) |  |
+| qwen3.6:35b-a3b | installed | 23.94 | qwen35moe | gpt2/qwen35 | 248320 | **yes** (same list) |  |
+| qwen3.6:latest | installed | 23.94 | qwen35moe | gpt2/qwen35 | 248320 | **yes** (same list) |  |
+| deepseek-coder-v2:16b | installed | 8.91 | deepseek2 | gpt2/deepseek-llm | 102400 | no | add_bos_token differs: target None (id None), draft True (id 100000); vocabulary size differs by 145920 (> 128): target 248320, draft 102400; 102272 token texts differ from id 124 (target 'À', draft ' |
+| deepseek-coder:6.7b | installed | 3.83 | llama | gpt2/None | 32256 | no | add_bos_token differs: target None (id None), draft True (id 32013); vocabulary size differs by 216064 (> 128): target 248320, draft 32256; 32129 token texts differ from id 124 (target 'À', draft 'Â') |
+| gemma3:12b | installed | 7.31 | gemma3 | llama/default | 262145 | no | vocabulary type differs: target 'gpt2', draft 'llama'; add_bos_token differs: target None (id None), draft True (id 2); vocabulary size differs by 13825 (> 128): target 248320, draft 262145; 248314 to |
+| llama3.1:8b | installed | 4.92 | llama | gpt2/llama-bpe | 128256 | no | add_eos_token differs: target False (id 248046), draft None (id 128009); vocabulary size differs by 120064 (> 128): target 248320, draft 128256; 127976 token texts differ from id 280 (target 'Ġp', dra |
+| llama3:8b | installed | 4.66 | llama | gpt2/llama-bpe | 128256 | no | add_eos_token differs: target False (id 248046), draft None (id 128009); vocabulary size differs by 120064 (> 128): target 248320, draft 128256; 127976 token texts differ from id 280 (target 'Ġp', dra |
+| mistral-nemo:latest | installed | 7.07 | llama | gpt2/tekken | 131072 | no | add_bos_token differs: target None (id None), draft True (id 1); vocabulary size differs by 117248 (> 128): target 248320, draft 131072; 131066 token texts differ from id 5 (target '&', draft '[AVAILA |
+| mistral:7b | installed | 4.37 | llama | llama/default | 32768 | no | vocabulary type differs: target 'gpt2', draft 'llama'; add_bos_token differs: target None (id None), draft True (id 1); vocabulary size differs by 215552 (> 128): target 248320, draft 32768; 32763 tok |
+| mistral:latest | installed | 4.37 | llama | llama/default | 32768 | no | vocabulary type differs: target 'gpt2', draft 'llama'; add_bos_token differs: target None (id None), draft True (id 1); vocabulary size differs by 215552 (> 128): target 248320, draft 32768; 32763 tok |
+| nomic-embed-text:latest | installed | 0.27 | nomic-bert | bert/None | 30522 | no | vocabulary type differs: target 'gpt2', draft 'bert'; add_eos_token differs: target False (id 248046), draft None (id 102); vocabulary size differs by 217798 (> 128): target 248320, draft 30522; 30517 |
+| phi4:14b | installed | 9.05 | phi3 | gpt2/dbrx | 100352 | no | add_eos_token differs: target False (id 248046), draft None (id 100257); vocabulary size differs by 147968 (> 128): target 248320, draft 100352; 100072 token texts differ from id 280 (target 'Ġp', dra |
+| qwen2.5-coder:14b | installed | 8.99 | qwen2 | gpt2/qwen2 | 152064 | no | add_bos_token differs: target None (id None), draft False (id 151643); add_eos_token differs: target False (id 248046), draft None (id 151645); vocabulary size differs by 96256 (> 128): target 248320, |
+| qwen2.5-coder:32b | installed | 19.85 | qwen2 | gpt2/qwen2 | 152064 | no | add_bos_token differs: target None (id None), draft False (id 151643); add_eos_token differs: target False (id 248046), draft None (id 151645); vocabulary size differs by 96256 (> 128): target 248320, |
+| qwen2.5:14b-instruct | installed | 8.99 | qwen2 | gpt2/qwen2 | 152064 | no | add_bos_token differs: target None (id None), draft False (id 151643); add_eos_token differs: target False (id 248046), draft None (id 151645); vocabulary size differs by 96256 (> 128): target 248320, |
+| qwen2.5:14b-instruct-q4_K_M | installed | 8.99 | qwen2 | gpt2/qwen2 | 152064 | no | add_bos_token differs: target None (id None), draft False (id 151643); add_eos_token differs: target False (id 248046), draft None (id 151645); vocabulary size differs by 96256 (> 128): target 248320, |
+| qwen2.5:7b | installed | 4.68 | qwen2 | gpt2/qwen2 | 152064 | no | add_bos_token differs: target None (id None), draft False (id 151643); add_eos_token differs: target False (id 248046), draft None (id 151645); vocabulary size differs by 96256 (> 128): target 248320, |
+| qwen2.5:7b-instruct | installed | 4.68 | qwen2 | gpt2/qwen2 | 152064 | no | add_bos_token differs: target None (id None), draft False (id 151643); add_eos_token differs: target False (id 248046), draft None (id 151645); vocabulary size differs by 96256 (> 128): target 248320, |
+| qwen2.5:7b-instruct-q4_K_M | installed | 4.68 | qwen2 | gpt2/qwen2 | 152064 | no | add_bos_token differs: target None (id None), draft False (id 151643); add_eos_token differs: target False (id 248046), draft None (id 151645); vocabulary size differs by 96256 (> 128): target 248320, |
+| qwen3.5:0.8b | registry (header only) | 0.81 | qwen35 | gpt2/qwen35 | 248320 | no | add_bos_token differs: target None (id None), draft False (id None); add_eos_token differs: target False (id 248046), draft None (id 248046); 250 token texts differ from id 248070 (target '[PAD0]', dr |
+| qwen3.5:2b | registry (header only) | 2.01 | qwen35 | gpt2/qwen35 | 248320 | no | add_bos_token differs: target None (id None), draft False (id None); add_eos_token differs: target False (id 248046), draft None (id 248046); 250 token texts differ from id 248070 (target '[PAD0]', dr |
+| qwen3.5:4b | registry (header only) | 2.65 | qwen35 | gpt2/qwen35 | 248320 | no | add_bos_token differs: target None (id None), draft False (id None); add_eos_token differs: target False (id 248046), draft None (id 248046); 250 token texts differ from id 248070 (target '[PAD0]', dr |
+| qwen3.5:9b | registry (header only) | 5.63 | qwen35 | gpt2/qwen35 | 248320 | no | add_bos_token differs: target None (id None), draft False (id None); add_eos_token differs: target False (id 248046), draft None (id 248046); 250 token texts differ from id 248070 (target '[PAD0]', dr |
+| qwen3:8b | installed | 5.23 | qwen3 | gpt2/qwen2 | 151936 | no | add_bos_token differs: target None (id None), draft False (id 151643); add_eos_token differs: target False (id 248046), draft None (id 151645); vocabulary size differs by 96384 (> 128): target 248320, |

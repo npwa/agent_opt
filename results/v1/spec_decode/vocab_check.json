@@ -1,0 +1,512 @@
+{
+  "target": {
+    "model": "qwen3.6-32k",
+    "size_gb": 23.94,
+    "architecture": "qwen35moe",
+    "n_tokens": 248320,
+    "tokens_sha": "187637dc29b507cd",
+    "tokenizer": {
+      "add_eos_token": false,
+      "add_padding_token": false,
+      "eos_token_id": 248046,
+      "model": "gpt2",
+      "padding_token_id": 248044,
+      "pre": "qwen35"
+    },
+    "mtp_tensors": [
+      "mtp.fc.weight",
+      "mtp.layers.0.attn_k.weight",
+      "mtp.layers.0.attn_k_norm.weight",
+      "mtp.layers.0.attn_norm.weight",
+      "mtp.layers.0.attn_output.weight",
+      "mtp.layers.0.attn_q.weight",
+      "mtp.layers.0.attn_q_norm.weight",
+      "mtp.layers.0.attn_v.weight",
+      "mtp.layers.0.ffn_down_exps.weight",
+      "mtp.layers.0.ffn_down_shexp.weight",
+      "mtp.layers.0.ffn_gate_exps.weight",
+      "mtp.layers.0.ffn_gate_inp.weight"
+    ],
+    "block_count": 40,
+    "expert_count": 256
+  },
+  "candidates": [
+    {
+      "model": "deepseek-coder-v2:16b",
+      "origin": "installed",
+      "size_gb": 8.91,
+      "compatible": false,
+      "reasons": [
+        "add_bos_token differs: target None (id None), draft True (id 100000)",
+        "vocabulary size differs by 145920 (> 128): target 248320, draft 102400",
+        "102272 token texts differ from id 124 (target '\u00c0', draft '\u00c2')"
+      ],
+      "draft_tokens": 102400,
+      "identical_token_list": false,
+      "architecture": "deepseek2",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "deepseek-llm",
+      "tokens_sha": "bf058f26cfb1e6e5"
+    },
+    {
+      "model": "deepseek-coder:6.7b",
+      "origin": "installed",
+      "size_gb": 3.83,
+      "compatible": false,
+      "reasons": [
+        "add_bos_token differs: target None (id None), draft True (id 32013)",
+        "vocabulary size differs by 216064 (> 128): target 248320, draft 32256",
+        "32129 token texts differ from id 124 (target '\u00c0', draft '\u00c2')"
+      ],
+      "draft_tokens": 32256,
+      "identical_token_list": false,
+      "architecture": "llama",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": null,
+      "tokens_sha": "2f90e72c5f593f98"
+    },
+    {
+      "model": "gemma3:12b",
+      "origin": "installed",
+      "size_gb": 7.31,
+      "compatible": false,
+      "reasons": [
+        "vocabulary type differs: target 'gpt2', draft 'llama'",
+        "add_bos_token differs: target None (id None), draft True (id 2)",
+        "vocabulary size differs by 13825 (> 128): target 248320, draft 262145",
+        "248314 token texts differ from id 5 (target '&', draft '[multimodal]')"
+      ],
+      "draft_tokens": 262145,
+      "identical_token_list": false,
+      "architecture": "gemma3",
+      "tokenizer_model": "llama",
+      "tokenizer_pre": "default",
+      "tokens_sha": "6928a24110661b36"
+    },
+    {
+      "model": "llama3.1:8b",
+      "origin": "installed",
+      "size_gb": 4.92,
+      "compatible": false,
+      "reasons": [
+        "add_eos_token differs: target False (id 248046), draft None (id 128009)",
+        "vocabulary size differs by 120064 (> 128): target 248320, draft 128256",
+        "127976 token texts differ from id 280 (target '\u0120p', draft ';\u010a')"
+      ],
+      "draft_tokens": 128256,
+      "identical_token_list": false,
+      "architecture": "llama",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "llama-bpe",
+      "tokens_sha": "3471faba24d25aca"
+    },
+    {
+      "model": "llama3:8b",
+      "origin": "installed",
+      "size_gb": 4.66,
+      "compatible": false,
+      "reasons": [
+        "add_eos_token differs: target False (id 248046), draft None (id 128009)",
+        "vocabulary size differs by 120064 (> 128): target 248320, draft 128256",
+        "127976 token texts differ from id 280 (target '\u0120p', draft ';\u010a')"
+      ],
+      "draft_tokens": 128256,
+      "identical_token_list": false,
+      "architecture": "llama",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "llama-bpe",
+      "tokens_sha": "1eea9f41d33299cb"
+    },
+    {
+      "model": "mistral-nemo:latest",
+      "origin": "installed",
+      "size_gb": 7.07,
+      "compatible": false,
+      "reasons": [
+        "add_bos_token differs: target None (id None), draft True (id 1)",
+        "vocabulary size differs by 117248 (> 128): target 248320, draft 131072",
+        "131066 token texts differ from id 5 (target '&', draft '[AVAILABLE_TOOLS]')"
+      ],
+      "draft_tokens": 131072,
+      "identical_token_list": false,
+      "architecture": "llama",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "tekken",
+      "tokens_sha": "8bb2755155d48cd1"
+    },
+    {
+      "model": "mistral:7b",
+      "origin": "installed",
+      "size_gb": 4.37,
+      "compatible": false,
+      "reasons": [
+        "vocabulary type differs: target 'gpt2', draft 'llama'",
+        "add_bos_token differs: target None (id None), draft True (id 1)",
+        "vocabulary size differs by 215552 (> 128): target 248320, draft 32768",
+        "32763 token texts differ from id 5 (target '&', draft '[TOOL_CALLS]')"
+      ],
+      "draft_tokens": 32768,
+      "identical_token_list": false,
+      "architecture": "llama",
+      "tokenizer_model": "llama",
+      "tokenizer_pre": "default",
+      "tokens_sha": "6bbc665cb82468af"
+    },
+    {
+      "model": "mistral:latest",
+      "origin": "installed",
+      "size_gb": 4.37,
+      "compatible": false,
+      "reasons": [
+        "vocabulary type differs: target 'gpt2', draft 'llama'",
+        "add_bos_token differs: target None (id None), draft True (id 1)",
+        "vocabulary size differs by 215552 (> 128): target 248320, draft 32768",
+        "32763 token texts differ from id 5 (target '&', draft '[TOOL_CALLS]')"
+      ],
+      "draft_tokens": 32768,
+      "identical_token_list": false,
+      "architecture": "llama",
+      "tokenizer_model": "llama",
+      "tokenizer_pre": "default",
+      "tokens_sha": "6bbc665cb82468af"
+    },
+    {
+      "model": "nomic-embed-text:latest",
+      "origin": "installed",
+      "size_gb": 0.27,
+      "compatible": false,
+      "reasons": [
+        "vocabulary type differs: target 'gpt2', draft 'bert'",
+        "add_eos_token differs: target False (id 248046), draft None (id 102)",
+        "vocabulary size differs by 217798 (> 128): target 248320, draft 30522",
+        "30517 token texts differ from id 5 (target '&', draft '[unused4]')"
+      ],
+      "draft_tokens": 30522,
+      "identical_token_list": false,
+      "architecture": "nomic-bert",
+      "tokenizer_model": "bert",
+      "tokenizer_pre": null,
+      "tokens_sha": "fb50a65796721ea8"
+    },
+    {
+      "model": "phi4:14b",
+      "origin": "installed",
+      "size_gb": 9.05,
+      "compatible": false,
+      "reasons": [
+        "add_eos_token differs: target False (id 248046), draft None (id 100257)",
+        "vocabulary size differs by 147968 (> 128): target 248320, draft 100352",
+        "100072 token texts differ from id 280 (target '\u0120p', draft ';\u010a')"
+      ],
+      "draft_tokens": 100352,
+      "identical_token_list": false,
+      "architecture": "phi3",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "dbrx",
+      "tokens_sha": "e0d6d985ea4464dd"
+    },
+    {
+      "model": "qwen2.5-coder:14b",
+      "origin": "installed",
+      "size_gb": 8.99,
+      "compatible": false,
+      "reasons": [
+        "add_bos_token differs: target None (id None), draft False (id 151643)",
+        "add_eos_token differs: target False (id 248046), draft None (id 151645)",
+        "vocabulary size differs by 96256 (> 128): target 248320, draft 152064",
+        "151783 token texts differ from id 280 (target '\u0120p', draft ';\u010a')"
+      ],
+      "draft_tokens": 152064,
+      "identical_token_list": false,
+      "architecture": "qwen2",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "qwen2",
+      "tokens_sha": "21badebdc47fcb3f"
+    },
+    {
+      "model": "qwen2.5-coder:32b",
+      "origin": "installed",
+      "size_gb": 19.85,
+      "compatible": false,
+      "reasons": [
+        "add_bos_token differs: target None (id None), draft False (id 151643)",
+        "add_eos_token differs: target False (id 248046), draft None (id 151645)",
+        "vocabulary size differs by 96256 (> 128): target 248320, draft 152064",
+        "151783 token texts differ from id 280 (target '\u0120p', draft ';\u010a')"
+      ],
+      "draft_tokens": 152064,
+      "identical_token_list": false,
+      "architecture": "qwen2",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "qwen2",
+      "tokens_sha": "21badebdc47fcb3f"
+    },
+    {
+      "model": "qwen2.5:14b-instruct",
+      "origin": "installed",
+      "size_gb": 8.99,
+      "compatible": false,
+      "reasons": [
+        "add_bos_token differs: target None (id None), draft False (id 151643)",
+        "add_eos_token differs: target False (id 248046), draft None (id 151645)",
+        "vocabulary size differs by 96256 (> 128): target 248320, draft 152064",
+        "151783 token texts differ from id 280 (target '\u0120p', draft ';\u010a')"
+      ],
+      "draft_tokens": 152064,
+      "identical_token_list": false,
+      "architecture": "qwen2",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "qwen2",
+      "tokens_sha": "21badebdc47fcb3f"
+    },
+    {
+      "model": "qwen2.5:14b-instruct-q4_K_M",
+      "origin": "installed",
+      "size_gb": 8.99,
+      "compatible": false,
+      "reasons": [
+        "add_bos_token differs: target None (id None), draft False (id 151643)",
+        "add_eos_token differs: target False (id 248046), draft None (id 151645)",
+        "vocabulary size differs by 96256 (> 128): target 248320, draft 152064",
+        "151783 token texts differ from id 280 (target '\u0120p', draft ';\u010a')"
+      ],
+      "draft_tokens": 152064,
+      "identical_token_list": false,
+      "architecture": "qwen2",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "qwen2",
+      "tokens_sha": "21badebdc47fcb3f"
+    },
+    {
+      "model": "qwen2.5:7b",
+      "origin": "installed",
+      "size_gb": 4.68,
+      "compatible": false,
+      "reasons": [
+        "add_bos_token differs: target None (id None), draft False (id 151643)",
+        "add_eos_token differs: target False (id 248046), draft None (id 151645)",
+        "vocabulary size differs by 96256 (> 128): target 248320, draft 152064",
+        "151783 token texts differ from id 280 (target '\u0120p', draft ';\u010a')"
+      ],
+      "draft_tokens": 152064,
+      "identical_token_list": false,
+      "architecture": "qwen2",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "qwen2",
+      "tokens_sha": "21badebdc47fcb3f"
+    },
+    {
+      "model": "qwen2.5:7b-instruct",
+      "origin": "installed",
+      "size_gb": 4.68,
+      "compatible": false,
+      "reasons": [
+        "add_bos_token differs: target None (id None), draft False (id 151643)",
+        "add_eos_token differs: target False (id 248046), draft None (id 151645)",
+        "vocabulary size differs by 96256 (> 128): target 248320, draft 152064",
+        "151783 token texts differ from id 280 (target '\u0120p', draft ';\u010a')"
+      ],
+      "draft_tokens": 152064,
+      "identical_token_list": false,
+      "architecture": "qwen2",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "qwen2",
+      "tokens_sha": "21badebdc47fcb3f"
+    },
+    {
+      "model": "qwen2.5:7b-instruct-q4_K_M",
+      "origin": "installed",
+      "size_gb": 4.68,
+      "compatible": false,
+      "reasons": [
+        "add_bos_token differs: target None (id None), draft False (id 151643)",
+        "add_eos_token differs: target False (id 248046), draft None (id 151645)",
+        "vocabulary size differs by 96256 (> 128): target 248320, draft 152064",
+        "151783 token texts differ from id 280 (target '\u0120p', draft ';\u010a')"
+      ],
+      "draft_tokens": 152064,
+      "identical_token_list": false,
+      "architecture": "qwen2",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "qwen2",
+      "tokens_sha": "21badebdc47fcb3f"
+    },
+    {
+      "model": "qwen3.6-16k:latest",
+      "origin": "installed",
+      "size_gb": 23.94,
+      "compatible": true,
+      "reasons": [],
+      "draft_tokens": 248320,
+      "identical_token_list": true,
+      "architecture": "qwen35moe",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "qwen35",
+      "tokens_sha": "187637dc29b507cd"
+    },
+    {
+      "model": "qwen3.6-32k:latest",
+      "origin": "installed",
+      "size_gb": 23.94,
+      "compatible": true,
+      "reasons": [],
+      "draft_tokens": 248320,
+      "identical_token_list": true,
+      "architecture": "qwen35moe",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "qwen35",
+      "tokens_sha": "187637dc29b507cd"
+    },
+    {
+      "model": "qwen3.6-64k:latest",
+      "origin": "installed",
+      "size_gb": 23.94,
+      "compatible": true,
+      "reasons": [],
+      "draft_tokens": 248320,
+      "identical_token_list": true,
+      "architecture": "qwen35moe",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "qwen35",
+      "tokens_sha": "187637dc29b507cd"
+    },
+    {
+      "model": "qwen3.6-8k:latest",
+      "origin": "installed",
+      "size_gb": 23.94,
+      "compatible": true,
+      "reasons": [],
+      "draft_tokens": 248320,
+      "identical_token_list": true,
+      "architecture": "qwen35moe",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "qwen35",
+      "tokens_sha": "187637dc29b507cd"
+    },
+    {
+      "model": "qwen3.6-ngl16:latest",
+      "origin": "installed",
+      "size_gb": 23.94,
+      "compatible": true,
+      "reasons": [],
+      "draft_tokens": 248320,
+      "identical_token_list": true,
+      "architecture": "qwen35moe",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "qwen35",
+      "tokens_sha": "187637dc29b507cd"
+    },
+    {
+      "model": "qwen3.6:35b-a3b",
+      "origin": "installed",
+      "size_gb": 23.94,
+      "compatible": true,
+      "reasons": [],
+      "draft_tokens": 248320,
+      "identical_token_list": true,
+      "architecture": "qwen35moe",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "qwen35",
+      "tokens_sha": "187637dc29b507cd"
+    },
+    {
+      "model": "qwen3.6:latest",
+      "origin": "installed",
+      "size_gb": 23.94,
+      "compatible": true,
+      "reasons": [],
+      "draft_tokens": 248320,
+      "identical_token_list": true,
+      "architecture": "qwen35moe",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "qwen35",
+      "tokens_sha": "187637dc29b507cd"
+    },
+    {
+      "model": "qwen3:8b",
+      "origin": "installed",
+      "size_gb": 5.23,
+      "compatible": false,
+      "reasons": [
+        "add_bos_token differs: target None (id None), draft False (id 151643)",
+        "add_eos_token differs: target False (id 248046), draft None (id 151645)",
+        "vocabulary size differs by 96384 (> 128): target 248320, draft 151936",
+        "151655 token texts differ from id 280 (target '\u0120p', draft ';\u010a')"
+      ],
+      "draft_tokens": 151936,
+      "identical_token_list": false,
+      "architecture": "qwen3",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "qwen2",
+      "tokens_sha": "c6308f3391fb99bb"
+    },
+    {
+      "model": "qwen3.5:0.8b",
+      "origin": "registry (header only)",
+      "size_gb": 0.81,
+      "compatible": false,
+      "reasons": [
+        "add_bos_token differs: target None (id None), draft False (id None)",
+        "add_eos_token differs: target False (id 248046), draft None (id 248046)",
+        "250 token texts differ from id 248070 (target '[PAD0]', draft '<|audio_start|>')"
+      ],
+      "draft_tokens": 248320,
+      "identical_token_list": false,
+      "architecture": "qwen35",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "qwen35",
+      "tokens_sha": "6d8afc30d32560a9"
+    },
+    {
+      "model": "qwen3.5:2b",
+      "origin": "registry (header only)",
+      "size_gb": 2.01,
+      "compatible": false,
+      "reasons": [
+        "add_bos_token differs: target None (id None), draft False (id None)",
+        "add_eos_token differs: target False (id 248046), draft None (id 248046)",
+        "250 token texts differ from id 248070 (target '[PAD0]', draft '<|audio_start|>')"
+      ],
+      "draft_tokens": 248320,
+      "identical_token_list": false,
+      "architecture": "qwen35",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "qwen35",
+      "tokens_sha": "6d8afc30d32560a9"
+    },
+    {
+      "model": "qwen3.5:4b",
+      "origin": "registry (header only)",
+      "size_gb": 2.65,
+      "compatible": false,
+      "reasons": [
+        "add_bos_token differs: target None (id None), draft False (id None)",
+        "add_eos_token differs: target False (id 248046), draft None (id 248046)",
+        "250 token texts differ from id 248070 (target '[PAD0]', draft '<|audio_start|>')"
+      ],
+      "draft_tokens": 248320,
+      "identical_token_list": false,
+      "architecture": "qwen35",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "qwen35",
+      "tokens_sha": "6d8afc30d32560a9"
+    },
+    {
+      "model": "qwen3.5:9b",
+      "origin": "registry (header only)",
+      "size_gb": 5.63,
+      "compatible": false,
+      "reasons": [
+        "add_bos_token differs: target None (id None), draft False (id None)",
+        "add_eos_token differs: target False (id 248046), draft None (id 248046)",
+        "250 token texts differ from id 248070 (target '[PAD0]', draft '<|audio_start|>')"
+      ],
+      "draft_tokens": 248320,
+      "identical_token_list": false,
+      "architecture": "qwen35",
+      "tokenizer_model": "gpt2",
+      "tokenizer_pre": "qwen35",
+      "tokens_sha": "6d8afc30d32560a9"
+    }
+  ]
+}
