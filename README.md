@@ -124,7 +124,7 @@ ruff check . && pytest           # unit, golden and replay tests; no GPU require
 OUT=results/v1/baseline
 mkdir -p $OUT/proxy
 AGENT_OPT_DATA_DIR=$OUT/proxy python -m uvicorn harness.proxy:app --host 127.0.0.1 --port 11435 &   # metrics proxy
-python -m harness.runner run --configs configs/baseline_32k.yaml --n 10 --seed 1 \
+python -m harness.runner run --configs configs/baseline_32k.yaml --n 10 --ignore-task-trials --seed 1 \
     --out $OUT --scratch /tmp/agent_opt_scratch --parity-fraction 0.2    # resumable: re-run the same command to continue
 python -m harness.runner status --out $OUT
 python -m harness.trace --run $OUT && python -m harness.decompose --run $OUT   # per-step timeline, time breakdown
@@ -132,7 +132,13 @@ python -m analysis.report --run $OUT                                          # 
 python -m analysis.figures --run $OUT                                         # standalone SVG charts
 ```
 
-Use `--tasks <id> ...` to run a subset and `--dry-run` to see the randomized trial order first. Run
+Use `--tasks <id> ...` to run a subset and `--dry-run` to see the randomized trial order first. Tasks belong to
+named suites (`suite:` in the task YAML): `core` (10 tasks that can still show a difference; about 1.5 h at
+`--n 5`) and `guard` (4 tasks that always passed; regression guards that carry `trials: 3`). `--suite core` selects a
+suite; a task's own `trials` overrides `--n` unless `--ignore-task-trials` is given (the baseline runs above used
+n = 10 for every task). `status --by-task` shows progress per task, and every trial record keeps the previous
+trial's id and task (`prev_trial_id`, `prev_task`): the randomized order is back-to-back, so a trial's first call can
+be served from the previous trial's prompt cache, which analyses can use as a covariate. Run
 `python -m harness.manifest` to record the hardware/software manifest.
 
 **Re-derive results from recorded runs** (no GPU, no model):

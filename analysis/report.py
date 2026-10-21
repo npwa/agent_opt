@@ -90,6 +90,12 @@ def _cell(recs: list[dict], key: str) -> dict:
     return out
 
 
+def _n_label(plan: dict) -> dict:
+    """{} when every task has the same n; else a label for the header (plan `trials_per_task`)."""
+    per = sorted(set((plan.get("trials_per_task") or {}).values()))
+    return {"n_label": f"n = {per[0]}-{per[-1]} per cell (varies by task)"} if len(per) > 1 else {}
+
+
 def summarize(data: dict, baseline: str | None = None) -> dict:
     plan, records = data["plan"], data["records"]
     configs = list(plan["configs"])
@@ -151,7 +157,7 @@ def summarize(data: dict, baseline: str | None = None) -> dict:
     comparisons = _compare(records, configs, baseline, cat)
     return {
         "name": data["name"], "created_utc": plan.get("created_utc"), "run_seed": plan.get("run_seed"),
-        "n": plan.get("n"), "parity_fraction": plan.get("parity_fraction", 0.0),
+        "n": plan.get("n"), **_n_label(plan), "parity_fraction": plan.get("parity_fraction", 0.0),
         "configs": configs, "baseline": baseline, "tasks": tasks, "common_tasks": common,
         "categories": {t: cat.get(t, "unknown") for t in tasks},
         "platform": _platform(data["platform"]), "cells": {f"{c}|{t}": v for (c, t), v in cells.items()},
@@ -232,7 +238,7 @@ def p1(v: float) -> str:
 
 def render_markdown(s: dict) -> str:
     L = [f"# Results: {s['name']}", "",
-         f"Run seed {s['run_seed']}, n = {s['n']} per cell, configurations: {', '.join(s['configs'])} "
+         f"Run seed {s['run_seed']}, {s.get('n_label', f"n = {s['n']} per cell")}, configurations: {', '.join(s['configs'])} "
          f"(baseline: **{s['baseline']}**). {s['trials']['measured']} measured trials, "
          f"{s['trials']['harness_failed']} harness failures excluded"
          + (f", {s['parity_trials']} uninstrumented parity trials (see parity)" if s['parity_trials'] else "")
@@ -389,7 +395,7 @@ def render_html(s: dict) -> str:
          f'<meta name="viewport" content="width=device-width,initial-scale=1">'
          f"<title>agent_opt results - {e(s['name'])}</title><style>{CSS}</style></head><body><main>",
          f"<h1>Results: {e(s['name'])}</h1>",
-         f'<p class="sub">Run seed {e(s["run_seed"])} · n = {e(s["n"])} per cell · configurations: '
+         f'<p class="sub">Run seed {e(s["run_seed"])} · {e(s.get("n_label", f"n = {s['n']} per cell"))} · configurations: '
          f"{e(', '.join(s['configs']))} · baseline: {e(s['baseline'])}</p>",
          '<div class="tiles">' + "".join(
              f'<div class="tile"><div class="l">{e(a)}</div><div class="v">{e(b)}</div><div class="d">{e(c)}</div></div>'

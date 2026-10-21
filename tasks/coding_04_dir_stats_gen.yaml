@@ -8,6 +8,8 @@ tools: [read, write, edit, bash, glob, list]
 timeout_s: 420
 expected_tool_sequence: [read, write]
 tags: [bash, short]
+suite: [guard]
+trials: 3
 verify:
   - type: command
     cmd: "bash dir_stats.sh . | head -n 3"

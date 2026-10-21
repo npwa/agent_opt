@@ -94,19 +94,27 @@ def spec_hash(path: Path) -> str:
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()[:12]
 
 
+def trials_for(spec: TaskSpec, n: int, use_task_trials: bool = True) -> int:
+    """Instrumented trials of a task: its own ``trials`` field if it has one (and is honoured), else ``n``."""
+    return spec.trials if use_task_trials and spec.trials else n
+
+
 def build_plan(configs: list[RunConfig], specs: list[TaskSpec], n: int, run_seed: int,
-               tasks_dir: Path, parity_fraction: float = 0.0) -> dict:
-    """Instrumented trials plus, per (config, task) cell, ceil(parity_fraction * n) trials that
-    bypass the proxy (talk to Ollama directly) for the instrumentation parity check (F7)."""
-    n_parity = math.ceil(parity_fraction * n) if parity_fraction > 0 else 0
+               tasks_dir: Path, parity_fraction: float = 0.0, use_task_trials: bool = True) -> dict:
+    """Instrumented trials plus, per (config, task) cell, ceil(parity_fraction * trials) trials that
+    bypass the proxy (talk to Ollama directly) for the instrumentation parity check (F7). A task's
+    own ``trials`` field overrides ``n`` (e.g. regression-guard tasks run fewer times)."""
+    per_task = {s.id: trials_for(s, n, use_task_trials) for s in specs}
     trials = [{"trial_id": trial_id(c.id, s.id, k, inst), "config": c.id, "task": s.id, "k": k,
                "instrumented": inst}
               for c in configs for s in specs
-              for inst, count in ((True, n), (False, n_parity)) for k in range(count)]
+              for inst, count in ((True, per_task[s.id]),
+                                  (False, math.ceil(parity_fraction * per_task[s.id]) if parity_fraction > 0 else 0))
+              for k in range(count)]
     random.Random(run_seed).shuffle(trials)
     return {
         "created_utc": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "run_seed": run_seed, "n": n, "parity_fraction": parity_fraction,
+        "run_seed": run_seed, "n": n, "parity_fraction": parity_fraction, "trials_per_task": per_task,
         "configs": {c.id: c.__dict__ for c in configs},
         "tasks": {s.id: spec_hash(tasks_dir / f"{s.id}.yaml") for s in specs},
         "order": trials,
@@ -118,7 +126,8 @@ def load_or_create_plan(out: Path, plan: dict, force: bool = False) -> dict:
     if path.exists():
         old = json.loads(path.read_text())
         same = (all(old[k] == plan[k] for k in ("run_seed", "n", "configs", "tasks"))
-                and old.get("parity_fraction", 0.0) == plan["parity_fraction"])
+                and old.get("parity_fraction", 0.0) == plan["parity_fraction"]
+                and old.get("trials_per_task", {t: old["n"] for t in old["tasks"]}) == plan["trials_per_task"])
         if not same and not force:
             raise PlanMismatchError(
                 f"{path} was created with different seed/n/configs/tasks; use a new --out "
@@ -305,6 +314,7 @@ def run_trial(spec: TaskSpec, cfg: RunConfig, item: dict, run_seed: int, out: Pa
     record = {
         "trial_id": tid, "task": spec.id, "config": cfg.id, "model": cfg.model, "k": item["k"],
         "instrumented": item.get("instrumented", True),
+        "prev_trial_id": item.get("prev_trial_id"), "prev_task": item.get("prev_task"),
         "seed": seed, "run_seed": run_seed, **final, "attempts": attempts,
     }
     tmp = trial_dir / "record.json.tmp"
@@ -315,36 +325,48 @@ def run_trial(spec: TaskSpec, cfg: RunConfig, item: dict, run_seed: int, out: Pa
 
 # ---- driver ------------------------------------------------------------------------------------
 
-def status_table(out: Path) -> str:
+def status_table(out: Path, by_task: bool = False) -> str:
     plan = json.loads((out / "plan.json").read_text())
     counts: dict[str, int] = {}
     pending = 0
+    tasks: dict[str, list[int]] = {}  # task -> [planned, done]
     for item in plan["order"]:
         rec = out / "trials" / item["trial_id"] / "record.json"
+        row = tasks.setdefault(item["task"], [0, 0])
+        row[0] += 1
         if rec.exists():
             st = json.loads(rec.read_text())["status"]
             counts[st] = counts.get(st, 0) + 1
+            row[1] += 1
         else:
             pending += 1
     done = sum(counts.values())
     parts = ", ".join(f"{k}={v}" for k, v in sorted(counts.items()))
-    return f"{done}/{len(plan['order'])} trials done ({parts or 'none'}), {pending} pending"
+    line = f"{done}/{len(plan['order'])} trials done ({parts or 'none'}), {pending} pending"
+    if by_task:
+        line += "\n" + "\n".join(f"  {t}: {d}/{p}" for t, (p, d) in sorted(tasks.items()))
+    return line
 
 
 def run_all(configs: list[RunConfig], specs: list[TaskSpec], n: int, run_seed: int, out: Path,
             scratch: Path, metrics: Path, max_retries: int = 2, limit: int | None = None,
             force_plan: bool = False, tasks_dir: Path = ROOT / "tasks", attempt_fn=run_attempt,
-            log=print, parity_fraction: float = 0.0) -> dict:
+            log=print, parity_fraction: float = 0.0, use_task_trials: bool = True) -> dict:
     plan = load_or_create_plan(
-        out, build_plan(configs, specs, n, run_seed, tasks_dir, parity_fraction), force_plan)
+        out, build_plan(configs, specs, n, run_seed, tasks_dir, parity_fraction, use_task_trials), force_plan)
     by_cfg = {c.id: c for c in configs}
     by_task = {s.id: s for s in specs}
     if not (out / "platform.yaml").exists():
         manifest.write_manifest(out / "platform.yaml")
     ran = 0
-    for item in plan["order"]:
+    order = plan["order"]
+    for pos, item in enumerate(order):
         if is_done(out, item["trial_id"]):
             continue
+        # trial order is randomised but back-to-back, so the previous trial's prompt cache can speed this
+        # trial up (first-call prefill): record the predecessor so analyses can use it as a covariate
+        item = {**item, "prev_trial_id": order[pos - 1]["trial_id"] if pos else None,
+                "prev_task": order[pos - 1]["task"] if pos else None}
         if limit is not None and ran >= limit:
             break
         log(f"[{time.strftime('%H:%M:%S')}] {item['trial_id']}")
@@ -364,6 +386,10 @@ def main() -> int:
     r = sub.add_parser("run")
     r.add_argument("--configs", type=Path, nargs="+", required=True)
     r.add_argument("--tasks", nargs="*", help="task ids (default: all)")
+    r.add_argument("--suite", nargs="*", help="only tasks in these suites (task field `suite`, e.g. core guard); "
+                   "combined with --tasks by intersection")
+    r.add_argument("--ignore-task-trials", action="store_true",
+                   help="use --n for every task, ignoring per-task `trials` (e.g. for a uniform baseline)")
     r.add_argument("--n", type=int, default=10)
     r.add_argument("--seed", type=int, default=1)
     r.add_argument("--out", type=Path, required=True)
@@ -388,20 +414,32 @@ def main() -> int:
     r.add_argument("--no-preflight", action="store_true")
     st = sub.add_parser("status")
     st.add_argument("--out", type=Path, required=True)
+    st.add_argument("--by-task", action="store_true", help="also list done/planned trials per task")
     a = ap.parse_args()
 
     if a.cmd == "status":
-        print(status_table(a.out))
+        print(status_table(a.out, a.by_task))
         return 0
     specs = [load_task(p) for p in sorted((ROOT / "tasks").glob("*.yaml"))]
+    known = sorted({x for s in specs for x in s.suite})  # all suites, before --tasks narrows the list
     if a.tasks:
         specs = [s for s in specs if s.id in a.tasks]
+    if a.suite:
+        if unknown := [x for x in a.suite if x not in known]:
+            print(f"unknown suite(s) {unknown}; known: {known}", file=sys.stderr)
+            return 2
+        specs = [s for s in specs if set(s.suite) & set(a.suite)]
+    if not specs:
+        print("no tasks selected", file=sys.stderr)
+        return 2
     configs = [load_config(p) for p in a.configs]
     metrics = (a.proxy_data or a.out / "proxy") / "metrics.jsonl"
     if a.dry_run:
-        plan = build_plan(configs, specs, a.n, a.seed, ROOT / "tasks", a.parity_fraction)
+        plan = build_plan(configs, specs, a.n, a.seed, ROOT / "tasks", a.parity_fraction,
+                          not a.ignore_task_trials)
         for item in plan["order"]:
             print(item["trial_id"])
+        print("trials per task: " + ", ".join(f"{t}={k}" for t, k in plan["trials_per_task"].items()))
         print(f"{len(plan['order'])} trials")
         return 0
     if not a.no_preflight and (problems := preflight(specs, need_direct=a.parity_fraction > 0)):
@@ -417,7 +455,8 @@ def main() -> int:
             sampler.start()
         STALL_S = a.stall_s
         run_all(configs, specs, a.n, a.seed, a.out, a.scratch, metrics, a.max_retries,
-                a.limit, a.force_plan, parity_fraction=a.parity_fraction)
+                a.limit, a.force_plan, parity_fraction=a.parity_fraction,
+                use_task_trials=not a.ignore_task_trials)
     except PlanMismatchError as e:
         print(e, file=sys.stderr)
         return 2

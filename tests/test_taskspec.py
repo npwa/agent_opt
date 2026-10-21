@@ -32,6 +32,11 @@ def mutate(**kw):
 DEL = taskspec.TaskSpecError
 
 NEGATIVE = {
+    "trials_zero": (mutate(trials=0), "trials: must be an integer"),
+    "trials_string": (mutate(trials="3"), "trials: must be an integer"),
+    "trials_bool": (mutate(trials=True), "trials: must be an integer"),
+    "suite_bad_name": (mutate(suite=["Core Suite"]), "suite:"),
+    "suite_not_list": (mutate(suite="core"), "suite: must be a list"),
     "missing_verify": (mutate(verify=DEL), "missing required key 'verify'"),
     "empty_verify": (mutate(verify=[]), "verify: must be a non-empty list"),
     "bad_timeout_low": (mutate(timeout_s=1), "timeout_s"),
@@ -129,3 +134,18 @@ def test_main_cli_ok_on_repo(monkeypatch, capsys):
     monkeypatch.chdir(ROOT)
     monkeypatch.setattr("sys.argv", ["taskspec"])
     assert taskspec.main() == 0
+
+
+def test_trials_and_suite_are_accepted_and_parsed():
+    spec = taskspec.parse_spec(mutate(trials=3, suite=["core", "guard_2"]))
+    assert not taskspec.validate_spec(mutate(trials=3, suite=["core", "guard_2"]))
+    assert spec.trials == 3 and spec.suite == ["core", "guard_2"]
+    assert taskspec.parse_spec(GOOD).trials is None and taskspec.parse_spec(GOOD).suite == []
+
+
+def test_repo_suites_partition_the_tasks():
+    specs = taskspec.load_all(TASKS)
+    core = {s.id for s in specs if "core" in s.suite}
+    guard = {s.id for s in specs if "guard" in s.suite}
+    assert core and guard and not core & guard and core | guard == {s.id for s in specs}
+    assert all(s.trials == 3 for s in specs if s.id in guard) and all(s.trials is None for s in specs if s.id in core)

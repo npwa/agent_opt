@@ -8,6 +8,8 @@ tools: [read, write, edit, bash, glob, grep, list]
 timeout_s: 540
 expected_tool_sequence: [bash, read, edit, bash]
 tags: [python, short]
+suite: [guard]
+trials: 3
 verify:
   - type: py_test
     test_source: test_hidden.py

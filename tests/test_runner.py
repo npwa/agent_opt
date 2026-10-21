@@ -53,6 +53,52 @@ def test_plan_is_complete_deterministic_and_shuffled():
     assert sorted(ids) != ids  # shuffled, not in sorted/grouped order
 
 
+def test_per_task_trials_override_n_and_scale_parity():
+    sp = [replace(s, trials=2) if s.id == SQRT else s for s in specs(FIZZ, SQRT)]
+    plan = runner.build_plan([CFG], sp, 5, 7, ROOT / "tasks", parity_fraction=0.4)
+    count = {}
+    for t in plan["order"]:
+        key = (t["task"], t["instrumented"])
+        count[key] = count.get(key, 0) + 1
+    assert count == {(FIZZ, True): 5, (FIZZ, False): 2, (SQRT, True): 2, (SQRT, False): 1}
+    assert plan["trials_per_task"] == {FIZZ: 5, SQRT: 2}
+    uniform = runner.build_plan([CFG], sp, 5, 7, ROOT / "tasks", use_task_trials=False)
+    assert uniform["trials_per_task"] == {FIZZ: 5, SQRT: 5} and len(uniform["order"]) == 10
+
+
+def test_changing_trials_per_task_is_a_plan_mismatch(tmp_path):
+    sp = specs(FIZZ, SQRT)
+    runner.load_or_create_plan(tmp_path, runner.build_plan([CFG], sp, 3, 1, ROOT / "tasks"))
+    other = [replace(s, trials=1) if s.id == SQRT else s for s in sp]
+    with pytest.raises(runner.PlanMismatchError):
+        runner.load_or_create_plan(tmp_path, runner.build_plan([CFG], other, 3, 1, ROOT / "tasks"))
+
+
+def test_old_plans_without_trials_per_task_still_match(tmp_path):
+    sp = specs(FIZZ)
+    plan = runner.build_plan([CFG], sp, 3, 1, ROOT / "tasks")
+    old = {k: v for k, v in plan.items() if k != "trials_per_task"}
+    (tmp_path / "plan.json").write_text(json.dumps(old))
+    assert runner.load_or_create_plan(tmp_path, plan) == old
+
+
+def test_run_all_records_the_previous_trial_and_status_by_task(tmp_path):
+    sp = specs(FIZZ, SQRT)
+
+    def fake_attempt(spec, cfg, tid, attempt, seed, trial_dir, scratch, metrics, instrumented=True):
+        return {"status": "pass", "attempt": attempt, "elapsed_s": 1.0}
+
+    plan = runner.run_all([CFG], sp, 2, 3, tmp_path / "out", tmp_path / "s", tmp_path / "m.jsonl",
+                          attempt_fn=fake_attempt, log=lambda *_: None)
+    order = [t["trial_id"] for t in plan["order"]]
+    recs = [json.loads((tmp_path / "out/trials" / tid / "record.json").read_text()) for tid in order]
+    assert recs[0]["prev_trial_id"] is None
+    assert [r["prev_trial_id"] for r in recs[1:]] == order[:-1]
+    assert [r["prev_task"] for r in recs[1:]] == [t["task"] for t in plan["order"][:-1]]
+    table = runner.status_table(tmp_path / "out", by_task=True)
+    assert "4/4 trials done" in table and f"{FIZZ}: 2/2" in table and f"{SQRT}: 2/2" in table
+
+
 def test_trial_seed_deterministic_and_distinct():
     assert runner.trial_seed(1, "a") == runner.trial_seed(1, "a")
     assert runner.trial_seed(1, "a") != runner.trial_seed(1, "b")
@@ -304,3 +350,29 @@ def test_stalled_trial_is_a_retried_harness_failure_not_an_outcome(fake_oc, monk
     rec = fake_oc("hang_after_step", max_retries=1)  # one step, then silence
     assert rec["status"] == "harness_failed" and rec["reason"] == "stalled"
     assert len(rec["attempts"]) == 2 and all(a["reason"] == "stalled" for a in rec["attempts"])
+
+
+def run_cli(monkeypatch, capsys, *args):
+    monkeypatch.setattr(sys, "argv", ["runner", "run", "--configs", str(ROOT / "configs/baseline_32k.yaml"),
+                                      "--out", "/nonexistent/out", "--scratch", "/nonexistent/s", "--dry-run", *args])
+    code = runner.main()
+    return code, capsys.readouterr()
+
+
+def test_cli_suite_selection_and_task_trials(monkeypatch, capsys):
+    code, cap = run_cli(monkeypatch, capsys, "--suite", "core", "--n", "2")
+    assert code == 0 and "10 tasks" not in cap.out and cap.out.rstrip().endswith("20 trials")
+    assert "bugfix_01_moving_average" not in cap.out  # guard task not in core
+    code, cap = run_cli(monkeypatch, capsys, "--n", "10")  # guards honour their own n = 3
+    assert "bugfix_01_moving_average=3" in cap.out and "c_ringbuf_03_ringbuffer=10" in cap.out
+    code, cap = run_cli(monkeypatch, capsys, "--n", "10", "--ignore-task-trials")
+    assert cap.out.rstrip().endswith("140 trials")
+    code, cap = run_cli(monkeypatch, capsys, "--suite", "core", "--tasks", "coding_02_fizzbuzz_gen", "--n", "4")
+    assert cap.out.rstrip().endswith("4 trials")
+
+
+def test_cli_unknown_suite_and_empty_selection(monkeypatch, capsys):
+    code, cap = run_cli(monkeypatch, capsys, "--suite", "nope")
+    assert code == 2 and "unknown suite" in cap.err and "core" in cap.err
+    code, cap = run_cli(monkeypatch, capsys, "--suite", "guard", "--tasks", "coding_02_fizzbuzz_gen")
+    assert code == 2 and "no tasks selected" in cap.err

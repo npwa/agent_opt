@@ -25,6 +25,8 @@ Schema (all unknown keys are rejected):
     timeout_s: 900
     expected_tool_sequence: [read, write, bash]   # optional; matched as a subsequence
     tags: [c, short]
+    suite: [core]                       # optional named subsets; runner --suite core
+    trials: 3                           # optional per-task default n (overrides --n)
     verify:                             # >= 1 verifier, ALL must pass
       - type: compile_run
         ...
@@ -58,7 +60,9 @@ VERIFIERS: dict[str, tuple[set[str], set[str]]] = {
     "python": ({"callable"}, {"args"}),
 }
 TOP_REQUIRED = {"id", "title", "category", "prompts", "timeout_s", "verify"}
-TOP_OPTIONAL = {"fixture", "setup", "agent", "tools", "mcp", "env", "expected_tool_sequence", "tags"}
+TOP_OPTIONAL = {"fixture", "setup", "agent", "tools", "mcp", "env", "expected_tool_sequence", "tags", "trials", "suite"}
+SUITE_RE = re.compile(r"^[a-z][a-z0-9_]*$")
+MAX_TRIALS = 1000
 
 
 class TaskSpecError(ValueError):
@@ -85,6 +89,8 @@ class TaskSpec:
     env: dict[str, str] = field(default_factory=dict)
     expected_tool_sequence: list[str] = field(default_factory=list)
     tags: list[str] = field(default_factory=list)
+    trials: int | None = None  # per-task default number of trials (overrides the run's --n)
+    suite: list[str] = field(default_factory=list)  # named subsets, e.g. core, guard (runner --suite)
 
 
 def _is_str_list(v: Any, *, non_empty: bool = False) -> bool:
@@ -210,6 +216,15 @@ def validate_spec(data: Any, *, filename_stem: str | None = None) -> list[str]:
     for k in ("mcp", "tags", "setup"):
         if k in data and not _is_str_list(data[k]):
             errs.append(f"{k}: must be a list of strings")
+    if "trials" in data and not (_int(data["trials"]) and 1 <= data["trials"] <= MAX_TRIALS):
+        errs.append(f"trials: must be an integer between 1 and {MAX_TRIALS}")
+    if "suite" in data:
+        if not _is_str_list(data["suite"]):
+            errs.append("suite: must be a list of suite names")
+        else:
+            for s in data["suite"]:
+                if not SUITE_RE.match(s):
+                    errs.append(f"suite: '{s}' must match [a-z][a-z0-9_]*")
     if "expected_tool_sequence" in data and not _is_str_list(data["expected_tool_sequence"]):
         errs.append("expected_tool_sequence: must be a list of tool names")
     if "env" in data and not (isinstance(data["env"], dict) and all(
