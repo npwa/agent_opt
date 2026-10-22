@@ -1,0 +1,14 @@
+id: longctx_11_harbor_report
+title: Answer six questions from a ~14k-token report whose errata change the answers
+category: long_context
+prompts:
+  - "Read report.md completely; it is long, so make sure you reach the end. Then answer these six questions as a numbered list (1. to 6.), one line each, using the figures as finally corrected: (1) What was the total FY2025 throughput of all nine terminals in kTEU? (2) Which terminal had the highest incident rate per 100 kTEU, and what was it (two decimals)? (3) By what percent did total unplanned downtime change from FY2024 to FY2025 (one decimal, with sign)? (4) Which terminals qualify for the Green Berth recognition for FY2025? List only the qualifying terminals. (5) Who approved the revised safety budget, and on what date? (6) On what date does the pilotage rule take effect?"
+fixture: longctx_11_harbor_report
+tools: [read, glob, list, grep]
+timeout_s: 900
+expected_tool_sequence: [read]
+tags: [long-context, errata, arithmetic, hard]
+suite: [core]
+verify:
+  - type: python
+    callable: "harness.verifiers.hard:harbor_answers"

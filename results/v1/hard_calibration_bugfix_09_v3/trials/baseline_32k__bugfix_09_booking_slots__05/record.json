@@ -1,0 +1,62 @@
+{
+  "trial_id": "baseline_32k__bugfix_09_booking_slots__05",
+  "task": "bugfix_09_booking_slots",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 5,
+  "instrumented": true,
+  "prev_trial_id": "baseline_32k__bugfix_09_booking_slots__07",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 606652235,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T01:46:31Z",
+  "wall_start": 1792633591.031219,
+  "wall_end": 1792633734.6716428,
+  "elapsed_s": 143.6,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 10,
+  "tokens_in": 103339,
+  "tokens_out": 3463,
+  "tool_sequence": [
+    "read",
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "edit",
+    "bash",
+    "read",
+    "edit",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 1,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": false,
+      "detail": "Ran 20 tests in 0.001s |  | FAILED (failures=3)"
+    }
+  ],
+  "final_answer": "All 7 tests pass now. Here's what was fixed:\n\n1. **`overlaps`** (`bookings.py:13`): Changed `<=` to `<` so touching intervals (like `(540, 600)` and `(600, 660)`) are no longer considered overlapping, per the docstring that \"touching intervals do not overlap.\"\n\n2. **`merge_intervals`** (`bookings.py:21,24`): \n   - Changed `intervals.sort()` to `intervals = sorted(intervals)` so the argument is never modified (docstring says \"The argument must not be modified\").\n   - Changed `start < merged[-1][1]` to `start <= merged[-1][1]` so touching intervals are also merged (docstring says \"Intervals that overlap or touch are merged into one.\").\n\n3. **`find_free_slots`** (`bookings.py:45-48`):\n   - Clamped busy interval bounds to `[day_start, day_end]` as the docstring requires (\"parts of a busy interval that lie outside the day window are ignored\").\n   - Changed `>` to `>=` for the gap comparison (\"a gap of exactly min_len minutes is long enough\").\n   - Added a final check `if cursor < day_end` to append any remaining free gap after all busy intervals are processed.",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T01:46:31Z"
+    }
+  ]
+}

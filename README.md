@@ -98,7 +98,7 @@ of the v0 claims (M4.2) are not yet run.
 |---|---|
 | `harness/` | the measurement tooling: `runner` (seeded, resumable trials), `proxy` (passive metrics proxy), `telemetry` (NVML sampler), `trace` and `decompose` (per-step timeline and time breakdown), `verifiers` + `sandbox` (automatic pass/fail), `taskspec`, `replay`, `promptreplay` (time prompt variants from captured requests), `server` (per-configuration Ollama server settings), `vocabcheck` + `ggufmeta` (draft-model compatibility), `nsys`, `manifest` |
 | `analysis/` | `stats` (Wilson, bootstrap, Mann-Whitney, Holm), `parity`, `report` + `svg` (Markdown and inline-SVG HTML report), `figures` (standalone SVG charts), `compare_runs`, `claims` (verification-claim check) |
-| `tasks/` | the 14 task specs (YAML): prompts, tool permissions, timeout, verifiers |
+| `tasks/` | the 18 task specs (YAML): prompts, tool permissions, timeout, verifiers (14 original, 4 harder ones added after the baseline) |
 | `fixtures/` | task inputs (`tasks/`), hidden verifier assets (`verify/`), known-good/bad examples (`golden/`), recorded traces (`traces/`) and the replay runs with committed golden outputs (`replay/`) |
 | `configs/` | run configurations: `baseline_32k.yaml` and the `sweep/` set (context size, KV cache type, flash attention, fit margin) |
 | `agent-config/` | OpenCode agents, the mock email/calendar MCP tools, Modelfiles, SearXNG settings |
@@ -133,8 +133,8 @@ python -m analysis.figures --run $OUT                                         # 
 ```
 
 Use `--tasks <id> ...` to run a subset and `--dry-run` to see the randomized trial order first. Tasks belong to
-named suites (`suite:` in the task YAML): `core` (10 tasks that can still show a difference; about 1.5 h at
-`--n 5`) and `guard` (4 tasks that always passed; regression guards that carry `trials: 3`). `--suite core` selects a
+named suites (`suite:` in the task YAML): `core` (the 14 tasks that can still show a difference; about 1.5 h at
+`--n 3`) and `guard` (4 tasks that always passed; regression guards that carry `trials: 3`). `--suite core` selects a
 suite; a task's own `trials` overrides `--n` unless `--ignore-task-trials` is given (the baseline runs above used
 n = 10 for every task). `status --by-task` shows progress per task, and every trial record keeps the previous
 trial's id and task (`prev_trial_id`, `prev_task`): the randomized order is back-to-back, so a trial's first call can

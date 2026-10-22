@@ -1,0 +1,61 @@
+{
+  "trial_id": "baseline_32k__bugfix_09_booking_slots__06",
+  "task": "bugfix_09_booking_slots",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 6,
+  "instrumented": true,
+  "prev_trial_id": null,
+  "prev_task": null,
+  "seed": 1205975339,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T01:37:56Z",
+  "wall_start": 1792633076.356812,
+  "wall_end": 1792633175.891384,
+  "elapsed_s": 99.5,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 9,
+  "tokens_in": 92167,
+  "tokens_out": 2185,
+  "tool_sequence": [
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "bash",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 7 tests pass. Here's a summary of the fixes:\n\n1. **`overlaps`** \u2014 Changed `<=` to `<` on both comparisons so touching intervals like `(540,600)` and `(600,660)` correctly return `False`.\n\n2. **`merge_intervals`** \u2014 Two fixes: changed the input check from `start <` to `start <=` so touching intervals merge; added `sorted(intervals)` instead of `intervals.sort()` to avoid mutating the input list as the docstring requires.\n\n3. **`total_busy_minutes`** \u2014 Now calls `merge_intervals` first before summing, so overlapping intervals don't double-count minutes per the spec.\n\n4. **`find_free_slots`** \u2014 Three fixes: changed gap threshold from `>` to `>=` (\"at least min_len\" means equality counts); clamped interval bounds to `[day_start, day_end]`; added trailing gap check after busy intervals until `day_end`.",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-22T01:37:56Z"
+    }
+  ]
+}

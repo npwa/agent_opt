@@ -1,0 +1,58 @@
+{
+  "trial_id": "baseline_32k__bugfix_09_booking_slots__02",
+  "task": "bugfix_09_booking_slots",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 2,
+  "instrumented": true,
+  "prev_trial_id": "baseline_32k__comms_12_timezone_slot__03",
+  "prev_task": "comms_12_timezone_slot",
+  "seed": 1079704120,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T23:09:02Z",
+  "wall_start": 1792624142.7561703,
+  "wall_end": 1792624190.2867415,
+  "elapsed_s": 47.5,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 7,
+  "tokens_in": 62019,
+  "tokens_out": 933,
+  "tool_sequence": [
+    "read",
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": false,
+      "detail": "Ran 20 tests in 0.001s |  | FAILED (failures=6)"
+    }
+  ],
+  "final_answer": "All 7 tests pass. The three bugs fixed:\n\n1. **`overlaps`**: Changed `<=` to `<` so touching intervals are no longer considered overlapping\n2. **`merge_intervals`**: Changed `start < merged[-1][1]` to `start <= merged[-1][1]` to merge touching intervals\n3. **`merge_intervals`**: Used `sorted(intervals)` instead of `intervals.sort()` to avoid mutating the caller's list",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-21T23:09:02Z"
+    }
+  ]
+}

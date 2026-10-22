@@ -1,0 +1,62 @@
+{
+  "trial_id": "baseline_32k__bugfix_09_booking_slots__09",
+  "task": "bugfix_09_booking_slots",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 9,
+  "instrumented": true,
+  "prev_trial_id": "baseline_32k__bugfix_09_booking_slots__08",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 570239202,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T01:43:19Z",
+  "wall_start": 1792633399.4234612,
+  "wall_end": 1792633499.0090883,
+  "elapsed_s": 99.6,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 10,
+  "tokens_in": 100996,
+  "tokens_out": 2122,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "read",
+    "edit",
+    "edit",
+    "edit",
+    "bash",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": false,
+      "detail": "Ran 20 tests in 0.001s |  | FAILED (failures=2)"
+    }
+  ],
+  "final_answer": "All 7 tests pass now. Here's a summary of the bugs fixed:\n\n1. **`overlaps`** (line 13): Used `<=` instead of `<`, treating touching intervals as overlapping.\n2. **`merge_intervals`** (line 21): Mutated the argument list (`intervals.sort()` \u2192 `sorted(intervals)`). \n3. **`merge_intervals`** (line 24): Had branches reversed \u2014 the merge condition and append were swapped, causing an IndexError.\n4. **`find_free_slots`** (lines 45-52): Used `>` instead of `>=` for gap length check, didn't clamp busy intervals to the day window, and didn't check for a trailing free slot after the last busy interval.",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T01:43:19Z"
+    }
+  ]
+}

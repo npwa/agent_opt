@@ -1,0 +1,52 @@
+{
+  "trial_id": "baseline_32k__longctx_11_harbor_report__08",
+  "task": "longctx_11_harbor_report",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 8,
+  "instrumented": true,
+  "prev_trial_id": "baseline_32k__comms_12_timezone_slot__00",
+  "prev_task": "comms_12_timezone_slot",
+  "seed": 915428434,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T23:39:46Z",
+  "wall_start": 1792625986.0914788,
+  "wall_end": 1792626096.3756528,
+  "elapsed_s": 110.3,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 60392,
+  "tokens_out": 1120,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": false,
+      "detail": "1: total 2673 not stated; 3: expected a change of 2.6 %; 4: named ['Cormorant Quay', 'East Spit', 'Fennick', 'Ironbridge'], expected ['Alder Point', 'Cormorant Quay', 'East Spit', 'Fennick']"
+    }
+  ],
+  "final_answer": "1. 2,665 kTEU\n2. Garrow Bay, 10.74 per 100 kTEU\n3. +7.1%\n4. Cormorant Quay, East Spit, Fennick, Ironbridge\n5. Board of Directors on 21 November 2025\n6. 1 April 2026",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-21T23:39:46Z"
+    }
+  ]
+}

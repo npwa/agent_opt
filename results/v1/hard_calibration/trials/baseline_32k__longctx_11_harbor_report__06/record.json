@@ -1,0 +1,51 @@
+{
+  "trial_id": "baseline_32k__longctx_11_harbor_report__06",
+  "task": "longctx_11_harbor_report",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 6,
+  "instrumented": true,
+  "prev_trial_id": "baseline_32k__bugfix_09_booking_slots__04",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 1182725578,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T01:03:52Z",
+  "wall_start": 1792631032.4665937,
+  "wall_end": 1792631144.1031165,
+  "elapsed_s": 111.6,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 52696,
+  "tokens_out": 1349,
+  "tool_sequence": [
+    "read",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": false,
+      "detail": "1: total 2673 not stated; 3: expected a change of 2.6 %; 4: named ['Cormorant Quay', 'East Spit', 'Fennick', 'Ironbridge'], expected ['Alder Point', 'Cormorant Quay', 'East Spit', 'Fennick']"
+    }
+  ],
+  "final_answer": "I've read the full report including Appendix A (errata). Here are the answers:\n\n1. 3,139 kTEU\n2. Garrow Bay, 10.75 per 100 kTEU\n3. +0.6%\n4. Cormorant Quay, East Spit, Fennick, Ironbridge\n5. Board of Directors, 21 November 2025\n6. 1 April 2026",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T01:03:52Z"
+    }
+  ]
+}

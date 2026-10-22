@@ -1,0 +1,52 @@
+{
+  "trial_id": "baseline_32k__longctx_11_harbor_report__05",
+  "task": "longctx_11_harbor_report",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 5,
+  "instrumented": true,
+  "prev_trial_id": "baseline_32k__coding_10_wcx_constrained__08",
+  "prev_task": "coding_10_wcx_constrained",
+  "seed": 81962371,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T00:02:10Z",
+  "wall_start": 1792627330.9510639,
+  "wall_end": 1792627445.985594,
+  "elapsed_s": 115.0,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 60392,
+  "tokens_out": 1341,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": false,
+      "detail": "3: expected a change of 2.6 %; 4: named ['Alder Point', 'Brightwater', 'Cormorant Quay', 'East Spit', 'Fennick', 'Garrow Bay'], expected ['Alder Point', 'Cormorant Quay', 'East Spit', 'Fennick']"
+    }
+  ],
+  "final_answer": "I've read the full report including Appendix A errata. Here are the answers using corrected figures:\n\n1. 2673 kTEU\n2. Garrow Bay, 10.75 per 100 kTEU\n3. +10.7%\n4. Alder Point, Brightwater, Cormorant Quay, East Spit, Fennick, Garrow Bay\n5. Board of Directors, 21 November 2025\n6. 1 April 2026",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T00:02:10Z"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "trial_id": "baseline_32k__comms_12_timezone_slot__06",
+  "task": "comms_12_timezone_slot",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 6,
+  "instrumented": true,
+  "prev_trial_id": "baseline_32k__coding_10_wcx_constrained__04",
+  "prev_task": "coding_10_wcx_constrained",
+  "seed": 417101469,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T00:16:34Z",
+  "wall_start": 1792628194.0821474,
+  "wall_end": 1792628288.5642877,
+  "elapsed_s": 94.5,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 21751,
+  "tokens_out": 1794,
+  "tool_sequence": [
+    "comm-tools_create_event",
+    "comm-tools_create_event"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": false,
+      "detail": "event at 2026-09-15T14:30:00 - 2026-09-15T15:15:00, expected 2026-09-16T13:30 - 14:15 UTC; 0 emails sent, expected 3; 0 emails to ana@example.com, expected 1; 0 emails to ben@example.com, expected 1; 0 emails to chen@example.com, expected 1"
+    }
+  ],
+  "final_answer": "Now sending the three personalized emails:",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T00:16:34Z"
+    }
+  ]
+}

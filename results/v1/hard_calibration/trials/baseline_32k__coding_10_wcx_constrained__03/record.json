@@ -1,0 +1,57 @@
+{
+  "trial_id": "baseline_32k__coding_10_wcx_constrained__03",
+  "task": "coding_10_wcx_constrained",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 3,
+  "instrumented": true,
+  "prev_trial_id": "baseline_32k__coding_10_wcx_constrained__09",
+  "prev_task": "coding_10_wcx_constrained",
+  "seed": 84981430,
+  "run_seed": 1,
+  "status": "timeout",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T00:22:08Z",
+  "wall_start": 1792628528.7064884,
+  "wall_end": 1792629128.7589853,
+  "elapsed_s": 600.1,
+  "timed_out": true,
+  "stalled": false,
+  "exit_codes": [
+    -9
+  ],
+  "steps": 6,
+  "tokens_in": 50734,
+  "tokens_out": 14183,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "write",
+    "write",
+    "write",
+    "write"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": false,
+      "detail": "compile failed: wcx.c: In function \u2018main\u2019:\nwcx.c:11:10: error: unused variable \u2018cr_lines\u2019 [-Werror=unused-variable]\n   11 |     long cr_lines = 0;  /* count of lone \\r (not followed by \\n) as \"lines\" */\n      |          ^~~~~~~~\nwcx.c:10:9: error: unused variable \u2018cr_pending\u2019 [-Werror=unused-variable]\n   10 |     i"
+    }
+  ],
+  "final_answer": "Let me first clean up, understand the spec, and write this correctly.",
+  "files": [
+    "wcx.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "timeout",
+      "reason": null,
+      "started_utc": "2026-10-22T00:22:08Z"
+    }
+  ]
+}

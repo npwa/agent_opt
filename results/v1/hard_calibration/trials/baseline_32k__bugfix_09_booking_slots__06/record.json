@@ -1,0 +1,65 @@
+{
+  "trial_id": "baseline_32k__bugfix_09_booking_slots__06",
+  "task": "bugfix_09_booking_slots",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 6,
+  "instrumented": true,
+  "prev_trial_id": "baseline_32k__bugfix_09_booking_slots__03",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 1205975339,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T00:44:46Z",
+  "wall_start": 1792629886.5935962,
+  "wall_end": 1792630039.4323862,
+  "elapsed_s": 152.8,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 14,
+  "tokens_in": 143993,
+  "tokens_out": 3547,
+  "tool_sequence": [
+    "read",
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "edit",
+    "bash",
+    "edit",
+    "edit",
+    "bash",
+    "edit",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 1,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": false,
+      "detail": "Ran 20 tests in 0.001s |  | FAILED (failures=3)"
+    }
+  ],
+  "final_answer": "All 7 tests pass. Here's what was fixed in `bookings.py`:\n\n- **`overlaps()`** \u2014 changed `<=` to `<` so touching intervals (540,600)/(600,660) don't count as overlapping (`bookings.py:13`)\n- **`merge_intervals()`** \u2014 changed `<` to `<=` so touching intervals merge, and used `sorted()` instead of `.sort()` to avoid mutating the input argument (`bookings.py:21,24`)\n- **`total_busy_minutes()`** \u2014 added `merge_intervals()` call so overlapping intervals are deduplicated per docstring spec (`bookings.py:33`)\n- **`find_free_slots()`** \u2014 changed `>` to `>=` (exactly min_len qualifies), and clamped busy intervals to the day window (`bookings.py:44,48`)",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T00:44:46Z"
+    }
+  ]
+}

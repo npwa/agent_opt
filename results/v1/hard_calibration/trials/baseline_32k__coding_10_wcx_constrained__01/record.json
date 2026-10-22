@@ -1,0 +1,60 @@
+{
+  "trial_id": "baseline_32k__coding_10_wcx_constrained__01",
+  "task": "coding_10_wcx_constrained",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "baseline_32k__bugfix_09_booking_slots__02",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 1475347520,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-21T23:09:50Z",
+  "wall_start": 1792624190.3850563,
+  "wall_end": 1792624429.8354461,
+  "elapsed_s": 239.4,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 10,
+  "tokens_in": 90244,
+  "tokens_out": 7323,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "write",
+    "write",
+    "write",
+    "bash",
+    "bash",
+    "write",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": false,
+      "detail": "no trailing newline: expected '0 2 11 11\\n', got exit 0, '1 2 11 11\\n'; unterminated last line is the longest: expected '2 4 13 8\\n', got exit 0, '3 2 13 8\\n'; tab vtab formfeed: expected '0 4 7 7\\n', got exit 0, '1 4 7 7\\n'; nul bytes belong to words: expected '0 2 6 6\\n', got exit 0, '1 2 6 6\\n' (+4 more)"
+    }
+  ],
+  "final_answer": "",
+  "files": [
+    "wcx.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-21T23:09:50Z"
+    }
+  ]
+}

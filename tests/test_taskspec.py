@@ -115,7 +115,7 @@ def test_check_assets_reports_missing(tmp_path):
 def test_committed_tasks_are_valid_and_complete():
     specs = taskspec.load_all(TASKS)
     ids = {s.id for s in specs}
-    assert len(specs) == 14
+    assert len(specs) == 18  # 14 original tasks + the four hard tasks (P5)
     assert {s.category for s in specs} >= {
         "bugfix", "refactor", "log_triage", "repo_qa", "long_context", "code_gen"}
     assert {"coding_01_my_sqrt_review", "comms_07_confirm_send", "research_08e_free_will"} <= ids

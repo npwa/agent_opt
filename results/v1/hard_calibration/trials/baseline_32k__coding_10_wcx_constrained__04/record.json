@@ -1,0 +1,76 @@
+{
+  "trial_id": "baseline_32k__coding_10_wcx_constrained__04",
+  "task": "coding_10_wcx_constrained",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 4,
+  "instrumented": true,
+  "prev_trial_id": "baseline_32k__longctx_11_harbor_report__09",
+  "prev_task": "longctx_11_harbor_report",
+  "seed": 614704220,
+  "run_seed": 1,
+  "status": "timeout",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T00:06:33Z",
+  "wall_start": 1792627593.6911407,
+  "wall_end": 1792628193.7573195,
+  "elapsed_s": 600.1,
+  "timed_out": true,
+  "stalled": false,
+  "exit_codes": [
+    -9
+  ],
+  "steps": 20,
+  "tokens_in": 220762,
+  "tokens_out": 16964,
+  "tool_sequence": [
+    "read",
+    "glob",
+    "read",
+    "write",
+    "write",
+    "write",
+    "write",
+    "write",
+    "write",
+    "write",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "read",
+    "edit",
+    "bash",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 1,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": false,
+      "detail": "unterminated last line is the longest: expected '2 4 13 8\\n', got exit 0, '2 2 13 8\\n'; high bytes belong to words: expected '2 3 10 7\\n', got exit 0, '2 2 10 7\\n'; many short lines: expected '200000 200000 400000 1\\n', got exit 0, '200000 1 400000 1\\n'; long line then short: expected '2 3 1000005 1000002\\n', got exit 0, '2 2 1000005 1000002\\n'"
+    }
+  ],
+  "final_answer": "",
+  "files": [
+    "wcx.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "timeout",
+      "reason": null,
+      "started_utc": "2026-10-22T00:06:33Z"
+    }
+  ]
+}

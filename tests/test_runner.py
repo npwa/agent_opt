@@ -360,13 +360,16 @@ def run_cli(monkeypatch, capsys, *args):
 
 
 def test_cli_suite_selection_and_task_trials(monkeypatch, capsys):
+    from harness.taskspec import load_all
+    all_specs = load_all(ROOT / "tasks")
+    n_core = sum("core" in s.suite for s in all_specs)
     code, cap = run_cli(monkeypatch, capsys, "--suite", "core", "--n", "2")
-    assert code == 0 and "10 tasks" not in cap.out and cap.out.rstrip().endswith("20 trials")
+    assert code == 0 and cap.out.rstrip().endswith(f"{2 * n_core} trials")
     assert "bugfix_01_moving_average" not in cap.out  # guard task not in core
     code, cap = run_cli(monkeypatch, capsys, "--n", "10")  # guards honour their own n = 3
     assert "bugfix_01_moving_average=3" in cap.out and "c_ringbuf_03_ringbuffer=10" in cap.out
     code, cap = run_cli(monkeypatch, capsys, "--n", "10", "--ignore-task-trials")
-    assert cap.out.rstrip().endswith("140 trials")
+    assert cap.out.rstrip().endswith(f"{10 * len(all_specs)} trials")
     code, cap = run_cli(monkeypatch, capsys, "--suite", "core", "--tasks", "coding_02_fizzbuzz_gen", "--n", "4")
     assert cap.out.rstrip().endswith("4 trials")
 

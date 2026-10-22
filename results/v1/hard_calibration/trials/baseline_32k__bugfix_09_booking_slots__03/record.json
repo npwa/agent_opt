@@ -1,0 +1,59 @@
+{
+  "trial_id": "baseline_32k__bugfix_09_booking_slots__03",
+  "task": "bugfix_09_booking_slots",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 3,
+  "instrumented": true,
+  "prev_trial_id": "baseline_32k__coding_10_wcx_constrained__05",
+  "prev_task": "coding_10_wcx_constrained",
+  "seed": 1116307545,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T00:43:29Z",
+  "wall_start": 1792629809.3121533,
+  "wall_end": 1792629886.4947834,
+  "elapsed_s": 77.2,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 7,
+  "tokens_in": 64387,
+  "tokens_out": 1667,
+  "tool_sequence": [
+    "read",
+    "bash",
+    "read",
+    "read",
+    "edit",
+    "edit",
+    "read",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": false,
+      "detail": "Ran 20 tests in 0.001s |  | FAILED (failures=6)"
+    }
+  ],
+  "final_answer": "All 7 tests pass. The two fixes were:\n\n1. **`overlaps` (line 13)**: Changed `a[0] <= b[1] and b[0] <= a[1]` to `a[0] < b[1] and b[0] < a[1]` \u2014 touching intervals should not be considered overlapping.\n\n2. **`merge_intervals` (lines 21, 24)**: Changed `intervals.sort()` (which mutated the caller's list) to `sorted(intervals)` (which creates a copy), and changed `start < merged[-1][1]` to `start <= merged[-1][1]` so that touching intervals get merged.",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T00:43:29Z"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "trial_id": "baseline_32k__bugfix_09_booking_slots__07",
+  "task": "bugfix_09_booking_slots",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 7,
+  "instrumented": true,
+  "prev_trial_id": "baseline_32k__bugfix_09_booking_slots__09",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 701599131,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T01:44:59Z",
+  "wall_start": 1792633499.0988905,
+  "wall_end": 1792633590.9340634,
+  "elapsed_s": 91.8,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 7,
+  "tokens_in": 66086,
+  "tokens_out": 2133,
+  "tool_sequence": [
+    "read",
+    "bash",
+    "read",
+    "read",
+    "edit",
+    "edit",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": false,
+      "detail": "Ran 20 tests in 0.001s |  | FAILED (failures=2)"
+    }
+  ],
+  "final_answer": "All 7 tests pass. Here's what I fixed:\n\n1. **`overlaps`** (line 13): Changed `<=` to `<` on both comparisons so touching intervals like `(540,600)` and `(600,660)` are not considered overlapping.\n\n2. **`merge_intervals`** (lines 21, 24): Changed `intervals.sort()` to `sorted(intervals)` so the argument is not mutated; changed `start < merged[-1][1]` to `start <=` so touching intervals get merged.\n\n3. **`find_free_slots`** (lines 46-49): Fixed three issues \u2014 busy intervals clipped to the day window, gap check changed from `>` to `>=` (a gap of exactly `min_len` qualifies), cursor capped at `day_end`, and a trailing free slot after all busy intervals is checked.",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T01:44:59Z"
+    }
+  ]
+}

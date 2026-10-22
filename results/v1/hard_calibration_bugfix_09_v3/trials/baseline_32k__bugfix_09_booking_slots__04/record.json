@@ -1,0 +1,64 @@
+{
+  "trial_id": "baseline_32k__bugfix_09_booking_slots__04",
+  "task": "bugfix_09_booking_slots",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 4,
+  "instrumented": true,
+  "prev_trial_id": "baseline_32k__bugfix_09_booking_slots__00",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 1981281495,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T01:51:56Z",
+  "wall_start": 1792633916.6554556,
+  "wall_end": 1792634096.1987872,
+  "elapsed_s": 179.5,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 12,
+  "tokens_in": 126172,
+  "tokens_out": 4384,
+  "tool_sequence": [
+    "read",
+    "glob",
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "bash",
+    "edit",
+    "edit",
+    "bash",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Let me re-read the docstring for `find_free_slots` more carefully: \"parts of a busy interval that lie outside the day window are ignored\" and \"A gap of exactly min_len minutes is long enough.\" Let me also verify the return type \u2014 it should return tuples, not lists. Currently it returns `(cursor, start)` which creates tuples via the tuple literal syntax... actually wait, I see `free.append((cursor, start))` which does create tuples. Good.\n\nLet me also check: docstring says \"Returns a list of (start, end) tuples\" \u2014 that's what we're doing. The fix looks correct.\n\nAll bugs are fixed. Here's a summary:\n\n1. **`overlaps`**: Changed `<=` to `<` for both boundary comparisons \u2014 touching intervals shouldn't count as overlapping\n2. **`merge_intervals`**: (a) Used `sorted()` instead of `.sort()` to avoid mutating the argument, (b) Changed `<` to `<=` so touching intervals get merged\n3. **`total_busy_minutes`**: Added `merge_intervals()` call before summing \u2014 the docstring says \"a minute covered twice counts once\" but the original code double-counted overlapping minutes\n4. **`find_free_slots`**: (a) Fixed `<` to `>=` so gaps of exactly `min_len` qualify, (b) Added clipping of busy intervals to the day window `[day_start, day_end]`, (c) Added merging of overlapping/adjacent busy intervals using `merge_intervals`, (d) Added final gap check after the last busy interval",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-22T01:51:56Z"
+    }
+  ]
+}

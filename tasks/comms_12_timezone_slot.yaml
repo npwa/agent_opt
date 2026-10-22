@@ -1,0 +1,16 @@
+id: comms_12_timezone_slot
+title: Find the earliest meeting slot across three time zones, book it and email each attendee their local time
+category: comms
+prompts:
+  - "Schedule a 45-minute meeting titled \"Design review\" for Ana (ana@example.com, Lisbon), Ben (ben@example.com, New York) and Chen (chen@example.com, Berlin). Only Monday 2026-09-14, Tuesday 2026-09-15 and Wednesday 2026-09-16 are possible. In September the local time offsets from UTC are: Lisbon UTC+1, New York UTC-4, Berlin UTC+2. Rules: the meeting must lie completely within 09:00 to 17:00 local time for each of the three; it must start on a quarter hour; choose the earliest start that works for everyone. Busy times (local time of each person): Ana is busy all day Monday and on Tuesday from 14:00 to 15:30. Ben is busy on Monday from 09:00 to 11:30, on Tuesday from 13:00 to 14:00 and on Wednesday from 09:00 to 09:30. Chen is busy on Monday from 15:00 to 17:00 and on Tuesday from 15:00 to 16:30. Create the calendar event with all three attendees, giving start and end in UTC as ISO 8601 without a suffix (for example 2026-09-14T13:30:00), and then send each of the three exactly one email with the subject \"Design review\" whose body states the meeting date and its start time in THAT PERSON'S local time (24-hour HH:MM) and the length. I authorise you to create the event and send the emails right away, do not ask me for confirmation, and do not repeat any action."
+agent: comms
+mcp: [comm-tools]
+env:
+  COMM_TOOLS_MODE: mock
+timeout_s: 900
+expected_tool_sequence: [comm-tools_create_event, comm-tools_send_email, comm-tools_send_email, comm-tools_send_email]
+tags: [mock-tools, timezones, constraints, hard]
+suite: [core]
+verify:
+  - type: python
+    callable: "harness.verifiers.hard:tz_slot"

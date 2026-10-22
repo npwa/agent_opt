@@ -1,0 +1,14 @@
+id: coding_10_wcx_constrained
+title: Constrained C filter (no dynamic memory, exact semantics, edge-case inputs)
+category: code_gen
+prompts:
+  - "Write wcx.c as specified in WCX.md and compile it with exactly the flags given there."
+fixture: coding_10_wcx_constrained
+tools: [read, write, edit, bash, glob, list]
+timeout_s: 600
+expected_tool_sequence: [read, write, bash]
+tags: [c, hard, constraints, edge-cases]
+suite: [core]
+verify:
+  - type: python
+    callable: "harness.verifiers.hard:wcx"

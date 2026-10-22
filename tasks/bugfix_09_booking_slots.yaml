@@ -1,0 +1,14 @@
+id: bugfix_09_booking_slots
+title: Fix the booking helpers (two failing tests, more latent bugs, docstrings are the spec)
+category: bugfix
+prompts:
+  - "The tests in test_bookings.py fail. Run them with 'python3 -m unittest' and fix bookings.py. The failing tests show only some of the problems: the docstrings in bookings.py are the specification and the service has more users than these tests cover, so check every function against its docstring (including what it must not do to its arguments) and make each one behave exactly as documented. Do not modify the tests."
+fixture: bugfix_09_booking_slots
+tools: [read, write, edit, bash, glob, grep, list]
+timeout_s: 900
+expected_tool_sequence: [bash, read, edit, bash]
+tags: [python, hard, latent-bugs]
+suite: [core]
+verify:
+  - type: py_test
+    test_source: test_hidden.py
