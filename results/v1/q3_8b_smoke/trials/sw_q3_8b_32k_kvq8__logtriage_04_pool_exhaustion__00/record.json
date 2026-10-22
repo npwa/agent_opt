@@ -1,0 +1,52 @@
+{
+  "trial_id": "sw_q3_8b_32k_kvq8__logtriage_04_pool_exhaustion__00",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "sw_q3_8b_32k_kvq8",
+  "model": "ollama/qwen3-8b-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_q3_8b_32k_kvq8__longctx_06_tidal_report__00",
+  "prev_task": "longctx_06_tidal_report",
+  "seed": 161329477,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T03:04:10Z",
+  "wall_start": 1792638250.6693513,
+  "wall_end": 1792638272.4498725,
+  "elapsed_s": 21.5,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 2,
+  "tokens_in": 13871,
+  "tokens_out": 1564,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": false,
+      "detail": "missing 'root_cause'; missing 'culprit_job'; missing 'culprit_user'"
+    }
+  ],
+  "final_answer": "1. First error burst started at 2026-01-18T03:17:42Z on host api-07  \n2. Root cause: Database connection exhaustion (max=20) causing 503 upstream errors  \n3. Likely responsible: Batch jobs hitting database limits - check job logs for heavy DB queries",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T03:04:10Z"
+    }
+  ]
+}

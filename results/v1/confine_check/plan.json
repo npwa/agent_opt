@@ -1,0 +1,67 @@
+{
+  "created_utc": "2026-10-22T04:44:08Z",
+  "run_seed": 1,
+  "n": 1,
+  "parity_fraction": 0.0,
+  "trials_per_task": {
+    "bugfix_01_moving_average": 1,
+    "coding_05_scientific_lan": 1,
+    "comms_07_confirm_send": 1,
+    "refactor_02_rename_price": 1,
+    "research_08e_free_will": 1
+  },
+  "configs": {
+    "baseline_32k": {
+      "id": "baseline_32k",
+      "model": "ollama/qwen3.6-32k",
+      "description": "qwen3.6 35B-A3B, num_ctx 32768 (Modelfile), default sampling, per-trial seed",
+      "seed_mode": "per_trial",
+      "options": {},
+      "server": null
+    }
+  },
+  "tasks": {
+    "bugfix_01_moving_average": "6bf7937511c3",
+    "coding_05_scientific_lan": "adf6f2792260",
+    "comms_07_confirm_send": "9da7f2d319ca",
+    "refactor_02_rename_price": "410b4bbf373e",
+    "research_08e_free_will": "5645c5453b04"
+  },
+  "order": [
+    {
+      "trial_id": "baseline_32k__comms_07_confirm_send__00",
+      "config": "baseline_32k",
+      "task": "comms_07_confirm_send",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "baseline_32k__refactor_02_rename_price__00",
+      "config": "baseline_32k",
+      "task": "refactor_02_rename_price",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "baseline_32k__research_08e_free_will__00",
+      "config": "baseline_32k",
+      "task": "research_08e_free_will",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "baseline_32k__bugfix_01_moving_average__00",
+      "config": "baseline_32k",
+      "task": "bugfix_01_moving_average",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "baseline_32k__coding_05_scientific_lan__00",
+      "config": "baseline_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 0,
+      "instrumented": true
+    }
+  ]
+}

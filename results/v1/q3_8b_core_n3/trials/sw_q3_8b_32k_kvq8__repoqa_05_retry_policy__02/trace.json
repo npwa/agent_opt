@@ -1,0 +1,102 @@
+{
+  "trial_id": "sw_q3_8b_32k_kvq8__repoqa_05_retry_policy__02",
+  "task": "repoqa_05_retry_policy",
+  "config": "sw_q3_8b_32k_kvq8",
+  "attempt": 1,
+  "status": "fail",
+  "summary": {
+    "wall_start": 1792640994.9384286,
+    "wall_end": 1792641014.2153485,
+    "wall_s": 19.276919841766357,
+    "n_steps": 2,
+    "llm_s": 17.3518,
+    "ttft_s": 2.0742,
+    "decode_s": 15.277600000000001,
+    "tool_s": 0.021999835968017578,
+    "gap_s": 0.14630126953125,
+    "idle_gap_s": 0.0,
+    "prefill_tokens": 13787,
+    "decode_tokens": 1349,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "sw_q3_8b_32k_kvq8__repoqa_05_retry_policy__02#a1:1",
+      "t_start": 1792640996.7172472,
+      "t_end": 1792641002.7583473,
+      "ttft_s": 1.6372,
+      "llm_s": 6.0411,
+      "decode_s": 4.4039,
+      "prefill_tokens": 6490,
+      "decode_tokens": 398,
+      "prefill_tok_s": 3964.09,
+      "decode_tok_s": 90.38,
+      "n_chunks": 312,
+      "first_token_skew_s": 0.009552717208862305,
+      "itl_p50_ms": 11.00000000000012,
+      "itl_p99_ms": 12.9999999999999,
+      "tool_names": [
+        "glob",
+        "grep"
+      ],
+      "tool_latency_s": 0.021999835968017578,
+      "tools": [
+        {
+          "tool": "glob",
+          "start": 1792641002.043,
+          "end": 1792641002.057,
+          "status": "completed"
+        },
+        {
+          "tool": "grep",
+          "start": 1792641002.74,
+          "end": 1792641002.748,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792640998.364,
+      "oc_step_finish": 1792641002.779,
+      "tool_errors": 0,
+      "gap_s": 0.03870654106140137,
+      "gpu_busy_pct_llm": 85.85,
+      "gpu_power_w_llm": 312.14833333333337,
+      "gpu_samples_llm": 60,
+      "gpu_busy_pct_gap": 97.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 2,
+      "llm_call_id": "sw_q3_8b_32k_kvq8__repoqa_05_retry_policy__02#a1:2",
+      "t_start": 1792641002.7970538,
+      "t_end": 1792641014.1077538,
+      "ttft_s": 0.437,
+      "llm_s": 11.3107,
+      "decode_s": 10.873700000000001,
+      "prefill_tokens": 7297,
+      "decode_tokens": 951,
+      "prefill_tok_s": 16697.94,
+      "decode_tok_s": 87.46,
+      "n_chunks": 946,
+      "first_token_skew_s": 0.004946231842041016,
+      "itl_p50_ms": 11.000000000001009,
+      "itl_p99_ms": 12.56000000000009,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792641003.239,
+      "oc_step_finish": 1792641014.122,
+      "tool_errors": 0,
+      "gap_s": 0.10759472846984863,
+      "gpu_busy_pct_llm": 96.64601769911505,
+      "gpu_power_w_llm": 354.6973451327434,
+      "gpu_samples_llm": 113,
+      "gpu_busy_pct_gap": 97.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

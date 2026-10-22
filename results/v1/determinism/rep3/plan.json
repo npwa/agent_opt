@@ -1,0 +1,60 @@
+{
+  "created_utc": "2026-10-22T05:04:27Z",
+  "run_seed": 1,
+  "n": 1,
+  "parity_fraction": 0.0,
+  "trials_per_task": {
+    "bugfix_01_moving_average": 1,
+    "coding_05_scientific_lan": 1,
+    "coding_06_tax_rates_lan": 1,
+    "repoqa_05_retry_policy": 1
+  },
+  "configs": {
+    "det_t0": {
+      "id": "det_t0",
+      "model": "ollama/qwen3.6-32k",
+      "description": "qwen3.6 35B-A3B, 32k context, temperature 0 (repeated trials should be identical if the stack is deterministic)",
+      "seed_mode": "none",
+      "options": {
+        "temperature": 0
+      },
+      "server": null
+    }
+  },
+  "tasks": {
+    "bugfix_01_moving_average": "6bf7937511c3",
+    "coding_05_scientific_lan": "adf6f2792260",
+    "coding_06_tax_rates_lan": "7d1c4ebf3406",
+    "repoqa_05_retry_policy": "790e1276cd56"
+  },
+  "order": [
+    {
+      "trial_id": "det_t0__repoqa_05_retry_policy__00",
+      "config": "det_t0",
+      "task": "repoqa_05_retry_policy",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "det_t0__bugfix_01_moving_average__00",
+      "config": "det_t0",
+      "task": "bugfix_01_moving_average",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "det_t0__coding_06_tax_rates_lan__00",
+      "config": "det_t0",
+      "task": "coding_06_tax_rates_lan",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "det_t0__coding_05_scientific_lan__00",
+      "config": "det_t0",
+      "task": "coding_05_scientific_lan",
+      "k": 0,
+      "instrumented": true
+    }
+  ]
+}

@@ -5,7 +5,7 @@
 #   scripts/session_p2_p6.sh p2                     # any subset; every stage is resumable (re-run to continue)
 #
 # Stages
-#   p2      determinism: 4 tasks x 6 repeats, temperature 0, system Ollama                       (about 20-25 min)
+#   p2      determinism: 4 tasks x 6 repeats with byte-identical prompts, temperature 0, system Ollama   (about 20 min)
 #   survey  start the two qwen3:8b servers once and record layers on GPU / KV size                (about 3 min)
 #   p6      smoke: every task once on qwen3:8b (32k, KV q8_0), checks that tool calls work        (about 20-40 min)
 #   core    qwen3:8b on the core suite, n = 3 (first screen of M5.4; only worth running if p6 looks sane) (about 1 h)
@@ -28,14 +28,16 @@ trap stop_proxy EXIT
 for stage in "$@"; do
     echo "=== $stage: $(date +%H:%M:%S)"
     case $stage in
-    p2)
-        OUT=results/v1/determinism
-        start_proxy $OUT
-        python -m harness.runner run --configs configs/determinism_t0.yaml \
-            --tasks coding_05_scientific_lan coding_06_tax_rates_lan bugfix_01_moving_average repoqa_05_retry_policy \
-            --n 6 --ignore-task-trials --seed 1 --out $OUT --scratch /tmp/agent_opt_scratch
-        python -m analysis.determinism --run $OUT
-        stop_proxy ;;
+    p2)  # repeats = the same trial id and scratch path in separate output directories, so the prompts are byte-identical
+        for rep in 0 1 2 3 4 5; do
+            OUT=results/v1/determinism/rep$rep
+            start_proxy $OUT
+            python -m harness.runner run --configs configs/determinism_t0.yaml \
+                --tasks coding_05_scientific_lan coding_06_tax_rates_lan bugfix_01_moving_average repoqa_05_retry_policy \
+                --n 1 --ignore-task-trials --seed 1 --out $OUT --scratch /tmp/agent_opt_scratch
+            stop_proxy
+        done
+        python -m analysis.determinism --run results/v1/determinism/rep[0-5] --out results/v1/determinism ;;
     survey)
         python -m harness.server survey --configs configs/sweep/sw_q3_8b_32k.yaml configs/sweep/sw_q3_8b_32k_kvq8.yaml \
             --out results/v1/server_survey_q3_8b ;;

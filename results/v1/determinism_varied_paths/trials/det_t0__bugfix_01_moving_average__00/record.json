@@ -1,0 +1,57 @@
+{
+  "trial_id": "det_t0__bugfix_01_moving_average__00",
+  "task": "bugfix_01_moving_average",
+  "config": "det_t0",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "det_t0__coding_05_scientific_lan__00",
+  "prev_task": "coding_05_scientific_lan",
+  "seed": null,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T02:43:33Z",
+  "wall_start": 1792637013.5412016,
+  "wall_end": 1792637044.8676596,
+  "elapsed_s": 31.3,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 6,
+  "tokens_in": 49785,
+  "tokens_out": 521,
+  "tool_sequence": [
+    "read",
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 5 tests pass. The bug was an off-by-one error in `stats_utils.py:9` \u2014 `range(len(values) - window)` was missing the `+ 1`, causing it to skip the last valid window position.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-22T02:43:33Z"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "trial_id": "sw_q3_8b_32k_kvq8__coding_10_wcx_constrained__01",
+  "task": "coding_10_wcx_constrained",
+  "config": "sw_q3_8b_32k_kvq8",
+  "model": "ollama/qwen3-8b-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_q3_8b_32k_kvq8__coding_03_compress_gen__02",
+  "prev_task": "coding_03_compress_gen",
+  "seed": 204817847,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T04:01:26Z",
+  "wall_start": 1792641686.2828565,
+  "wall_end": 1792641796.4655228,
+  "elapsed_s": 110.2,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 35686,
+  "tokens_out": 8847,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "write",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": false,
+      "detail": "compile failed: wcx.c: In function \u2018main\u2019:\nwcx.c:17:30: error: comparison of integer expressions of different signedness: \u2018size_t\u2019 {aka \u2018long unsigned int\u2019} and \u2018ssize_t\u2019 {aka \u2018long int\u2019} [-Werror=sign-compare]\n   17 |         for (size_t i = 0; i < n; i++) {\n      |                              ^\nwcx.c:23:41: erro"
+    }
+  ],
+  "final_answer": "",
+  "files": [
+    "wcx.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T04:01:26Z"
+    }
+  ]
+}

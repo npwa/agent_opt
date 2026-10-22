@@ -62,3 +62,13 @@ def test_cli_writes_reports(tmp_path, monkeypatch):
     monkeypatch.setattr(sys, "argv", ["x", "--run", str(run)])
     assert det.main() == 0
     assert (run / "determinism.md").exists() and json.loads((run / "determinism.json").read_text())["meets_90pct_rule"]
+
+
+def test_repeats_across_run_directories_are_matched_by_task(tmp_path):
+    runs = []
+    for k, steps in enumerate([A, A, B]):
+        d = tmp_path / f"rep{k}"
+        d.mkdir()
+        runs.append(make_run(d, [(steps, [10, 20, 30], True)]))
+    res = det.analyse_dirs(runs)["tasks"]["task_a"]
+    assert res["repeats"] == 3 and res["identical_to_modal"] == 2 and res["first_divergence_steps"] == [1]

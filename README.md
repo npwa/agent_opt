@@ -141,6 +141,12 @@ trial's id and task (`prev_trial_id`, `prev_task`): the randomized order is back
 be served from the previous trial's prompt cache, which analyses can use as a covariate. Run
 `python -m harness.manifest` to record the hardware/software manifest.
 
+**Confinement.** OpenCode runs with every permission allowed and the rights of the user, and a weaker model once
+searched the whole filesystem and edited the repository's fixtures. The runner therefore starts every trial under
+Linux Landlock (`harness/landlock.py`, no root needed): a trial can read system paths and write only inside its own
+trial directory (`TMPDIR` is set there); the repository (including the hidden verifier files), the home directory and
+other trials are not accessible. `--no-confine` turns it off.
+
 **Server settings per configuration.** A config with a `server:` section (`num_ctx`, `kv_cache_type`,
 `flash_attention`, `num_parallel`, `fit_target_mib`; see `configs/sweep/` and `harness/server.py`) runs on a private
 `ollama serve` that the runner starts with exactly those settings when the config's block of trials begins, points

@@ -1,0 +1,56 @@
+{
+  "trial_id": "det_t0__bugfix_01_moving_average__05",
+  "task": "bugfix_01_moving_average",
+  "config": "det_t0",
+  "model": "ollama/qwen3.6-32k",
+  "k": 5,
+  "instrumented": true,
+  "prev_trial_id": "det_t0__coding_06_tax_rates_lan__01",
+  "prev_task": "coding_06_tax_rates_lan",
+  "seed": null,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T02:42:31Z",
+  "wall_start": 1792636951.3378081,
+  "wall_end": 1792636981.5138285,
+  "elapsed_s": 30.2,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 40791,
+  "tokens_out": 533,
+  "tool_sequence": [
+    "read",
+    "read",
+    "read",
+    "bash",
+    "edit"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "The bug is on line 9: `range(len(values) - window)` should be `range(len(values) - window + 1)` to include the last valid window position.\nFixed: `range(len(values) - window)` \u2192 `range(len(values) - window + 1)` on line 9, so the last valid window position is included.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-22T02:42:31Z"
+    }
+  ]
+}

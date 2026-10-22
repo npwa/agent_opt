@@ -1,0 +1,102 @@
+{
+  "trial_id": "sw_q3_8b_32k_kvq8__coding_05_scientific_lan__02",
+  "task": "coding_05_scientific_lan",
+  "config": "sw_q3_8b_32k_kvq8",
+  "attempt": 1,
+  "status": "fail",
+  "summary": {
+    "wall_start": 1792640019.912045,
+    "wall_end": 1792640032.4367216,
+    "wall_s": 12.52467656135559,
+    "n_steps": 2,
+    "llm_s": 10.599,
+    "ttft_s": 2.9184,
+    "decode_s": 7.6806,
+    "tool_s": 0.497999906539917,
+    "gap_s": 0.21786880493164062,
+    "idle_gap_s": 0.0,
+    "prefill_tokens": 16597,
+    "decode_tokens": 671,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "sw_q3_8b_32k_kvq8__coding_05_scientific_lan__02#a1:1",
+      "t_start": 1792640021.6198528,
+      "t_end": 1792640027.4132528,
+      "ttft_s": 1.6023,
+      "llm_s": 5.7934,
+      "decode_s": 4.1911000000000005,
+      "prefill_tokens": 6444,
+      "decode_tokens": 380,
+      "prefill_tok_s": 4021.72,
+      "decode_tok_s": 90.67,
+      "n_chunks": 302,
+      "first_token_skew_s": 0.008847236633300781,
+      "itl_p50_ms": 11.00000000000012,
+      "itl_p99_ms": 12.9999999999999,
+      "tool_names": [
+        "webfetch",
+        "webfetch"
+      ],
+      "tool_latency_s": 0.497999906539917,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792640026.963,
+          "end": 1792640027.357,
+          "status": "completed"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792640027.394,
+          "end": 1792640027.498,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792640023.231,
+      "oc_step_finish": 1792640027.514,
+      "tool_errors": 1,
+      "gap_s": 0.11253643035888672,
+      "gpu_busy_pct_llm": 83.62068965517241,
+      "gpu_power_w_llm": 314.5396551724138,
+      "gpu_samples_llm": 58,
+      "gpu_busy_pct_gap": 96.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 2,
+      "llm_call_id": "sw_q3_8b_32k_kvq8__coding_05_scientific_lan__02#a1:2",
+      "t_start": 1792640027.5257893,
+      "t_end": 1792640032.3313892,
+      "ttft_s": 1.3161,
+      "llm_s": 4.8056,
+      "decode_s": 3.4895,
+      "prefill_tokens": 10153,
+      "decode_tokens": 291,
+      "prefill_tok_s": 7714.46,
+      "decode_tok_s": 83.39,
+      "n_chunks": 287,
+      "first_token_skew_s": 0.004110813140869141,
+      "itl_p50_ms": 12.00000000000001,
+      "itl_p99_ms": 13.150000000000238,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792640028.846,
+      "oc_step_finish": 1792640032.343,
+      "tool_errors": 0,
+      "gap_s": 0.1053323745727539,
+      "gpu_busy_pct_llm": 97.02083333333333,
+      "gpu_power_w_llm": 351.10833333333335,
+      "gpu_samples_llm": 48,
+      "gpu_busy_pct_gap": 97.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

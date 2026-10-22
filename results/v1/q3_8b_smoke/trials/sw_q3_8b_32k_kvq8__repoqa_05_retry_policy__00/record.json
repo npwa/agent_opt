@@ -1,0 +1,51 @@
+{
+  "trial_id": "sw_q3_8b_32k_kvq8__repoqa_05_retry_policy__00",
+  "task": "repoqa_05_retry_policy",
+  "config": "sw_q3_8b_32k_kvq8",
+  "model": "ollama/qwen3-8b-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_q3_8b_32k_kvq8__coding_03_compress_gen__00",
+  "prev_task": "coding_03_compress_gen",
+  "seed": 805662772,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T02:51:23Z",
+  "wall_start": 1792637483.8277915,
+  "wall_end": 1792637519.20406,
+  "elapsed_s": 35.4,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 20372,
+  "tokens_out": 2776,
+  "tool_sequence": [
+    "glob",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": false,
+      "detail": "missing 'delay_function_cited'; missing 'max_delay_value'; missing 'max_delay_citation'; missing 'max_attempts_value'; missing 'max_attempts_citation'"
+    }
+  ],
+  "final_answer": "(1) The `next_delay` method in `retry.py` computes the delay using exponential backoff.  \n(2) The default maximum delay is `config.RETRY_MAX_DELAY_S` (defined in `config.py`).  \n(3) Retries stop after `config.RETRY_MAX_ATTEMPTS` attempts (also defined in `config.py`).  \n\nFiles cited:  \n1. `retry.py:20` (for delay computation)  \n2. `config.py:RETRY_MAX_DELAY_S` (default max delay)  \n3. `config.py:RETRY_MAX_ATTEMPTS` (default retry count)",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T02:51:23Z"
+    }
+  ]
+}

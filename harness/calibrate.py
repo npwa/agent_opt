@@ -131,8 +131,17 @@ def _wait(p: subprocess.Popen, remaining: float, events: Path, stall_s: float | 
             return "stalled"
 
 
+def confined(cmd: list[str], rw: list[Path] | None) -> list[str]:
+    """Wrap ``cmd`` so that it runs under harness/landlock.py with only ``rw`` (plus system read-only paths) accessible."""
+    if rw is None:
+        return cmd
+    args = [a for p in rw for a in ("--rw", str(p))]
+    return [sys.executable, str(Path(__file__).with_name("landlock.py")), *args, "--", *cmd]  # a script path: cwd is the trial dir
+
+
 def run_opencode(spec: TaskSpec, work: Path, run_dir: Path, env: dict, model: str,
-                 max_s: int, events: Path, stall_s: float | None = None, busy=None) -> dict:
+                 max_s: int, events: Path, stall_s: float | None = None, busy=None,
+                 confine: list[Path] | None = None) -> dict:
     session = None
     started = time.monotonic()
     timed_out = stalled = False
@@ -150,7 +159,7 @@ def run_opencode(spec: TaskSpec, work: Path, run_dir: Path, env: dict, model: st
             timed_out = True
             break
         with open(events, "ab") as out, open(run_dir / "stderr.txt", "ab") as err:
-            p = subprocess.Popen(cmd, env=env, cwd=work, stdin=subprocess.DEVNULL, stdout=out,
+            p = subprocess.Popen(confined(cmd, confine), env=env, cwd=work, stdin=subprocess.DEVNULL, stdout=out,
                                  stderr=err, start_new_session=True)
             result = _wait(p, remaining, events, stall_s, busy)
             if isinstance(result, str):

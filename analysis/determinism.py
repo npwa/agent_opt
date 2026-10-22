@@ -61,15 +61,21 @@ def first_divergence(a: list, b: list) -> int | None:
 
 
 def analyse_run(run_dir: Path) -> dict:
-    run_dir = Path(run_dir)
-    tokens = completion_tokens(run_dir / "proxy" / "metrics.jsonl")
+    """Repeats = the trials of one run directory (their ids differ, hence so do their scratch paths)."""
+    return analyse_dirs([Path(run_dir)])
+
+
+def analyse_dirs(run_dirs: list[Path]) -> dict:
+    """Repeats = the trials of the same task across several run directories (identical trial ids and paths)."""
     by_task = defaultdict(list)
-    for rec_path in sorted((run_dir / "trials").glob("*/record.json")):
-        rec = json.loads(rec_path.read_text())
-        ev = rec_path.parent / "events.jsonl"
-        if rec.get("instrumented", True) and rec.get("status") != "harness_failed" and ev.exists():
-            by_task[rec["task"]].append({"trial": rec["trial_id"], "sig": signature(ev), "passed": bool(rec.get("verdict_passed")),
-                                         "tokens": tokens.get(rec["trial_id"], [])})
+    for run_dir in map(Path, run_dirs):
+        tokens = completion_tokens(run_dir / "proxy" / "metrics.jsonl")
+        for rec_path in sorted((run_dir / "trials").glob("*/record.json")):
+            rec = json.loads(rec_path.read_text())
+            ev = rec_path.parent / "events.jsonl"
+            if rec.get("instrumented", True) and rec.get("status") != "harness_failed" and ev.exists():
+                by_task[rec["task"]].append({"trial": f"{run_dir.name}/{rec['trial_id']}", "sig": signature(ev),
+                                             "passed": bool(rec.get("verdict_passed")), "tokens": tokens.get(rec["trial_id"], [])})
     tasks = {}
     for task, reps in sorted(by_task.items()):
         keys = [json.dumps(r["sig"]) for r in reps]
@@ -114,13 +120,18 @@ def render(name: str, res: dict) -> str:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="Determinism of repeated trials in a run directory")
-    ap.add_argument("--run", type=Path, required=True)
+    ap = argparse.ArgumentParser(description="Determinism of repeated trials")
+    ap.add_argument("--run", type=Path, nargs="+", required=True,
+                    help="one run directory (repeats = its trials) or several (repeats = the same trial of each)")
+    ap.add_argument("--out", type=Path, help="where to write determinism.md/json (default: the first run directory's parent if several)")
     a = ap.parse_args()
-    res = analyse_run(a.run)
-    (a.run / "determinism.json").write_text(json.dumps(res, indent=2) + "\n")
-    (a.run / "determinism.md").write_text(render(a.run.name, res))
-    print(render(a.run.name, res))
+    res = analyse_dirs(a.run)
+    out = a.out or (a.run[0] if len(a.run) == 1 else a.run[0].parent)
+    out.mkdir(parents=True, exist_ok=True)
+    name = out.name
+    (out / "determinism.json").write_text(json.dumps(res, indent=2) + "\n")
+    (out / "determinism.md").write_text(render(name, res))
+    print(render(name, res))
     return 0
 
 

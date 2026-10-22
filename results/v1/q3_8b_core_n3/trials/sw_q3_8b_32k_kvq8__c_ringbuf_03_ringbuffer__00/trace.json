@@ -1,0 +1,141 @@
+{
+  "trial_id": "sw_q3_8b_32k_kvq8__c_ringbuf_03_ringbuffer__00",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_q3_8b_32k_kvq8",
+  "attempt": 1,
+  "status": "fail",
+  "summary": {
+    "wall_start": 1792641532.6633074,
+    "wall_end": 1792641554.9875097,
+    "wall_s": 22.324202299118042,
+    "n_steps": 3,
+    "llm_s": 20.441699999999997,
+    "ttft_s": 2.0909,
+    "decode_s": 18.3508,
+    "tool_s": 0.018000125885009766,
+    "gap_s": 0.16800498962402344,
+    "idle_gap_s": 0.0,
+    "prefill_tokens": 19673,
+    "decode_tokens": 1639,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "sw_q3_8b_32k_kvq8__c_ringbuf_03_ringbuffer__00#a1:1",
+      "t_start": 1792641534.3778045,
+      "t_end": 1792641548.5466046,
+      "ttft_s": 1.6354,
+      "llm_s": 14.1688,
+      "decode_s": 12.533399999999999,
+      "prefill_tokens": 6475,
+      "decode_tokens": 1114,
+      "prefill_tok_s": 3959.28,
+      "decode_tok_s": 88.88,
+      "n_chunks": 1036,
+      "first_token_skew_s": 0.010795354843139648,
+      "itl_p50_ms": 11.00000000000012,
+      "itl_p99_ms": 12.000000000000455,
+      "tool_names": [
+        "read",
+        "read"
+      ],
+      "tool_latency_s": 0.00800013542175293,
+      "tools": [
+        {
+          "tool": "read",
+          "start": 1792641548.09,
+          "end": 1792641548.095,
+          "status": "error"
+        },
+        {
+          "tool": "read",
+          "start": 1792641548.526,
+          "end": 1792641548.529,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792641536.024,
+      "oc_step_finish": 1792641548.564,
+      "tool_errors": 2,
+      "gap_s": 0.03568434715270996,
+      "gpu_busy_pct_llm": 89.36170212765957,
+      "gpu_power_w_llm": 333.24326241134753,
+      "gpu_samples_llm": 141,
+      "gpu_busy_pct_gap": 97.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 2,
+      "llm_call_id": "sw_q3_8b_32k_kvq8__c_ringbuf_03_ringbuffer__00#a1:2",
+      "t_start": 1792641548.582289,
+      "t_end": 1792641550.841289,
+      "ttft_s": 0.2364,
+      "llm_s": 2.259,
+      "decode_s": 2.0225999999999997,
+      "prefill_tokens": 6581,
+      "decode_tokens": 184,
+      "prefill_tok_s": 27838.41,
+      "decode_tok_s": 90.97,
+      "n_chunks": 162,
+      "first_token_skew_s": 0.004311084747314453,
+      "itl_p50_ms": 11.00000000000001,
+      "itl_p99_ms": 17.000000000000007,
+      "tool_names": [
+        "glob"
+      ],
+      "tool_latency_s": 0.009999990463256836,
+      "tools": [
+        {
+          "tool": "glob",
+          "start": 1792641550.825,
+          "end": 1792641550.835,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792641548.823,
+      "oc_step_finish": 1792641550.85,
+      "tool_errors": 0,
+      "gap_s": 0.024756669998168945,
+      "gpu_busy_pct_llm": 97.0,
+      "gpu_power_w_llm": 342.06363636363636,
+      "gpu_samples_llm": 22,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 3,
+      "llm_call_id": "sw_q3_8b_32k_kvq8__c_ringbuf_03_ringbuffer__00#a1:3",
+      "t_start": 1792641550.8660457,
+      "t_end": 1792641554.8799458,
+      "ttft_s": 0.2191,
+      "llm_s": 4.0139,
+      "decode_s": 3.7947999999999995,
+      "prefill_tokens": 6617,
+      "decode_tokens": 341,
+      "prefill_tok_s": 30200.82,
+      "decode_tok_s": 89.86,
+      "n_chunks": 337,
+      "first_token_skew_s": 0.0038542747497558594,
+      "itl_p50_ms": 11.00000000000012,
+      "itl_p99_ms": 12.650000000000071,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792641551.089,
+      "oc_step_finish": 1792641554.89,
+      "tool_errors": 0,
+      "gap_s": 0.10756397247314453,
+      "gpu_busy_pct_llm": 96.8048780487805,
+      "gpu_power_w_llm": 347.30243902439025,
+      "gpu_samples_llm": 41,
+      "gpu_busy_pct_gap": 95.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

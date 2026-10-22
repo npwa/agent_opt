@@ -1,0 +1,61 @@
+{
+  "trial_id": "sw_q3_8b_32k_kvq8__coding_04_dir_stats_gen__00",
+  "task": "coding_04_dir_stats_gen",
+  "config": "sw_q3_8b_32k_kvq8",
+  "model": "ollama/qwen3-8b-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_q3_8b_32k_kvq8__coding_01_my_sqrt_review__00",
+  "prev_task": "coding_01_my_sqrt_review",
+  "seed": 1971250768,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T02:59:02Z",
+  "wall_start": 1792637942.7086794,
+  "wall_end": 1792637978.687194,
+  "elapsed_s": 36.0,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 19831,
+  "tokens_out": 2824,
+  "tool_sequence": [
+    "glob",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "command",
+      "passed": false,
+      "detail": "stdout lacks 'Files: '; stdout lacks 'Directories: '; stdout lacks 'Total Size: '"
+    },
+    {
+      "type": "command",
+      "passed": false,
+      "detail": "exit 127 != 1: bash: dir_stats.sh: No such file or directory"
+    },
+    {
+      "type": "command",
+      "passed": false,
+      "detail": "exit 127 != 0: bash: dir_stats.sh: No such file or directory; stdout lacks 'Files: 3'; stdout lacks 'Directories: 2'; stdout lacks 'Total Size: 8 bytes'"
+    }
+  ],
+  "final_answer": "",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T02:59:02Z"
+    }
+  ]
+}

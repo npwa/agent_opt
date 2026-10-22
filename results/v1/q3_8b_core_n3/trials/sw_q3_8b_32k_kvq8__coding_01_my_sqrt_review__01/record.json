@@ -1,0 +1,51 @@
+{
+  "trial_id": "sw_q3_8b_32k_kvq8__coding_01_my_sqrt_review__01",
+  "task": "coding_01_my_sqrt_review",
+  "config": "sw_q3_8b_32k_kvq8",
+  "model": "ollama/qwen3-8b-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_q3_8b_32k_kvq8__longctx_11_harbor_report__01",
+  "prev_task": "longctx_11_harbor_report",
+  "seed": 297215616,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T04:28:20Z",
+  "wall_start": 1792643300.9376059,
+  "wall_end": 1792643317.111139,
+  "elapsed_s": 16.2,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 19914,
+  "tokens_out": 1045,
+  "tool_sequence": [
+    "glob",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": false,
+      "detail": "missing 'tolerance_not_scaled'; missing 'infinite_loop'"
+    }
+  ],
+  "final_answer": "The `sqrt_iterative` function uses the Newton-Raphson method to approximate square roots. It iteratively improves the guess until the result is within \u00b10.00001 of the actual value. The implementation is generally correct for most cases, but the convergence threshold (`0.00001`) might not be sufficient for extremely precise calculations. The function also properly handles negative inputs by returning an error message. To fully verify correctness, test with edge cases like `num = 2`, `num = 0`, and very large numbers.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T04:28:20Z"
+    }
+  ]
+}

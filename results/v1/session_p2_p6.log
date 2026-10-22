@@ -1,0 +1,292 @@
+=== p2: 19:39:47
+[19:39:51] det_t0__repoqa_05_retry_policy__02
+    -> pass 73.6s attempts=1
+[19:41:05] det_t0__coding_05_scientific_lan__05
+    -> pass 10.2s attempts=1
+[19:41:15] det_t0__repoqa_05_retry_policy__05
+    -> pass 23.2s attempts=1
+[19:41:38] det_t0__coding_06_tax_rates_lan__05
+    -> fail 13.9s attempts=1
+[19:41:52] det_t0__repoqa_05_retry_policy__03
+    -> pass 24.9s attempts=1
+[19:42:17] det_t0__coding_06_tax_rates_lan__01
+    -> fail 13.5s attempts=1
+[19:42:31] det_t0__bugfix_01_moving_average__05
+    -> pass 30.2s attempts=1
+[19:43:01] det_t0__coding_05_scientific_lan__04
+    -> pass 11.2s attempts=1
+[19:43:12] det_t0__coding_05_scientific_lan__03
+    -> pass 11.5s attempts=1
+[19:43:24] det_t0__coding_05_scientific_lan__00
+    -> pass 9.0s attempts=1
+[19:43:33] det_t0__bugfix_01_moving_average__00
+    -> pass 31.3s attempts=1
+[19:44:04] det_t0__coding_05_scientific_lan__01
+    -> pass 12.2s attempts=1
+[19:44:17] det_t0__bugfix_01_moving_average__01
+    -> pass 29.6s attempts=1
+[19:44:46] det_t0__repoqa_05_retry_policy__01
+    -> pass 22.7s attempts=1
+[19:45:09] det_t0__coding_06_tax_rates_lan__04
+    -> fail 15.4s attempts=1
+[19:45:25] det_t0__coding_06_tax_rates_lan__00
+    -> pass 14.5s attempts=1
+[19:45:39] det_t0__repoqa_05_retry_policy__04
+    -> pass 25.0s attempts=1
+[19:46:04] det_t0__coding_06_tax_rates_lan__02
+    -> fail 15.9s attempts=1
+[19:46:20] det_t0__coding_06_tax_rates_lan__03
+    -> fail 15.3s attempts=1
+[19:46:35] det_t0__bugfix_01_moving_average__03
+    -> pass 29.5s attempts=1
+[19:47:05] det_t0__coding_05_scientific_lan__02
+    -> pass 10.3s attempts=1
+[19:47:15] det_t0__bugfix_01_moving_average__02
+    -> pass 30.0s attempts=1
+[19:47:45] det_t0__repoqa_05_retry_policy__00
+    -> pass 24.4s attempts=1
+[19:48:10] det_t0__bugfix_01_moving_average__04
+    -> pass 33.0s attempts=1
+24/24 trials done (fail=5, pass=19), 0 pending
+# Determinism: determinism
+
+Same task and configuration repeated at temperature 0. 'Identical' = same text parts and tool calls, in order.
+
+| Task | repeats | identical to the most common run | distinct runs | first divergence at step | calls with equal token count | verdicts agree |
+|---|---:|---:|---:|---|---:|---|
+| bugfix_01_moving_average | 6 | 1 | 6 | 0, 0, 0, 6, 7 | 10/26 (38 %) | yes |
+| coding_05_scientific_lan | 6 | 1 | 6 | 0, 0, 0, 0, 0 | 0/5 (0 %) | yes |
+| coding_06_tax_rates_lan | 6 | 1 | 6 | 0, 0, 0, 0, 0 | 0/5 (0 %) | no |
+| repoqa_05_retry_policy | 6 | 1 | 6 | 0, 1, 1, 1, 1 | 4/15 (27 %) | yes |
+
+Over all tasks 27 % of compared calls have the same completion-token count as the reference repeat; the plan's rule (>= 90 %) is NOT met.
+
+=== survey: 19:48:43
+# Server survey
+
+Each configuration's private Ollama server was started once and read back (no trials). 'Experts on CPU' = layers whose MoE experts overflow to system memory (llama.cpp fit).
+
+| Config | requested | n_ctx | KV (K/V) | KV MiB | flash attn | GPU layers | experts on CPU | model GPU MiB | model CPU MiB | VRAM used (fit) | size_vram | as requested |
+|---|---|---:|---|---:|---|---:|---:|---:|---:|---:|---:|---|
+| sw_q3_8b_32k | {"num_ctx": 32768, "base_model": "qwen3:8b"} | 32768 | f16/f16 | 4608.0 | auto | 33/37 | 0 | 4157.15 | None | 8501 | 8501 | yes |
+| sw_q3_8b_32k_kvq8 | {"num_ctx": 32768, "base_model": "qwen3:8b", "kv_cache_type": "q8_0", "flash_attention": true} | 32768 | q8_0/q8_0 | 2448.0 | enabled | 37/37 | None | 4643.78 | None | None | 7284 | yes |
+
+=== p6: 19:49:15
+starting private Ollama for sw_q3_8b_32k_kvq8: {'num_ctx': 32768, 'base_model': 'qwen3:8b', 'kv_cache_type': 'q8_0', 'flash_attention': True}
+[19:49:23] sw_q3_8b_32k_kvq8__comms_07_confirm_send__00
+    -> fail 63.1s attempts=1
+[19:50:26] sw_q3_8b_32k_kvq8__coding_03_compress_gen__00
+    -> fail 56.7s attempts=1
+[19:51:23] sw_q3_8b_32k_kvq8__repoqa_05_retry_policy__00
+    -> fail 35.4s attempts=1
+[19:51:59] sw_q3_8b_32k_kvq8__research_08e_free_will__00
+    -> fail 36.8s attempts=1
+[19:52:36] sw_q3_8b_32k_kvq8__coding_10_wcx_constrained__00
+    -> fail 34.9s attempts=1
+[19:53:11] sw_q3_8b_32k_kvq8__bugfix_01_moving_average__00
+    -> pass 43.0s attempts=1
+[19:53:54] sw_q3_8b_32k_kvq8__refactor_02_rename_price__00
+    -> fail 229.0s attempts=1
+[19:57:43] sw_q3_8b_32k_kvq8__longctx_11_harbor_report__00
+    -> fail 58.3s attempts=1
+[19:58:42] sw_q3_8b_32k_kvq8__coding_01_my_sqrt_review__00
+    -> fail 20.6s attempts=1
+[19:59:02] sw_q3_8b_32k_kvq8__coding_04_dir_stats_gen__00
+    -> fail 36.0s attempts=1
+[19:59:38] sw_q3_8b_32k_kvq8__comms_12_timezone_slot__00
+    -> fail 256.1s attempts=1
+[20:03:54] sw_q3_8b_32k_kvq8__longctx_06_tidal_report__00
+    -> fail 15.7s attempts=1
+[20:04:10] sw_q3_8b_32k_kvq8__logtriage_04_pool_exhaustion__00
+    -> fail 21.5s attempts=1
+[20:04:32] sw_q3_8b_32k_kvq8__coding_05_scientific_lan__00
+    -> pass 27.1s attempts=1
+[20:04:59] sw_q3_8b_32k_kvq8__bugfix_09_booking_slots__00
+    -> fail 638.3s attempts=1
+[20:15:38] sw_q3_8b_32k_kvq8__coding_06_tax_rates_lan__00
+    -> pass 7.1s attempts=1
+[20:15:45] sw_q3_8b_32k_kvq8__c_ringbuf_03_ringbuffer__00
+    -> fail 23.7s attempts=1
+[20:16:08] sw_q3_8b_32k_kvq8__coding_02_fizzbuzz_gen__00
+    -> fail 26.2s attempts=1
+18/18 trials done (fail=15, pass=3), 0 pending
+sw_q3_8b_32k_kvq8__bugfix_01_moving_average__00: steps=6 wall=43.0s llm=41.0s tool=0.0s gap=0.3s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__bugfix_09_booking_slots__00: steps=35 wall=638.3s llm=635.2s tool=0.1s gap=1.4s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__c_ringbuf_03_ringbuffer__00: steps=3 wall=23.7s llm=21.8s tool=0.0s gap=0.2s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_01_my_sqrt_review__00: steps=3 wall=20.6s llm=18.8s tool=0.0s gap=0.2s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_02_fizzbuzz_gen__00: steps=4 wall=26.2s llm=24.3s tool=0.0s gap=0.2s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_03_compress_gen__00: steps=4 wall=56.7s llm=55.0s tool=0.0s gap=0.2s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_04_dir_stats_gen__00: steps=3 wall=36.0s llm=34.1s tool=0.0s gap=0.1s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_05_scientific_lan__00: steps=3 wall=27.1s llm=17.3s tool=8.3s gap=8.1s idle_gap=6.5s warnings=0
+sw_q3_8b_32k_kvq8__coding_06_tax_rates_lan__00: steps=1 wall=7.1s llm=5.5s tool=0.0s gap=0.1s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_10_wcx_constrained__00: steps=6 wall=34.9s llm=32.9s tool=0.1s gap=0.3s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__comms_07_confirm_send__00: steps=7 wall=63.1s llm=49.5s tool=0.0s gap=11.4s idle_gap=6.8s warnings=0
+sw_q3_8b_32k_kvq8__comms_12_timezone_slot__00: steps=3 wall=256.1s llm=253.4s tool=0.1s gap=0.5s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__logtriage_04_pool_exhaustion__00: steps=2 wall=21.8s llm=19.7s tool=0.0s gap=0.1s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__longctx_06_tidal_report__00: steps=2 wall=15.7s llm=14.0s tool=0.0s gap=0.1s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__longctx_11_harbor_report__00: steps=3 wall=58.3s llm=56.6s tool=0.0s gap=0.2s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__refactor_02_rename_price__00: steps=10 wall=229.0s llm=90.8s tool=116.9s gap=136.6s idle_gap=135.0s warnings=0
+sw_q3_8b_32k_kvq8__repoqa_05_retry_policy__00: steps=3 wall=35.4s llm=33.5s tool=0.0s gap=0.2s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__research_08e_free_will__00: steps=2 wall=36.8s llm=30.9s tool=2.7s gap=3.1s idle_gap=1.9s warnings=0
+18 traces written
+| Category | n | wall (s) | prefill % | decode % | tool % | harness % | unattributed % | flagged |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| bugfix | 2 | 681 | 2.3 | 97.0 | 0.0 | 0.8 | 0.0 | 0 |
+| code_gen | 5 | 177 | 8.2 | 86.6 | 0.0 | 5.2 | 0.0 | 0 |
+| code_review | 1 | 21 | 13.0 | 78.0 | 0.0 | 9.0 | -0.0 | 0 |
+| comms | 2 | 319 | 2.0 | 92.9 | 0.0 | 5.1 | -0.0 | 0 |
+| log_triage | 1 | 22 | 9.6 | 80.8 | 0.0 | 9.6 | 0.0 | 0 |
+| long_context | 2 | 74 | 12.7 | 82.7 | 0.0 | 4.6 | -0.0 | 0 |
+| reasoning | 2 | 34 | 14.9 | 51.9 | 23.3 | 10.0 | -0.0 | 0 |
+| refactor | 1 | 229 | 2.7 | 36.9 | 51.0 | 9.3 | -0.0 | 0 |
+| repo_qa | 1 | 35 | 6.3 | 88.3 | 0.0 | 5.4 | 0.0 | 0 |
+| research | 1 | 37 | 7.0 | 76.8 | 7.2 | 9.0 | -0.0 | 0 |
+
+18 trials, 0 flagged (unattributed >= 5.0% or join warnings)
+report for q3_8b_smoke: 18 measured trials -> results/v1/q3_8b_smoke
+=== core: 20:16:36
+starting private Ollama for sw_q3_8b_32k_kvq8: {'num_ctx': 32768, 'base_model': 'qwen3:8b', 'kv_cache_type': 'q8_0', 'flash_attention': True}
+[20:16:44] sw_q3_8b_32k_kvq8__refactor_02_rename_price__00
+    -> pass 67.5s attempts=1
+[20:17:52] sw_q3_8b_32k_kvq8__bugfix_09_booking_slots__02
+    -> fail 638.4s attempts=1
+[20:28:30] sw_q3_8b_32k_kvq8__coding_02_fizzbuzz_gen__02
+    -> fail 15.5s attempts=1
+[20:28:46] sw_q3_8b_32k_kvq8__bugfix_09_booking_slots__01
+    -> fail 124.5s attempts=1
+[20:30:51] sw_q3_8b_32k_kvq8__research_08e_free_will__00
+    -> fail 32.2s attempts=1
+[20:31:23] sw_q3_8b_32k_kvq8__logtriage_04_pool_exhaustion__00
+    -> fail 64.0s attempts=1
+[20:32:27] sw_q3_8b_32k_kvq8__c_ringbuf_03_ringbuffer__02
+    -> fail 37.0s attempts=1
+[20:33:04] sw_q3_8b_32k_kvq8__coding_02_fizzbuzz_gen__00
+    -> pass 35.1s attempts=1
+[20:33:39] sw_q3_8b_32k_kvq8__coding_05_scientific_lan__02
+    -> fail 12.5s attempts=1
+[20:33:52] sw_q3_8b_32k_kvq8__research_08e_free_will__01
+    -> fail 54.3s attempts=1
+[20:34:46] sw_q3_8b_32k_kvq8__comms_12_timezone_slot__01
+    -> timeout 900.0s attempts=1
+[20:49:46] sw_q3_8b_32k_kvq8__coding_06_tax_rates_lan__02
+    -> pass 7.9s attempts=1
+[20:49:54] sw_q3_8b_32k_kvq8__repoqa_05_retry_policy__02
+    -> fail 19.3s attempts=1
+[20:50:14] sw_q3_8b_32k_kvq8__coding_10_wcx_constrained__00
+    -> fail 275.4s attempts=1
+[20:54:50] sw_q3_8b_32k_kvq8__refactor_02_rename_price__01
+    -> fail 37.5s attempts=1
+[20:55:27] sw_q3_8b_32k_kvq8__coding_10_wcx_constrained__02
+    -> fail 146.6s attempts=1
+[20:57:54] sw_q3_8b_32k_kvq8__coding_02_fizzbuzz_gen__01
+    -> pass 57.6s attempts=1
+[20:58:52] sw_q3_8b_32k_kvq8__c_ringbuf_03_ringbuffer__00
+    -> fail 22.3s attempts=1
+[20:59:15] sw_q3_8b_32k_kvq8__coding_06_tax_rates_lan__00
+    -> pass 7.0s attempts=1
+[20:59:22] sw_q3_8b_32k_kvq8__repoqa_05_retry_policy__01
+    -> fail 28.6s attempts=1
+[20:59:50] sw_q3_8b_32k_kvq8__research_08e_free_will__02
+    -> fail 47.8s attempts=1
+[21:00:38] sw_q3_8b_32k_kvq8__coding_03_compress_gen__02
+    -> fail 47.5s attempts=1
+[21:01:26] sw_q3_8b_32k_kvq8__coding_10_wcx_constrained__01
+    -> fail 110.2s attempts=1
+[21:03:16] sw_q3_8b_32k_kvq8__logtriage_04_pool_exhaustion__02
+    -> fail 20.5s attempts=1
+[21:03:37] sw_q3_8b_32k_kvq8__coding_06_tax_rates_lan__01
+    -> pass 7.1s attempts=1
+[21:03:44] sw_q3_8b_32k_kvq8__longctx_11_harbor_report__02
+    -> fail 23.7s attempts=1
+[21:04:08] sw_q3_8b_32k_kvq8__coding_03_compress_gen__00
+    -> fail 102.7s attempts=1
+[21:05:51] sw_q3_8b_32k_kvq8__comms_12_timezone_slot__02
+    -> pass 207.5s attempts=1
+[21:09:18] sw_q3_8b_32k_kvq8__refactor_02_rename_price__02
+    -> pass 33.2s attempts=1
+[21:09:52] sw_q3_8b_32k_kvq8__bugfix_09_booking_slots__00
+    -> fail 638.8s attempts=1
+[21:20:31] sw_q3_8b_32k_kvq8__coding_05_scientific_lan__00
+    -> pass 20.9s attempts=1
+[21:20:52] sw_q3_8b_32k_kvq8__coding_01_my_sqrt_review__00
+    -> fail 19.1s attempts=1
+[21:21:11] sw_q3_8b_32k_kvq8__coding_03_compress_gen__01
+    -> pass 80.0s attempts=1
+[21:22:31] sw_q3_8b_32k_kvq8__comms_12_timezone_slot__00
+    -> fail 254.7s attempts=1
+[21:26:46] sw_q3_8b_32k_kvq8__longctx_11_harbor_report__00
+    -> fail 35.5s attempts=1
+[21:27:21] sw_q3_8b_32k_kvq8__logtriage_04_pool_exhaustion__01
+    -> fail 35.6s attempts=1
+[21:27:57] sw_q3_8b_32k_kvq8__longctx_11_harbor_report__01
+    -> fail 23.1s attempts=1
+[21:28:20] sw_q3_8b_32k_kvq8__coding_01_my_sqrt_review__01
+    -> fail 16.2s attempts=1
+[21:28:37] sw_q3_8b_32k_kvq8__coding_05_scientific_lan__01
+    -> fail 7.5s attempts=1
+[21:28:44] sw_q3_8b_32k_kvq8__c_ringbuf_03_ringbuffer__01
+    -> fail 166.9s attempts=1
+[21:31:31] sw_q3_8b_32k_kvq8__repoqa_05_retry_policy__00
+    -> fail 35.7s attempts=1
+[21:32:07] sw_q3_8b_32k_kvq8__coding_01_my_sqrt_review__02
+    -> fail 18.1s attempts=1
+42/42 trials done (fail=31, pass=10, timeout=1), 0 pending
+sw_q3_8b_32k_kvq8__bugfix_09_booking_slots__00: steps=35 wall=638.8s llm=635.7s tool=0.1s gap=1.4s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__bugfix_09_booking_slots__01: steps=5 wall=124.5s llm=122.6s tool=0.0s gap=0.3s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__bugfix_09_booking_slots__02: steps=32 wall=638.4s llm=635.3s tool=0.1s gap=1.3s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__c_ringbuf_03_ringbuffer__00: steps=3 wall=22.3s llm=20.4s tool=0.0s gap=0.2s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__c_ringbuf_03_ringbuffer__01: steps=8 wall=166.9s llm=164.9s tool=0.1s gap=0.4s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__c_ringbuf_03_ringbuffer__02: steps=6 wall=37.0s llm=35.1s tool=0.0s gap=0.3s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_01_my_sqrt_review__00: steps=3 wall=19.1s llm=17.2s tool=0.0s gap=0.2s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_01_my_sqrt_review__01: steps=3 wall=16.2s llm=14.3s tool=0.0s gap=0.2s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_01_my_sqrt_review__02: steps=3 wall=18.1s llm=16.3s tool=0.0s gap=0.2s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_02_fizzbuzz_gen__00: steps=4 wall=35.1s llm=33.4s tool=0.0s gap=0.2s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_02_fizzbuzz_gen__01: steps=3 wall=57.6s llm=55.8s tool=0.0s gap=0.2s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_02_fizzbuzz_gen__02: steps=2 wall=15.5s llm=13.8s tool=0.0s gap=0.1s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_03_compress_gen__00: steps=4 wall=102.7s llm=100.8s tool=0.0s gap=0.2s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_03_compress_gen__01: steps=4 wall=80.0s llm=78.2s tool=0.0s gap=0.2s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_03_compress_gen__02: steps=4 wall=47.5s llm=45.6s tool=0.0s gap=0.2s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_05_scientific_lan__00: steps=3 wall=20.9s llm=17.7s tool=1.8s gap=1.5s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_05_scientific_lan__01: steps=1 wall=7.5s llm=5.6s tool=0.0s gap=0.1s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_05_scientific_lan__02: steps=2 wall=12.5s llm=10.6s tool=0.5s gap=0.2s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_06_tax_rates_lan__00: steps=1 wall=7.0s llm=5.2s tool=0.0s gap=0.1s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_06_tax_rates_lan__01: steps=1 wall=7.1s llm=5.3s tool=0.0s gap=0.1s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_06_tax_rates_lan__02: steps=1 wall=7.9s llm=6.3s tool=0.0s gap=0.1s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_10_wcx_constrained__00: steps=27 wall=275.4s llm=272.7s tool=0.1s gap=1.0s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_10_wcx_constrained__01: steps=5 wall=110.2s llm=108.2s tool=0.0s gap=0.3s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__coding_10_wcx_constrained__02: steps=7 wall=146.6s llm=144.6s tool=0.1s gap=0.3s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__comms_12_timezone_slot__00: steps=3 wall=254.7s llm=252.1s tool=0.1s gap=0.5s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__comms_12_timezone_slot__01: steps=8 wall=900.0s llm=897.4s tool=0.1s gap=0.4s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__comms_12_timezone_slot__02: steps=3 wall=207.5s llm=205.1s tool=0.1s gap=0.5s idle_gap=0.2s warnings=0
+sw_q3_8b_32k_kvq8__logtriage_04_pool_exhaustion__00: steps=7 wall=64.3s llm=58.2s tool=10.6s gap=4.1s idle_gap=1.5s warnings=0
+sw_q3_8b_32k_kvq8__logtriage_04_pool_exhaustion__01: steps=5 wall=35.9s llm=33.6s tool=0.2s gap=0.3s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__logtriage_04_pool_exhaustion__02: steps=2 wall=20.8s llm=18.7s tool=0.0s gap=0.1s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__longctx_11_harbor_report__00: steps=3 wall=35.5s llm=33.7s tool=0.0s gap=0.2s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__longctx_11_harbor_report__01: steps=2 wall=23.1s llm=21.3s tool=0.0s gap=0.1s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__longctx_11_harbor_report__02: steps=3 wall=23.7s llm=21.8s tool=0.0s gap=0.2s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__refactor_02_rename_price__00: steps=5 wall=67.5s llm=28.6s tool=36.5s gap=37.2s idle_gap=4.0s warnings=3
+sw_q3_8b_32k_kvq8__refactor_02_rename_price__01: steps=3 wall=37.5s llm=34.2s tool=2.6s gap=1.6s idle_gap=0.6s warnings=0
+sw_q3_8b_32k_kvq8__refactor_02_rename_price__02: steps=4 wall=33.2s llm=30.2s tool=1.4s gap=1.4s idle_gap=0.3s warnings=0
+sw_q3_8b_32k_kvq8__repoqa_05_retry_policy__00: steps=3 wall=35.7s llm=33.8s tool=0.0s gap=0.2s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__repoqa_05_retry_policy__01: steps=3 wall=28.6s llm=26.8s tool=0.0s gap=0.2s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__repoqa_05_retry_policy__02: steps=2 wall=19.3s llm=17.4s tool=0.0s gap=0.1s idle_gap=0.0s warnings=0
+sw_q3_8b_32k_kvq8__research_08e_free_will__00: steps=2 wall=32.2s llm=28.1s tool=1.4s gap=1.9s idle_gap=0.9s warnings=0
+sw_q3_8b_32k_kvq8__research_08e_free_will__01: steps=3 wall=54.3s llm=40.3s tool=11.0s gap=11.4s idle_gap=9.9s warnings=0
+sw_q3_8b_32k_kvq8__research_08e_free_will__02: steps=4 wall=47.8s llm=43.9s tool=1.0s gap=1.5s idle_gap=0.2s warnings=0
+42 traces written
+| Category | n | wall (s) | prefill % | decode % | tool % | harness % | unattributed % | flagged |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| bugfix | 3 | 1402 | 2.0 | 97.4 | 0.0 | 0.6 | -0.0 | 0 |
+| code_gen | 12 | 1097 | 3.7 | 94.2 | 0.0 | 2.1 | -0.0 | 0 |
+| code_review | 3 | 53 | 13.5 | 76.0 | 0.0 | 10.4 | 0.0 | 0 |
+| comms | 3 | 1362 | 1.0 | 98.4 | 0.0 | 0.6 | -0.0 | 0 |
+| log_triage | 3 | 121 | 11.0 | 80.3 | 3.2 | 5.4 | -0.0 | 0 |
+| long_context | 3 | 82 | 26.2 | 67.0 | 0.0 | 6.8 | -0.0 | 0 |
+| reasoning | 6 | 63 | 22.0 | 58.6 | 2.2 | 17.2 | -0.0 | 0 |
+| refactor | 3 | 138 | 8.1 | 59.2 | 19.1 | 13.6 | 0.0 | 1 |
+| repo_qa | 3 | 84 | 8.0 | 85.3 | 0.0 | 6.8 | -0.0 | 0 |
+| research | 3 | 134 | 6.4 | 77.3 | 9.9 | 6.3 | -0.0 | 0 |
+
+42 trials, 1 flagged (unattributed >= 5.0% or join warnings): sw_q3_8b_32k_kvq8__refactor_02_rename_price__00
+report for q3_8b_core_n3: 42 measured trials -> results/v1/q3_8b_core_n3
+=== done: 21:32:27

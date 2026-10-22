@@ -1,0 +1,51 @@
+{
+  "trial_id": "sw_q3_8b_32k_kvq8__repoqa_05_retry_policy__02",
+  "task": "repoqa_05_retry_policy",
+  "config": "sw_q3_8b_32k_kvq8",
+  "model": "ollama/qwen3-8b-32k",
+  "k": 2,
+  "instrumented": true,
+  "prev_trial_id": "sw_q3_8b_32k_kvq8__coding_06_tax_rates_lan__02",
+  "prev_task": "coding_06_tax_rates_lan",
+  "seed": 1287928065,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T03:49:54Z",
+  "wall_start": 1792640994.9384286,
+  "wall_end": 1792641014.2153485,
+  "elapsed_s": 19.3,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 2,
+  "tokens_in": 13787,
+  "tokens_out": 1349,
+  "tool_sequence": [
+    "glob",
+    "grep"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": false,
+      "detail": "missing 'max_delay_value'; missing 'max_delay_citation'; missing 'max_attempts_value'; missing 'max_attempts_citation'"
+    }
+  ],
+  "final_answer": "1. The function computing delay is `next_delay` in `retry.py:20`.  \n2. Default max delay is `config.RETRY_MAX_DELAY_S` in `retry.py:11`.  \n3. Jobs stop retrying after `config.RETRY_MAX_ATTEMPTS` attempts in `retry.py:9`.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T03:49:54Z"
+    }
+  ]
+}

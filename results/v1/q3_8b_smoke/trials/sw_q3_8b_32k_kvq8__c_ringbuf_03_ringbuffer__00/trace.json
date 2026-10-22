@@ -1,0 +1,141 @@
+{
+  "trial_id": "sw_q3_8b_32k_kvq8__c_ringbuf_03_ringbuffer__00",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_q3_8b_32k_kvq8",
+  "attempt": 1,
+  "status": "fail",
+  "summary": {
+    "wall_start": 1792638945.1840434,
+    "wall_end": 1792638968.8658807,
+    "wall_s": 23.68183732032776,
+    "n_steps": 3,
+    "llm_s": 21.8381,
+    "ttft_s": 3.5683,
+    "decode_s": 18.2698,
+    "tool_s": 0.017999649047851562,
+    "gap_s": 0.17042136192321777,
+    "idle_gap_s": 0.0,
+    "prefill_tokens": 19673,
+    "decode_tokens": 1639,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "sw_q3_8b_32k_kvq8__c_ringbuf_03_ringbuffer__00#a1:1",
+      "t_start": 1792638946.8573594,
+      "t_end": 1792638962.4483595,
+      "ttft_s": 3.1209,
+      "llm_s": 15.591,
+      "decode_s": 12.470099999999999,
+      "prefill_tokens": 6475,
+      "decode_tokens": 1114,
+      "prefill_tok_s": 2074.72,
+      "decode_tok_s": 89.33,
+      "n_chunks": 1036,
+      "first_token_skew_s": 0.011740684509277344,
+      "itl_p50_ms": 11.00000000000012,
+      "itl_p99_ms": 12.000000000000455,
+      "tool_names": [
+        "read",
+        "read"
+      ],
+      "tool_latency_s": 0.0069997310638427734,
+      "tools": [
+        {
+          "tool": "read",
+          "start": 1792638961.993,
+          "end": 1792638961.998,
+          "status": "error"
+        },
+        {
+          "tool": "read",
+          "start": 1792638962.43,
+          "end": 1792638962.432,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792638949.99,
+      "oc_step_finish": 1792638962.47,
+      "tool_errors": 2,
+      "gap_s": 0.04004359245300293,
+      "gpu_busy_pct_llm": 87.42307692307692,
+      "gpu_power_w_llm": 325.91410256410256,
+      "gpu_samples_llm": 156,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 2,
+      "llm_call_id": "sw_q3_8b_32k_kvq8__c_ringbuf_03_ringbuffer__00#a1:2",
+      "t_start": 1792638962.488403,
+      "t_end": 1792638964.743303,
+      "ttft_s": 0.2369,
+      "llm_s": 2.2549,
+      "decode_s": 2.0180000000000002,
+      "prefill_tokens": 6581,
+      "decode_tokens": 184,
+      "prefill_tok_s": 27779.65,
+      "decode_tok_s": 91.18,
+      "n_chunks": 162,
+      "first_token_skew_s": 0.005696773529052734,
+      "itl_p50_ms": 11.00000000000001,
+      "itl_p99_ms": 17.000000000000007,
+      "tool_names": [
+        "glob"
+      ],
+      "tool_latency_s": 0.010999917984008789,
+      "tools": [
+        {
+          "tool": "glob",
+          "start": 1792638964.726,
+          "end": 1792638964.737,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792638962.731,
+      "oc_step_finish": 1792638964.752,
+      "tool_errors": 0,
+      "gap_s": 0.024729490280151367,
+      "gpu_busy_pct_llm": 96.95652173913044,
+      "gpu_power_w_llm": 351.40434782608696,
+      "gpu_samples_llm": 23,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 3,
+      "llm_call_id": "sw_q3_8b_32k_kvq8__c_ringbuf_03_ringbuffer__00#a1:3",
+      "t_start": 1792638964.7680326,
+      "t_end": 1792638968.7602324,
+      "ttft_s": 0.2105,
+      "llm_s": 3.9922,
+      "decode_s": 3.7817,
+      "prefill_tokens": 6617,
+      "decode_tokens": 341,
+      "prefill_tok_s": 31434.68,
+      "decode_tok_s": 90.17,
+      "n_chunks": 337,
+      "first_token_skew_s": 0.003467559814453125,
+      "itl_p50_ms": 11.00000000000012,
+      "itl_p99_ms": 12.00000000000001,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792638964.982,
+      "oc_step_finish": 1792638968.773,
+      "tool_errors": 0,
+      "gap_s": 0.10564827919006348,
+      "gpu_busy_pct_llm": 96.3,
+      "gpu_power_w_llm": 355.0875,
+      "gpu_samples_llm": 40,
+      "gpu_busy_pct_gap": 95.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

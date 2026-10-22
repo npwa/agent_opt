@@ -19,7 +19,7 @@ packages = ["harness", "analysis"]
 [tool.ruff]
 line-length = 100
 target-version = "py312"
-extend-exclude = ["benchmark", "agent-config", ".venv"]
+extend-exclude = ["benchmark", "agent-config", ".venv", "results"]  # results: recorded runs, including code the agents wrote
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]

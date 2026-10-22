@@ -1,0 +1,69 @@
+=== p2: 21:58:07
+[21:58:11] det_t0__repoqa_05_retry_policy__00
+    -> fail 73.5s attempts=1
+[21:59:24] det_t0__bugfix_01_moving_average__00
+    -> pass 59.6s attempts=1
+[22:00:24] det_t0__coding_06_tax_rates_lan__00
+    -> fail 42.1s attempts=1
+[22:01:06] det_t0__coding_05_scientific_lan__00
+    -> pass 38.8s attempts=1
+4/4 trials done (fail=2, pass=2), 0 pending
+[22:01:49] det_t0__repoqa_05_retry_policy__00
+    -> pass 22.0s attempts=1
+[22:02:11] det_t0__bugfix_01_moving_average__00
+    -> pass 32.1s attempts=1
+[22:02:43] det_t0__coding_06_tax_rates_lan__00
+    -> fail 12.5s attempts=1
+[22:02:55] det_t0__coding_05_scientific_lan__00
+    -> pass 9.2s attempts=1
+4/4 trials done (fail=1, pass=3), 0 pending
+[22:03:08] det_t0__repoqa_05_retry_policy__00
+    -> pass 21.9s attempts=1
+[22:03:30] det_t0__bugfix_01_moving_average__00
+    -> pass 31.9s attempts=1
+[22:04:02] det_t0__coding_06_tax_rates_lan__00
+    -> fail 12.4s attempts=1
+[22:04:15] det_t0__coding_05_scientific_lan__00
+    -> pass 9.3s attempts=1
+4/4 trials done (fail=1, pass=3), 0 pending
+[22:04:28] det_t0__repoqa_05_retry_policy__00
+    -> fail 21.0s attempts=1
+[22:04:49] det_t0__bugfix_01_moving_average__00
+    -> pass 31.6s attempts=1
+[22:05:21] det_t0__coding_06_tax_rates_lan__00
+    -> fail 12.4s attempts=1
+[22:05:33] det_t0__coding_05_scientific_lan__00
+    -> pass 9.2s attempts=1
+4/4 trials done (fail=2, pass=2), 0 pending
+[22:05:46] det_t0__repoqa_05_retry_policy__00
+    -> fail 21.6s attempts=1
+[22:06:08] det_t0__bugfix_01_moving_average__00
+    -> pass 32.5s attempts=1
+[22:06:40] det_t0__coding_06_tax_rates_lan__00
+    -> fail 12.7s attempts=1
+[22:06:53] det_t0__coding_05_scientific_lan__00
+    -> pass 9.2s attempts=1
+4/4 trials done (fail=2, pass=2), 0 pending
+[22:07:06] det_t0__repoqa_05_retry_policy__00
+    -> fail 21.3s attempts=1
+[22:07:27] det_t0__bugfix_01_moving_average__00
+    -> pass 31.8s attempts=1
+[22:07:59] det_t0__coding_06_tax_rates_lan__00
+    -> fail 13.2s attempts=1
+[22:08:12] det_t0__coding_05_scientific_lan__00
+    -> pass 9.2s attempts=1
+4/4 trials done (fail=2, pass=2), 0 pending
+# Determinism: determinism
+
+Same task and configuration repeated at temperature 0. 'Identical' = same text parts and tool calls, in order.
+
+| Task | repeats | identical to the most common run | distinct runs | first divergence at step | calls with equal token count | verdicts agree |
+|---|---:|---:|---:|---|---:|---|
+| bugfix_01_moving_average | 6 | 6 | 1 | - | 25/25 (100 %) | yes |
+| coding_05_scientific_lan | 6 | 6 | 1 | - | 5/5 (100 %) | yes |
+| coding_06_tax_rates_lan | 6 | 6 | 1 | - | 5/5 (100 %) | yes |
+| repoqa_05_retry_policy | 6 | 4 | 3 | 4, 4 | 11/15 (73 %) | no |
+
+Over all tasks 92 % of compared calls have the same completion-token count as the reference repeat; the plan's rule (>= 90 %) is met.
+
+=== done: 22:08:22

@@ -1,0 +1,57 @@
+{
+  "trial_id": "baseline_32k__bugfix_01_moving_average__00",
+  "task": "bugfix_01_moving_average",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "baseline_32k__research_08e_free_will__00",
+  "prev_task": "research_08e_free_will",
+  "seed": 1518839701,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T04:53:33Z",
+  "wall_start": 1792644813.085942,
+  "wall_end": 1792644872.5654151,
+  "elapsed_s": 59.5,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 42568,
+  "tokens_out": 526,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 5 tests pass. The bug was an off-by-one error in `moving_average` at line 9: the range was missing `+ 1`, causing it to skip the last window position.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-22T04:53:33Z"
+    }
+  ]
+}

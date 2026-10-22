@@ -38,7 +38,7 @@ from pathlib import Path
 
 import yaml
 
-from harness import calibrate, manifest, stall
+from harness import calibrate, landlock, manifest, stall
 from harness import server as serverlib
 from harness.manifest import OPENCODE_ISOLATION_ENV
 from harness.taskspec import TaskSpec, load_task
@@ -49,6 +49,7 @@ from harness.workdir import prepare_workdir
 ROOT = Path(__file__).resolve().parent.parent
 FINAL_STATUSES = {"pass", "fail", "timeout", "harness_failed"}
 CONFIG_KEYS = {"id", "model", "description", "seed_mode", "options", "server"}
+CONFINE = True  # run OpenCode under Landlock (harness/landlock.py); --no-confine turns it off
 STALL_S = 300.0  # no events + idle GPU + no working child for this long = stalled trial (0 disables); set by --stall-s
 
 
@@ -282,8 +283,13 @@ def run_attempt(spec: TaskSpec, cfg: RunConfig, tid: str, attempt: int, seed: in
            "XDG_STATE_HOME": str(xdg / "state"), "XDG_CACHE_HOME": str(xdg / "cache"),
            **OPENCODE_ISOLATION_ENV}
 
+    (run_dir / "tmp").mkdir(exist_ok=True)
+    env["TMPDIR"] = str(run_dir / "tmp")  # confined trials may only write below their own directory
+    confine = [run_dir, xdg] if CONFINE else None
+    if CONFINE:  # the repo's virtualenv is off limits: MCP servers started by bare name must find the system tools
+        env["PATH"] = os.pathsep.join(d for d in env.get("PATH", "").split(os.pathsep) if not d.startswith(str(ROOT)))
     run = calibrate.run_opencode(spec, work, run_dir, env, cfg.model, spec.timeout_s, events,
-                                 stall_s=STALL_S, busy=stall.make_probe() if STALL_S else None)
+                                 stall_s=STALL_S, busy=stall.make_probe() if STALL_S else None, confine=confine)
     wall_end = time.time()
     ev = calibrate.parse_events(events)
     ctx = VerifyContext(workdir=work, verify_root=ROOT / "fixtures/verify", spec=spec,
@@ -453,7 +459,7 @@ def run_all(configs: list[RunConfig], specs: list[TaskSpec], n: int, run_seed: i
 
 
 def main() -> int:
-    global STALL_S
+    global STALL_S, CONFINE
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     r = sub.add_parser("run")
@@ -477,6 +483,8 @@ def main() -> int:
     r.add_argument("--stall-s", type=float, default=STALL_S,
                    help="end a trial as a harness failure after this many seconds without events, GPU activity "
                         "or a working child process (default %(default)s; 0 disables)")
+    r.add_argument("--no-confine", action="store_true",
+                   help="do not run OpenCode under Landlock (by default a trial can only touch its own directory)")
     r.add_argument("--limit", type=int, help="run at most this many pending trials, then stop")
     r.add_argument("--force-plan", action="store_true")
     r.add_argument("--rerun-harness-failed", action="store_true",
@@ -515,6 +523,9 @@ def main() -> int:
         print("trials per task: " + ", ".join(f"{t}={k}" for t, k in plan["trials_per_task"].items()))
         print(f"{len(plan['order'])} trials")
         return 0
+    if not a.no_confine and not landlock.supported():
+        print("Landlock is not available on this kernel: cannot confine the agent (use --no-confine to run without)", file=sys.stderr)
+        return 2
     if not a.no_preflight and (problems := preflight(specs, need_direct=a.parity_fraction > 0,
                                                       private_server=any(c.server is not None for c in configs))):
         print("preflight failed:\n  - " + "\n  - ".join(problems), file=sys.stderr)
@@ -528,6 +539,7 @@ def main() -> int:
         if sampler:
             sampler.start()
         STALL_S = a.stall_s
+        CONFINE = not a.no_confine
         run_all(configs, specs, a.n, a.seed, a.out, a.scratch, metrics, a.max_retries,
                 a.limit, a.force_plan, parity_fraction=a.parity_fraction,
                 use_task_trials=not a.ignore_task_trials)

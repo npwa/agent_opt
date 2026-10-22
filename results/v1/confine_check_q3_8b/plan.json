@@ -1,0 +1,50 @@
+{
+  "created_utc": "2026-10-22T04:55:33Z",
+  "run_seed": 1,
+  "n": 3,
+  "parity_fraction": 0.0,
+  "trials_per_task": {
+    "refactor_02_rename_price": 3
+  },
+  "configs": {
+    "sw_q3_8b_32k_kvq8": {
+      "id": "sw_q3_8b_32k_kvq8",
+      "model": "ollama/qwen3-8b-32k",
+      "description": "qwen3:8b, 32k context, KV q8_0, flash attention on",
+      "seed_mode": "per_trial",
+      "options": {},
+      "server": {
+        "num_ctx": 32768,
+        "base_model": "qwen3:8b",
+        "kv_cache_type": "q8_0",
+        "flash_attention": true
+      }
+    }
+  },
+  "tasks": {
+    "refactor_02_rename_price": "410b4bbf373e"
+  },
+  "order": [
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__refactor_02_rename_price__01",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "refactor_02_rename_price",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__refactor_02_rename_price__02",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "refactor_02_rename_price",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__refactor_02_rename_price__00",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "refactor_02_rename_price",
+      "k": 0,
+      "instrumented": true
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "trial_id": "sw_q3_8b_32k_kvq8__bugfix_01_moving_average__00",
+  "task": "bugfix_01_moving_average",
+  "config": "sw_q3_8b_32k_kvq8",
+  "model": "ollama/qwen3-8b-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_q3_8b_32k_kvq8__coding_10_wcx_constrained__00",
+  "prev_task": "coding_10_wcx_constrained",
+  "seed": 1888604015,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T02:53:11Z",
+  "wall_start": 1792637591.3615232,
+  "wall_end": 1792637634.387673,
+  "elapsed_s": 43.0,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 6,
+  "tokens_in": 42138,
+  "tokens_out": 3385,
+  "tool_sequence": [
+    "bash",
+    "edit",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 1,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "The bug in `stats_utils.py` was fixed by adjusting the range in the moving average calculation. The loop now correctly iterates over all valid windows, ensuring the output matches expected results. All tests passed successfully. \ud83d\ude80",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-22T02:53:11Z"
+    }
+  ]
+}

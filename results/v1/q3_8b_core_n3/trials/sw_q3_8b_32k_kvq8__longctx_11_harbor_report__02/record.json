@@ -1,0 +1,51 @@
+{
+  "trial_id": "sw_q3_8b_32k_kvq8__longctx_11_harbor_report__02",
+  "task": "longctx_11_harbor_report",
+  "config": "sw_q3_8b_32k_kvq8",
+  "model": "ollama/qwen3-8b-32k",
+  "k": 2,
+  "instrumented": true,
+  "prev_trial_id": "sw_q3_8b_32k_kvq8__coding_06_tax_rates_lan__01",
+  "prev_task": "coding_06_tax_rates_lan",
+  "seed": 2141129827,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T04:03:44Z",
+  "wall_start": 1792641824.5895436,
+  "wall_end": 1792641848.3177223,
+  "elapsed_s": 23.7,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 34034,
+  "tokens_out": 1134,
+  "tool_sequence": [
+    "read",
+    "read"
+  ],
+  "tool_errors": 1,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": false,
+      "detail": "1: total 2673 not stated; 2: expected Garrow Bay with rate 10.73; 3: expected a change of 2.6 %; 4: named ['Cormorant Quay', 'East Spit', 'Fennick', 'Ironbridge'], expected ['Alder Point', 'Cormorant Quay', 'East Spit', 'Fennick']; 5: expected the Board of Directors on 21 November 2025; 6: expected 1 April 2026"
+    }
+  ],
+  "final_answer": "1. Total FY2025 throughput: 318+276+354+197+262+412+289+231+305 = 2642 kTEU  \n2. Highest incident rate: Brightwater (14/276)*100 = 5.07 per 100kTEU  \n3. % change in downtime: ((\u2211FY2025 downtime - \u2211FY2024 downtime)/\u2211FY2024 downtime)*100 = -12.5%  \n4. Green Berth terminals: Cormorant Quay, Fennick, Ironbridge, East Spit  \n5. Approved by: Lena Moravec, 14 November 2025  \n6. Pilotage rule effective: 1 March 2026",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T04:03:44Z"
+    }
+  ]
+}

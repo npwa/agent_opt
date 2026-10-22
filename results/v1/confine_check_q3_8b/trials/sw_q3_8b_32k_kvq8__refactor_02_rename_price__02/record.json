@@ -1,0 +1,65 @@
+{
+  "trial_id": "sw_q3_8b_32k_kvq8__refactor_02_rename_price__02",
+  "task": "refactor_02_rename_price",
+  "config": "sw_q3_8b_32k_kvq8",
+  "model": "ollama/qwen3-8b-32k",
+  "k": 2,
+  "instrumented": true,
+  "prev_trial_id": "sw_q3_8b_32k_kvq8__refactor_02_rename_price__01",
+  "prev_task": "refactor_02_rename_price",
+  "seed": 845330911,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T04:56:13Z",
+  "wall_start": 1792644973.3936737,
+  "wall_end": 1792645028.1811433,
+  "elapsed_s": 54.8,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 7,
+  "tokens_in": 47126,
+  "tokens_out": 3019,
+  "tool_sequence": [
+    "glob",
+    "glob",
+    "task",
+    "glob",
+    "grep",
+    "grep"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": false,
+      "detail": "Ran 4 tests in 0.000s |  | FAILED (failures=1, errors=2)"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": false,
+      "detail": "exit 1 != 0: "
+    }
+  ],
+  "final_answer": "",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T04:56:13Z"
+    }
+  ]
+}
