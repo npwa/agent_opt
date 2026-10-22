@@ -1,0 +1,10 @@
+# qwen3:8b with a q8_0 KV cache (2.4 GB at 32k), which should let the whole model stay on the GPU.
+id: sw_q3_8b_32k_kvq8
+model: ollama/qwen3-8b-32k
+description: qwen3:8b, 32k context, KV q8_0, flash attention on
+seed_mode: per_trial
+server:
+  num_ctx: 32768
+  base_model: qwen3:8b
+  kv_cache_type: q8_0
+  flash_attention: true

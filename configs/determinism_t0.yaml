@@ -1,0 +1,7 @@
+# Determinism test (plan item P2): greedy decoding, no seed; the trials of one task are repeats of each other.
+id: det_t0
+model: ollama/qwen3.6-32k
+description: qwen3.6 35B-A3B, 32k context, temperature 0 (repeated trials should be identical if the stack is deterministic)
+seed_mode: none
+options:
+  temperature: 0

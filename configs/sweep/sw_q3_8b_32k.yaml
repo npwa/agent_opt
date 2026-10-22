@@ -1,0 +1,9 @@
+# Second model (plan M5.4): qwen3:8b with a 32k context window (the registry model defaults to 4k, which would cut the 7k-token agent prompt).
+# At f16 the 32k KV cache of this dense 36-layer model is about 4.8 GB on top of 5.2 GB of weights: llama.cpp's fit moves layers to the CPU.
+id: sw_q3_8b_32k
+model: ollama/qwen3-8b-32k
+description: qwen3:8b, 32k context, KV f16
+seed_mode: per_trial
+server:
+  num_ctx: 32768
+  base_model: qwen3:8b

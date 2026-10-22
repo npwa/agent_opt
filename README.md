@@ -97,7 +97,7 @@ of the v0 claims (M4.2) are not yet run.
 | Path | Contents |
 |---|---|
 | `harness/` | the measurement tooling: `runner` (seeded, resumable trials), `proxy` (passive metrics proxy), `telemetry` (NVML sampler), `trace` and `decompose` (per-step timeline and time breakdown), `verifiers` + `sandbox` (automatic pass/fail), `taskspec`, `replay`, `promptreplay` (time prompt variants from captured requests), `server` (per-configuration Ollama server settings), `vocabcheck` + `ggufmeta` (draft-model compatibility), `nsys`, `manifest` |
-| `analysis/` | `stats` (Wilson, bootstrap, Mann-Whitney, Holm), `parity`, `report` + `svg` (Markdown and inline-SVG HTML report), `figures` (standalone SVG charts), `compare_runs`, `claims` (verification-claim check) |
+| `analysis/` | `stats` (Wilson, bootstrap, Mann-Whitney, Holm), `parity`, `report` + `svg` (Markdown and inline-SVG HTML report), `figures` (standalone SVG charts), `compare_runs`, `claims` (verification-claim check), `determinism` |
 | `tasks/` | the 18 task specs (YAML): prompts, tool permissions, timeout, verifiers (14 original, 4 harder ones added after the baseline) |
 | `fixtures/` | task inputs (`tasks/`), hidden verifier assets (`verify/`), known-good/bad examples (`golden/`), recorded traces (`traces/`) and the replay runs with committed golden outputs (`replay/`) |
 | `configs/` | run configurations: `baseline_32k.yaml` and the `sweep/` set (context size, KV cache type, flash attention, fit margin) |
