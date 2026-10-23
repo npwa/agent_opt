@@ -1,0 +1,61 @@
+{
+  "trial_id": "sw_32k__coding_10_wcx_constrained__02",
+  "task": "coding_10_wcx_constrained",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 2,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_t03__logtriage_04_pool_exhaustion__02",
+  "prev_task": "logtriage_04_pool_exhaustion",
+  "seed": 2020826525,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T20:32:47Z",
+  "wall_start": 1792787567.8023489,
+  "wall_end": 1792787893.975702,
+  "elapsed_s": 326.2,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 11,
+  "tokens_in": 100937,
+  "tokens_out": 9534,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "write",
+    "write",
+    "write",
+    "write",
+    "write",
+    "write",
+    "write",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": false,
+      "detail": "one newline: expected '1 0 1 0\\n', got exit 0, '1 0 0 0\\n'; unterminated last line is the longest: expected '2 4 13 8\\n', got exit 0, '2 4 11 8\\n'; crlf: expected '2 3 11 6\\n', got exit 0, '2 3 9 6\\n'; high bytes belong to words: expected '2 3 10 7\\n', got exit 0, '2 3 8 7\\n' (+3 more)"
+    }
+  ],
+  "final_answer": "Compiles successfully. The `wcx.c` file is written and compiled with `gcc -std=c11 -Wall -Wextra -Werror -O2`.",
+  "files": [
+    "wcx.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-23T20:32:47Z"
+    }
+  ]
+}

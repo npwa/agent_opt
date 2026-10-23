@@ -1,0 +1,58 @@
+{
+  "trial_id": "sw_32k_t03__logtriage_04_pool_exhaustion__00",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "sw_32k_t03",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__bugfix_09_booking_slots__01",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 45800645,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T20:59:02Z",
+  "wall_start": 1792789142.022159,
+  "wall_end": 1792789268.4493506,
+  "elapsed_s": 126.1,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 92361,
+  "tokens_out": 1207,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "126 words, all checks ok"
+    }
+  ],
+  "final_answer": "Here's the outage analysis:\n\n**(1) First error burst:** `2026-01-18T03:17:42Z` on **api-07** (first host to report it), immediately cascading across all API hosts (api-01 through api-08).\n\n**(2) Root cause:** The database connection pool (`primary`, max=20) was fully consumed. The batch job `reconcile-ledger` on **batch-01** acquired all 20 connections and held them for ~26 minutes without releasing any, starving the API servers of available connections.\n\n**(3) Responsible party:** The **`reconcile-ledger`** batch job running on **batch-01**, launched by user **`svc-batch`**. It started at `03:15:03Z`, grabbed all 20 connections (one every 5 seconds), and didn't release them until `03:41:30Z`. The outage window was `03:17:42Z` to roughly `03:41:30Z` (~24 minutes of 503 errors across all API hosts).\n\nThe pre-existing WARN noise (cache misses, slow requests) from `02:00\u201303:00` is unrelated background chatter.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T20:59:02Z"
+    }
+  ]
+}

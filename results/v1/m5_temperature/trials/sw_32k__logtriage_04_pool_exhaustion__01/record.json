@@ -1,0 +1,62 @@
+{
+  "trial_id": "sw_32k__logtriage_04_pool_exhaustion__01",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_t03__coding_03_compress_gen__02",
+  "prev_task": "coding_03_compress_gen",
+  "seed": 436812540,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T20:50:10Z",
+  "wall_start": 1792788610.6735291,
+  "wall_end": 1792788746.652739,
+  "elapsed_s": 135.7,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 7,
+  "tokens_in": 125539,
+  "tokens_out": 1854,
+  "tool_sequence": [
+    "read",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "149 words, all checks ok"
+    }
+  ],
+  "final_answer": "Let me check how the outage ended and when recovery began:\nHere's the full outage analysis from 72k log lines:\n\n**(1) First error burst**: `2026-01-18T03:17:42Z` on **api-07** \u2014 then cascaded across all API hosts (api-01 through api-08).\n\n**(2) Root cause**: The database connection pool was fully consumed to its max of 20 connections, leaving zero available for any API request. All 301 resulting HTTP 503 errors affected every host in the pool. The outage lasted ~24 minutes (`03:17:42Z` \u2192 `03:41:30Z`).\n\n**(3) Responsible entity**: Batch job **`reconcile-ledger`** running on **batch-01** under user **`svc-batch`**. It started at `03:15:03Z` with `db_conns=20` and monopolized all 20 connections (acquiring one every 5 seconds, never releasing), draining the entire pool before finally finishing and releasing them at `T03:41:30Z` (~26 min, 48M rows processed).\n\nOne isolated TLS error at `02:41:07Z` on api-02 was unrelated noise (a single peer reset \u2014 not a cascade or pool issue).",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T20:50:10Z"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "trial_id": "sw_32k__logtriage_04_pool_exhaustion__00",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_t03__coding_03_compress_gen__00",
+  "prev_task": "coding_03_compress_gen",
+  "seed": 1402451595,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T20:55:43Z",
+  "wall_start": 1792788943.168369,
+  "wall_end": 1792788993.0890446,
+  "elapsed_s": 49.6,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 29010,
+  "tokens_out": 624,
+  "tool_sequence": [
+    "bash",
+    "glob",
+    "grep"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": false,
+      "detail": "missing 'start_time'; missing 'first_host'; missing 'root_cause'; missing 'culprit_job'; missing 'culprit_user'"
+    }
+  ],
+  "final_answer": "",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-23T20:55:43Z"
+    }
+  ]
+}

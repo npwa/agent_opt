@@ -1,0 +1,63 @@
+{
+  "trial_id": "sw_32k__c_ringbuf_03_ringbuffer__01",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_t03__coding_01_my_sqrt_review__02",
+  "prev_task": "coding_01_my_sqrt_review",
+  "seed": 10428335,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T18:23:02Z",
+  "wall_start": 1792779782.4227135,
+  "wall_end": 1792779942.4152865,
+  "elapsed_s": 160.0,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 9,
+  "tokens_in": 95803,
+  "tokens_out": 4304,
+  "tool_sequence": [
+    "read",
+    "read",
+    "glob",
+    "write",
+    "write",
+    "edit",
+    "read",
+    "bash",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All done \u2014 compiled cleanly with `-Wall -Werror` and all 20 tests pass.",
+  "files": [
+    "ringbuf.c",
+    "test_ringbuf.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T18:23:02Z"
+    }
+  ]
+}

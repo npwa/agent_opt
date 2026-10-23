@@ -1,0 +1,10 @@
+# H8: lower sampling temperature. Same private server and 32k model as sw_32k (so the three temperature configs share one
+# server block and their trials are interleaved in time); only the request's temperature differs (default is 1.0).
+id: sw_32k_t06
+model: ollama/qwen3.6-32k
+description: 32k context, sampling temperature 0.6
+seed_mode: per_trial
+options:
+  temperature: 0.6
+server:
+  num_ctx: 32768

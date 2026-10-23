@@ -1,0 +1,61 @@
+{
+  "trial_id": "sw_32k_t06__logtriage_04_pool_exhaustion__01",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "sw_32k_t06",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__logtriage_04_pool_exhaustion__00",
+  "prev_task": "logtriage_04_pool_exhaustion",
+  "seed": 2015732940,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T20:56:33Z",
+  "wall_start": 1792788993.1495843,
+  "wall_end": 1792789081.4659255,
+  "elapsed_s": 88.0,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 8,
+  "tokens_in": 78847,
+  "tokens_out": 1692,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": false,
+      "detail": "missing 'first_host'"
+    }
+  ],
+  "final_answer": "Here are the findings from analyzing `app.log`:\n\n**(1) First error burst \u2014 when & where**\n\nThe first actual error occurred at **`2026-01-18T02:41:07Z` on host `api-02`**, but it was a single TLS handshake failure (noise). The real outage burst began at **`2026-01-18T03:17:42Z`** when the database connection pool was exhausted, cascading across **all API hosts** (`api-01` through `api-08`) with 503 errors.\n\n**(2) Root cause**\n\nThe DB connection pool (`max=20`) was fully consumed and never released by a long-running batch job. At `03:15:03Z`, the job **`reconcile-ledger`** (host `batch-01`, user=`svc-batch`) started acquiring connections one-by-one every 5 seconds until it grabbed all 20 (`acquired connection 20/20` at `03:16:39Z`). It held them for ~26 minutes, only releasing at `03:41:30Z`. The outage window was **~24 minutes** (`03:17:42Z` to roughly `03:41:30Z`).\n\n**(3) Responsible job/user**\n\n- **Job:** `reconcile-ledger` running on host `batch-01`\n- **User:** `svc-batch`\n- **Impact:** 48,210,112 rows processed while monopolizing all 20 DB connections, starving the API servers of database access.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-23T20:56:33Z"
+    }
+  ]
+}

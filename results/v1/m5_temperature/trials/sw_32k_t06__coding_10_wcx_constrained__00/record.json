@@ -1,0 +1,56 @@
+{
+  "trial_id": "sw_32k_t06__coding_10_wcx_constrained__00",
+  "task": "coding_10_wcx_constrained",
+  "config": "sw_32k_t06",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_t06__longctx_11_harbor_report__00",
+  "prev_task": "longctx_11_harbor_report",
+  "seed": 572857967,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T18:57:58Z",
+  "wall_start": 1792781878.089089,
+  "wall_end": 1792781925.6686604,
+  "elapsed_s": 47.6,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 6,
+  "tokens_in": 47992,
+  "tokens_out": 1122,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "write",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Compiled cleanly. Quick smoke test:\nDone. `wcx.c` compiles with the exact flags and produces correct output \u2014 e.g. for `\"hello world\\nfoo bar baz\\n\"` it prints `2 5 24 11` (2 lines, 5 words, 24 bytes, longest line 11 chars).",
+  "files": [
+    "wcx.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T18:57:58Z"
+    }
+  ]
+}

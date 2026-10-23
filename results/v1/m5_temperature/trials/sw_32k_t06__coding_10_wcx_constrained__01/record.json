@@ -1,0 +1,66 @@
+{
+  "trial_id": "sw_32k_t06__coding_10_wcx_constrained__01",
+  "task": "coding_10_wcx_constrained",
+  "config": "sw_32k_t06",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_t03__coding_01_my_sqrt_review__01",
+  "prev_task": "coding_01_my_sqrt_review",
+  "seed": 817770033,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T21:37:56Z",
+  "wall_start": 1792791476.7386534,
+  "wall_end": 1792791789.5930462,
+  "elapsed_s": 312.9,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 16,
+  "tokens_in": 148705,
+  "tokens_out": 8918,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "write",
+    "bash",
+    "bash",
+    "bash",
+    "edit",
+    "bash",
+    "bash",
+    "read",
+    "edit",
+    "write",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All tests pass:\n\n- Empty input: `0 0 0 0` \u2713\n- \"hello\" (no trailing newline): `0 1 5 5` \u2713\n- NUL bytes in word (\"a\\0b\\n\"): `1 1 4 3` \u2713  \n- High bytes (\"\\xff\\xfe\\n\"): `1 1 2 2` \u2713\n- Whitespace-only line (\"   \\n\"): `1 0 4 3` \u2713\n- 64 MiB single line: works without dynamic memory \u2713\n\nDone. `wcx.c` is written and compiled with the exact flags from WCX.md.",
+  "files": [
+    "wcx.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T21:37:56Z"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "trial_id": "sw_32k__logtriage_04_pool_exhaustion__02",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 2,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_t03__refactor_02_rename_price__00",
+  "prev_task": "refactor_02_rename_price",
+  "seed": 444796079,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T21:14:01Z",
+  "wall_start": 1792790041.7540393,
+  "wall_end": 1792790180.4896662,
+  "elapsed_s": 138.4,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 6,
+  "tokens_in": 105678,
+  "tokens_out": 1854,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "252 words, all checks ok"
+    }
+  ],
+  "final_answer": "Let me confirm the full extent of the error burst window:\nI now have the full picture. Here's the outage analysis:\n\n---\n\n**(1) When the first real error burst started and on which host:**\n\nThe first real error within the outage window was at:\n- `2026-01-18T03:17:42Z` on **api-07**, which logged `db pool exhausted (max=20) waiting=14 path=/v1/orders`\n\nThis single host hit the limit first. Within seconds it cascaded to all hosts (api-01 through api-08), with mass 503 errors starting at `T03:17:43Z`. The burst lasted from **03:17:42Z to ~03:19:22Z** (roughly 2 minutes), before the batch job released its connections.\n\n---\n\n**(2) Root cause:**\n\nThe database connection pool (max=20) was **fully consumed and never released**\u2014all 20 connections were sitting idle/blocked, leaving zero available for live API traffic. The symptom was \"db pool exhausted\" on every host, causing upstream 503 failures across the entire fleet.\n\n---\n\n**(3) Which batch job or user is responsible:**\n\n**Batch job `reconcile-ledger` on host `batch-01`, running as user `svc-batch`.** It:\n- **Started** at `2026-01-18T03:15:03Z`: `job reconcile-ledger started user=svc-batch db_conns=20`\n- Acquired all 20 connections one-by-one over the next ~2.5 minutes\n- **Held them for ~26 minutes** without releasing any (logs show no activity between connection acquisition at `03:16:39Z` and release)\n- Only finished (`rows=48210112`, `released_conns=20`) at `T03:41:30Z`, after the outage window had closed\n\n---\n\n**Summary:** The svc-batch user's `reconcile-ledger` batch job on batch-01 grabbed all 20 DB connections and held them for 26 minutes without releasing them, starving all API hosts of database connections and causing a full-service outage from 03:17\u201303:19Z.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T21:14:01Z"
+    }
+  ]
+}

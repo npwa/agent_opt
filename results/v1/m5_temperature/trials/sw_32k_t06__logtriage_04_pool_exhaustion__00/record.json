@@ -1,0 +1,64 @@
+{
+  "trial_id": "sw_32k_t06__logtriage_04_pool_exhaustion__00",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "sw_32k_t06",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_t06__bugfix_09_booking_slots__01",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 1938331670,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T19:04:00Z",
+  "wall_start": 1792782240.1555774,
+  "wall_end": 1792782479.4460669,
+  "elapsed_s": 239.0,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 10,
+  "tokens_in": 154420,
+  "tokens_out": 2225,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": false,
+      "detail": "missing 'culprit_user'"
+    }
+  ],
+  "final_answer": "**Root Cause: `reconcile-ledger` batch job held all 20 DB connections for 26+ minutes**\n\nEvidence from logs:\n\n- **03:15:03** \u2014 `batch-01` started `reconcile-ledger`, requesting 20 connections (`db_conns=20`)\n- **03:15:04 \u2013 03:16:39** \u2014 Batch acquired all 20 connections one-by-one (every ~5s), exhausting the pool (`max=20`)\n- **03:17:42** \u2014 First `ERROR api-07 db pool exhausted (max=20) waiting=14 path=/v1/orders`\n- **03:17:42 \u2013 03:19:22** \u2014 All API servers (`api-01` through `api-08`) returned **503 errors** with `upstream=db pool exhausted (max=20)` \u2014 zero connections available for live traffic\n- **03:41:30** \u2014 Batch finally finished after processing 48,210,112 rows and releasing all 20 connections\n\n**Why it happened:** The batch job acquired the entire connection pool on startup and never released connections until completion. With a pool limit of 20, this starved all API servers of DB access for ~26 minutes. Any concurrent requests to `/v1/orders`, `/v1/search`, `/v1/cart`, etc. failed with 503s immediately once the pool was drained.\n\n**Fix:** Limit batch jobs to a small fraction of the pool (e.g., 2\u20134 connections), or use a separate DB pool for batch workloads.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-23T19:04:00Z"
+    }
+  ]
+}

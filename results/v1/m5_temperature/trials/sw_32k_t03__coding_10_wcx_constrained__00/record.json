@@ -1,0 +1,61 @@
+{
+  "trial_id": "sw_32k_t03__coding_10_wcx_constrained__00",
+  "task": "coding_10_wcx_constrained",
+  "config": "sw_32k_t03",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_t06__repoqa_05_retry_policy__01",
+  "prev_task": "repoqa_05_retry_policy",
+  "seed": 1344784039,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T22:11:17Z",
+  "wall_start": 1792793477.9834247,
+  "wall_end": 1792793660.1288185,
+  "elapsed_s": 182.1,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 11,
+  "tokens_in": 98151,
+  "tokens_out": 5192,
+  "tool_sequence": [
+    "read",
+    "write",
+    "edit",
+    "bash",
+    "bash",
+    "read",
+    "edit",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": false,
+      "detail": "no trailing newline: expected '0 2 11 11\\n', got exit 0, '0 3 11 10\\n'; unterminated last line is the longest: expected '2 4 13 8\\n', got exit 0, '2 5 13 7\\n'; crlf: expected '2 3 11 6\\n', got exit 0, '2 3 11 4\\n'; tab vtab formfeed: expected '0 4 7 7\\n', got exit 0, '0 5 7 4\\n' (+5 more)"
+    }
+  ],
+  "final_answer": "Now let me test a few edge cases:",
+  "files": [
+    "wcx.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-23T22:11:17Z"
+    }
+  ]
+}

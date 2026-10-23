@@ -1,0 +1,81 @@
+{
+  "trial_id": "sw_32k_t06__refactor_02_rename_price__01",
+  "task": "refactor_02_rename_price",
+  "config": "sw_32k_t06",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_t03__bugfix_09_booking_slots__00",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 1795770069,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T20:26:53Z",
+  "wall_start": 1792787213.152713,
+  "wall_end": 1792787288.5916905,
+  "elapsed_s": 75.4,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 45654,
+  "tokens_out": 1579,
+  "tool_sequence": [
+    "glob",
+    "grep",
+    "read",
+    "read",
+    "read",
+    "read",
+    "read",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 12 occurrences of `calc_price` have been renamed to `compute_total_price` across all files, and all 4 tests pass.",
+  "files": [
+    "README.md",
+    "cart.py",
+    "pricing.py",
+    "report.py",
+    "test_cart.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T20:26:53Z"
+    }
+  ]
+}

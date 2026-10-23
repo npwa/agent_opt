@@ -1,0 +1,70 @@
+{
+  "trial_id": "sw_32k__c_ringbuf_03_ringbuffer__00",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_t06__coding_10_wcx_constrained__01",
+  "prev_task": "coding_10_wcx_constrained",
+  "seed": 468219121,
+  "run_seed": 1,
+  "status": "timeout",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T21:43:09Z",
+  "wall_start": 1792791789.9110732,
+  "wall_end": 1792792929.961314,
+  "elapsed_s": 1140.0,
+  "timed_out": true,
+  "stalled": false,
+  "exit_codes": [
+    -9
+  ],
+  "steps": 16,
+  "tokens_in": 187185,
+  "tokens_out": 30749,
+  "tool_sequence": [
+    "read",
+    "glob",
+    "read",
+    "glob",
+    "write",
+    "edit",
+    "write",
+    "bash",
+    "edit",
+    "bash",
+    "bash",
+    "edit",
+    "write",
+    "bash",
+    "edit",
+    "bash",
+    "write"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": false,
+      "detail": "FAIL line 31: rb_read(rb, out, 8) == 8 && memcmp(out, \"efghijkl\", 8) == 0\nFAIL line 38: rb_peek(rb, out, 64) == 7 && memcmp(out, \"34567AB\", 7) == 0"
+    }
+  ],
+  "final_answer": "There's a serious bug in the implementation that also crashes the test. Let me rewrite `ringbuf.c` more carefully:",
+  "files": [
+    "ringbuf.c",
+    "test_peek.c",
+    "test_ringbuf.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "timeout",
+      "reason": null,
+      "started_utc": "2026-10-23T21:43:09Z"
+    }
+  ]
+}

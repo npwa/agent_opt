@@ -1,0 +1,61 @@
+{
+  "trial_id": "sw_32k_t03__logtriage_04_pool_exhaustion__01",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "sw_32k_t03",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_t06__coding_02_fizzbuzz_gen__02",
+  "prev_task": "coding_02_fizzbuzz_gen",
+  "seed": 1596125597,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T20:45:17Z",
+  "wall_start": 1792788317.6166217,
+  "wall_end": 1792788479.99626,
+  "elapsed_s": 162.1,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 7,
+  "tokens_in": 139017,
+  "tokens_out": 2351,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "227 words, all checks ok"
+    }
+  ],
+  "final_answer": "Here are the three answers from the log analysis:\n\n---\n\n**(1) First error burst \u2014 when and on which host**\n\n- **Time:** `2026-01-18T03:17:42Z`\n- **Host:** `api-07` (first hit), then within seconds all hosts were affected: api-01 through api-08\n- The first line was:\n  ```\n  ERROR api-07 db pool exhausted (max=20) waiting=14 path=/v1/orders\n  ```\n- Within ~1 second, every API host started returning `503 upstream=db pool exhausted` \u2014 a full outage.\n\n**(2) Root cause**\n\nThe application's database connection pool has a hard limit of **20 connections**. A batch job grabbed all 20 connections and held them, leaving zero for the live API servers. When api-07 tried to get a 21st connection at `03:17:42Z`, it timed out after waiting 14 seconds and threw the first error. All subsequent requests across all hosts failed with 503s until the connections were released (~`03:19:22Z`).\n\n**(3) Responsible batch job / user**\n\n- **Job:** `reconcile-ledger` running on host **`batch-01`**, triggered by user **`svc-batch`**\n- Timeline:\n  - `03:15:03Z` \u2014 job started with `db_conns=20`\n  - `03:15:04Z`\u2013`03:16:39Z` \u2014 acquired all 20 connections one-by-one (every ~5 seconds)\n  - `03:17:42Z` \u2014 first outage error\n  - Connections were released at `03:19:22Z` (service recovered), and the job logged completion at `03:41:30Z` with `rows=48210112`\n\n**Summary:** The `reconcile-ledger` batch job on `batch-01` (user `svc-batch`) consumed the entire DB connection pool (20/20), starving all API hosts and causing a ~2-minute outage starting at `03:17:42Z`.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T20:45:17Z"
+    }
+  ]
+}

@@ -102,6 +102,10 @@ trial but passes 24 % of the core-suite trials (10/42) against 66 % for `qwen3.6
 CI -57 to -23); it often stops early without doing the work. The larger model's partial CPU offload costs time but buys a pass
 rate 2.7 times as high.
 
+**Sampling temperature (`results/v1/m5_temperature/`).** Lowering the temperature from the model default (1.0) to 0.3 or 0.6 does not
+change the pass rate detectably (60 % / 60 % / 69 %, 42 trials each, intervals overlap) and does not make repeated trials more
+consistent (cells with mixed outcomes 6 / 9 / 4 of 14): the spread between runs comes from the agent's path, not from sampling.
+
 **Caveats.** Instrumentation parity is still inconclusive (isolated run: uninstrumented/instrumented time ratio
 0.87, 95 % CI 0.73-1.01 against a ±5 % tolerance, 28 parity trials; it was 1.06 in the first run, so the direction is
 not stable and noise is the likeliest explanation; success 61 % vs 71 %). One parity trial hung waiting for Ollama and

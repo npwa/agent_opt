@@ -1,0 +1,66 @@
+{
+  "trial_id": "sw_32k_t03__c_ringbuf_03_ringbuffer__01",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_32k_t03",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_t06__coding_03_compress_gen__00",
+  "prev_task": "coding_03_compress_gen",
+  "seed": 453223484,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T19:09:21Z",
+  "wall_start": 1792782561.1273215,
+  "wall_end": 1792782788.6668818,
+  "elapsed_s": 227.5,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 13,
+  "tokens_in": 138378,
+  "tokens_out": 6334,
+  "tool_sequence": [
+    "read",
+    "glob",
+    "read",
+    "read",
+    "write",
+    "edit",
+    "bash",
+    "write",
+    "bash",
+    "edit",
+    "edit",
+    "edit",
+    "read",
+    "bash"
+  ],
+  "tool_errors": 1,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 22 tests pass and the code compiles cleanly with `gcc -std=c11 -Wall -Werror`. Here's what was implemented in `ringbuf.c`:\n\n- **`rb_create`** / **`rb_destroy`** \u2014 allocates/frees an opaque ring buffer with a capacity-checked byte array\n- **`rb_write`** \u2014 copies data into the buffer, handling wrap-around at the end of storage; returns how many bytes were actually written (clamped to free space)\n- **`rb_read`** \u2014 removes oldest bytes from the buffer, also handling wrap-around; returns count read\n- **`rb_peek`** \u2014 non-destructive copy of oldest bytes (uses a temporary head index)\n- **`rb_size`** / **`rb_capacity`** \u2014 query current fill level and total capacity\n- **`rb_clear`** \u2014 resets head/tail/count to zero\n\nAll functions are NULL-safe per the spec.",
+  "files": [
+    "ringbuf.c",
+    "test_ringbuf.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T19:09:21Z"
+    }
+  ]
+}

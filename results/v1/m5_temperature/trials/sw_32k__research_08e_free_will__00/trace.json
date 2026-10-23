@@ -1,0 +1,215 @@
+{
+  "trial_id": "sw_32k__research_08e_free_will__00",
+  "task": "research_08e_free_will",
+  "config": "sw_32k",
+  "attempt": 1,
+  "status": "fail",
+  "summary": {
+    "wall_start": 1792781583.9338803,
+    "wall_end": 1792781745.27283,
+    "wall_s": 161.33894968032837,
+    "n_steps": 4,
+    "llm_s": 155.979,
+    "ttft_s": 112.33930000000001,
+    "decode_s": 43.639700000000005,
+    "tool_s": 6.596999883651733,
+    "gap_s": 3.066000461578369,
+    "idle_gap_s": 1.2286811172962189,
+    "prefill_tokens": 65636,
+    "decode_tokens": 1463,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "sw_32k__research_08e_free_will__00#a1:1",
+      "t_start": 1792781586.2278297,
+      "t_end": 1792781596.7875297,
+      "ttft_s": 2.6241,
+      "llm_s": 10.5597,
+      "decode_s": 7.935599999999999,
+      "prefill_tokens": 7652,
+      "decode_tokens": 276,
+      "prefill_tok_s": 2916.05,
+      "decode_tok_s": 34.78,
+      "n_chunks": 91,
+      "first_token_skew_s": 0.05007028579711914,
+      "itl_p50_ms": 29.00000000000036,
+      "itl_p99_ms": 1634.9999999999998,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 1.8519997596740723,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792781593.109,
+          "end": 1792781593.87,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792781594.683,
+          "end": 1792781595.066,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792781596.764,
+          "end": 1792781597.472,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792781588.902,
+      "oc_step_finish": 1792781597.488,
+      "tool_errors": 0,
+      "gap_s": 0.7203435897827148,
+      "gpu_busy_pct_llm": 33.20952380952381,
+      "gpu_power_w_llm": 118.96190476190476,
+      "gpu_samples_llm": 105,
+      "gpu_busy_pct_gap": 9.0,
+      "gpu_samples_gap": 7,
+      "idle_gap_s": 0.4116249084472656
+    },
+    {
+      "step": 2,
+      "llm_call_id": "sw_32k__research_08e_free_will__00#a1:2",
+      "t_start": 1792781597.5078733,
+      "t_end": 1792781619.3297732,
+      "ttft_s": 16.7419,
+      "llm_s": 21.8219,
+      "decode_s": 5.079999999999998,
+      "prefill_tokens": 12223,
+      "decode_tokens": 175,
+      "prefill_tok_s": 730.08,
+      "decode_tok_s": 34.45,
+      "n_chunks": 27,
+      "first_token_skew_s": 0.01222681999206543,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 1723.000000000001,
+      "tool_names": [
+        "searxng_web_url_read",
+        "searxng_web_url_read",
+        "searxng_web_url_read"
+      ],
+      "tool_latency_s": 1.622999906539917,
+      "tools": [
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792781616.344,
+          "end": 1792781617.319,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792781618.169,
+          "end": 1792781618.517,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792781619.305,
+          "end": 1792781619.605,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792781614.262,
+      "oc_step_finish": 1792781619.617,
+      "tool_errors": 2,
+      "gap_s": 0.307049036026001,
+      "gpu_busy_pct_llm": 81.38356164383562,
+      "gpu_power_w_llm": 131.8566210045662,
+      "gpu_samples_llm": 219,
+      "gpu_busy_pct_gap": 21.0,
+      "gpu_samples_gap": 3,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 3,
+      "llm_call_id": "sw_32k__research_08e_free_will__00#a1:3",
+      "t_start": 1792781619.6368222,
+      "t_end": 1792781668.0692222,
+      "ttft_s": 41.2762,
+      "llm_s": 48.4324,
+      "decode_s": 7.156199999999998,
+      "prefill_tokens": 24080,
+      "decode_tokens": 245,
+      "prefill_tok_s": 583.39,
+      "decode_tok_s": 34.24,
+      "n_chunks": 53,
+      "first_token_skew_s": 0.005977630615234375,
+      "itl_p50_ms": 29.000000000003467,
+      "itl_p99_ms": 1930.7300000000034,
+      "tool_names": [
+        "searxng_web_url_read",
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 3.122000217437744,
+      "tools": [
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792781664.184,
+          "end": 1792781665.17,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792781666.074,
+          "end": 1792781666.606,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792781668.043,
+          "end": 1792781669.647,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792781660.919,
+      "oc_step_finish": 1792781669.664,
+      "tool_errors": 0,
+      "gap_s": 1.6179816722869873,
+      "gpu_busy_pct_llm": 85.0702479338843,
+      "gpu_power_w_llm": 135.48181818181817,
+      "gpu_samples_llm": 484,
+      "gpu_busy_pct_gap": 13.75,
+      "gpu_samples_gap": 16,
+      "idle_gap_s": 0.6067431271076202
+    },
+    {
+      "step": 4,
+      "llm_call_id": "sw_32k__research_08e_free_will__00#a1:4",
+      "t_start": 1792781669.687204,
+      "t_end": 1792781744.8522038,
+      "ttft_s": 51.6971,
+      "llm_s": 75.165,
+      "decode_s": 23.467900000000007,
+      "prefill_tokens": 21681,
+      "decode_tokens": 767,
+      "prefill_tok_s": 419.39,
+      "decode_tok_s": 32.68,
+      "n_chunks": 744,
+      "first_token_skew_s": 0.005696296691894531,
+      "itl_p50_ms": 30.000000000001137,
+      "itl_p99_ms": 60.580000000005086,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792781721.39,
+      "oc_step_finish": 1792781744.869,
+      "tool_errors": 0,
+      "gap_s": 0.420626163482666,
+      "gpu_busy_pct_llm": 73.59042553191489,
+      "gpu_power_w_llm": 128.64321808510638,
+      "gpu_samples_llm": 752,
+      "gpu_busy_pct_gap": 7.5,
+      "gpu_samples_gap": 4,
+      "idle_gap_s": 0.210313081741333
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

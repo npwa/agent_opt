@@ -1,0 +1,141 @@
+{
+  "trial_id": "sw_32k__logtriage_04_pool_exhaustion__00",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "sw_32k",
+  "attempt": 1,
+  "status": "fail",
+  "summary": {
+    "wall_start": 1792788943.168369,
+    "wall_end": 1792788993.0890446,
+    "wall_s": 49.92067551612854,
+    "n_steps": 3,
+    "llm_s": 47.7,
+    "ttft_s": 29.1524,
+    "decode_s": 18.5476,
+    "tool_s": 0.040000200271606445,
+    "gap_s": 0.16723108291625977,
+    "idle_gap_s": 0.0,
+    "prefill_tokens": 29010,
+    "decode_tokens": 624,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "sw_32k__logtriage_04_pool_exhaustion__00#a1:1",
+      "t_start": 1792788945.2218134,
+      "t_end": 1792788952.1745133,
+      "ttft_s": 2.6284,
+      "llm_s": 6.9527,
+      "decode_s": 4.3243,
+      "prefill_tokens": 7379,
+      "decode_tokens": 146,
+      "prefill_tok_s": 2807.41,
+      "decode_tok_s": 33.76,
+      "n_chunks": 44,
+      "first_token_skew_s": 0.2477865219116211,
+      "itl_p50_ms": 30.999999999999694,
+      "itl_p99_ms": 1616.7799999999975,
+      "tool_names": [
+        "bash",
+        "glob"
+      ],
+      "tool_latency_s": 0.02200007438659668,
+      "tools": [
+        {
+          "tool": "bash",
+          "start": 1792788951.415,
+          "end": 1792788951.423,
+          "status": "completed"
+        },
+        {
+          "tool": "glob",
+          "start": 1792788952.151,
+          "end": 1792788952.165,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792788948.098,
+      "oc_step_finish": 1792788952.193,
+      "tool_errors": 0,
+      "gap_s": 0.03915524482727051,
+      "gpu_busy_pct_llm": 38.78260869565217,
+      "gpu_power_w_llm": 120.60289855072465,
+      "gpu_samples_llm": 69,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 2,
+      "llm_call_id": "sw_32k__logtriage_04_pool_exhaustion__00#a1:2",
+      "t_start": 1792788952.2136686,
+      "t_end": 1792788965.3996687,
+      "ttft_s": 1.9692,
+      "llm_s": 13.186,
+      "decode_s": 11.2168,
+      "prefill_tokens": 7589,
+      "decode_tokens": 375,
+      "prefill_tok_s": 3853.85,
+      "decode_tok_s": 33.43,
+      "n_chunks": 264,
+      "first_token_skew_s": 0.00813150405883789,
+      "itl_p50_ms": 29.99999999999936,
+      "itl_p99_ms": 61.75999999999985,
+      "tool_names": [
+        "grep"
+      ],
+      "tool_latency_s": 0.018000125885009766,
+      "tools": [
+        {
+          "tool": "grep",
+          "start": 1792788965.379,
+          "end": 1792788965.397,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792788954.191,
+      "oc_step_finish": 1792788965.413,
+      "tool_errors": 0,
+      "gap_s": 0.030845165252685547,
+      "gpu_busy_pct_llm": 23.59090909090909,
+      "gpu_power_w_llm": 118.92121212121212,
+      "gpu_samples_llm": 132,
+      "gpu_busy_pct_gap": 20.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 3,
+      "llm_call_id": "sw_32k__logtriage_04_pool_exhaustion__00#a1:3",
+      "t_start": 1792788965.4305139,
+      "t_end": 1792788992.991814,
+      "ttft_s": 24.5548,
+      "llm_s": 27.5613,
+      "decode_s": 3.006499999999999,
+      "prefill_tokens": 14042,
+      "decode_tokens": 103,
+      "prefill_tok_s": 571.86,
+      "decode_tok_s": 34.26,
+      "n_chunks": 98,
+      "first_token_skew_s": 0.013686180114746094,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 61.11999999999997,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792788989.999,
+      "oc_step_finish": 1792788993.005,
+      "tool_errors": 0,
+      "gap_s": 0.09723067283630371,
+      "gpu_busy_pct_llm": 89.25454545454545,
+      "gpu_power_w_llm": 134.92727272727274,
+      "gpu_samples_llm": 275,
+      "gpu_busy_pct_gap": 19.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

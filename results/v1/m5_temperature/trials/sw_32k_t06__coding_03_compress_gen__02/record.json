@@ -1,0 +1,53 @@
+{
+  "trial_id": "sw_32k_t06__coding_03_compress_gen__02",
+  "task": "coding_03_compress_gen",
+  "config": "sw_32k_t06",
+  "model": "ollama/qwen3.6-32k",
+  "k": 2,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__bugfix_09_booking_slots__00",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 95380353,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T21:33:21Z",
+  "wall_start": 1792791201.3104696,
+  "wall_end": 1792791227.7883914,
+  "elapsed_s": 26.5,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 22994,
+  "tokens_out": 601,
+  "tool_sequence": [
+    "read",
+    "write"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "File written to `compress.c`. The function implements run-length compression: each consecutive group of identical characters is replaced by the character followed by its count as digits (e.g., \"aabcccccaaa\" \u2192 \"a2b1c5a3\").",
+  "files": [
+    "compress.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T21:33:21Z"
+    }
+  ]
+}
