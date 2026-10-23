@@ -71,11 +71,13 @@ def restrict(rw: list[Path], ro: list[Path] | None = None) -> None:
     if fd < 0:
         raise LandlockError(f"landlock_create_ruleset failed (errno {ctypes.get_errno()})")
     try:
-        for paths, access in ((ro or [], READ_ONLY), (rw, handled)):
+        for paths, access in ((ro or [], READ_ONLY), (rw, handled)):  # access == READ_ONLY identifies the optional read-only list
             for p in paths:
                 p = Path(p)
                 if not p.exists():
-                    continue
+                    if access == READ_ONLY:
+                        continue  # an optional system path that this machine does not have
+                    raise LandlockError(f"writable path does not exist: {p} (a missing grant would silently deny the agent)")
                 pfd = os.open(p, os.O_PATH | os.O_CLOEXEC)
                 try:
                     # a single file cannot get directory rights: keep file-applicable ones only

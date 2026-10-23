@@ -1,0 +1,58 @@
+{
+  "trial_id": "baseline_32k__logtriage_04_pool_exhaustion__00",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": null,
+  "prev_task": null,
+  "seed": 1894990539,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T15:07:29Z",
+  "wall_start": 1792768049.3979275,
+  "wall_end": 1792768186.788562,
+  "elapsed_s": 137.1,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 61906,
+  "tokens_out": 2034,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "210 words, all checks ok"
+    }
+  ],
+  "final_answer": "Here are the findings:\n\n**(1) First real error burst: `03:17:42Z` on `api-07**\n\nThe first actual error was:\n```\n2026-01-18T03:17:42Z ERROR api-07 db pool exhausted (max=20) waiting=14 path=/v1/orders\n```\nWithin seconds it cascaded across all API hosts (`api-01` through `api-08`) \u2014 302 ERROR lines of **503 upstream=db pool exhausted** in a matter of minutes.\n\n**(2) Root cause: DB connection pool exhaustion**\n\nThe primary database connection pool has a hard limit of **20 connections**. When that limit was hit, all API hosts lost their ability to reach the database, returning 503s to every user request.\n\n**(3) Who triggered it: `svc-batch` on host `batch-01`**\n\n```\n2026-01-18T03:15:03Z INFO batch-01 job reconcile-ledger started user=svc-batch db_conns=20\n2026-01-18T03:15:04Z ... 1/20 from pool=primary        \u2190 first conn acquired\n...\n2026-01-18T03:16:39Z DEBUG batch-01 acquire connection 20/20   \u2190 consumed ALL connections\n```\n\nThe `reconcile-ledger` batch job (user `svc-batch`) on `batch-01` grabbed **all 20/20** connections from the primary pool at **03:15:03Z** and held them for ~26 minutes until finishing at **03:41:30Z**. That's the entire outage window \u2014 API servers had zero available connections.\n\n**Summary**: A batch job ran with `db_conns=20`, exhausting the full pool and taking the entire service out. It either shouldn't have been allowed to consume all connections, or should have used a separate database pool reserved for background work.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T15:07:29Z"
+    }
+  ]
+}

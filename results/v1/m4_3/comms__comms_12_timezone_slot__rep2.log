@@ -1,0 +1,18 @@
+[08:01:49] baseline_32k__comms_12_timezone_slot__00
+    -> fail 195.2s attempts=1
+1/1 trials done (fail=1), 0 pending
+# Nsight Systems alignment: baseline_32k__comms_12_timezone_slot__00
+
+73269 kernels and 136466 CUDA graph launches captured (llama.cpp decodes with CUDA graphs); GPU-active time inside the run: 25.73 s.
+
+- GPU-active time inside proxy LLM windows: **100.0 %** (acceptance >= 90 %)
+- Decode-window 100 ms slices with GPU activity: **98.6 %**
+- GPU-active share of LLM time: 13.4 % vs NVML utilisation 35.2 %
+- Idle gaps between kernel-active intervals: n=203793, p50 0.73 ms, p99 6.09 ms, max 375.1 ms, total 164.13 s
+
+| step | GPU-active % prefill | GPU-active % decode | NVML busy % | gap p50 ms | gap p99 ms |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 8.6 | 15.1 | 31.8 | 0.76 | 3.27 |
+| 2 | 8.0 | 14.5 | 36.1 | 0.78 | 3.19 |
+| 3 | 7.0 | 10.4 | 37.6 | 0.81 | 3.84 |
+

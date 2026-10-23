@@ -1,0 +1,23 @@
+# Nsight Systems alignment: baseline_32k__bugfix_09_booking_slots__00
+
+131871 kernels and 77588 CUDA graph launches captured (llama.cpp decodes with CUDA graphs); GPU-active time inside the run: 17.94 s.
+
+- GPU-active time inside proxy LLM windows: **100.0 %** (acceptance >= 90 %)
+- Decode-window 100 ms slices with GPU activity: **97.5 %**
+- GPU-active share of LLM time: 12.6 % vs NVML utilisation 45.2 %
+- Idle gaps between kernel-active intervals: n=203517, p50 0.00 ms, p99 16.88 ms, max 474.0 ms, total 123.02 s
+
+| step | GPU-active % prefill | GPU-active % decode | NVML busy % | gap p50 ms | gap p99 ms |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 8.7 | 14.7 | 83.5 | 0.74 | 3.27 |
+| 2 | 5.7 | 16.2 | 31.5 | 0.68 | 2.61 |
+| 3 | 12.7 | 14.1 | 54.7 | 0.83 | 3.26 |
+| 4 | 6.2 | 16.2 | 36.9 | 0.73 | 2.80 |
+| 5 | 7.9 | 16.7 | 39.0 | 0.69 | 2.58 |
+| 6 | 6.6 | 17.1 | 38.1 | 0.69 | 2.55 |
+| 7 | 8.5 | 17.0 | 74.8 | 0.66 | 2.58 |
+| 8 | 8.2 | 16.9 | 37.4 | 0.72 | 2.77 |
+| 9 | 7.6 | 16.5 | 44.2 | 0.68 | 2.64 |
+| 10 | 7.8 | 17.1 | 37.9 | 0.71 | 2.66 |
+| 11 | 7.4 | 16.9 | 28.8 | 0.71 | 2.78 |
+| 12 | 6.1 | 12.1 | 35.7 | 0.71 | 2.75 |

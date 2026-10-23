@@ -1,0 +1,75 @@
+{
+  "trial_id": "baseline_32k__coding_03_compress_gen__00",
+  "n_kernels": 66363,
+  "n_graph_launches": 29718,
+  "steps": [
+    {
+      "step": 1,
+      "kernel_busy_pct_prefill": 8.754324507871795,
+      "kernel_busy_pct_decode": 16.195536154001076,
+      "nvml_busy_pct_llm": 92.57668711656441,
+      "launch_gaps_decode": {
+        "n": 3581,
+        "total_s": 1.7557828426361084,
+        "p50_ms": 0.66375732421875,
+        "p99_ms": 2.5877475738525377,
+        "max_ms": 20.91240882873535
+      }
+    },
+    {
+      "step": 2,
+      "kernel_busy_pct_prefill": 11.697824054678076,
+      "kernel_busy_pct_decode": 16.510845035575315,
+      "nvml_busy_pct_llm": 53.23529411764706,
+      "launch_gaps_decode": {
+        "n": 30,
+        "total_s": 0.022941112518310547,
+        "p50_ms": 0.7822513580322266,
+        "p99_ms": 0.8440828323364258,
+        "max_ms": 0.8478164672851562
+      }
+    },
+    {
+      "step": 3,
+      "kernel_busy_pct_prefill": 7.235695335725443,
+      "kernel_busy_pct_decode": 17.096545441232756,
+      "nvml_busy_pct_llm": 25.24812030075188,
+      "launch_gaps_decode": {
+        "n": 28670,
+        "total_s": 20.15051770210266,
+        "p50_ms": 0.6968975067138672,
+        "p99_ms": 2.557811737060548,
+        "max_ms": 25.943994522094727
+      }
+    },
+    {
+      "step": 4,
+      "kernel_busy_pct_prefill": 6.8625005268965245,
+      "kernel_busy_pct_decode": 1.0139118013731832,
+      "nvml_busy_pct_llm": 36.95,
+      "launch_gaps_decode": {
+        "n": 121,
+        "total_s": 0.09039926528930664,
+        "p50_ms": 0.6835460662841797,
+        "p99_ms": 2.5351524353027344,
+        "max_ms": 2.5892257690429688
+      }
+    }
+  ],
+  "summary": {
+    "kernel_active_s_total": 7.930939197540283,
+    "kernel_active_s_in_run": 7.894869565963745,
+    "kernel_time_in_llm_windows_pct": 100.0,
+    "decode_slices_with_kernels_pct": 94.34628975265018,
+    "kernel_busy_pct_of_llm_time": 11.85620574611243,
+    "nvml_busy_pct_llm": 52.00252538374084,
+    "launch_gaps_run": {
+      "n": 90139,
+      "total_s": 56.62776517868042,
+      "p50_ms": 0.0007152557373046875,
+      "p99_ms": 18.182258605957013,
+      "max_ms": 372.18499183654785
+    }
+  },
+  "launch_api_calls": 105963
+}

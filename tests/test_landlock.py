@@ -84,3 +84,8 @@ def test_runner_confines_by_default_and_has_an_off_switch():
     src = Path(runner.__file__).read_text()
     assert "CONFINE = True" in src and "--no-confine" in src
     assert 'env["TMPDIR"]' in src and "not d.startswith(str(ROOT))" in src  # temp files in the trial dir, venv off PATH
+
+
+def test_a_missing_writable_path_is_an_error_not_a_silent_denial(tmp_path):
+    with pytest.raises(landlock.LandlockError, match="does not exist"):
+        landlock.restrict([tmp_path / "missing"], [])

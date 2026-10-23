@@ -1,0 +1,31 @@
+{
+  "created_utc": "2026-10-23T15:01:48Z",
+  "run_seed": 1,
+  "n": 1,
+  "parity_fraction": 0.0,
+  "trials_per_task": {
+    "comms_12_timezone_slot": 1
+  },
+  "configs": {
+    "baseline_32k": {
+      "id": "baseline_32k",
+      "model": "ollama/qwen3.6-32k",
+      "description": "qwen3.6 35B-A3B, num_ctx 32768 (Modelfile), default sampling, per-trial seed",
+      "seed_mode": "per_trial",
+      "options": {},
+      "server": null
+    }
+  },
+  "tasks": {
+    "comms_12_timezone_slot": "bc564241ad76"
+  },
+  "order": [
+    {
+      "trial_id": "baseline_32k__comms_12_timezone_slot__00",
+      "config": "baseline_32k",
+      "task": "comms_12_timezone_slot",
+      "k": 0,
+      "instrumented": true
+    }
+  ]
+}

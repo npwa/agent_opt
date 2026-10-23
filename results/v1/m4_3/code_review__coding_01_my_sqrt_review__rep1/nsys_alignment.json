@@ -1,0 +1,49 @@
+{
+  "trial_id": "baseline_32k__coding_01_my_sqrt_review__00",
+  "n_kernels": 55497,
+  "n_graph_launches": 32396,
+  "steps": [
+    {
+      "step": 1,
+      "kernel_busy_pct_prefill": 8.747542642247769,
+      "kernel_busy_pct_decode": 14.314695615291736,
+      "nvml_busy_pct_llm": 89.21764705882353,
+      "launch_gaps_decode": {
+        "n": 5224,
+        "total_s": 3.0183866024017334,
+        "p50_ms": 0.7002353668212891,
+        "p99_ms": 3.3859038352966375,
+        "max_ms": 19.86074447631836
+      }
+    },
+    {
+      "step": 2,
+      "kernel_busy_pct_prefill": 7.975854738936465,
+      "kernel_busy_pct_decode": 16.35338888082737,
+      "nvml_busy_pct_llm": 23.438485804416406,
+      "launch_gaps_decode": {
+        "n": 33194,
+        "total_s": 23.619810342788696,
+        "p50_ms": 0.705718994140625,
+        "p99_ms": 2.7577877044677734,
+        "max_ms": 25.77996253967285
+      }
+    }
+  ],
+  "summary": {
+    "kernel_active_s_total": 8.201841592788696,
+    "kernel_active_s_in_run": 8.165751695632935,
+    "kernel_time_in_llm_windows_pct": 100.0,
+    "decode_slices_with_kernels_pct": 97.5609756097561,
+    "kernel_busy_pct_of_llm_time": 12.410541669013975,
+    "nvml_busy_pct_llm": 56.328066431619966,
+    "launch_gaps_run": {
+      "n": 81951,
+      "total_s": 56.38840174674988,
+      "p50_ms": 0.0007152557373046875,
+      "p99_ms": 18.342018127441406,
+      "max_ms": 420.55368423461914
+    }
+  },
+  "launch_api_calls": 96153
+}

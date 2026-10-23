@@ -1,0 +1,62 @@
+{
+  "trial_id": "baseline_32k__logtriage_04_pool_exhaustion__00",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": null,
+  "prev_task": null,
+  "seed": 1894990539,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T15:11:12Z",
+  "wall_start": 1792768272.1697922,
+  "wall_end": 1792768404.8557353,
+  "elapsed_s": 132.4,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 8,
+  "tokens_in": 77529,
+  "tokens_out": 1941,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "228 words, all checks ok"
+    }
+  ],
+  "final_answer": "Here's the outage analysis from `app.log`:\n\n**(1) First error burst \u2014 time and host**\n\nThe first error appeared at **`2026-01-18T02:41:07Z` on api-02**: a single `TLS handshake failed: peer reset`. This was an isolated noise event.\n\nThe real outage began **5.5 hours later at `2026-01-18T03:17:42Z`**, when **api-07** was the first host to log `db pool exhausted (max=20) waiting=14 path=/v1/orders`. Within seconds, all 8 api-n nodes (api-01 through api-08) were returning 503s \u2014 **301 total db-pool-exhaustion errors** cascading across every host.\n\n**(2) Root cause \u2014 connection pool starvation via a leaking batch job**\n\nAt `2026-01-18T03:15:03Z`, the batch job was logging its activities. Every 5 seconds it took one more connection, steadily draining the shared pool of max=20 until all connections were consumed (connections 1\u201320 acquired between 03:15:04 and ~03:16:34). With zero connections left for the API layer, all subsequent database-dependent API requests got rejected with 503.\n\n**(3) Responsible entity \u2014 batch job `reconcile-ledger` running as user `svc-batch` on host `batch-01`**\n\nLog evidence:\n```\n2026-01-18T03:15:03Z INFO batch-01 job reconcile-ledger started user=svc-batch db_conns=20\n2026-01-18T03:15:04Z DEBUG batch-01 reconcile-ledger acquired connection 1/20 from pool=primary\n... (continues acquiring one connection every 5 seconds through all 20)\n```\n\nThe job (`reconcile-ledger`) leaked all 20 database connections to the `primary` pool. It never released any until after the outage, and its sequential 5-second acquisition pattern left no headroom for concurrent API traffic hitting the same connection pool.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T15:11:12Z"
+    }
+  ]
+}

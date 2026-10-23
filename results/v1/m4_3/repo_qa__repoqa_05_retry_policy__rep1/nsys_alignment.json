@@ -1,0 +1,62 @@
+{
+  "trial_id": "baseline_32k__repoqa_05_retry_policy__00",
+  "n_kernels": 66483,
+  "n_graph_launches": 8763,
+  "steps": [
+    {
+      "step": 1,
+      "kernel_busy_pct_prefill": 8.817959296167729,
+      "kernel_busy_pct_decode": 16.382338534844184,
+      "nvml_busy_pct_llm": 89.99115044247787,
+      "launch_gaps_decode": {
+        "n": 5416,
+        "total_s": 2.7300736904144287,
+        "p50_ms": 0.6628036499023438,
+        "p99_ms": 2.6278018951416025,
+        "max_ms": 19.896984100341797
+      }
+    },
+    {
+      "step": 2,
+      "kernel_busy_pct_prefill": 10.666588732728302,
+      "kernel_busy_pct_decode": 14.335150521609258,
+      "nvml_busy_pct_llm": 46.66326530612245,
+      "launch_gaps_decode": {
+        "n": 2206,
+        "total_s": 2.1724936962127686,
+        "p50_ms": 0.9188652038574219,
+        "p99_ms": 3.4642577171325675,
+        "max_ms": 14.050722122192383
+      }
+    },
+    {
+      "step": 3,
+      "kernel_busy_pct_prefill": 8.009694994040109,
+      "kernel_busy_pct_decode": 3.0050115113481803,
+      "nvml_busy_pct_llm": 54.05555555555556,
+      "launch_gaps_decode": {
+        "n": 2349,
+        "total_s": 0.9139819145202637,
+        "p50_ms": 0.007152557373046875,
+        "p99_ms": 2.6750564575195304,
+        "max_ms": 22.23038673400879
+      }
+    }
+  ],
+  "summary": {
+    "kernel_active_s_total": 4.884981393814087,
+    "kernel_active_s_in_run": 4.848874568939209,
+    "kernel_time_in_llm_windows_pct": 100.0,
+    "decode_slices_with_kernels_pct": 64.76190476190476,
+    "kernel_busy_pct_of_llm_time": 9.209603342546052,
+    "nvml_busy_pct_llm": 63.569990434718626,
+    "launch_gaps_run": {
+      "n": 69304,
+      "total_s": 43.70883774757385,
+      "p50_ms": 0.0007152557373046875,
+      "p99_ms": 18.998775482177738,
+      "max_ms": 360.3506088256836
+    }
+  },
+  "launch_api_calls": 82340
+}

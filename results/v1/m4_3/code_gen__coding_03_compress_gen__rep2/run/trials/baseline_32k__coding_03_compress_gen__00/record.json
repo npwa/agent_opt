@@ -1,0 +1,54 @@
+{
+  "trial_id": "baseline_32k__coding_03_compress_gen__00",
+  "task": "coding_03_compress_gen",
+  "config": "baseline_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": null,
+  "prev_task": null,
+  "seed": 197546614,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T14:50:59Z",
+  "wall_start": 1792767059.4774075,
+  "wall_end": 1792767128.1592042,
+  "elapsed_s": 68.7,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 30574,
+  "tokens_out": 988,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "write"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Done. `/work/compress.c` implements `compress_string` using run-length: consecutive identical characters are compressed to `<char><count>` (e.g., `\"aabcccccaaa\"` \u2192 `\"a2b1c5a3\"`), and the result is null-terminated in `dest`.",
+  "files": [
+    "compress.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T14:50:59Z"
+    }
+  ]
+}

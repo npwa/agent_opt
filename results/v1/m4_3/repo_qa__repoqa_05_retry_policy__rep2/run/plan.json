@@ -1,0 +1,31 @@
+{
+  "created_utc": "2026-10-23T15:33:43Z",
+  "run_seed": 1,
+  "n": 1,
+  "parity_fraction": 0.0,
+  "trials_per_task": {
+    "repoqa_05_retry_policy": 1
+  },
+  "configs": {
+    "baseline_32k": {
+      "id": "baseline_32k",
+      "model": "ollama/qwen3.6-32k",
+      "description": "qwen3.6 35B-A3B, num_ctx 32768 (Modelfile), default sampling, per-trial seed",
+      "seed_mode": "per_trial",
+      "options": {},
+      "server": null
+    }
+  },
+  "tasks": {
+    "repoqa_05_retry_policy": "790e1276cd56"
+  },
+  "order": [
+    {
+      "trial_id": "baseline_32k__repoqa_05_retry_policy__00",
+      "config": "baseline_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 0,
+      "instrumented": true
+    }
+  ]
+}

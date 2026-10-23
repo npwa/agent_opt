@@ -288,6 +288,7 @@ def run_attempt(spec: TaskSpec, cfg: RunConfig, tid: str, attempt: int, seed: in
     # start of the prompt: a per-trial temp path would make every trial's prompt differ from character ~570 on and
     # defeat the cross-trial prefix cache (every first call cold, +28 s per trial; found in M4.2). So the temp
     # directory is one constant path, emptied before each trial (trials run one after the other).
+    xdg.mkdir(parents=True, exist_ok=True)  # Landlock rules need existing paths; a fresh scratch directory has no xdg yet
     shared_tmp = scratch / "shared_tmp"
     shutil.rmtree(shared_tmp, ignore_errors=True)
     shared_tmp.mkdir(parents=True, exist_ok=True)

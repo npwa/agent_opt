@@ -1,0 +1,19 @@
+[08:17:24] baseline_32k__longctx_11_harbor_report__00
+    -> pass 159.3s attempts=1
+1/1 trials done (pass=1), 0 pending
+# Nsight Systems alignment: baseline_32k__longctx_11_harbor_report__00
+
+141860 kernels and 57631 CUDA graph launches captured (llama.cpp decodes with CUDA graphs); GPU-active time inside the run: 18.91 s.
+
+- GPU-active time inside proxy LLM windows: **100.0 %** (acceptance >= 90 %)
+- Decode-window 100 ms slices with GPU activity: **93.2 %**
+- GPU-active share of LLM time: 12.0 % vs NVML utilisation 61.3 %
+- Idle gaps between kernel-active intervals: n=193549, p50 0.00 ms, p99 18.25 ms, max 434.9 ms, total 133.76 s
+
+| step | GPU-active % prefill | GPU-active % decode | NVML busy % | gap p50 ms | gap p99 ms |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 8.9 | 12.7 | 92.7 | 0.77 | 3.67 |
+| 2 | 10.6 | 6.0 | 32.1 | 1.02 | 1.21 |
+| 3 | 9.7 | 17.8 | 92.7 | 0.69 | 2.69 |
+| 4 | 9.5 | 16.3 | 27.5 | 0.72 | 2.65 |
+

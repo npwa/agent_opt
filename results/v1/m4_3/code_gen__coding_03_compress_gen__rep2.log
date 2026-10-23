@@ -1,0 +1,19 @@
+[07:50:59] baseline_32k__coding_03_compress_gen__00
+    -> pass 68.7s attempts=1
+1/1 trials done (pass=1), 0 pending
+# Nsight Systems alignment: baseline_32k__coding_03_compress_gen__00
+
+66363 kernels and 29718 CUDA graph launches captured (llama.cpp decodes with CUDA graphs); GPU-active time inside the run: 7.89 s.
+
+- GPU-active time inside proxy LLM windows: **100.0 %** (acceptance >= 90 %)
+- Decode-window 100 ms slices with GPU activity: **94.3 %**
+- GPU-active share of LLM time: 11.9 % vs NVML utilisation 52.0 %
+- Idle gaps between kernel-active intervals: n=90139, p50 0.00 ms, p99 18.18 ms, max 372.2 ms, total 56.63 s
+
+| step | GPU-active % prefill | GPU-active % decode | NVML busy % | gap p50 ms | gap p99 ms |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 8.8 | 16.2 | 92.6 | 0.66 | 2.59 |
+| 2 | 11.7 | 16.5 | 53.2 | 0.78 | 0.84 |
+| 3 | 7.2 | 17.1 | 25.2 | 0.70 | 2.56 |
+| 4 | 6.9 | 1.0 | 37.0 | 0.68 | 2.54 |
+

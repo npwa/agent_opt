@@ -17,7 +17,7 @@ limits are in [`DIRECTION.md`](DIRECTION.md).
 | M1 | 14 executable tasks with verifiers, sandbox, golden tests, calibration run (tag `m1`) | done |
 | M2 | Trial runner, trace join, 10 Hz GPU telemetry, time decomposition, parity check, Nsight capture (tag `m2`) | done |
 | M3 | Statistics, report generator, replay mode with golden fixtures and a CI job (tag `m3`) | done |
-| M4 | Baseline campaign: whole suite, n = 10, 32k vs 16k re-check | M4.1 done (two 168-trial baselines: first and isolated); M4.2 done (16k vs 32k); M4.3 next |
+| M4 | Baseline campaign: whole suite, n = 10, 32k vs 16k re-check | **done** (tag `m4`): M4.1 done (two 168-trial baselines: first and isolated); M4.2 done (16k vs 32k); M4.3 done (GPU activity); tag `m4` |
 | M5 | Lever experiments: context/KV size, prompt budget, speculative decoding, second model, agent configs | planned |
 | M6 | Automated citation verifier and research evaluation | planned |
 | M7 | Write-up (README, deck, results) | planned |
@@ -91,6 +91,11 @@ oldest tool results are dropped; the two long-context tasks 0/3). The earlier v0
 fizzbuzz-style tasks is not reproduced. A runner bug found during this run (confinement gave every trial its own temp
 path, which OpenCode prints in its first tool and which broke the prompt cache) inflates all M4.2 trial times by about
 28 s; success rates are unaffected, and later runs have the fix.
+
+**GPU activity (M4.3, `results/v1/m4_3/`).** 20 Nsight captures over 10 task categories show that the GPU is actually
+working **11.7 % of the wall-clock** (8.9-13.0 % per category; about 9 % of prefill and 10-17 % of decode time), while NVML
+reports 37-83 % for the same windows. With about two thirds of the expert weights in system memory the GPU computes in short
+bursts and waits for the CPU: the processor is the bottleneck, in prefill and in decode.
 
 **Caveats.** Instrumentation parity is still inconclusive (isolated run: uninstrumented/instrumented time ratio
 0.87, 95 % CI 0.73-1.01 against a ±5 % tolerance, 28 parity trials; it was 1.06 in the first run, so the direction is

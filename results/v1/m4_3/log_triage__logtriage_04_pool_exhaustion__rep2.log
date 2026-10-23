@@ -1,0 +1,23 @@
+[08:11:12] baseline_32k__logtriage_04_pool_exhaustion__00
+    -> pass 132.4s attempts=1
+1/1 trials done (pass=1), 0 pending
+# Nsight Systems alignment: baseline_32k__logtriage_04_pool_exhaustion__00
+
+122407 kernels and 61650 CUDA graph launches captured (llama.cpp decodes with CUDA graphs); GPU-active time inside the run: 15.91 s.
+
+- GPU-active time inside proxy LLM windows: **100.0 %** (acceptance >= 90 %)
+- Decode-window 100 ms slices with GPU activity: **99.8 %**
+- GPU-active share of LLM time: 12.2 % vs NVML utilisation 50.2 %
+- Idle gaps between kernel-active intervals: n=178115, p50 0.00 ms, p99 17.53 ms, max 386.9 ms, total 113.98 s
+
+| step | GPU-active % prefill | GPU-active % decode | NVML busy % | gap p50 ms | gap p99 ms |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 8.7 | 16.4 | 85.7 | 0.70 | 2.70 |
+| 2 | 5.6 | 16.4 | 62.6 | 0.66 | 2.58 |
+| 3 | 4.1 | 16.2 | 24.6 | 0.72 | 2.74 |
+| 4 | 4.5 | 17.1 | 28.6 | 0.69 | 2.60 |
+| 5 | 6.2 | 16.8 | 31.8 | 0.69 | 2.62 |
+| 6 | 9.2 | 15.2 | 67.2 | 0.73 | 3.06 |
+| 7 | 8.7 | 16.8 | 58.5 | 0.72 | 2.70 |
+| 8 | 9.4 | 15.6 | 42.4 | 0.75 | 3.44 |
+

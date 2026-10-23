@@ -321,7 +321,7 @@ def capture(task: str, config: Path, out: Path, scratch: Path, warmup: bool = Tr
                 "messages": [{"role": "user", "content": "hi"}]})
         subprocess.run(
             [sys.executable, "-m", "harness.runner", "run", "--configs", str(config), "--tasks", task,
-             "--n", "1", "--seed", "1", "--out", str(out / "run"), "--scratch", str(scratch / "work"),
+             "--n", "1", "--ignore-task-trials", "--seed", "1", "--out", str(out / "run"), "--scratch", str(scratch / "work"),
              "--proxy-data", str(out / "proxy"), "--gpu-hz", "10"], cwd=runner.ROOT, check=True)
         # unload so the llama-server child exits, give CUPTI a moment, then stop the profiler
         _post(f"http://{PRIVATE_HOST}/api/generate", {"model": model_name, "keep_alive": 0}, 60)

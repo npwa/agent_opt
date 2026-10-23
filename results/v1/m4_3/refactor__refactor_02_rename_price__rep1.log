@@ -1,0 +1,26 @@
+[08:24:25] baseline_32k__refactor_02_rename_price__00
+    -> pass 163.9s attempts=1
+1/1 trials done (pass=1), 0 pending
+# Nsight Systems alignment: baseline_32k__refactor_02_rename_price__00
+
+128325 kernels and 103382 CUDA graph launches captured (llama.cpp decodes with CUDA graphs); GPU-active time inside the run: 22.08 s.
+
+- GPU-active time inside proxy LLM windows: **100.0 %** (acceptance >= 90 %)
+- Decode-window 100 ms slices with GPU activity: **97.4 %**
+- GPU-active share of LLM time: 13.7 % vs NVML utilisation 41.8 %
+- Idle gaps between kernel-active intervals: n=225765, p50 0.00 ms, p99 15.45 ms, max 432.1 ms, total 137.12 s
+
+| step | GPU-active % prefill | GPU-active % decode | NVML busy % | gap p50 ms | gap p99 ms |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 8.8 | 16.4 | 90.7 | 0.66 | 2.60 |
+| 2 | 8.0 | 17.7 | 33.6 | 0.67 | 2.47 |
+| 3 | 11.9 | 16.0 | 67.8 | 0.83 | 0.95 |
+| 4 | 13.5 | 16.8 | 34.5 | 0.78 | 0.92 |
+| 5 | 5.1 | 17.6 | 23.9 | 0.68 | 2.61 |
+| 6 | 8.0 | 17.4 | 47.3 | 0.68 | 2.64 |
+| 7 | 6.8 | 17.8 | 31.6 | 0.68 | 2.58 |
+| 8 | 6.3 | 17.4 | 28.5 | 0.69 | 2.62 |
+| 9 | 15.0 | 17.3 | 39.0 | 0.76 | 0.86 |
+| 10 | 6.2 | 17.2 | 33.0 | 0.68 | 2.70 |
+| 11 | 6.2 | 5.2 | 29.5 | 0.73 | 2.71 |
+
