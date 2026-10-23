@@ -97,6 +97,11 @@ working **11.7 % of the wall-clock** (8.9-13.0 % per category; about 9 % of pref
 reports 37-83 % for the same windows. With about two thirds of the expert weights in system memory the GPU computes in short
 bursts and waits for the CPU: the processor is the bottleneck, in prefill and in decode.
 
+**A smaller second model (`qwen3:8b`, `results/v1/q3_8b_core_n3_confined/`).** Fully on the GPU (q8_0 KV cache), it is faster per
+trial but passes 24 % of the core-suite trials (10/42) against 66 % for `qwen3.6` under identical conditions (difference -42 pp,
+CI -57 to -23); it often stops early without doing the work. The larger model's partial CPU offload costs time but buys a pass
+rate 2.7 times as high.
+
 **Caveats.** Instrumentation parity is still inconclusive (isolated run: uninstrumented/instrumented time ratio
 0.87, 95 % CI 0.73-1.01 against a ±5 % tolerance, 28 parity trials; it was 1.06 in the first run, so the direction is
 not stable and noise is the likeliest explanation; success 61 % vs 71 %). One parity trial hung waiting for Ollama and

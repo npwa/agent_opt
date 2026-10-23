@@ -6,3 +6,7 @@ directory the model searched the filesystem for `calc_price` and **edited the re
 `refactor_02` trial that ran after a fixture was modified, are invalid. The other trials never touched a path outside
 their working directory (checked by searching every events file for repository paths), so they are usable as a first,
 provisional picture, but the whole screen should be repeated under confinement before any conclusion is drawn.
+
+**Superseded:** the screen was repeated under confinement in `../q3_8b_core_n3_confined/` (same 14 tasks, n = 3,
+10/42 passed in both runs, identical per-task pattern except `coding_03`/`comms_12`, which each differ by one trial),
+so the contaminated trials did not change the picture; use the confined run.

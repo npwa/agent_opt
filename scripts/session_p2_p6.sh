@@ -50,7 +50,7 @@ for stage in "$@"; do
         python -m harness.trace --run $OUT && python -m harness.decompose --run $OUT && python -m analysis.report --run $OUT
         stop_proxy ;;
     core)
-        OUT=results/v1/q3_8b_core_n3
+        OUT=${CORE_OUT:-results/v1/q3_8b_core_n3}  # CORE_OUT=... gives a re-run (e.g. the confined one) its own directory
         docker start searxng > /dev/null 2>&1
         start_proxy $OUT
         python -m harness.runner run --configs configs/sweep/sw_q3_8b_32k_kvq8.yaml --suite core --n 3 --ignore-task-trials --seed 1 \

@@ -1,0 +1,349 @@
+{
+  "created_utc": "2026-10-23T17:05:31Z",
+  "run_seed": 1,
+  "n": 3,
+  "parity_fraction": 0.0,
+  "trials_per_task": {
+    "bugfix_09_booking_slots": 3,
+    "c_ringbuf_03_ringbuffer": 3,
+    "coding_01_my_sqrt_review": 3,
+    "coding_02_fizzbuzz_gen": 3,
+    "coding_03_compress_gen": 3,
+    "coding_05_scientific_lan": 3,
+    "coding_06_tax_rates_lan": 3,
+    "coding_10_wcx_constrained": 3,
+    "comms_12_timezone_slot": 3,
+    "logtriage_04_pool_exhaustion": 3,
+    "longctx_11_harbor_report": 3,
+    "refactor_02_rename_price": 3,
+    "repoqa_05_retry_policy": 3,
+    "research_08e_free_will": 3
+  },
+  "configs": {
+    "sw_q3_8b_32k_kvq8": {
+      "id": "sw_q3_8b_32k_kvq8",
+      "model": "ollama/qwen3-8b-32k",
+      "description": "qwen3:8b, 32k context, KV q8_0, flash attention on",
+      "seed_mode": "per_trial",
+      "options": {},
+      "server": {
+        "num_ctx": 32768,
+        "base_model": "qwen3:8b",
+        "kv_cache_type": "q8_0",
+        "flash_attention": true
+      }
+    }
+  },
+  "tasks": {
+    "bugfix_09_booking_slots": "08ccab1fdffa",
+    "c_ringbuf_03_ringbuffer": "ab1cfbac8d0c",
+    "coding_01_my_sqrt_review": "cdb71d8a5953",
+    "coding_02_fizzbuzz_gen": "518590ba1bd6",
+    "coding_03_compress_gen": "9d03ea0a9236",
+    "coding_05_scientific_lan": "adf6f2792260",
+    "coding_06_tax_rates_lan": "7d1c4ebf3406",
+    "coding_10_wcx_constrained": "cfe72a61ec04",
+    "comms_12_timezone_slot": "bc564241ad76",
+    "logtriage_04_pool_exhaustion": "a7ee2193c9be",
+    "longctx_11_harbor_report": "b0852b928a58",
+    "refactor_02_rename_price": "410b4bbf373e",
+    "repoqa_05_retry_policy": "790e1276cd56",
+    "research_08e_free_will": "5645c5453b04"
+  },
+  "order": [
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__refactor_02_rename_price__00",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "refactor_02_rename_price",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__bugfix_09_booking_slots__02",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "bugfix_09_booking_slots",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__coding_02_fizzbuzz_gen__02",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__bugfix_09_booking_slots__01",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "bugfix_09_booking_slots",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__research_08e_free_will__00",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "research_08e_free_will",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__logtriage_04_pool_exhaustion__00",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "logtriage_04_pool_exhaustion",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__c_ringbuf_03_ringbuffer__02",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__coding_02_fizzbuzz_gen__00",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__coding_05_scientific_lan__02",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "coding_05_scientific_lan",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__research_08e_free_will__01",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "research_08e_free_will",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__comms_12_timezone_slot__01",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "comms_12_timezone_slot",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__coding_06_tax_rates_lan__02",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "coding_06_tax_rates_lan",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__repoqa_05_retry_policy__02",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "repoqa_05_retry_policy",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__coding_10_wcx_constrained__00",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "coding_10_wcx_constrained",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__refactor_02_rename_price__01",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "refactor_02_rename_price",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__coding_10_wcx_constrained__02",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "coding_10_wcx_constrained",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__coding_02_fizzbuzz_gen__01",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__c_ringbuf_03_ringbuffer__00",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__coding_06_tax_rates_lan__00",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "coding_06_tax_rates_lan",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__repoqa_05_retry_policy__01",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "repoqa_05_retry_policy",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__research_08e_free_will__02",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "research_08e_free_will",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__coding_03_compress_gen__02",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "coding_03_compress_gen",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__coding_10_wcx_constrained__01",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "coding_10_wcx_constrained",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__logtriage_04_pool_exhaustion__02",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "logtriage_04_pool_exhaustion",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__coding_06_tax_rates_lan__01",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "coding_06_tax_rates_lan",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__longctx_11_harbor_report__02",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "longctx_11_harbor_report",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__coding_03_compress_gen__00",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "coding_03_compress_gen",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__comms_12_timezone_slot__02",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "comms_12_timezone_slot",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__refactor_02_rename_price__02",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "refactor_02_rename_price",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__bugfix_09_booking_slots__00",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "bugfix_09_booking_slots",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__coding_05_scientific_lan__00",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "coding_05_scientific_lan",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__coding_01_my_sqrt_review__00",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "coding_01_my_sqrt_review",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__coding_03_compress_gen__01",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "coding_03_compress_gen",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__comms_12_timezone_slot__00",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "comms_12_timezone_slot",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__longctx_11_harbor_report__00",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "longctx_11_harbor_report",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__logtriage_04_pool_exhaustion__01",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "logtriage_04_pool_exhaustion",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__longctx_11_harbor_report__01",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "longctx_11_harbor_report",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__coding_01_my_sqrt_review__01",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "coding_01_my_sqrt_review",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__coding_05_scientific_lan__01",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "coding_05_scientific_lan",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__c_ringbuf_03_ringbuffer__01",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__repoqa_05_retry_policy__00",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "repoqa_05_retry_policy",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_q3_8b_32k_kvq8__coding_01_my_sqrt_review__02",
+      "config": "sw_q3_8b_32k_kvq8",
+      "task": "coding_01_my_sqrt_review",
+      "k": 2,
+      "instrumented": true
+    }
+  ]
+}

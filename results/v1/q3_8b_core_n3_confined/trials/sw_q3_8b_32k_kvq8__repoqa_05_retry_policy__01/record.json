@@ -1,0 +1,51 @@
+{
+  "trial_id": "sw_q3_8b_32k_kvq8__repoqa_05_retry_policy__01",
+  "task": "repoqa_05_retry_policy",
+  "config": "sw_q3_8b_32k_kvq8",
+  "model": "ollama/qwen3-8b-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_q3_8b_32k_kvq8__coding_06_tax_rates_lan__00",
+  "prev_task": "coding_06_tax_rates_lan",
+  "seed": 953509556,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T17:29:31Z",
+  "wall_start": 1792776571.8197162,
+  "wall_end": 1792776592.1986072,
+  "elapsed_s": 20.4,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 20399,
+  "tokens_out": 1470,
+  "tool_sequence": [
+    "glob",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": false,
+      "detail": "missing 'max_delay_citation'; missing 'max_attempts_citation'"
+    }
+  ],
+  "final_answer": "1. The `next_delay` method in `RetryPolicy` (miniq/retry.py:20) computes the delay using exponential backoff.  \n2. The default maximum delay is `config.RETRY_MAX_DELAY_S` (miniq/retry.py:11), typically 30 seconds.  \n3. Jobs stop retrying after `config.RETRY_MAX_ATTEMPTS` (miniq/retry.py:9), defaulting to 5 attempts.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-23T17:29:31Z"
+    }
+  ]
+}

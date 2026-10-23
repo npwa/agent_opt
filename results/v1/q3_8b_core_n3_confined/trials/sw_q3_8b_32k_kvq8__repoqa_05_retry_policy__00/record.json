@@ -1,0 +1,52 @@
+{
+  "trial_id": "sw_q3_8b_32k_kvq8__repoqa_05_retry_policy__00",
+  "task": "repoqa_05_retry_policy",
+  "config": "sw_q3_8b_32k_kvq8",
+  "model": "ollama/qwen3-8b-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_q3_8b_32k_kvq8__c_ringbuf_03_ringbuffer__01",
+  "prev_task": "c_ringbuf_03_ringbuffer",
+  "seed": 805662772,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T18:03:05Z",
+  "wall_start": 1792778585.5562375,
+  "wall_end": 1792778615.781625,
+  "elapsed_s": 30.2,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 27834,
+  "tokens_out": 2266,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": false,
+      "detail": "missing 'max_delay_value'"
+    }
+  ],
+  "final_answer": "1. The function computing the delay is `next_delay` in `retry.py:20`.  \n2. The default maximum delay is `30.0` seconds (defined in `config.py:9`).  \n3. Jobs stop retrying after `5` attempts (defined in `config.py:7`).",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-23T18:03:05Z"
+    }
+  ]
+}

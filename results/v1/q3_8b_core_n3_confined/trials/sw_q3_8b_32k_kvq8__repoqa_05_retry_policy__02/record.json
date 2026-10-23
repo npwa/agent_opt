@@ -1,0 +1,51 @@
+{
+  "trial_id": "sw_q3_8b_32k_kvq8__repoqa_05_retry_policy__02",
+  "task": "repoqa_05_retry_policy",
+  "config": "sw_q3_8b_32k_kvq8",
+  "model": "ollama/qwen3-8b-32k",
+  "k": 2,
+  "instrumented": true,
+  "prev_trial_id": "sw_q3_8b_32k_kvq8__coding_06_tax_rates_lan__02",
+  "prev_task": "coding_06_tax_rates_lan",
+  "seed": 1287928065,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T17:19:08Z",
+  "wall_start": 1792775948.0900674,
+  "wall_end": 1792775962.3641236,
+  "elapsed_s": 14.3,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 2,
+  "tokens_in": 13262,
+  "tokens_out": 945,
+  "tool_sequence": [
+    "glob",
+    "grep"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": false,
+      "detail": "missing 'delay_function_cited'; missing 'max_delay_value'; missing 'max_delay_citation'; missing 'max_attempts_value'; missing 'max_attempts_citation'"
+    }
+  ],
+  "final_answer": "The files for the `miniq` package were not found in the expected directory. Please verify if the package is installed or provide the correct path to the `miniq` directory. Without access to the code, I cannot answer the questions about its retry policy.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-23T17:19:08Z"
+    }
+  ]
+}
