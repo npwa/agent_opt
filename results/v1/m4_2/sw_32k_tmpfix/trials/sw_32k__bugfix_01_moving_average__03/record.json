@@ -1,0 +1,55 @@
+{
+  "trial_id": "sw_32k__bugfix_01_moving_average__03",
+  "task": "bugfix_01_moving_average",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 3,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__coding_06_tax_rates_lan__03",
+  "prev_task": "coding_06_tax_rates_lan",
+  "seed": 2007619253,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T05:56:47Z",
+  "wall_start": 1792735007.8440878,
+  "wall_end": 1792735039.9712844,
+  "elapsed_s": 32.1,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 24857,
+  "tokens_out": 679,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "edit"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "The bug is on line 9. The loop range uses `len(values) - window` which excludes the last valid window position. It should be `len(values) - window + 1`.\nThe bug was an off-by-one error in `stats_utils.py:9`. The loop used `range(len(values) - window)` which excluded the last valid window position. For a list of length 5 with window 3, it computed windows starting at indices 0 and 1 but missed index 2 (the last valid start position).\n\nFixed to `range(len(values) - window + 1)` so all valid window positions are included.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T05:56:47Z"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "trial_id": "sw_16k__c_ringbuf_03_ringbuffer__09",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 9,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__coding_02_fizzbuzz_gen__04",
+  "prev_task": "coding_02_fizzbuzz_gen",
+  "seed": 1869295320,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T01:28:52Z",
+  "wall_start": 1792718932.302472,
+  "wall_end": 1792719281.2090783,
+  "elapsed_s": 348.9,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 6,
+  "tokens_in": 67125,
+  "tokens_out": 9955,
+  "tool_sequence": [
+    "read",
+    "read",
+    "glob",
+    "write",
+    "write",
+    "write",
+    "write"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Let me rewrite this cleanly with a proper test that doesn't access internals:",
+  "files": [
+    "ringbuf.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T01:28:52Z"
+    }
+  ]
+}

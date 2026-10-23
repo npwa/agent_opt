@@ -1,0 +1,60 @@
+{
+  "trial_id": "sw_16k__bugfix_09_booking_slots__07",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 7,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__comms_07_confirm_send__05",
+  "prev_task": "comms_07_confirm_send",
+  "seed": 555238517,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T22:58:09Z",
+  "wall_start": 1792709889.84667,
+  "wall_end": 1792710007.1318898,
+  "elapsed_s": 117.3,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 8,
+  "tokens_in": 75136,
+  "tokens_out": 2291,
+  "tool_sequence": [
+    "read",
+    "glob",
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "edit",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": false,
+      "detail": "Ran 20 tests in 0.001s |  | FAILED (failures=2)"
+    }
+  ],
+  "final_answer": "All 7 tests pass. The three bugs were:\n\n1. **`overlaps`** (`bookings.py:13`): Used `<=` instead of `<`, causing touching intervals to be reported as overlapping.\n\n2. **`merge_intervals`** (`bookings.py:21-25`): Mutated the input list via `.sort()` (doc says \"must not be modified\") and used `<` instead of `<=`, so touching intervals weren't merged. Fixed by copying first and using `<=`.\n\n3. **`find_free_slots`** (`bookings.py:42-49`): Multiple issues \u2014 didn't filter busy intervals outside the day window, used `>` instead of `>=` for gap length (doc says \"at least min_len\"), and never appended the final gap after the last busy interval within the day window.",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T22:58:09Z"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "trial_id": "sw_16k__c_ringbuf_03_ringbuffer__08",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 8,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__longctx_11_harbor_report__00",
+  "prev_task": "longctx_11_harbor_report",
+  "seed": 308295946,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T01:19:12Z",
+  "wall_start": 1792718352.0116556,
+  "wall_end": 1792718725.1715698,
+  "elapsed_s": 373.2,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 9,
+  "tokens_in": 101183,
+  "tokens_out": 10798,
+  "tool_sequence": [
+    "read",
+    "read",
+    "glob",
+    "write",
+    "write",
+    "write",
+    "write",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "The test logic itself had issues (the FIFO order check was wrong). Let me fix it:",
+  "files": [
+    "ringbuf.c",
+    "test.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T01:19:12Z"
+    }
+  ]
+}

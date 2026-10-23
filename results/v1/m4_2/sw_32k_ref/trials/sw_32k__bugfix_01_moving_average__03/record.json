@@ -1,0 +1,56 @@
+{
+  "trial_id": "sw_32k__bugfix_01_moving_average__03",
+  "task": "bugfix_01_moving_average",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 3,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__comms_07_confirm_send__03",
+  "prev_task": "comms_07_confirm_send",
+  "seed": 2007619253,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T05:22:45Z",
+  "wall_start": 1792732965.9923942,
+  "wall_end": 1792733020.2685273,
+  "elapsed_s": 54.3,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 41996,
+  "tokens_out": 421,
+  "tool_sequence": [
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All tests pass. The bug was an off-by-one error on line 9 of `stats_utils.py`: `range(len(values) - window)` was missing the last valid window position. Fixed by changing it to `range(len(values) - window + 1)`.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T05:22:45Z"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "trial_id": "sw_16k__logtriage_04_pool_exhaustion__03",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 3,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__coding_05_scientific_lan__02",
+  "prev_task": "coding_05_scientific_lan",
+  "seed": 43153366,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T23:31:23Z",
+  "wall_start": 1792711883.411077,
+  "wall_end": 1792711999.886744,
+  "elapsed_s": 116.2,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 46768,
+  "tokens_out": 963,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "123 words, all checks ok"
+    }
+  ],
+  "final_answer": "Database connection pool exhausted because the **batch job `reconcile-ledger`** consumed ALL 20 db connections at startup:\n\n- `44947:2026-01-18T03:15:03Z INFO batch-01 job reconcile-ledger started user=svc-batch db_conns=20`\n- First exhaustion error at `03:17:42Z`: `api-07 db pool exhausted (max=20) waiting=14 path=/v1/orders`\n- 302 total ERROR lines following, all `db pool exhausted (max=20)` across api-01 through api-08\n\n**Root cause**: The batch job acquired 20 DB connections on start, depleting the entire pool. Normal API requests could no longer obtain connections and returned 503 errors for ~the remainder of the log.\n\n**Fixes**:\n1. Set `db_conns=1` or lower for batch jobs to leave capacity for APIs\n2. Add connection pool priority/isolation between batch services and API services\n3. Implement connection timeout/retry with backoff in workers to avoid cascading failures",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-22T23:31:23Z"
+    }
+  ]
+}

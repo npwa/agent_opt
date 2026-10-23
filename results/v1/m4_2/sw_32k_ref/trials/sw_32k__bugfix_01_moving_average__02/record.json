@@ -1,0 +1,57 @@
+{
+  "trial_id": "sw_32k__bugfix_01_moving_average__02",
+  "task": "bugfix_01_moving_average",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 2,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__c_ringbuf_03_ringbuffer__01",
+  "prev_task": "c_ringbuf_03_ringbuffer",
+  "seed": 462778644,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T02:58:11Z",
+  "wall_start": 1792724291.3567157,
+  "wall_end": 1792724354.889466,
+  "elapsed_s": 63.5,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 42633,
+  "tokens_out": 675,
+  "tool_sequence": [
+    "read",
+    "bash",
+    "read",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 5 tests pass. The bug was at `stats_utils.py:9` \u2014 the loop used `range(len(values) - window)` which produced one fewer iteration than needed. Adding `+ 1` includes the final window position.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T02:58:11Z"
+    }
+  ]
+}

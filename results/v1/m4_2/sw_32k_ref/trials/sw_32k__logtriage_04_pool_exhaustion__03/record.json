@@ -1,0 +1,70 @@
+{
+  "trial_id": "sw_32k__logtriage_04_pool_exhaustion__03",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 3,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__coding_04_dir_stats_gen__00",
+  "prev_task": "coding_04_dir_stats_gen",
+  "seed": 909188519,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T04:15:54Z",
+  "wall_start": 1792728954.8155465,
+  "wall_end": 1792729140.157535,
+  "elapsed_s": 185.0,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 9,
+  "tokens_in": 166875,
+  "tokens_out": 2560,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "126 words, all checks ok"
+    }
+  ],
+  "final_answer": "The evidence is clear. Here's the triage:\n\n**(1) First error burst:** `2026-01-18T03:17:42Z` on host **api-07** (the first `db pool exhausted` error appeared there). The cascade then spread to api-01 through api-08 within seconds, producing ~3,000+ errors over 60+ minutes.\n\n**(2) Root cause:** Database connection pool exhaustion \u2014 the pool max is 20 connections. A batch job grabbed all 20 connections and never released them, leaving zero for API requests. The first error on api-07 explicitly says `db pool exhausted (max=20) waiting=14 path=/v1/orders`.\n\n**(3) Responsible agent:** **`batch-01`** running the **`reconcile-ledger`** job, started by user **`svc-batch`**. At `03:15:03Z` it started and sequentially acquired all 20 connections from pool=primary (one every ~5 seconds). By `03:17:42Z` the API requests for `/v1/orders` could no longer get any connection, triggering the outage.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T04:15:54Z"
+    }
+  ]
+}

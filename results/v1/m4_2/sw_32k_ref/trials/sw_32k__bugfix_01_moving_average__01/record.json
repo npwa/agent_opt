@@ -1,0 +1,56 @@
+{
+  "trial_id": "sw_32k__bugfix_01_moving_average__01",
+  "task": "bugfix_01_moving_average",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__longctx_11_harbor_report__01",
+  "prev_task": "longctx_11_harbor_report",
+  "seed": 2134663703,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T04:46:37Z",
+  "wall_start": 1792730797.6192143,
+  "wall_end": 1792730853.9464188,
+  "elapsed_s": 56.3,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 34136,
+  "tokens_out": 494,
+  "tool_sequence": [
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 5 tests pass. The bug was in `stats_utils.py:9` \u2014 the loop range was `len(values) - window` instead of `len(values) - window + 1`, which excluded the last valid window position.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T04:46:37Z"
+    }
+  ]
+}

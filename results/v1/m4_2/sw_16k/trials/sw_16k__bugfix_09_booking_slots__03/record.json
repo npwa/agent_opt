@@ -1,0 +1,66 @@
+{
+  "trial_id": "sw_16k__bugfix_09_booking_slots__03",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 3,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__c_ringbuf_03_ringbuffer__00",
+  "prev_task": "c_ringbuf_03_ringbuffer",
+  "seed": 58936245,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T00:00:55Z",
+  "wall_start": 1792713655.8261368,
+  "wall_end": 1792713819.0153592,
+  "elapsed_s": 163.2,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 15,
+  "tokens_in": 154085,
+  "tokens_out": 3150,
+  "tool_sequence": [
+    "read",
+    "bash",
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "read",
+    "edit",
+    "bash",
+    "edit",
+    "bash",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 7 tests pass. Let me do a final review of the complete file against every docstring:\nAll 7 tests pass. Here's a summary of the bugs fixed:\n\n1. **`overlaps`** (`/tmp/agent_opt_scratch/sw_16k__bugfix_09_booking_slots__03/work/bookings.py:13`): Changed `<=` to `<` so touching intervals no longer report as overlapping.\n\n2. **`merge_intervals`** (`bookings.py:21`): Changed `intervals.sort()` to `sorted(intervals)` so the input argument is not mutated (docstring requirement).\n\n3. **`merge_intervals`** (`bookings.py:24`): Changed `<` to `<=` so touching intervals get merged as documented.\n\n4. **`total_busy_minutes`** (`bookings.py:33-34`): Added `merge_intervals()` call before summing, so overlapping intervals are counted once per docstring (\"a minute covered twice counts once\").\n\n5. **`find_free_slots`** (`bookings.py:46-52`): Added clamping of busy intervals to the day window `[day_start, day_end]` per docstring (\"parts outside the day window are ignored\"). Changed `>` to `>=` for the min_len check (\"a gap of exactly min_len is long enough\").\n\n6. **`find_free_slots`** (`bookings.py:54-55`): Added the trailing gap after the last busy interval up to `day_end`, which was previously missing.",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T00:00:55Z"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "trial_id": "sw_16k__coding_10_wcx_constrained__05",
+  "task": "coding_10_wcx_constrained",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 5,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__coding_02_fizzbuzz_gen__02",
+  "prev_task": "coding_02_fizzbuzz_gen",
+  "seed": 1868674961,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T00:46:23Z",
+  "wall_start": 1792716383.0491138,
+  "wall_end": 1792716893.9250462,
+  "elapsed_s": 510.9,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 19,
+  "tokens_in": 197078,
+  "tokens_out": 14671,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "write",
+    "write",
+    "write",
+    "write",
+    "bash",
+    "bash",
+    "write",
+    "write",
+    "bash",
+    "write",
+    "bash",
+    "bash",
+    "bash",
+    "write",
+    "bash",
+    "edit"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": false,
+      "detail": "compile failed: wcx.c: In function \u2018main\u2019:\nwcx.c:44:19: error: \u2018else\u2019 without a previous \u2018if\u2019\n   44 |                 } else {\n      |                   ^~~~"
+    }
+  ],
+  "final_answer": "The maxlen is wrong - it should count all bytes in the line (including spaces), not just non-whitespace ones.",
+  "files": [
+    "wcx.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-23T00:46:23Z"
+    }
+  ]
+}

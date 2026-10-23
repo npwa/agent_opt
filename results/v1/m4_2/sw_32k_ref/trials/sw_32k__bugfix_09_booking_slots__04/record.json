@@ -1,0 +1,59 @@
+{
+  "trial_id": "sw_32k__bugfix_09_booking_slots__04",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 4,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__refactor_02_rename_price__00",
+  "prev_task": "refactor_02_rename_price",
+  "seed": 1539917694,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T03:48:20Z",
+  "wall_start": 1792727300.282503,
+  "wall_end": 1792727390.3048584,
+  "elapsed_s": 90.0,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 8,
+  "tokens_in": 74207,
+  "tokens_out": 1317,
+  "tool_sequence": [
+    "read",
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "edit",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": false,
+      "detail": "Ran 20 tests in 0.001s |  | FAILED (failures=2)"
+    }
+  ],
+  "final_answer": "All 7 tests pass now. The fixes were:\n\n1. **`overlaps`**: Changed `<=` to `<` so touching intervals are not considered overlapping\n2. **`merge_intervals`**: Use `sorted()` (copy) instead of `.sort()` to avoid mutating the argument; changed `<` to `<=` to merge touching intervals\n3. **`find_free_slots`**: Clipped busy intervals to `[day_start, day_end]`; changed `>` to `>=` for min_len threshold; added post-loop check to capture gap after the last busy interval",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-23T03:48:20Z"
+    }
+  ]
+}

@@ -161,7 +161,12 @@ def run_opencode(spec: TaskSpec, work: Path, run_dir: Path, env: dict, model: st
         with open(events, "ab") as out, open(run_dir / "stderr.txt", "ab") as err:
             p = subprocess.Popen(confined(cmd, confine), env=env, cwd=work, stdin=subprocess.DEVNULL, stdout=out,
                                  stderr=err, start_new_session=True)
-            result = _wait(p, remaining, events, stall_s, busy)
+            try:
+                result = _wait(p, remaining, events, stall_s, busy)
+            except BaseException:  # Ctrl-C / SIGINT / a crash of the runner: never leave the agent running behind us
+                os.killpg(p.pid, signal.SIGKILL)
+                p.wait()
+                raise
             if isinstance(result, str):
                 os.killpg(p.pid, signal.SIGKILL)
                 p.wait()

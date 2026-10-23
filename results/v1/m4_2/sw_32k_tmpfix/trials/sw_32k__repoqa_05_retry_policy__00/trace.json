@@ -1,0 +1,148 @@
+{
+  "trial_id": "sw_32k__repoqa_05_retry_policy__00",
+  "task": "repoqa_05_retry_policy",
+  "config": "sw_32k",
+  "attempt": 1,
+  "status": "fail",
+  "summary": {
+    "wall_start": 1792734226.6887746,
+    "wall_end": 1792734289.8683157,
+    "wall_s": 63.17954111099243,
+    "n_steps": 3,
+    "llm_s": 61.2615,
+    "ttft_s": 38.3499,
+    "decode_s": 22.9116,
+    "tool_s": 0.04999971389770508,
+    "gap_s": 0.17901110649108887,
+    "idle_gap_s": 0.0,
+    "prefill_tokens": 24516,
+    "decode_tokens": 760,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "sw_32k__repoqa_05_retry_policy__00#a1:1",
+      "t_start": 1792734228.4278045,
+      "t_end": 1792734264.6663046,
+      "ttft_s": 30.4253,
+      "llm_s": 36.2385,
+      "decode_s": 5.813200000000002,
+      "prefill_tokens": 7363,
+      "decode_tokens": 203,
+      "prefill_tok_s": 242.0,
+      "decode_tok_s": 34.92,
+      "n_chunks": 68,
+      "first_token_skew_s": 0.01189565658569336,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 1859.1800000000005,
+      "tool_names": [
+        "glob",
+        "grep"
+      ],
+      "tool_latency_s": 0.03399991989135742,
+      "tools": [
+        {
+          "tool": "glob",
+          "start": 1792734262.744,
+          "end": 1792734262.764,
+          "status": "completed"
+        },
+        {
+          "tool": "grep",
+          "start": 1792734264.645,
+          "end": 1792734264.659,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792734258.865,
+      "oc_step_finish": 1792734264.685,
+      "tool_errors": 0,
+      "gap_s": 0.037294626235961914,
+      "gpu_busy_pct_llm": 85.34159779614325,
+      "gpu_power_w_llm": 130.02920110192838,
+      "gpu_samples_llm": 363,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 2,
+      "llm_call_id": "sw_32k__repoqa_05_retry_policy__00#a1:2",
+      "t_start": 1792734264.7035992,
+      "t_end": 1792734272.6465993,
+      "ttft_s": 3.9554,
+      "llm_s": 7.943,
+      "decode_s": 3.9875999999999996,
+      "prefill_tokens": 8212,
+      "decode_tokens": 118,
+      "prefill_tok_s": 2076.15,
+      "decode_tok_s": 29.59,
+      "n_chunks": 15,
+      "first_token_skew_s": 0.0060007572174072266,
+      "itl_p50_ms": 38.000000000000256,
+      "itl_p99_ms": 1802.2599999999995,
+      "tool_names": [
+        "read",
+        "read"
+      ],
+      "tool_latency_s": 0.015999794006347656,
+      "tools": [
+        {
+          "tool": "read",
+          "start": 1792734270.805,
+          "end": 1792734270.814,
+          "status": "completed"
+        },
+        {
+          "tool": "read",
+          "start": 1792734272.617,
+          "end": 1792734272.624,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792734268.665,
+      "oc_step_finish": 1792734272.655,
+      "tool_errors": 0,
+      "gap_s": 0.026350021362304688,
+      "gpu_busy_pct_llm": 47.675,
+      "gpu_power_w_llm": 125.67375,
+      "gpu_samples_llm": 80,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 3,
+      "llm_call_id": "sw_32k__repoqa_05_retry_policy__00#a1:3",
+      "t_start": 1792734272.6729493,
+      "t_end": 1792734289.7529492,
+      "ttft_s": 3.9692,
+      "llm_s": 17.08,
+      "decode_s": 13.110799999999998,
+      "prefill_tokens": 8941,
+      "decode_tokens": 439,
+      "prefill_tok_s": 2252.59,
+      "decode_tok_s": 33.48,
+      "n_chunks": 415,
+      "first_token_skew_s": 0.007850885391235352,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 60.99999999999994,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792734276.65,
+      "oc_step_finish": 1792734289.769,
+      "tool_errors": 0,
+      "gap_s": 0.11536645889282227,
+      "gpu_busy_pct_llm": 31.093567251461987,
+      "gpu_power_w_llm": 119.31988304093568,
+      "gpu_samples_llm": 171,
+      "gpu_busy_pct_gap": 19.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

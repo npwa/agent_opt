@@ -1,0 +1,55 @@
+{
+  "trial_id": "sw_16k__coding_10_wcx_constrained__08",
+  "task": "coding_10_wcx_constrained",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 8,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__logtriage_04_pool_exhaustion__02",
+  "prev_task": "logtriage_04_pool_exhaustion",
+  "seed": 1437321943,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T22:49:12Z",
+  "wall_start": 1792709352.387211,
+  "wall_end": 1792709656.1419673,
+  "elapsed_s": 303.8,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 40389,
+  "tokens_out": 8975,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": false,
+      "detail": "one newline: expected '1 0 1 0\\n', got exit 0, '1 0 0 0\\n'; unterminated last line is the longest: expected '2 4 13 8\\n', got exit 0, '2 4 11 8\\n'; crlf: expected '2 3 11 6\\n', got exit 0, '2 3 9 6\\n'; high bytes belong to words: expected '2 3 10 7\\n', got exit 0, '2 3 8 7\\n' (+3 more)"
+    }
+  ],
+  "final_answer": "",
+  "files": [
+    "wcx.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T22:49:12Z"
+    }
+  ]
+}

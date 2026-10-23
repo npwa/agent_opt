@@ -1,0 +1,57 @@
+{
+  "trial_id": "sw_16k__coding_03_compress_gen__07",
+  "task": "coding_03_compress_gen",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 7,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__comms_07_confirm_send__01",
+  "prev_task": "comms_07_confirm_send",
+  "seed": 1957518740,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T22:16:25Z",
+  "wall_start": 1792707385.1279402,
+  "wall_end": 1792707452.65845,
+  "elapsed_s": 67.5,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 6,
+  "tokens_in": 47202,
+  "tokens_out": 910,
+  "tool_sequence": [
+    "read",
+    "bash",
+    "read",
+    "write",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 1,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Done \u2014 `compress.c` writes the run-length compressed string into `dest`. Compiles clean with `gcc`.",
+  "files": [
+    "compress.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-22T22:16:25Z"
+    }
+  ]
+}

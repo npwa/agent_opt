@@ -1,0 +1,204 @@
+{
+  "created_utc": "2026-10-23T05:43:21Z",
+  "run_seed": 1,
+  "n": 4,
+  "parity_fraction": 0.0,
+  "trials_per_task": {
+    "bugfix_01_moving_average": 4,
+    "coding_02_fizzbuzz_gen": 4,
+    "coding_05_scientific_lan": 4,
+    "coding_06_tax_rates_lan": 4,
+    "comms_07_confirm_send": 4,
+    "repoqa_05_retry_policy": 4
+  },
+  "configs": {
+    "sw_32k": {
+      "id": "sw_32k",
+      "model": "ollama/qwen3.6-32k",
+      "description": "qwen3.6 35B-A3B, 32k context, KV f16, on a private Ollama (reference for the sweep)",
+      "seed_mode": "per_trial",
+      "options": {},
+      "server": {
+        "num_ctx": 32768
+      }
+    }
+  },
+  "tasks": {
+    "bugfix_01_moving_average": "6bf7937511c3",
+    "coding_02_fizzbuzz_gen": "518590ba1bd6",
+    "coding_05_scientific_lan": "adf6f2792260",
+    "coding_06_tax_rates_lan": "7d1c4ebf3406",
+    "comms_07_confirm_send": "9da7f2d319ca",
+    "repoqa_05_retry_policy": "790e1276cd56"
+  },
+  "order": [
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__00",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__03",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__03",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__comms_07_confirm_send__01",
+      "config": "sw_32k",
+      "task": "comms_07_confirm_send",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__01",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__01",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_02_fizzbuzz_gen__01",
+      "config": "sw_32k",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__02",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__01",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_02_fizzbuzz_gen__02",
+      "config": "sw_32k",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__bugfix_01_moving_average__00",
+      "config": "sw_32k",
+      "task": "bugfix_01_moving_average",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_02_fizzbuzz_gen__03",
+      "config": "sw_32k",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__bugfix_01_moving_average__01",
+      "config": "sw_32k",
+      "task": "bugfix_01_moving_average",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__comms_07_confirm_send__03",
+      "config": "sw_32k",
+      "task": "comms_07_confirm_send",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__comms_07_confirm_send__00",
+      "config": "sw_32k",
+      "task": "comms_07_confirm_send",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__00",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__02",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__02",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__03",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__bugfix_01_moving_average__03",
+      "config": "sw_32k",
+      "task": "bugfix_01_moving_average",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__00",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__bugfix_01_moving_average__02",
+      "config": "sw_32k",
+      "task": "bugfix_01_moving_average",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__comms_07_confirm_send__02",
+      "config": "sw_32k",
+      "task": "comms_07_confirm_send",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_02_fizzbuzz_gen__00",
+      "config": "sw_32k",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 0,
+      "instrumented": true
+    }
+  ]
+}

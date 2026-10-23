@@ -1,0 +1,208 @@
+{
+  "trial_id": "sw_16k__comms_12_timezone_slot__04",
+  "task": "comms_12_timezone_slot",
+  "config": "sw_16k",
+  "attempt": 1,
+  "status": "pass",
+  "summary": {
+    "wall_start": 1792720619.0868685,
+    "wall_end": 1792720858.18463,
+    "wall_s": 239.09776139259338,
+    "n_steps": 4,
+    "llm_s": 236.64780000000002,
+    "ttft_s": 36.6838,
+    "decode_s": 199.964,
+    "tool_s": 0.1770000457763672,
+    "gap_s": 0.4972536563873291,
+    "idle_gap_s": 0.0,
+    "prefill_tokens": 31480,
+    "decode_tokens": 6817,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "sw_16k__comms_12_timezone_slot__04#a1:1",
+      "t_start": 1792720621.039576,
+      "t_end": 1792720816.546776,
+      "ttft_s": 26.6433,
+      "llm_s": 195.5072,
+      "decode_s": 168.8639,
+      "prefill_tokens": 6674,
+      "decode_tokens": 5718,
+      "prefill_tok_s": 250.49,
+      "decode_tok_s": 33.86,
+      "n_chunks": 5114,
+      "first_token_skew_s": 0.01912379264831543,
+      "itl_p50_ms": 28.999999999996362,
+      "itl_p99_ms": 62.99999999998818,
+      "tool_names": [
+        "comm-tools_create_event"
+      ],
+      "tool_latency_s": 0.013000011444091797,
+      "tools": [
+        {
+          "tool": "comm-tools_create_event",
+          "start": 1792720816.531,
+          "end": 1792720816.544,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792720647.702,
+      "oc_step_finish": 1792720816.58,
+      "tool_errors": 0,
+      "gap_s": 0.05324053764343262,
+      "gpu_busy_pct_llm": 30.07161125319693,
+      "gpu_power_w_llm": 117.77539641943734,
+      "gpu_samples_llm": 1955,
+      "gpu_busy_pct_gap": 20.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 2,
+      "llm_call_id": "sw_16k__comms_12_timezone_slot__04#a1:2",
+      "t_start": 1792720816.6000166,
+      "t_end": 1792720834.4501166,
+      "ttft_s": 3.6554,
+      "llm_s": 17.8501,
+      "decode_s": 14.194700000000001,
+      "prefill_tokens": 7506,
+      "decode_tokens": 507,
+      "prefill_tok_s": 2053.4,
+      "decode_tok_s": 35.72,
+      "n_chunks": 35,
+      "first_token_skew_s": 0.0075833797454833984,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 3360.7000000000003,
+      "tool_names": [
+        "comm-tools_create_event",
+        "comm-tools_send_email",
+        "comm-tools_send_email",
+        "comm-tools_send_email"
+      ],
+      "tool_latency_s": 0.0710000991821289,
+      "tools": [
+        {
+          "tool": "comm-tools_create_event",
+          "start": 1792720824.593,
+          "end": 1792720824.638,
+          "status": "completed"
+        },
+        {
+          "tool": "comm-tools_send_email",
+          "start": 1792720827.871,
+          "end": 1792720827.881,
+          "status": "completed"
+        },
+        {
+          "tool": "comm-tools_send_email",
+          "start": 1792720831.135,
+          "end": 1792720831.143,
+          "status": "completed"
+        },
+        {
+          "tool": "comm-tools_send_email",
+          "start": 1792720834.422,
+          "end": 1792720834.43,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792720820.263,
+      "oc_step_finish": 1792720834.463,
+      "tool_errors": 0,
+      "gap_s": 0.03279304504394531,
+      "gpu_busy_pct_llm": 38.31460674157304,
+      "gpu_power_w_llm": 121.1758426966292,
+      "gpu_samples_llm": 178,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 3,
+      "llm_call_id": "sw_16k__comms_12_timezone_slot__04#a1:3",
+      "t_start": 1792720834.4829097,
+      "t_end": 1792720849.4280097,
+      "ttft_s": 3.9871,
+      "llm_s": 14.9451,
+      "decode_s": 10.958,
+      "prefill_tokens": 8385,
+      "decode_tokens": 390,
+      "prefill_tok_s": 2103.03,
+      "decode_tok_s": 35.59,
+      "n_chunks": 39,
+      "first_token_skew_s": 0.00899052619934082,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 3303.01,
+      "tool_names": [
+        "comm-tools_send_email",
+        "comm-tools_send_email",
+        "comm-tools_send_email"
+      ],
+      "tool_latency_s": 0.09299993515014648,
+      "tools": [
+        {
+          "tool": "comm-tools_send_email",
+          "start": 1792720842.87,
+          "end": 1792720842.902,
+          "status": "completed"
+        },
+        {
+          "tool": "comm-tools_send_email",
+          "start": 1792720846.156,
+          "end": 1792720846.188,
+          "status": "completed"
+        },
+        {
+          "tool": "comm-tools_send_email",
+          "start": 1792720849.403,
+          "end": 1792720849.432,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792720838.479,
+      "oc_step_finish": 1792720849.441,
+      "tool_errors": 0,
+      "gap_s": 0.02846837043762207,
+      "gpu_busy_pct_llm": 41.22,
+      "gpu_power_w_llm": 121.52266666666668,
+      "gpu_samples_llm": 150,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 4,
+      "llm_call_id": "sw_16k__comms_12_timezone_slot__04#a1:4",
+      "t_start": 1792720849.456478,
+      "t_end": 1792720857.8018782,
+      "ttft_s": 2.398,
+      "llm_s": 8.3454,
+      "decode_s": 5.9474,
+      "prefill_tokens": 8915,
+      "decode_tokens": 202,
+      "prefill_tok_s": 3717.68,
+      "decode_tok_s": 33.96,
+      "n_chunks": 185,
+      "first_token_skew_s": 0.004521846771240234,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 64.18999999999966,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792720851.859,
+      "oc_step_finish": 1792720857.817,
+      "tool_errors": 0,
+      "gap_s": 0.3827517032623291,
+      "gpu_busy_pct_llm": 38.416666666666664,
+      "gpu_power_w_llm": 122.46666666666667,
+      "gpu_samples_llm": 84,
+      "gpu_busy_pct_gap": 20.0,
+      "gpu_samples_gap": 3,
+      "idle_gap_s": 0.0
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

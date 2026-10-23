@@ -1,0 +1,57 @@
+{
+  "trial_id": "sw_16k__bugfix_01_moving_average__06",
+  "task": "bugfix_01_moving_average",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 6,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__bugfix_01_moving_average__02",
+  "prev_task": "bugfix_01_moving_average",
+  "seed": 1151521844,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T01:48:12Z",
+  "wall_start": 1792720092.9895153,
+  "wall_end": 1792720148.7690732,
+  "elapsed_s": 55.8,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 42002,
+  "tokens_out": 474,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 5 tests pass. The bug was an off-by-one error: `range(len(values) - window)` should be `range(len(values) - window + 1)` to include the last valid window position.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T01:48:12Z"
+    }
+  ]
+}

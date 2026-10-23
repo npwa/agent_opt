@@ -1,0 +1,64 @@
+{
+  "trial_id": "sw_32k__coding_04_dir_stats_gen__02",
+  "task": "coding_04_dir_stats_gen",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 2,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__coding_10_wcx_constrained__01",
+  "prev_task": "coding_10_wcx_constrained",
+  "seed": 373656565,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T03:00:21Z",
+  "wall_start": 1792724421.5608854,
+  "wall_end": 1792724473.54058,
+  "elapsed_s": 52.0,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 31080,
+  "tokens_out": 483,
+  "tool_sequence": [
+    "read",
+    "write",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Done. `dir_stats.sh` has been created and made executable. It accepts an optional directory argument (defaults to `.`), validates existence, counts files/directories and sums file sizes non-recursively, then outputs in the required format.",
+  "files": [
+    "dir_stats.sh"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T03:00:21Z"
+    }
+  ]
+}

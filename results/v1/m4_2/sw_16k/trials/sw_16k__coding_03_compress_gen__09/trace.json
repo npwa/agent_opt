@@ -1,0 +1,251 @@
+{
+  "trial_id": "sw_16k__coding_03_compress_gen__09",
+  "task": "coding_03_compress_gen",
+  "config": "sw_16k",
+  "attempt": 1,
+  "status": "pass",
+  "summary": {
+    "wall_start": 1792708558.5314014,
+    "wall_end": 1792708625.961741,
+    "wall_s": 67.43033957481384,
+    "n_steps": 6,
+    "llm_s": 65.4938,
+    "ttft_s": 38.6257,
+    "decode_s": 26.8681,
+    "tool_s": 0.05099964141845703,
+    "gap_s": 0.2813124656677246,
+    "idle_gap_s": 0.0,
+    "prefill_tokens": 46003,
+    "decode_tokens": 944,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "sw_16k__coding_03_compress_gen__09#a1:1",
+      "t_start": 1792708560.1866286,
+      "t_end": 1792708592.0537286,
+      "ttft_s": 29.5727,
+      "llm_s": 31.8671,
+      "decode_s": 2.2943999999999996,
+      "prefill_tokens": 7333,
+      "decode_tokens": 82,
+      "prefill_tok_s": 247.97,
+      "decode_tok_s": 35.74,
+      "n_chunks": 33,
+      "first_token_skew_s": 0.016671419143676758,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 968.2600000000002,
+      "tool_names": [
+        "read"
+      ],
+      "tool_latency_s": 0.009000062942504883,
+      "tools": [
+        {
+          "tool": "read",
+          "start": 1792708592.04,
+          "end": 1792708592.049,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792708589.776,
+      "oc_step_finish": 1792708592.069,
+      "tool_errors": 1,
+      "gap_s": 0.03542447090148926,
+      "gpu_busy_pct_llm": 91.4294670846395,
+      "gpu_power_w_llm": 129.6194357366771,
+      "gpu_samples_llm": 319,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 2,
+      "llm_call_id": "sw_16k__coding_03_compress_gen__09#a1:2",
+      "t_start": 1792708592.089153,
+      "t_end": 1792708595.902453,
+      "ttft_s": 1.5914,
+      "llm_s": 3.8133,
+      "decode_s": 2.2218999999999998,
+      "prefill_tokens": 7427,
+      "decode_tokens": 80,
+      "prefill_tok_s": 4666.96,
+      "decode_tok_s": 36.01,
+      "n_chunks": 19,
+      "first_token_skew_s": 0.010447025299072266,
+      "itl_p50_ms": 29.000000000000025,
+      "itl_p99_ms": 1430.569999999997,
+      "tool_names": [
+        "glob"
+      ],
+      "tool_latency_s": 0.017999887466430664,
+      "tools": [
+        {
+          "tool": "glob",
+          "start": 1792708595.877,
+          "end": 1792708595.895,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792708593.691,
+      "oc_step_finish": 1792708595.913,
+      "tool_errors": 0,
+      "gap_s": 0.027688264846801758,
+      "gpu_busy_pct_llm": 58.30769230769231,
+      "gpu_power_w_llm": 124.32307692307693,
+      "gpu_samples_llm": 39,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 3,
+      "llm_call_id": "sw_16k__coding_03_compress_gen__09#a1:3",
+      "t_start": 1792708595.9301412,
+      "t_end": 1792708602.4298413,
+      "ttft_s": 1.6626,
+      "llm_s": 6.4997,
+      "decode_s": 4.8370999999999995,
+      "prefill_tokens": 7529,
+      "decode_tokens": 167,
+      "prefill_tok_s": 4528.45,
+      "decode_tok_s": 34.52,
+      "n_chunks": 138,
+      "first_token_skew_s": 0.00725865364074707,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 56.639999999999965,
+      "tool_names": [
+        "bash"
+      ],
+      "tool_latency_s": 0.0019998550415039062,
+      "tools": [
+        {
+          "tool": "bash",
+          "start": 1792708602.443,
+          "end": 1792708602.445,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792708597.6,
+      "oc_step_finish": 1792708602.455,
+      "tool_errors": 0,
+      "gap_s": 0.03942418098449707,
+      "gpu_busy_pct_llm": 32.49230769230769,
+      "gpu_power_w_llm": 121.28769230769231,
+      "gpu_samples_llm": 65,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 4,
+      "llm_call_id": "sw_16k__coding_03_compress_gen__09#a1:4",
+      "t_start": 1792708602.4692655,
+      "t_end": 1792708611.0022655,
+      "ttft_s": 1.4773,
+      "llm_s": 8.533,
+      "decode_s": 7.0557,
+      "prefill_tokens": 7594,
+      "decode_tokens": 244,
+      "prefill_tok_s": 5140.46,
+      "decode_tok_s": 34.58,
+      "n_chunks": 190,
+      "first_token_skew_s": 0.005434513092041016,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 59.00000000000016,
+      "tool_names": [
+        "read"
+      ],
+      "tool_latency_s": 0.011999845504760742,
+      "tools": [
+        {
+          "tool": "read",
+          "start": 1792708610.982,
+          "end": 1792708610.994,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792708603.952,
+      "oc_step_finish": 1792708611.013,
+      "tool_errors": 0,
+      "gap_s": 0.02751469612121582,
+      "gpu_busy_pct_llm": 26.069767441860463,
+      "gpu_power_w_llm": 117.82558139534883,
+      "gpu_samples_llm": 86,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 5,
+      "llm_call_id": "sw_16k__coding_03_compress_gen__09#a1:5",
+      "t_start": 1792708611.0297801,
+      "t_end": 1792708621.88578,
+      "ttft_s": 2.1653,
+      "llm_s": 10.856,
+      "decode_s": 8.6907,
+      "prefill_tokens": 7913,
+      "decode_tokens": 307,
+      "prefill_tok_s": 3654.46,
+      "decode_tok_s": 35.33,
+      "n_chunks": 34,
+      "first_token_skew_s": 0.00691986083984375,
+      "itl_p50_ms": 29.00000000000036,
+      "itl_p99_ms": 5263.7199999999975,
+      "tool_names": [
+        "write"
+      ],
+      "tool_latency_s": 0.009999990463256836,
+      "tools": [
+        {
+          "tool": "write",
+          "start": 1792708621.866,
+          "end": 1792708621.876,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792708613.202,
+      "oc_step_finish": 1792708621.894,
+      "tool_errors": 0,
+      "gap_s": 0.025889873504638672,
+      "gpu_busy_pct_llm": 34.425925925925924,
+      "gpu_power_w_llm": 119.01481481481481,
+      "gpu_samples_llm": 108,
+      "gpu_busy_pct_gap": 21.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 6,
+      "llm_call_id": "sw_16k__coding_03_compress_gen__09#a1:6",
+      "t_start": 1792708621.91167,
+      "t_end": 1792708625.83637,
+      "ttft_s": 2.1564,
+      "llm_s": 3.9247,
+      "decode_s": 1.7683,
+      "prefill_tokens": 8207,
+      "decode_tokens": 64,
+      "prefill_tok_s": 3805.88,
+      "decode_tok_s": 36.19,
+      "n_chunks": 60,
+      "first_token_skew_s": 0.006930112838745117,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 56.42000000000019,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792708624.075,
+      "oc_step_finish": 1792708625.85,
+      "tool_errors": 0,
+      "gap_s": 0.12537097930908203,
+      "gpu_busy_pct_llm": 60.8974358974359,
+      "gpu_power_w_llm": 122.62051282051281,
+      "gpu_samples_llm": 39,
+      "gpu_busy_pct_gap": 19.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

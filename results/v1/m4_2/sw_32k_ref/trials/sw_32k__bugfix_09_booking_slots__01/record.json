@@ -1,0 +1,60 @@
+{
+  "trial_id": "sw_32k__bugfix_09_booking_slots__01",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__coding_02_fizzbuzz_gen__02",
+  "prev_task": "coding_02_fizzbuzz_gen",
+  "seed": 608263515,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T04:48:28Z",
+  "wall_start": 1792730908.618713,
+  "wall_end": 1792731070.858684,
+  "elapsed_s": 162.2,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 7,
+  "tokens_in": 67813,
+  "tokens_out": 3818,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 7 tests pass. Here's what was fixed:\n\n- **`overlaps`**: Changed `<=` to `<` so touching intervals no longer count as overlapping\n- **`merge_intervals`**: Added copy of input (don't mutate argument) and changed `<` to `<=` to merge touching intervals\n- **`total_busy_minutes`**: Now uses `merge_intervals` to handle overlapping intervals correctly\n- **`find_free_slots`**: Clips busy intervals to day window, fixes gap detection logic (`> min_len` \u2192 finds gaps of exactly `min_len`), and adds the remaining gap after the last busy interval",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T04:48:28Z"
+    }
+  ]
+}

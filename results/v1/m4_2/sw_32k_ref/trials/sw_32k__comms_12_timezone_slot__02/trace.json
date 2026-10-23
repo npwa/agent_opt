@@ -1,0 +1,208 @@
+{
+  "trial_id": "sw_32k__comms_12_timezone_slot__02",
+  "task": "comms_12_timezone_slot",
+  "config": "sw_32k",
+  "attempt": 1,
+  "status": "pass",
+  "summary": {
+    "wall_start": 1792729181.0398448,
+    "wall_end": 1792729385.8368976,
+    "wall_s": 204.79705286026,
+    "n_steps": 4,
+    "llm_s": 202.1943,
+    "ttft_s": 38.5995,
+    "decode_s": 163.59480000000002,
+    "tool_s": 0.18400001525878906,
+    "gap_s": 0.49884724617004395,
+    "idle_gap_s": 0.0,
+    "prefill_tokens": 30864,
+    "decode_tokens": 5402,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "sw_32k__comms_12_timezone_slot__02#a1:1",
+      "t_start": 1792729183.1437504,
+      "t_end": 1792729342.3255503,
+      "ttft_s": 27.4828,
+      "llm_s": 159.1818,
+      "decode_s": 131.699,
+      "prefill_tokens": 6674,
+      "decode_tokens": 4306,
+      "prefill_tok_s": 242.84,
+      "decode_tok_s": 32.7,
+      "n_chunks": 3839,
+      "first_token_skew_s": 0.014449596405029297,
+      "itl_p50_ms": 30.000000000001137,
+      "itl_p99_ms": 64.99999999999773,
+      "tool_names": [
+        "comm-tools_create_event"
+      ],
+      "tool_latency_s": 0.016000032424926758,
+      "tools": [
+        {
+          "tool": "comm-tools_create_event",
+          "start": 1792729342.307,
+          "end": 1792729342.323,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792729210.641,
+      "oc_step_finish": 1792729342.366,
+      "tool_errors": 0,
+      "gap_s": 0.06200575828552246,
+      "gpu_busy_pct_llm": 32.04899497487437,
+      "gpu_power_w_llm": 117.4163944723618,
+      "gpu_samples_llm": 1592,
+      "gpu_busy_pct_gap": 19.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 2,
+      "llm_call_id": "sw_32k__comms_12_timezone_slot__02#a1:2",
+      "t_start": 1792729342.387556,
+      "t_end": 1792729360.030256,
+      "ttft_s": 3.4438,
+      "llm_s": 17.6427,
+      "decode_s": 14.198900000000002,
+      "prefill_tokens": 7318,
+      "decode_tokens": 495,
+      "prefill_tok_s": 2124.98,
+      "decode_tok_s": 34.86,
+      "n_chunks": 26,
+      "first_token_skew_s": 0.007643938064575195,
+      "itl_p50_ms": 30.999999999998806,
+      "itl_p99_ms": 3476.1200000000003,
+      "tool_names": [
+        "comm-tools_create_event",
+        "comm-tools_send_email",
+        "comm-tools_send_email",
+        "comm-tools_send_email"
+      ],
+      "tool_latency_s": 0.07399988174438477,
+      "tools": [
+        {
+          "tool": "comm-tools_create_event",
+          "start": 1792729349.969,
+          "end": 1792729350.016,
+          "status": "completed"
+        },
+        {
+          "tool": "comm-tools_send_email",
+          "start": 1792729353.311,
+          "end": 1792729353.321,
+          "status": "completed"
+        },
+        {
+          "tool": "comm-tools_send_email",
+          "start": 1792729356.654,
+          "end": 1792729356.663,
+          "status": "completed"
+        },
+        {
+          "tool": "comm-tools_send_email",
+          "start": 1792729360.005,
+          "end": 1792729360.013,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792729345.839,
+      "oc_step_finish": 1792729360.042,
+      "tool_errors": 0,
+      "gap_s": 0.03101181983947754,
+      "gpu_busy_pct_llm": 32.40909090909091,
+      "gpu_power_w_llm": 120.15852272727274,
+      "gpu_samples_llm": 176,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 3,
+      "llm_call_id": "sw_32k__comms_12_timezone_slot__02#a1:3",
+      "t_start": 1792729360.0612679,
+      "t_end": 1792729374.8730679,
+      "ttft_s": 4.1021,
+      "llm_s": 14.8118,
+      "decode_s": 10.7097,
+      "prefill_tokens": 8179,
+      "decode_tokens": 369,
+      "prefill_tok_s": 1993.86,
+      "decode_tok_s": 34.45,
+      "n_chunks": 21,
+      "first_token_skew_s": 0.006632328033447266,
+      "itl_p50_ms": 31.00000000000014,
+      "itl_p99_ms": 3405.340000000001,
+      "tool_names": [
+        "comm-tools_send_email",
+        "comm-tools_send_email",
+        "comm-tools_send_email"
+      ],
+      "tool_latency_s": 0.09400010108947754,
+      "tools": [
+        {
+          "tool": "comm-tools_send_email",
+          "start": 1792729368.072,
+          "end": 1792729368.107,
+          "status": "completed"
+        },
+        {
+          "tool": "comm-tools_send_email",
+          "start": 1792729371.477,
+          "end": 1792729371.506,
+          "status": "completed"
+        },
+        {
+          "tool": "comm-tools_send_email",
+          "start": 1792729374.848,
+          "end": 1792729374.878,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792729364.17,
+      "oc_step_finish": 1792729374.888,
+      "tool_errors": 0,
+      "gap_s": 0.03116440773010254,
+      "gpu_busy_pct_llm": 41.54054054054054,
+      "gpu_power_w_llm": 122.13986486486488,
+      "gpu_samples_llm": 148,
+      "gpu_busy_pct_gap": 21.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 4,
+      "llm_call_id": "sw_32k__comms_12_timezone_slot__02#a1:4",
+      "t_start": 1792729374.9042323,
+      "t_end": 1792729385.4622324,
+      "ttft_s": 3.5708,
+      "llm_s": 10.558,
+      "decode_s": 6.9872,
+      "prefill_tokens": 8693,
+      "decode_tokens": 232,
+      "prefill_tok_s": 2434.47,
+      "decode_tok_s": 33.2,
+      "n_chunks": 210,
+      "first_token_skew_s": 0.006967782974243164,
+      "itl_p50_ms": 30.00000000000025,
+      "itl_p99_ms": 64.00000000000006,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792729378.482,
+      "oc_step_finish": 1792729385.473,
+      "tool_errors": 0,
+      "gap_s": 0.3746652603149414,
+      "gpu_busy_pct_llm": 26.961904761904762,
+      "gpu_power_w_llm": 117.60285714285713,
+      "gpu_samples_llm": 105,
+      "gpu_busy_pct_gap": 13.5,
+      "gpu_samples_gap": 4,
+      "idle_gap_s": 0.0
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

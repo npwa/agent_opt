@@ -1,0 +1,62 @@
+{
+  "trial_id": "sw_16k__c_ringbuf_03_ringbuffer__01",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__comms_07_confirm_send__03",
+  "prev_task": "comms_07_confirm_send",
+  "seed": 1259538336,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T23:40:58Z",
+  "wall_start": 1792712458.2503557,
+  "wall_end": 1792712635.0394683,
+  "elapsed_s": 176.8,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 9,
+  "tokens_in": 90087,
+  "tokens_out": 4244,
+  "tool_sequence": [
+    "read",
+    "glob",
+    "glob",
+    "read",
+    "write",
+    "write",
+    "write",
+    "edit",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All done. Here's a summary:\n\n- **`ringbuf.c`** \u2014 implements all functions from `ringbuf.h` with an opaque struct, wrapping read/write/head/tail indices, and safe partial writes.\n- **Compilation** \u2014 clean with `gcc -std=c11 -Wall -Werror`.\n- **Tests** \u2014 32 tests passed covering NULL safety, create/destroy, basic write/read, peek (non-destructive), partial writes, wrap-around correctness, clear, and overwrite after clear.",
+  "files": [
+    "ringbuf.c",
+    "test.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-22T23:40:58Z"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "trial_id": "sw_32k__logtriage_04_pool_exhaustion__00",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__coding_03_compress_gen__00",
+  "prev_task": "coding_03_compress_gen",
+  "seed": 1402451595,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T03:52:31Z",
+  "wall_start": 1792727551.2246532,
+  "wall_end": 1792727677.3526936,
+  "elapsed_s": 125.8,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 68486,
+  "tokens_out": 1360,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "215 words, all checks ok"
+    }
+  ],
+  "final_answer": "Now let me find what caused the pool exhaustion - looking for batch jobs or user activity before the outage.\nHere are the findings:\n\n**(1) First error burst \u2014 `2026-01-18T03:17:43Z` on api-03** (~75-80 errors spread across all API hosts in rapid succession: api-01 through api-08). The very first error that started the cascade was at **api-07** (`03:17:42Z`) with `db pool exhausted`, followed immediately by 503s on every host.\n\n**(2) Root cause \u2014 Database connection pool exhaustion.** The pool has a hard limit of 20 connections (`max=20`), and the batch job `reconcile-ledger` acquired all 20 at once:\n```\n03:15:03Z batch-01 job reconcile-ledger started user=svc-batch db_conns=20\n03:16:39Z batch-01 acquire connection 20/20\n```\nThis left zero connections for the API servers, so every incoming request that hit the database got a 503.\n\n**(3) Responsible \u2014 Batch job `reconcile-ledger` on host **batch-01**, user **svc-batch**. It ran at `03:15:03Z`, drained all 20 DB connections (one every ~5s, holding them for ~26 minutes), and only finished at `03:41:30Z` after processing 48M rows.\n\n---\n\n**Noise dismissed:** The many \"cache miss\" WARN entries (`key=sess:...`, across api-01 to api-08) and sporadic \"slow request\"/\"TLS handshake failed\" alerts during the `02:00` window were unrelated operational noise \u2014 cache misses don't consume DB connections, those TLS resets were on a single client IP at the pre-outage hour.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T03:52:31Z"
+    }
+  ]
+}

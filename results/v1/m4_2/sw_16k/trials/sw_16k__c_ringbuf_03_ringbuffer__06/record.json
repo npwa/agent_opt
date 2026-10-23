@@ -1,0 +1,61 @@
+{
+  "trial_id": "sw_16k__c_ringbuf_03_ringbuffer__06",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 6,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__coding_06_tax_rates_lan__01",
+  "prev_task": "coding_06_tax_rates_lan",
+  "seed": 1893220463,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T01:51:35Z",
+  "wall_start": 1792720295.8395689,
+  "wall_end": 1792720501.5848641,
+  "elapsed_s": 205.7,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 8,
+  "tokens_in": 79477,
+  "tokens_out": 5261,
+  "tool_sequence": [
+    "read",
+    "read",
+    "glob",
+    "write",
+    "write",
+    "edit",
+    "bash",
+    "write",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All tests pass. Here's what was implemented in `ringbuf.c`:\n\n- **`rb_create`** \u2014 allocates the struct + zeroed internal buffer of the given capacity; returns NULL for capacity==0 or OOM\n- **`rb_destroy`** \u2014 frees buf and struct; accepts NULL safely\n- **`rb_write`** \u2014 writes bytes from `data`, wrapping `head` modulo capacity; stops at capacity (full) and returns how many were written\n- **`rb_read`** \u2014 reads oldest-first, advancing `tail`; returns count read, up to what's available\n- **`rb_peek`** \u2014 copies from the ring without advancing `tail`\n- **`rb_size` / `rb_capacity`** \u2014 return current stored bytes and total capacity\n- **`rb_clear`** \u2014 resets head, tail, size to zero",
+  "files": [
+    "ringbuf.c",
+    "test.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T01:51:35Z"
+    }
+  ]
+}

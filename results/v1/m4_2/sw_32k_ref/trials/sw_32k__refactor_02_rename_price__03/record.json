@@ -1,0 +1,85 @@
+{
+  "trial_id": "sw_32k__refactor_02_rename_price__03",
+  "task": "refactor_02_rename_price",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 3,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__repoqa_05_retry_policy__02",
+  "prev_task": "repoqa_05_retry_policy",
+  "seed": 838773709,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T03:58:12Z",
+  "wall_start": 1792727892.735531,
+  "wall_end": 1792727997.7689729,
+  "elapsed_s": 105.0,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 7,
+  "tokens_in": 68157,
+  "tokens_out": 1802,
+  "tool_sequence": [
+    "grep",
+    "glob",
+    "glob",
+    "read",
+    "read",
+    "read",
+    "read",
+    "read",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "read",
+    "read",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Done \u2014 `calc_price` \u2192 `compute_total_price` across all files, tested OK with `python3 -m unittest`.",
+  "files": [
+    "README.md",
+    "cart.py",
+    "pricing.py",
+    "report.py",
+    "test_cart.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T03:58:12Z"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "trial_id": "sw_16k__coding_10_wcx_constrained__00",
+  "task": "coding_10_wcx_constrained",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__bugfix_09_booking_slots__08",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 2037515869,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T21:56:51Z",
+  "wall_start": 1792706211.4483361,
+  "wall_end": 1792706510.7096815,
+  "elapsed_s": 299.3,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 31088,
+  "tokens_out": 8874,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "write"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": false,
+      "detail": "no trailing newline: expected '0 2 11 11\\n', got exit 0, '1 2 11 11\\n'; tab vtab formfeed: expected '0 4 7 7\\n', got exit 0, '1 4 7 7\\n'; nul bytes belong to words: expected '0 2 6 6\\n', got exit 0, '1 2 6 6\\n'; 64 MiB single line: expected '0 1 67108864 67108864\\n', got '1 1 67108864 67108864\\n' (exit 0)"
+    }
+  ],
+  "final_answer": "There's a logical bug in the word tracking for `in_word` transitions. Let me fix that.",
+  "files": [
+    "wcx.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T21:56:51Z"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "trial_id": "sw_32k__bugfix_01_moving_average__02",
+  "task": "bugfix_01_moving_average",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 2,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__coding_05_scientific_lan__00",
+  "prev_task": "coding_05_scientific_lan",
+  "seed": 462778644,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T05:57:31Z",
+  "wall_start": 1792735051.9724786,
+  "wall_end": 1792735086.4546785,
+  "elapsed_s": 34.5,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 6,
+  "tokens_in": 49745,
+  "tokens_out": 629,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "The bug was on line 9 of `stats_utils.py` in the `moving_average` function. The `range` stopped one iteration too early (`len(values) - window` instead of `len(values) - window + 1`), causing it to miss the last sliding window position. I fixed it by adding `+ 1`. All 5 tests now pass.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T05:57:31Z"
+    }
+  ]
+}

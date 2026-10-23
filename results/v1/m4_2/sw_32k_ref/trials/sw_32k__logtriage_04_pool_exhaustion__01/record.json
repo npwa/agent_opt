@@ -1,0 +1,59 @@
+{
+  "trial_id": "sw_32k__logtriage_04_pool_exhaustion__01",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__logtriage_04_pool_exhaustion__04",
+  "prev_task": "logtriage_04_pool_exhaustion",
+  "seed": 436812540,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T05:32:29Z",
+  "wall_start": 1792733549.8159666,
+  "wall_end": 1792733675.79097,
+  "elapsed_s": 125.7,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 72216,
+  "tokens_out": 1475,
+  "tool_sequence": [
+    "bash",
+    "glob",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "259 words, all checks ok"
+    }
+  ],
+  "final_answer": "Now let me confirm the exact timeline and check if there are any earlier errors or warning patterns.\nHere are the findings:\n\n---\n\n**(1) First error burst \u2014 2026-01-18T03:17:42Z on host `api-07`**\n\nAt `03:17:42Z`, `api-07` logged the first fatal error:\n```\nERROR api-07 db pool exhausted (max=20) waiting=14 path=/v1/orders\n```\nWithin seconds, the burst cascaded across all 8 API hosts (`api-01` through `api-08`) with **302 total 503 errors** from `03:17:42Z` to `03:19:22Z`. Prior to this, only scattered `WARN` entries (cache misses, slow requests) existed \u2014 not an outage.\n\n---\n\n**(2) Root cause \u2014 database connection pool exhaustion**\n\nThe batch job consumed all 20 connections from the shared `primary` pool (`db_conns=20`, pool max=20). Each connection was held for 5-second intervals:\n\n```\nbatch-01 reconcile-ledger acquired connection  1/20 at 03:15:04Z\nbatch-01 reconcile-ledger acquired connection 20/20 at 03:16:39Z\n```\n\nWith zero connections remaining, every API request that needed a database connection (e.g. `/v1/orders`, `/v1/users`) failed with 503. The entire service was effectively dead for ~100 seconds until the batch job finished at `03:41:30Z`.\n\n---\n\n**(3) Responsible party \u2014 batch job `reconcile-ledger` owned by user `svc-batch`, running on host `batch-01`**\n\n```\nINFO batch-01 job reconcile-ledger started user=svc-batch db_conns=20\nINFO batch-01 job reconcile-ledger finished rows=48210112 released_conns=20\n```\n\nThe `svc-batch` service initiated the `reconcile-ledger` job on host `batch-01`. It grabbed the entire pool of 20 connections and held them for ~26 minutes without returning any. This is a resource-hog pattern: a single batch job monopolizing all pooled DB connections while other services share that same pool, with no isolation or backpressure between batch and online traffic.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T05:32:29Z"
+    }
+  ]
+}

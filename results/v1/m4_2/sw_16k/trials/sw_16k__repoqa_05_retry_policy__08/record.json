@@ -1,0 +1,54 @@
+{
+  "trial_id": "sw_16k__repoqa_05_retry_policy__08",
+  "task": "repoqa_05_retry_policy",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 8,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__comms_12_timezone_slot__01",
+  "prev_task": "comms_12_timezone_slot",
+  "seed": 13557443,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T22:39:36Z",
+  "wall_start": 1792708776.1744573,
+  "wall_end": 1792708831.0526805,
+  "elapsed_s": 54.9,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 31934,
+  "tokens_out": 575,
+  "tool_sequence": [
+    "glob",
+    "bash",
+    "read",
+    "grep",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "73 words, all checks ok"
+    }
+  ],
+  "final_answer": "1. **Function that computes delay**: `next_delay` in `miniq/retry.py:20` \u2014 it calculates an exponential backoff value capped at `max_delay` and applies jitter.\n\n2. **Default maximum delay**: **30.0 seconds**, defined by `RETRY_MAX_DELAY_S` in `miniq/config.py:9`.\n\n3. **Default max attempts before stopping retry**: **5 attempts**, defined by `RETRY_MAX_ATTEMPTS` in `miniq/config.py:7`. The `should_retry` method at `miniq/retry.py:18` returns `attempt < self.max_attempts`, so with default 5 a job is retried on attempts 1\u20134 and stops being retried on attempt 5.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-22T22:39:36Z"
+    }
+  ]
+}

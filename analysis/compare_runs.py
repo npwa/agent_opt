@@ -34,7 +34,7 @@ def compare(a_dir: Path, b_dir: Path) -> str:
     cells_b = {t: sb["cells"][f"{cb}|{t}"] for t in tasks}
     L = [f"# Comparison: {a_dir.name} (A) vs {b_dir.name} (B)", "",
          f"{len(tasks)} common tasks. Differences are B - A. Intervals: Wilson (rates), Newcombe (rate differences), "
-         "percentile bootstrap (times); n = 10 per task.", ""]
+         "percentile bootstrap (times); the number of trials per task is in the pass counts (A pass, B pass).", ""]
 
     ka, na = sum(c["passes"] for c in cells_a.values()), sum(c["n"] for c in cells_a.values())
     kb, nb = sum(c["passes"] for c in cells_b.values()), sum(c["n"] for c in cells_b.values())

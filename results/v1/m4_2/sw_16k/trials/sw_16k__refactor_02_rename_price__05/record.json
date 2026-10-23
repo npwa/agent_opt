@@ -1,0 +1,73 @@
+{
+  "trial_id": "sw_16k__refactor_02_rename_price__05",
+  "task": "refactor_02_rename_price",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 5,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__comms_12_timezone_slot__09",
+  "prev_task": "comms_12_timezone_slot",
+  "seed": 812440477,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T21:45:56Z",
+  "wall_start": 1792705556.1174402,
+  "wall_end": 1792705616.846981,
+  "elapsed_s": 60.7,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 33967,
+  "tokens_out": 583,
+  "tool_sequence": [
+    "bash",
+    "grep",
+    "read",
+    "read",
+    "read",
+    "read",
+    "read",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Done: `calc_price` renamed to `compute_total_price` in all 12 references across all 5 files. All 4 tests pass.",
+  "files": [
+    "README.md",
+    "cart.py",
+    "pricing.py",
+    "report.py",
+    "test_cart.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-22T21:45:56Z"
+    }
+  ]
+}

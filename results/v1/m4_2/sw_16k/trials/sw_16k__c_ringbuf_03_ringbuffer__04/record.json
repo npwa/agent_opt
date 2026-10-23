@@ -1,0 +1,61 @@
+{
+  "trial_id": "sw_16k__c_ringbuf_03_ringbuffer__04",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 4,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__logtriage_04_pool_exhaustion__04",
+  "prev_task": "logtriage_04_pool_exhaustion",
+  "seed": 461661198,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T02:14:02Z",
+  "wall_start": 1792721642.3059328,
+  "wall_end": 1792721915.0559213,
+  "elapsed_s": 272.7,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 8,
+  "tokens_in": 89208,
+  "tokens_out": 7338,
+  "tool_sequence": [
+    "read",
+    "read",
+    "glob",
+    "write",
+    "read",
+    "write",
+    "write",
+    "write",
+    "write"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": false,
+      "detail": "test timed out"
+    }
+  ],
+  "final_answer": "Let me write a clean, working test file:",
+  "files": [
+    "ringbuf.c",
+    "test.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-23T02:14:02Z"
+    }
+  ]
+}

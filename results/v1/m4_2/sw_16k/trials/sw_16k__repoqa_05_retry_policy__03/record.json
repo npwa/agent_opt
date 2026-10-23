@@ -1,0 +1,53 @@
+{
+  "trial_id": "sw_16k__repoqa_05_retry_policy__03",
+  "task": "repoqa_05_retry_policy",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 3,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__comms_07_confirm_send__07",
+  "prev_task": "comms_07_confirm_send",
+  "seed": 1100702309,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T01:13:03Z",
+  "wall_start": 1792717983.6350768,
+  "wall_end": 1792718033.4644873,
+  "elapsed_s": 49.8,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 32109,
+  "tokens_out": 409,
+  "tool_sequence": [
+    "glob",
+    "grep",
+    "read",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "36 words, all checks ok"
+    }
+  ],
+  "final_answer": "Based on `miniq/retry.py` and `miniq/config.py`:\n\n1. **Delay computation function:** `next_delay` in `miniq/retry.py:20`\n2. **Default maximum delay:** 30 seconds (`RETRY_MAX_DELAY_S = 30.0` in `miniq/config.py:9`)\n3. **Default max retry attempts before stopping:** 5 (`RETRY_MAX_ATTEMPTS = 5` in `miniq/config.py:7`)",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T01:13:03Z"
+    }
+  ]
+}

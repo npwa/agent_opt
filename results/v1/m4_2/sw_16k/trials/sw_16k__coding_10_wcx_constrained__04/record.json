@@ -1,0 +1,57 @@
+{
+  "trial_id": "sw_16k__coding_10_wcx_constrained__04",
+  "task": "coding_10_wcx_constrained",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 4,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__bugfix_09_booking_slots__07",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 1859323853,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T23:00:07Z",
+  "wall_start": 1792710007.2410116,
+  "wall_end": 1792710209.3322742,
+  "elapsed_s": 202.1,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 7,
+  "tokens_in": 61082,
+  "tokens_out": 5297,
+  "tool_sequence": [
+    "read",
+    "write",
+    "bash",
+    "edit",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": false,
+      "detail": "no trailing newline: expected '0 2 11 11\\n', got exit 0, '1 2 11 11\\n'; unterminated last line is the longest: expected '2 4 13 8\\n', got exit 0, '3 4 13 8\\n'; tab vtab formfeed: expected '0 4 7 7\\n', got exit 0, '1 4 7 7\\n'; nul bytes belong to words: expected '0 2 6 6\\n', got exit 0, '1 2 6 6\\n' (+1 more)"
+    }
+  ],
+  "final_answer": "Compiled successfully with no warnings or errors. Verified it compiles cleanly with `gcc -std=c11 -Wall -Wextra -Werror -O2 -o wcx wcx.c`.",
+  "files": [
+    "wcx.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T23:00:07Z"
+    }
+  ]
+}

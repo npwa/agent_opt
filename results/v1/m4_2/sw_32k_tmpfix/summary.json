@@ -1,0 +1,287 @@
+{
+  "baseline": "sw_32k",
+  "categories": {
+    "bugfix_01_moving_average": "bugfix",
+    "coding_02_fizzbuzz_gen": "code_gen",
+    "coding_05_scientific_lan": "reasoning",
+    "coding_06_tax_rates_lan": "reasoning",
+    "comms_07_confirm_send": "comms",
+    "repoqa_05_retry_policy": "repo_qa"
+  },
+  "cells": {
+    "sw_32k|bugfix_01_moving_average": {
+      "harness_failed": 0,
+      "median_ci": [
+        31.1,
+        34.5
+      ],
+      "median_s": 31.700000000000003,
+      "n": 4,
+      "passes": 4,
+      "rate": 1.0,
+      "timeouts": 0,
+      "times": [
+        31.3,
+        31.1,
+        34.5,
+        32.1
+      ],
+      "wilson": [
+        0.5101091635454027,
+        1.0
+      ]
+    },
+    "sw_32k|coding_02_fizzbuzz_gen": {
+      "harness_failed": 0,
+      "median_ci": [
+        21.0,
+        137.8
+      ],
+      "median_s": 32.3,
+      "n": 4,
+      "passes": 3,
+      "rate": 0.75,
+      "timeouts": 0,
+      "times": [
+        41.3,
+        23.3,
+        137.8,
+        21.0
+      ],
+      "wilson": [
+        0.30064184258240184,
+        0.9544127391902995
+      ]
+    },
+    "sw_32k|coding_05_scientific_lan": {
+      "harness_failed": 0,
+      "median_ci": [
+        11.9,
+        13.6
+      ],
+      "median_s": 12.75,
+      "n": 4,
+      "passes": 4,
+      "rate": 1.0,
+      "timeouts": 0,
+      "times": [
+        11.9,
+        12.4,
+        13.6,
+        13.1
+      ],
+      "wilson": [
+        0.5101091635454027,
+        1.0
+      ]
+    },
+    "sw_32k|coding_06_tax_rates_lan": {
+      "harness_failed": 0,
+      "median_ci": [
+        11.2,
+        16.7
+      ],
+      "median_s": 13.5,
+      "n": 4,
+      "passes": 3,
+      "rate": 0.75,
+      "timeouts": 0,
+      "times": [
+        16.7,
+        15.1,
+        11.9,
+        11.2
+      ],
+      "wilson": [
+        0.30064184258240184,
+        0.9544127391902995
+      ]
+    },
+    "sw_32k|comms_07_confirm_send": {
+      "harness_failed": 0,
+      "median_ci": [
+        76.9,
+        120.8
+      ],
+      "median_s": 84.75,
+      "n": 4,
+      "passes": 4,
+      "rate": 1.0,
+      "timeouts": 0,
+      "times": [
+        86.6,
+        120.8,
+        82.9,
+        76.9
+      ],
+      "wilson": [
+        0.5101091635454027,
+        1.0
+      ]
+    },
+    "sw_32k|repoqa_05_retry_policy": {
+      "harness_failed": 0,
+      "median_ci": [
+        26.2,
+        63.2
+      ],
+      "median_s": 33.9,
+      "n": 4,
+      "passes": 2,
+      "rate": 0.5,
+      "timeouts": 0,
+      "times": [
+        63.2,
+        29.7,
+        38.1,
+        26.2
+      ],
+      "wilson": [
+        0.15003898915214947,
+        0.8499610108478506
+      ]
+    }
+  },
+  "common_tasks": [
+    "bugfix_01_moving_average",
+    "coding_02_fizzbuzz_gen",
+    "coding_05_scientific_lan",
+    "coding_06_tax_rates_lan",
+    "comms_07_confirm_send",
+    "repoqa_05_retry_policy"
+  ],
+  "comparisons": [],
+  "configs": [
+    "sw_32k"
+  ],
+  "created_utc": "2026-10-23T05:43:21Z",
+  "decomposition": {
+    "sw_32k": {
+      "all": {
+        "n": 24,
+        "pct": {
+          "decode": 60.26948450864549,
+          "harness": 9.399741703079885,
+          "prefill": 30.311171864838236,
+          "tool": 0.019601881356511933,
+          "unattributed": 4.207986685436843e-08
+        },
+        "wall_s": 982.6865200996399
+      },
+      "categories": {
+        "bugfix": {
+          "n": 4,
+          "not_ok": 0,
+          "pct": {
+            "decode": 49.174415081628176,
+            "harness": 6.054957484518712,
+            "prefill": 44.7458146392138,
+            "tool": 0.02481274317178794,
+            "unattributed": 5.1467521465415915e-08
+          },
+          "wall_s": 128.96625185012817
+        },
+        "code_gen": {
+          "n": 4,
+          "not_ok": 0,
+          "pct": {
+            "decode": 78.84411417658396,
+            "harness": 3.4331220716243394,
+            "prefill": 17.71322482659058,
+            "tool": 0.009539235595756385,
+            "unattributed": -3.103946368067518e-07
+          },
+          "wall_s": 223.4291067123413
+        },
+        "comms": {
+          "n": 4,
+          "not_ok": 0,
+          "pct": {
+            "decode": 55.1279699236564,
+            "harness": 14.931329713147163,
+            "prefill": 29.90276794979771,
+            "tool": 0.03793229966317697,
+            "unattributed": 1.1373555023088476e-07
+          },
+          "wall_s": 367.26365995407104
+        },
+        "reasoning": {
+          "n": 8,
+          "not_ok": 0,
+          "pct": {
+            "decode": 67.44296261682882,
+            "harness": 13.690852846708564,
+            "prefill": 18.86618426549147,
+            "tool": 0.0,
+            "unattributed": 2.709711370725768e-07
+          },
+          "wall_s": 105.86560440063477
+        },
+        "repo_qa": {
+          "n": 4,
+          "not_ok": 0,
+          "pct": {
+            "decode": 50.1502599631344,
+            "harness": 4.809878845897008,
+            "prefill": 45.0398609771287,
+            "tool": 0.0,
+            "unattributed": 2.1383989361607374e-07
+          },
+          "wall_s": 157.1618971824646
+        }
+      },
+      "first_call_share_pct": 51.37661038742714,
+      "flagged": [],
+      "gpu_duty_pct": 86.97924063377009
+    }
+  },
+  "n": 4,
+  "name": "sw_32k_tmpfix",
+  "overview": {
+    "sw_32k": {
+      "harness_failed": 0,
+      "n": 24,
+      "n_common": 24,
+      "passes": 20,
+      "passes_common": 20,
+      "rate_common": 0.8333333333333334,
+      "suite_hi": 386.6,
+      "suite_lo": 178.3,
+      "suite_s": 208.9,
+      "timeouts": 0,
+      "wilson": [
+        0.6414692935030095,
+        0.9332132367136705
+      ],
+      "wilson_common": [
+        0.6414692935030095,
+        0.9332132367136705
+      ]
+    }
+  },
+  "parity": null,
+  "parity_fraction": 0.0,
+  "parity_trials": 0,
+  "platform": {
+    "cuda": "13.0",
+    "driver": "580.126.09",
+    "gpu": "NVIDIA GeForce RTX 3080",
+    "llama_cpp": "b2f036c0f",
+    "ollama": "0.32.5",
+    "opencode": "1.18.11",
+    "python": "3.12.3"
+  },
+  "run_seed": 1,
+  "tasks": [
+    "bugfix_01_moving_average",
+    "coding_02_fizzbuzz_gen",
+    "coding_05_scientific_lan",
+    "coding_06_tax_rates_lan",
+    "comms_07_confirm_send",
+    "repoqa_05_retry_policy"
+  ],
+  "trials": {
+    "harness_failed": 0,
+    "measured": 24
+  }
+}

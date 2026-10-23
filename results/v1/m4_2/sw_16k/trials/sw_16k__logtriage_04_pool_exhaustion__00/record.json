@@ -1,0 +1,60 @@
+{
+  "trial_id": "sw_16k__logtriage_04_pool_exhaustion__00",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__coding_10_wcx_constrained__07",
+  "prev_task": "coding_10_wcx_constrained",
+  "seed": 1685223881,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T02:21:42Z",
+  "wall_start": 1792722102.4367156,
+  "wall_end": 1792722257.0634246,
+  "elapsed_s": 154.3,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 60604,
+  "tokens_out": 1305,
+  "tool_sequence": [
+    "bash",
+    "glob",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": false,
+      "detail": "missing 'culprit_user'"
+    }
+  ],
+  "final_answer": "The logs reveal a database connection pool exhaustion incident:\n\n**Timeline:**\n- **03:15:04\u201303:16:39** \u2014 `batch-01 reconcile-ledger` serially acquired all 20 connections from `pool=primary`, one every 5 seconds (lines ~44961\u201345884)\n- **03:17:42** \u2014 First `db pool exhausted (max=20)` error on `api-07` at `/v1/orders` with 14 requests waiting\n- **03:17:43+** \u2014 Cascading 503 errors across all API servers (`api-01`, `api-03`, `api-04`, `api-05`, `api-06`, `api-07`, `api-08`), totaling 301 pool exhaustion errors\n\n**Root cause:** The long-running `reconcile-ledger` job steadily consumed every connection in the pool (releasing none), starving all API workers. Once the pool hit 20/20, subsequent API requests failed immediately with 503s.\n\n**Key metrics from your input snippets:**\n- Pool exhausted on `api-07` first at `03:17:42Z` (`waiting=14`)\n- All 8 API servers impacted\n- Total of **301** \"db pool exhausted\" errors across the log (of 72,324 lines)",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-23T02:21:42Z"
+    }
+  ]
+}

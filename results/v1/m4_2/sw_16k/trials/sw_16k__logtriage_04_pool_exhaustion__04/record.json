@@ -1,0 +1,60 @@
+{
+  "trial_id": "sw_16k__logtriage_04_pool_exhaustion__04",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 4,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__bugfix_01_moving_average__07",
+  "prev_task": "bugfix_01_moving_average",
+  "seed": 325801868,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T02:12:00Z",
+  "wall_start": 1792721520.3572793,
+  "wall_end": 1792721642.2357442,
+  "elapsed_s": 121.6,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 6,
+  "tokens_in": 74790,
+  "tokens_out": 1478,
+  "tool_sequence": [
+    "read",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": false,
+      "detail": "missing 'culprit_job'; missing 'culprit_user'"
+    }
+  ],
+  "final_answer": "**Log Error Summary:**\n\n- **Total errors**: 302 ERROR/FATAL lines\n- **Primary issue**: `db pool exhausted (max=20)` \u2014 301 occurrences\n- **Time window**: Started at `2026-01-18T03:17:42Z`, lasted until at least `2026-01-18T03:19:22Z` (~1.5 min)\n- **Root cause node**: `api-07` first reported the pool exhaustion: `db pool exhausted (max=20) waiting=14 path=/v1/orders`\n- **Effect**: Cascading 503 errors across api-01 through api-08 as all routed to the exhausted connection pool while handling `/v1/orders` requests\n- **Other error**: One earlier TLS handshake failure at `02:41:07Z` on `api-02` (unrelated)",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-23T02:12:00Z"
+    }
+  ]
+}

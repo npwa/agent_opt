@@ -1,0 +1,64 @@
+{
+  "trial_id": "sw_16k__bugfix_09_booking_slots__02",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 2,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__c_ringbuf_03_ringbuffer__03",
+  "prev_task": "c_ringbuf_03_ringbuffer",
+  "seed": 180506399,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T01:07:14Z",
+  "wall_start": 1792717634.9030495,
+  "wall_end": 1792717799.29021,
+  "elapsed_s": 164.4,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 13,
+  "tokens_in": 138182,
+  "tokens_out": 3443,
+  "tool_sequence": [
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "bash",
+    "edit",
+    "read",
+    "edit",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 7 tests pass. Here's a summary of all the bugs fixed, both from test failures and docstring compliance:\n\n1. **`overlaps`** (line 13): Was using `<=` making touching intervals count as overlapping. Changed to `<` so touching intervals correctly don't overlap.\n\n2. **`merge_intervals`** (line 21-24): Two bugs \u2014 (a) called `.sort()` which mutated the input argument (must not modify it), (b) used `<` instead of `<=` so touching intervals weren't merged. Fixed by using `sorted()` and `<=`.\n\n3. **`total_busy_minutes`** (line 33): Docstring says \"a minute covered twice counts once\" but the original code just summed raw intervals without merging overlapping ones first. Now calls `merge_intervals()` to count distinct minutes.\n\n4. **`find_free_slots`** (lines 46-56): Two bugs \u2014 (a) gap check used `>` (strict) instead of `>=`, wrongly excluding gaps exactly `min_len` long, (b) missing the trailing free slot after the last busy interval and no clamping to day boundaries. Added `>=` comparison, day boundary clamping, and post-loop trailing slot check.",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T01:07:14Z"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "trial_id": "sw_16k__bugfix_09_booking_slots__06",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 6,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__coding_04_dir_stats_gen__05",
+  "prev_task": "coding_04_dir_stats_gen",
+  "seed": 571442729,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T02:37:00Z",
+  "wall_start": 1792723020.584517,
+  "wall_end": 1792723224.823811,
+  "elapsed_s": 204.2,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 13,
+  "tokens_in": 134781,
+  "tokens_out": 4766,
+  "tool_sequence": [
+    "read",
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "edit",
+    "edit",
+    "bash",
+    "read",
+    "edit",
+    "bash",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 7 tests pass. Here are the 5 bugs fixed:\n\n1. **`overlaps`** \u2014 used `<=` / `<=` instead of `<` / `<`, causing touching intervals to falsely overlap\n2. **`merge_intervals`** \u2014 sorted in-place (mutated argument) instead of using `sorted()` to return a new list\n3. **`merge_intervals`** \u2014 used `<` instead of `<=` for the merge condition, so touching intervals weren't merged\n4. **`find_free_slots`** \u2014 didn't clamp busy intervals to `[day_start, day_end]`, use `>= min_len`, or handle trailing gap after all busy intervals\n5. **`total_busy_minutes`** \u2014 summed raw intervals without deduplication; fixed by piping through `merge_intervals()` first",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T02:37:00Z"
+    }
+  ]
+}

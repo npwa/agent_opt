@@ -1,0 +1,59 @@
+{
+  "trial_id": "sw_16k__logtriage_04_pool_exhaustion__02",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 2,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__bugfix_01_moving_average__08",
+  "prev_task": "bugfix_01_moving_average",
+  "seed": 488536881,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T22:46:30Z",
+  "wall_start": 1792709190.4408274,
+  "wall_end": 1792709352.3166792,
+  "elapsed_s": 161.6,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 6,
+  "tokens_in": 72209,
+  "tokens_out": 1863,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": false,
+      "detail": "missing 'culprit_job'; missing 'culprit_user'"
+    }
+  ],
+  "final_answer": "## Updated Summary\n\n**Log file:** `app.log` \u2014 ~1950 lines, spans 2026-01-18T02:00 to ~04:00\n\n### Errors (302 total)\n\nTwo categories:\n\n| Time | Type | Count | Details |\n|------|------|-------|---------|\n| 02:41:07Z | TLS handshake failed | 1 | `api-02` \u2014 isolated, single connection reset from peer `10.4.2.9` |\n| 03:17:42 \u2013 03:19:22Z | **db pool exhausted** | 301 | Cascading 503 failures across all API nodes |\n\n### Cascade timeline\n\n- **Pre-03:17** \u2014 Gradual degradation: widespread cache misses (all endpoints/nodes), slow requests (up to ~1s)\n- **03:17:42Z** \u2014 First pool exhaustion on `api-07` \u2192 `/v1/orders` (`max=20, waiting=14`)\n- **03:17:42 \u2013 03:19:22Z** \u2014 Full cascade: ~301 errors over ~2 minutes across api-01 through api-08\n- **Post-03:59** \u2014 System recovered, all healthy (sub-60ms response times)\n\n### Key metrics\n\n- All 302 errors are `db pool exhausted` or TLS-related \u2014 no other error categories\n- Pool limit of 20 was the hard constraint\n- All 8 API servers affected during the cascade\n- Total outage window: ~2 minutes (errors); system fully recovered by end of log window\n\n### Root cause recommendation\n\nThe db connection pool max=20 is too low for the traffic load across 8 API servers. Increase `max_connections` and/or add connection pooling middleware (e.g., PgBouncer) to handle peak demand. The rising latency warnings before 03:17 suggest the pool was filling up gradually until it hit saturation.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T22:46:30Z"
+    }
+  ]
+}

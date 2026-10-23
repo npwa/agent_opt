@@ -1,0 +1,55 @@
+{
+  "trial_id": "sw_16k__bugfix_01_moving_average__05",
+  "task": "bugfix_01_moving_average",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 5,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__bugfix_01_moving_average__06",
+  "prev_task": "bugfix_01_moving_average",
+  "seed": 972942222,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T01:49:08Z",
+  "wall_start": 1792720148.873059,
+  "wall_end": 1792720209.4507697,
+  "elapsed_s": 60.6,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 24907,
+  "tokens_out": 728,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "edit"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "The bug is on line 9: `range(len(values) - window)` should be `range(len(values) - window + 1)`. It's off-by-one, missing the last valid window.\nFixed the off-by-one error in `range()` on line 9 \u2014 changed `len(values) - window` to `len(values) - window + 1`.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T01:49:08Z"
+    }
+  ]
+}

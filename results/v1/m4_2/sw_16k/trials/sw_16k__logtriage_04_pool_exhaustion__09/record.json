@@ -1,0 +1,54 @@
+{
+  "trial_id": "sw_16k__logtriage_04_pool_exhaustion__09",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 9,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__repoqa_05_retry_policy__09",
+  "prev_task": "repoqa_05_retry_policy",
+  "seed": 858917180,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T00:04:37Z",
+  "wall_start": 1792713877.0938838,
+  "wall_end": 1792713972.664211,
+  "elapsed_s": 95.3,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 31608,
+  "tokens_out": 890,
+  "tool_sequence": [
+    "read",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": false,
+      "detail": "missing 'culprit_user'"
+    }
+  ],
+  "final_answer": "Based on the log analysis, here are the key findings:\n\n**Critical Issue \u2014 DB Connection Pool Exhaustion**\n\n- **Root cause**: `batch-01` acquired all 20 connections from the `primary` pool (lines 44961\u201345884) for `reconcile-ledger`, holding them with no releases observed\n- **Impact**: At `03:17:42Z`, `api-07` logged `db pool exhausted (max=20) waiting=14 path=/v1/orders`, triggering 302 ERROR entries (lines ~46553\u201346827+) \u2014 all requests returning **503** across api-01 through api-08 on paths like `/v1/orders`, `/v1/items`, `/v1/search`, etc.\n- **Pattern**: One-off batch job (`reconcile-ledger`) monopolized the entire pool, starving API traffic\n\n**Other issues observed:**\n\n| Severity | Count | Details |\n|----------|-------|---------|\n| ERROR    | 302   | DB pool exhaustion (503s), plus TLS handshake failures |\n| WARN     | ~40+  | Cache misses (session cache not warming; `key=sess:*`) and slow requests (`/healthz`, `/v1/users`, `/v1/search`, `/v1/orders` taking 280\u2013940ms) |\n\n**Recommended actions:**\n1. Add pool connection release logs after `reconcile-ledger` completes to confirm connections are returned\n2. Isolate batch jobs in a separate DB connection pool with its own max size limit\n3. Increase pool `max` if the workload demands it, or add query timeouts so connections are automatically reclaimed\n4. Investigate TLS handshake failures between `api-02` \u2194 `10.4.2.9`",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-23T00:04:37Z"
+    }
+  ]
+}

@@ -106,11 +106,12 @@ def trials_for(spec: TaskSpec, n: int, use_task_trials: bool = True) -> int:
 
 
 def build_plan(configs: list[RunConfig], specs: list[TaskSpec], n: int, run_seed: int,
-               tasks_dir: Path, parity_fraction: float = 0.0, use_task_trials: bool = True) -> dict:
+               tasks_dir: Path, parity_fraction: float = 0.0, use_task_trials: bool = True,
+               n_for: dict[str, int] | None = None) -> dict:
     """Instrumented trials plus, per (config, task) cell, ceil(parity_fraction * trials) trials that
     bypass the proxy (talk to Ollama directly) for the instrumentation parity check (F7). A task's
     own ``trials`` field overrides ``n`` (e.g. regression-guard tasks run fewer times)."""
-    per_task = {s.id: trials_for(s, n, use_task_trials) for s in specs}
+    per_task = {s.id: (n_for or {}).get(s.id) or trials_for(s, n, use_task_trials) for s in specs}
     trials = [{"trial_id": trial_id(c.id, s.id, k, inst), "config": c.id, "task": s.id, "k": k,
                "instrumented": inst}
               for c in configs for s in specs
@@ -283,9 +284,15 @@ def run_attempt(spec: TaskSpec, cfg: RunConfig, tid: str, attempt: int, seed: in
            "XDG_STATE_HOME": str(xdg / "state"), "XDG_CACHE_HOME": str(xdg / "cache"),
            **OPENCODE_ISOLATION_ENV}
 
-    (run_dir / "tmp").mkdir(exist_ok=True)
-    env["TMPDIR"] = str(run_dir / "tmp")  # confined trials may only write below their own directory
-    confine = [run_dir, xdg] if CONFINE else None
+    # OpenCode prints $TMPDIR in the description of its first tool (bash), which the model server renders at the very
+    # start of the prompt: a per-trial temp path would make every trial's prompt differ from character ~570 on and
+    # defeat the cross-trial prefix cache (every first call cold, +28 s per trial; found in M4.2). So the temp
+    # directory is one constant path, emptied before each trial (trials run one after the other).
+    shared_tmp = scratch / "shared_tmp"
+    shutil.rmtree(shared_tmp, ignore_errors=True)
+    shared_tmp.mkdir(parents=True, exist_ok=True)
+    env["TMPDIR"] = str(shared_tmp)
+    confine = [run_dir, xdg, shared_tmp] if CONFINE else None
     if CONFINE:  # the repo's virtualenv is off limits: MCP servers started by bare name must find the system tools
         env["PATH"] = os.pathsep.join(d for d in env.get("PATH", "").split(os.pathsep) if not d.startswith(str(ROOT)))
     run = calibrate.run_opencode(spec, work, run_dir, env, cfg.model, spec.timeout_s, events,
@@ -397,13 +404,13 @@ def run_all(configs: list[RunConfig], specs: list[TaskSpec], n: int, run_seed: i
             scratch: Path, metrics: Path, max_retries: int = 2, limit: int | None = None,
             force_plan: bool = False, tasks_dir: Path = ROOT / "tasks", attempt_fn=run_attempt,
             log=print, parity_fraction: float = 0.0, use_task_trials: bool = True,
-            server_factory=None) -> dict:
+            server_factory=None, n_for: dict[str, int] | None = None) -> dict:
     """Run the pending trials of the plan. Configurations with a ``server`` section run on a private Ollama
     server that is started when their block of trials begins and stopped when it ends (``server_factory``
     builds it, default harness.server.ManagedServer; the proxy is pointed at it via upstream.txt)."""
     server_factory = server_factory or serverlib.ManagedServer
     plan = load_or_create_plan(
-        out, build_plan(configs, specs, n, run_seed, tasks_dir, parity_fraction, use_task_trials), force_plan)
+        out, build_plan(configs, specs, n, run_seed, tasks_dir, parity_fraction, use_task_trials, n_for), force_plan)
     by_cfg = {c.id: c for c in configs}
     by_task = {s.id: s for s in specs}
     if not (out / "platform.yaml").exists():
@@ -467,6 +474,8 @@ def main() -> int:
     r.add_argument("--tasks", nargs="*", help="task ids (default: all)")
     r.add_argument("--suite", nargs="*", help="only tasks in these suites (task field `suite`, e.g. core guard); "
                    "combined with --tasks by intersection")
+    r.add_argument("--n-for", nargs="*", default=[], metavar="TASK=N",
+                   help="number of trials for single tasks, overriding --n and the task's own `trials` (e.g. longctx_06_tidal_report=3)")
     r.add_argument("--ignore-task-trials", action="store_true",
                    help="use --n for every task, ignoring per-task `trials` (e.g. for a uniform baseline)")
     r.add_argument("--n", type=int, default=10)
@@ -514,10 +523,17 @@ def main() -> int:
         print("no tasks selected", file=sys.stderr)
         return 2
     configs = [load_config(p) for p in a.configs]
+    n_for = {}
+    for item in a.n_for:
+        name, _, num = item.partition("=")
+        if name not in {s.id for s in specs} or not num.isdigit() or int(num) < 1:
+            print(f"--n-for: bad entry {item!r} (expected TASK=N for a selected task)", file=sys.stderr)
+            return 2
+        n_for[name] = int(num)
     metrics = (a.proxy_data or a.out / "proxy") / "metrics.jsonl"
     if a.dry_run:
         plan = build_plan(configs, specs, a.n, a.seed, ROOT / "tasks", a.parity_fraction,
-                          not a.ignore_task_trials)
+                          not a.ignore_task_trials, n_for)
         for item in plan["order"]:
             print(item["trial_id"])
         print("trials per task: " + ", ".join(f"{t}={k}" for t, k in plan["trials_per_task"].items()))
@@ -542,7 +558,7 @@ def main() -> int:
         CONFINE = not a.no_confine
         run_all(configs, specs, a.n, a.seed, a.out, a.scratch, metrics, a.max_retries,
                 a.limit, a.force_plan, parity_fraction=a.parity_fraction,
-                use_task_trials=not a.ignore_task_trials)
+                use_task_trials=not a.ignore_task_trials, n_for=n_for)
     except PlanMismatchError as e:
         print(e, file=sys.stderr)
         return 2

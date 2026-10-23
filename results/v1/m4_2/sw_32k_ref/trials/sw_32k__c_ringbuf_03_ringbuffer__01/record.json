@@ -1,0 +1,66 @@
+{
+  "trial_id": "sw_32k__c_ringbuf_03_ringbuffer__01",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__bugfix_01_moving_average__04",
+  "prev_task": "bugfix_01_moving_average",
+  "seed": 10428335,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T02:49:22Z",
+  "wall_start": 1792723762.7276142,
+  "wall_end": 1792724291.1922657,
+  "elapsed_s": 528.5,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 14,
+  "tokens_in": 156538,
+  "tokens_out": 11533,
+  "tool_sequence": [
+    "read",
+    "glob",
+    "read",
+    "write",
+    "write",
+    "write",
+    "bash",
+    "write",
+    "bash",
+    "bash",
+    "edit",
+    "write",
+    "read",
+    "bash"
+  ],
+  "tool_errors": 1,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All tests passed. The implementation is complete with:\n\n- `ringbuf.c` - full implementation in a single file with opaque struct\n- Wrapping writes/reads at buffer boundaries\n- Partial writes when data exceeds free space\n- Safe NULL handling throughout\n\nCompiled cleanly with `gcc -std=c11 -Wall -Werror ringbuf.c test.c -o test`.",
+  "files": [
+    "ringbuf.c",
+    "test.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T02:49:22Z"
+    }
+  ]
+}

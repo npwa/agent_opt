@@ -1,0 +1,51 @@
+{
+  "trial_id": "sw_32k__longctx_11_harbor_report__01",
+  "task": "longctx_11_harbor_report",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__comms_12_timezone_slot__03",
+  "prev_task": "comms_12_timezone_slot",
+  "seed": 842103244,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T04:44:31Z",
+  "wall_start": 1792730671.9580882,
+  "wall_end": 1792730797.5434315,
+  "elapsed_s": 125.6,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 52759,
+  "tokens_out": 1059,
+  "tool_sequence": [
+    "read",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Now I have all the information from the report including Appendix A corrections. Let me compute the answers:\n\n**(1) Total FY2025 throughput:** Alder Point 318 + Brightwater 276 + Cormorant Quay 354 + Dunmore 197 + East Spit 262 + Fennick **441 (corrected from 412)** + Garrow Bay 289 + Holloway 231 + Ironbridge 305 = **2,673 kTEU**\n\n**(2) Highest incident rate per 100 kTEU:**\n- Alder Point: 9/318\u00d7100 = 2.83\n- Brightwater: 14/276\u00d7100 = 5.07\n- Cormorant Quay: 12/354\u00d7100 = 3.39\n- Dunmore: 11/197\u00d7100 = 5.58\n- East Spit: 7/262\u00d7100 = 2.67\n- Fennick: 13/441\u00d7100 = 2.95\n- Garrow Bay: **31/289\u00d7100 = 10.73 (corrected from 14)**\n- Holloway: 10/231\u00d7100 = 4.33\n- Ironbridge: 11/305\u00d7100 = 3.61\n\n**Garrow Bay at 10.73 per 100 kTEU**\n\n**(3) Total unplanned downtime FY2024 vs FY2025:**\nFY2024: 88+120+95+150+64+110+130+99+141 = 997 hours\nFY2025: 82+133+101+138+70+95+124+120+**160 (corrected)** = 1,023 hours\nChange: (1023-997)/997\u00d7100 = **+2.6%**\n\n**(4) Green Berth qualifiers:** All three conditions: incident rate < 4.0 per 100 kTEU, downtime < 140 hours, throughput \u2265 250 kTEU.\n\n- Alder Point: 2.83 \u2713, 82 \u2713, 318 \u2713 \u2192 **qualifies**\n- Brightwater: 5.07 \u2717 \u2192 no\n- Cormorant Quay: 3.39 \u2713, 101 \u2713, 354 \u2713 \u2192 **qualifies**\n- Dunmore: 5.58 \u2717 \u2192 no (also throughput 197 < 250)\n- East Spit: 2.67 \u2713, 70 \u2713, 262 \u2713 \u2192 **qualifies**\n- Fennick: 2.95 \u2713, 95 \u2713, 441 \u2713 \u2192 **qualifies**\n- Garrow Bay: 10.73 \u2717 \u2192 no\n- Holloway: 4.33 \u2717 \u2192 no (also downtime 120 < 140 \u2713 but incident rate fails)\n- Ironbridge: 3.61 \u2713, **160 \u2717**, 305 \u2713 \u2192 no\n\n**Alder Point, Cormorant Quay, East Spit, Fennick**\n\n1. 2,673 kTEU\n2. Garrow Bay, 10.73\n3. +2.6%\n4. Alder Point, Cormorant Quay, East Spit, Fennick\n5. Board of Directors, 21 November 2025\n6. 1 April 2026",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T04:44:31Z"
+    }
+  ]
+}

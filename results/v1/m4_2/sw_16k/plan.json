@@ -1,0 +1,1173 @@
+{
+  "created_utc": "2026-10-22T21:39:38Z",
+  "run_seed": 1,
+  "n": 10,
+  "parity_fraction": 0.0,
+  "trials_per_task": {
+    "bugfix_01_moving_average": 10,
+    "bugfix_09_booking_slots": 10,
+    "c_ringbuf_03_ringbuffer": 10,
+    "coding_01_my_sqrt_review": 10,
+    "coding_02_fizzbuzz_gen": 10,
+    "coding_03_compress_gen": 10,
+    "coding_04_dir_stats_gen": 10,
+    "coding_05_scientific_lan": 10,
+    "coding_06_tax_rates_lan": 10,
+    "coding_10_wcx_constrained": 10,
+    "comms_07_confirm_send": 10,
+    "comms_12_timezone_slot": 10,
+    "logtriage_04_pool_exhaustion": 10,
+    "longctx_06_tidal_report": 3,
+    "longctx_11_harbor_report": 3,
+    "refactor_02_rename_price": 10,
+    "repoqa_05_retry_policy": 10,
+    "research_08e_free_will": 3
+  },
+  "configs": {
+    "sw_16k": {
+      "id": "sw_16k",
+      "model": "ollama/qwen3.6-16k",
+      "description": "context 16384, otherwise as sw_32k",
+      "seed_mode": "per_trial",
+      "options": {},
+      "server": {
+        "num_ctx": 16384
+      }
+    }
+  },
+  "tasks": {
+    "bugfix_01_moving_average": "6bf7937511c3",
+    "bugfix_09_booking_slots": "08ccab1fdffa",
+    "c_ringbuf_03_ringbuffer": "ab1cfbac8d0c",
+    "coding_01_my_sqrt_review": "cdb71d8a5953",
+    "coding_02_fizzbuzz_gen": "518590ba1bd6",
+    "coding_03_compress_gen": "9d03ea0a9236",
+    "coding_04_dir_stats_gen": "0d68888c5233",
+    "coding_05_scientific_lan": "adf6f2792260",
+    "coding_06_tax_rates_lan": "7d1c4ebf3406",
+    "coding_10_wcx_constrained": "cfe72a61ec04",
+    "comms_07_confirm_send": "9da7f2d319ca",
+    "comms_12_timezone_slot": "bc564241ad76",
+    "logtriage_04_pool_exhaustion": "a7ee2193c9be",
+    "longctx_06_tidal_report": "ce819aa5118c",
+    "longctx_11_harbor_report": "b0852b928a58",
+    "refactor_02_rename_price": "410b4bbf373e",
+    "repoqa_05_retry_policy": "790e1276cd56",
+    "research_08e_free_will": "5645c5453b04"
+  },
+  "order": [
+    {
+      "trial_id": "sw_16k__comms_12_timezone_slot__07",
+      "config": "sw_16k",
+      "task": "comms_12_timezone_slot",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_05_scientific_lan__06",
+      "config": "sw_16k",
+      "task": "coding_05_scientific_lan",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__comms_12_timezone_slot__09",
+      "config": "sw_16k",
+      "task": "comms_12_timezone_slot",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__refactor_02_rename_price__05",
+      "config": "sw_16k",
+      "task": "refactor_02_rename_price",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_06_tax_rates_lan__07",
+      "config": "sw_16k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__bugfix_01_moving_average__09",
+      "config": "sw_16k",
+      "task": "bugfix_01_moving_average",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__longctx_11_harbor_report__02",
+      "config": "sw_16k",
+      "task": "longctx_11_harbor_report",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__comms_12_timezone_slot__03",
+      "config": "sw_16k",
+      "task": "comms_12_timezone_slot",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_05_scientific_lan__08",
+      "config": "sw_16k",
+      "task": "coding_05_scientific_lan",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__bugfix_09_booking_slots__08",
+      "config": "sw_16k",
+      "task": "bugfix_09_booking_slots",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_10_wcx_constrained__00",
+      "config": "sw_16k",
+      "task": "coding_10_wcx_constrained",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_02_fizzbuzz_gen__01",
+      "config": "sw_16k",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_02_fizzbuzz_gen__00",
+      "config": "sw_16k",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__bugfix_01_moving_average__01",
+      "config": "sw_16k",
+      "task": "bugfix_01_moving_average",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__longctx_06_tidal_report__01",
+      "config": "sw_16k",
+      "task": "longctx_06_tidal_report",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__research_08e_free_will__00",
+      "config": "sw_16k",
+      "task": "research_08e_free_will",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_04_dir_stats_gen__09",
+      "config": "sw_16k",
+      "task": "coding_04_dir_stats_gen",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__longctx_06_tidal_report__00",
+      "config": "sw_16k",
+      "task": "longctx_06_tidal_report",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__comms_07_confirm_send__01",
+      "config": "sw_16k",
+      "task": "comms_07_confirm_send",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_03_compress_gen__07",
+      "config": "sw_16k",
+      "task": "coding_03_compress_gen",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__bugfix_09_booking_slots__00",
+      "config": "sw_16k",
+      "task": "bugfix_09_booking_slots",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_04_dir_stats_gen__07",
+      "config": "sw_16k",
+      "task": "coding_04_dir_stats_gen",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__bugfix_09_booking_slots__09",
+      "config": "sw_16k",
+      "task": "bugfix_09_booking_slots",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_02_fizzbuzz_gen__03",
+      "config": "sw_16k",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_02_fizzbuzz_gen__08",
+      "config": "sw_16k",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__repoqa_05_retry_policy__01",
+      "config": "sw_16k",
+      "task": "repoqa_05_retry_policy",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__logtriage_04_pool_exhaustion__01",
+      "config": "sw_16k",
+      "task": "logtriage_04_pool_exhaustion",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_02_fizzbuzz_gen__05",
+      "config": "sw_16k",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__refactor_02_rename_price__08",
+      "config": "sw_16k",
+      "task": "refactor_02_rename_price",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_06_tax_rates_lan__08",
+      "config": "sw_16k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__repoqa_05_retry_policy__06",
+      "config": "sw_16k",
+      "task": "repoqa_05_retry_policy",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__refactor_02_rename_price__03",
+      "config": "sw_16k",
+      "task": "refactor_02_rename_price",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_05_scientific_lan__03",
+      "config": "sw_16k",
+      "task": "coding_05_scientific_lan",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_03_compress_gen__09",
+      "config": "sw_16k",
+      "task": "coding_03_compress_gen",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__comms_12_timezone_slot__01",
+      "config": "sw_16k",
+      "task": "comms_12_timezone_slot",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__repoqa_05_retry_policy__08",
+      "config": "sw_16k",
+      "task": "repoqa_05_retry_policy",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__refactor_02_rename_price__06",
+      "config": "sw_16k",
+      "task": "refactor_02_rename_price",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__c_ringbuf_03_ringbuffer__07",
+      "config": "sw_16k",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_05_scientific_lan__07",
+      "config": "sw_16k",
+      "task": "coding_05_scientific_lan",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_06_tax_rates_lan__03",
+      "config": "sw_16k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_01_my_sqrt_review__03",
+      "config": "sw_16k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__bugfix_01_moving_average__08",
+      "config": "sw_16k",
+      "task": "bugfix_01_moving_average",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__logtriage_04_pool_exhaustion__02",
+      "config": "sw_16k",
+      "task": "logtriage_04_pool_exhaustion",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_10_wcx_constrained__08",
+      "config": "sw_16k",
+      "task": "coding_10_wcx_constrained",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_06_tax_rates_lan__09",
+      "config": "sw_16k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__repoqa_05_retry_policy__05",
+      "config": "sw_16k",
+      "task": "repoqa_05_retry_policy",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_05_scientific_lan__09",
+      "config": "sw_16k",
+      "task": "coding_05_scientific_lan",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__comms_07_confirm_send__05",
+      "config": "sw_16k",
+      "task": "comms_07_confirm_send",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__bugfix_09_booking_slots__07",
+      "config": "sw_16k",
+      "task": "bugfix_09_booking_slots",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_10_wcx_constrained__04",
+      "config": "sw_16k",
+      "task": "coding_10_wcx_constrained",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_03_compress_gen__02",
+      "config": "sw_16k",
+      "task": "coding_03_compress_gen",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_10_wcx_constrained__06",
+      "config": "sw_16k",
+      "task": "coding_10_wcx_constrained",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_06_tax_rates_lan__04",
+      "config": "sw_16k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_01_my_sqrt_review__02",
+      "config": "sw_16k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__c_ringbuf_03_ringbuffer__05",
+      "config": "sw_16k",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__bugfix_09_booking_slots__04",
+      "config": "sw_16k",
+      "task": "bugfix_09_booking_slots",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_01_my_sqrt_review__05",
+      "config": "sw_16k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__longctx_06_tidal_report__02",
+      "config": "sw_16k",
+      "task": "longctx_06_tidal_report",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__research_08e_free_will__02",
+      "config": "sw_16k",
+      "task": "research_08e_free_will",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__logtriage_04_pool_exhaustion__08",
+      "config": "sw_16k",
+      "task": "logtriage_04_pool_exhaustion",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_02_fizzbuzz_gen__09",
+      "config": "sw_16k",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__refactor_02_rename_price__07",
+      "config": "sw_16k",
+      "task": "refactor_02_rename_price",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_05_scientific_lan__02",
+      "config": "sw_16k",
+      "task": "coding_05_scientific_lan",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__logtriage_04_pool_exhaustion__03",
+      "config": "sw_16k",
+      "task": "logtriage_04_pool_exhaustion",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_10_wcx_constrained__03",
+      "config": "sw_16k",
+      "task": "coding_10_wcx_constrained",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__comms_07_confirm_send__03",
+      "config": "sw_16k",
+      "task": "comms_07_confirm_send",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__c_ringbuf_03_ringbuffer__01",
+      "config": "sw_16k",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_05_scientific_lan__04",
+      "config": "sw_16k",
+      "task": "coding_05_scientific_lan",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_01_my_sqrt_review__09",
+      "config": "sw_16k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__refactor_02_rename_price__00",
+      "config": "sw_16k",
+      "task": "refactor_02_rename_price",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_04_dir_stats_gen__00",
+      "config": "sw_16k",
+      "task": "coding_04_dir_stats_gen",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__bugfix_01_moving_average__03",
+      "config": "sw_16k",
+      "task": "bugfix_01_moving_average",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_04_dir_stats_gen__02",
+      "config": "sw_16k",
+      "task": "coding_04_dir_stats_gen",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__refactor_02_rename_price__02",
+      "config": "sw_16k",
+      "task": "refactor_02_rename_price",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__comms_07_confirm_send__04",
+      "config": "sw_16k",
+      "task": "comms_07_confirm_send",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_04_dir_stats_gen__06",
+      "config": "sw_16k",
+      "task": "coding_04_dir_stats_gen",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__c_ringbuf_03_ringbuffer__00",
+      "config": "sw_16k",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__bugfix_09_booking_slots__03",
+      "config": "sw_16k",
+      "task": "bugfix_09_booking_slots",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__repoqa_05_retry_policy__09",
+      "config": "sw_16k",
+      "task": "repoqa_05_retry_policy",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__logtriage_04_pool_exhaustion__09",
+      "config": "sw_16k",
+      "task": "logtriage_04_pool_exhaustion",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__bugfix_09_booking_slots__01",
+      "config": "sw_16k",
+      "task": "bugfix_09_booking_slots",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_02_fizzbuzz_gen__07",
+      "config": "sw_16k",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__logtriage_04_pool_exhaustion__07",
+      "config": "sw_16k",
+      "task": "logtriage_04_pool_exhaustion",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_02_fizzbuzz_gen__06",
+      "config": "sw_16k",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__c_ringbuf_03_ringbuffer__02",
+      "config": "sw_16k",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__research_08e_free_will__01",
+      "config": "sw_16k",
+      "task": "research_08e_free_will",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__comms_12_timezone_slot__06",
+      "config": "sw_16k",
+      "task": "comms_12_timezone_slot",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_03_compress_gen__01",
+      "config": "sw_16k",
+      "task": "coding_03_compress_gen",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_01_my_sqrt_review__01",
+      "config": "sw_16k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_04_dir_stats_gen__01",
+      "config": "sw_16k",
+      "task": "coding_04_dir_stats_gen",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__bugfix_01_moving_average__04",
+      "config": "sw_16k",
+      "task": "bugfix_01_moving_average",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__comms_07_confirm_send__06",
+      "config": "sw_16k",
+      "task": "comms_07_confirm_send",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_03_compress_gen__00",
+      "config": "sw_16k",
+      "task": "coding_03_compress_gen",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__comms_07_confirm_send__00",
+      "config": "sw_16k",
+      "task": "comms_07_confirm_send",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_04_dir_stats_gen__03",
+      "config": "sw_16k",
+      "task": "coding_04_dir_stats_gen",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_05_scientific_lan__05",
+      "config": "sw_16k",
+      "task": "coding_05_scientific_lan",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_01_my_sqrt_review__06",
+      "config": "sw_16k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_01_my_sqrt_review__08",
+      "config": "sw_16k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__repoqa_05_retry_policy__02",
+      "config": "sw_16k",
+      "task": "repoqa_05_retry_policy",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_06_tax_rates_lan__05",
+      "config": "sw_16k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__comms_07_confirm_send__02",
+      "config": "sw_16k",
+      "task": "comms_07_confirm_send",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_03_compress_gen__04",
+      "config": "sw_16k",
+      "task": "coding_03_compress_gen",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_04_dir_stats_gen__04",
+      "config": "sw_16k",
+      "task": "coding_04_dir_stats_gen",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_10_wcx_constrained__01",
+      "config": "sw_16k",
+      "task": "coding_10_wcx_constrained",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__comms_07_confirm_send__09",
+      "config": "sw_16k",
+      "task": "comms_07_confirm_send",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_02_fizzbuzz_gen__02",
+      "config": "sw_16k",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_10_wcx_constrained__05",
+      "config": "sw_16k",
+      "task": "coding_10_wcx_constrained",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__bugfix_09_booking_slots__05",
+      "config": "sw_16k",
+      "task": "bugfix_09_booking_slots",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__comms_12_timezone_slot__08",
+      "config": "sw_16k",
+      "task": "comms_12_timezone_slot",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_10_wcx_constrained__02",
+      "config": "sw_16k",
+      "task": "coding_10_wcx_constrained",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_06_tax_rates_lan__00",
+      "config": "sw_16k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__c_ringbuf_03_ringbuffer__03",
+      "config": "sw_16k",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__bugfix_09_booking_slots__02",
+      "config": "sw_16k",
+      "task": "bugfix_09_booking_slots",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_06_tax_rates_lan__02",
+      "config": "sw_16k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_05_scientific_lan__01",
+      "config": "sw_16k",
+      "task": "coding_05_scientific_lan",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__comms_07_confirm_send__07",
+      "config": "sw_16k",
+      "task": "comms_07_confirm_send",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__repoqa_05_retry_policy__03",
+      "config": "sw_16k",
+      "task": "repoqa_05_retry_policy",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__longctx_11_harbor_report__01",
+      "config": "sw_16k",
+      "task": "longctx_11_harbor_report",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_01_my_sqrt_review__07",
+      "config": "sw_16k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__refactor_02_rename_price__04",
+      "config": "sw_16k",
+      "task": "refactor_02_rename_price",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__longctx_11_harbor_report__00",
+      "config": "sw_16k",
+      "task": "longctx_11_harbor_report",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__c_ringbuf_03_ringbuffer__08",
+      "config": "sw_16k",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_06_tax_rates_lan__06",
+      "config": "sw_16k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__logtriage_04_pool_exhaustion__05",
+      "config": "sw_16k",
+      "task": "logtriage_04_pool_exhaustion",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_02_fizzbuzz_gen__04",
+      "config": "sw_16k",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__c_ringbuf_03_ringbuffer__09",
+      "config": "sw_16k",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_05_scientific_lan__00",
+      "config": "sw_16k",
+      "task": "coding_05_scientific_lan",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__repoqa_05_retry_policy__07",
+      "config": "sw_16k",
+      "task": "repoqa_05_retry_policy",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__comms_12_timezone_slot__02",
+      "config": "sw_16k",
+      "task": "comms_12_timezone_slot",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_03_compress_gen__06",
+      "config": "sw_16k",
+      "task": "coding_03_compress_gen",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__refactor_02_rename_price__01",
+      "config": "sw_16k",
+      "task": "refactor_02_rename_price",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__comms_07_confirm_send__08",
+      "config": "sw_16k",
+      "task": "comms_07_confirm_send",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_03_compress_gen__05",
+      "config": "sw_16k",
+      "task": "coding_03_compress_gen",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__repoqa_05_retry_policy__04",
+      "config": "sw_16k",
+      "task": "repoqa_05_retry_policy",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__bugfix_01_moving_average__02",
+      "config": "sw_16k",
+      "task": "bugfix_01_moving_average",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__bugfix_01_moving_average__06",
+      "config": "sw_16k",
+      "task": "bugfix_01_moving_average",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__bugfix_01_moving_average__05",
+      "config": "sw_16k",
+      "task": "bugfix_01_moving_average",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__repoqa_05_retry_policy__00",
+      "config": "sw_16k",
+      "task": "repoqa_05_retry_policy",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_06_tax_rates_lan__01",
+      "config": "sw_16k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__c_ringbuf_03_ringbuffer__06",
+      "config": "sw_16k",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_03_compress_gen__08",
+      "config": "sw_16k",
+      "task": "coding_03_compress_gen",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_04_dir_stats_gen__08",
+      "config": "sw_16k",
+      "task": "coding_04_dir_stats_gen",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__comms_12_timezone_slot__04",
+      "config": "sw_16k",
+      "task": "comms_12_timezone_slot",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__bugfix_01_moving_average__00",
+      "config": "sw_16k",
+      "task": "bugfix_01_moving_average",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__comms_12_timezone_slot__00",
+      "config": "sw_16k",
+      "task": "comms_12_timezone_slot",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_10_wcx_constrained__09",
+      "config": "sw_16k",
+      "task": "coding_10_wcx_constrained",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__bugfix_01_moving_average__07",
+      "config": "sw_16k",
+      "task": "bugfix_01_moving_average",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__logtriage_04_pool_exhaustion__04",
+      "config": "sw_16k",
+      "task": "logtriage_04_pool_exhaustion",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__c_ringbuf_03_ringbuffer__04",
+      "config": "sw_16k",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_03_compress_gen__03",
+      "config": "sw_16k",
+      "task": "coding_03_compress_gen",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_10_wcx_constrained__07",
+      "config": "sw_16k",
+      "task": "coding_10_wcx_constrained",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__logtriage_04_pool_exhaustion__00",
+      "config": "sw_16k",
+      "task": "logtriage_04_pool_exhaustion",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__comms_12_timezone_slot__05",
+      "config": "sw_16k",
+      "task": "comms_12_timezone_slot",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__logtriage_04_pool_exhaustion__06",
+      "config": "sw_16k",
+      "task": "logtriage_04_pool_exhaustion",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_01_my_sqrt_review__00",
+      "config": "sw_16k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_04_dir_stats_gen__05",
+      "config": "sw_16k",
+      "task": "coding_04_dir_stats_gen",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__bugfix_09_booking_slots__06",
+      "config": "sw_16k",
+      "task": "bugfix_09_booking_slots",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__refactor_02_rename_price__09",
+      "config": "sw_16k",
+      "task": "refactor_02_rename_price",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_16k__coding_01_my_sqrt_review__04",
+      "config": "sw_16k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 4,
+      "instrumented": true
+    }
+  ]
+}

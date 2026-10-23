@@ -1,0 +1,54 @@
+{
+  "trial_id": "sw_16k__coding_10_wcx_constrained__03",
+  "task": "coding_10_wcx_constrained",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 3,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__logtriage_04_pool_exhaustion__03",
+  "prev_task": "logtriage_04_pool_exhaustion",
+  "seed": 2005325360,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T23:33:19Z",
+  "wall_start": 1792711999.9537098,
+  "wall_end": 1792712353.1157746,
+  "elapsed_s": 353.2,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 31100,
+  "tokens_out": 10699,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "write"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": false,
+      "detail": "compile failed: wcx.c: In function \u2018main\u2019:\nwcx.c:39:33: error: \u2018was_newline\u2019 undeclared (first use in this function)\n   39 |         } else if (was_space && was_newline) {\n      |                                 ^~~~~~~~~~~\nwcx.c:39:33: note: each undeclared identifier is reported only once for each function it app"
+    }
+  ],
+  "final_answer": "<|mask_end|>",
+  "files": [
+    "wcx.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T23:33:19Z"
+    }
+  ]
+}

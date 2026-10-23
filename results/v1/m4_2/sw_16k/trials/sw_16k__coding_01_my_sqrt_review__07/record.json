@@ -1,0 +1,50 @@
+{
+  "trial_id": "sw_16k__coding_01_my_sqrt_review__07",
+  "task": "coding_01_my_sqrt_review",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 7,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__longctx_11_harbor_report__01",
+  "prev_task": "longctx_11_harbor_report",
+  "seed": 236293734,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T01:15:37Z",
+  "wall_start": 1792718137.0784817,
+  "wall_end": 1792718182.0560439,
+  "elapsed_s": 45.0,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 2,
+  "tokens_in": 15127,
+  "tokens_out": 379,
+  "tool_sequence": [
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": false,
+      "detail": "missing 'negative_input'; missing 'tolerance_not_scaled'"
+    }
+  ],
+  "final_answer": "The function `sqrt_iterative` in `my_sqrt.c:3` has correctness issues:\n\n1. **Convergence check is too strict**: The condition at line 10 (`> 0.00001 || < -0.00001`) can cause infinite loops near zero-crossings. The difference between consecutive iterations isn't checked, only `result * result - number`.\n\n2. **No bound on iterations**: Could potentially infinite-loop for certain inputs before converging.\n\n3. **Uses fixed threshold (`0.00001`)**: Inconsistent precision across different magnitudes of input values. For very large numbers this is too coarse; for small positive numbers it may never converge.\n\n4. **Initial guess `result = number` at line 7**: Works numerically (unlike some implementations), so this is not a bug but worth noting.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-23T01:15:37Z"
+    }
+  ]
+}

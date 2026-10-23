@@ -246,6 +246,7 @@ state = pathlib.Path(os.environ["FAKE_OC_STATE"])
 n = int(state.read_text()) if state.exists() else 0
 state.write_text(str(n + 1))
 pathlib.Path(str(state) + ".env").write_text(os.environ.get("OPENCODE_DISABLE_CLAUDE_CODE", "unset"))
+pathlib.Path(str(state) + ".tmpdir").write_text(os.environ.get("TMPDIR", "unset"))
 def ev(t, **part):
     print(json.dumps({{"type": t, "sessionID": "ses_fake", "part": part}}), flush=True)
 if mode == "crash" or (mode == "crash_then_ok" and n == 0):
@@ -379,3 +380,30 @@ def test_cli_unknown_suite_and_empty_selection(monkeypatch, capsys):
     assert code == 2 and "unknown suite" in cap.err and "core" in cap.err
     code, cap = run_cli(monkeypatch, capsys, "--suite", "guard", "--tasks", "coding_02_fizzbuzz_gen")
     assert code == 2 and "no tasks selected" in cap.err
+
+
+def test_n_for_overrides_n_and_task_trials(tmp_path):
+    sp = specs(FIZZ, SQRT)
+    plan = runner.build_plan([CFG], sp, 5, 7, ROOT / "tasks", n_for={SQRT: 2})
+    assert plan["trials_per_task"] == {FIZZ: 5, SQRT: 2} and len(plan["order"]) == 7
+    guard = [replace(s, trials=3) for s in sp]
+    plan = runner.build_plan([CFG], guard, 5, 7, ROOT / "tasks", n_for={FIZZ: 4})
+    assert plan["trials_per_task"] == {FIZZ: 4, SQRT: 3}  # n_for beats the task's own trials
+
+
+def test_cli_n_for(monkeypatch, capsys):
+    code, cap = run_cli(monkeypatch, capsys, "--tasks", FIZZ, SQRT, "--n", "4", "--n-for", f"{SQRT}=1")
+    assert code == 0 and cap.out.rstrip().endswith("5 trials") and f"{SQRT}=1" in cap.out
+    code, cap = run_cli(monkeypatch, capsys, "--tasks", FIZZ, "--n-for", f"{SQRT}=1")
+    assert code == 2 and "--n-for" in cap.err
+    code, cap = run_cli(monkeypatch, capsys, "--tasks", FIZZ, "--n-for", f"{FIZZ}=zero")
+    assert code == 2
+
+
+def test_every_trial_gets_the_same_temp_dir_so_prompts_share_their_prefix(fake_oc, tmp_path):
+    """OpenCode prints $TMPDIR in its first tool's description: a per-trial value would break the prefix cache."""
+    fake_oc("ok")
+    first = (tmp_path / "calls.tmpdir").read_text()
+    assert first == str(tmp_path / "scratch" / "shared_tmp")
+    fake_oc("ok")
+    assert (tmp_path / "calls.tmpdir").read_text() == first and "fizzbuzz" not in first and "__" not in first

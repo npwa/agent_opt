@@ -1,0 +1,59 @@
+{
+  "trial_id": "sw_16k__bugfix_09_booking_slots__00",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__coding_03_compress_gen__07",
+  "prev_task": "coding_03_compress_gen",
+  "seed": 1414516386,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T22:17:32Z",
+  "wall_start": 1792707452.7933626,
+  "wall_end": 1792707573.5774226,
+  "elapsed_s": 120.8,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 7,
+  "tokens_in": 66542,
+  "tokens_out": 2306,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "edit",
+    "edit",
+    "edit",
+    "bash",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": false,
+      "detail": "Ran 20 tests in 0.001s |  | FAILED (failures=2)"
+    }
+  ],
+  "final_answer": "All 7 tests pass. Let me verify every function against its docstring as requested:\nDone. Here's a summary of the three bugs fixed:\n\n1. **`overlaps`** (line 13): Changed `<=` to `<` so touching intervals like `(540,600)` and `(600,660)` correctly return `False`.\n\n2. **`merge_intervals`** (lines 21, 24): Changed `intervals.sort()` to `sorted(intervals)` so the argument is never modified (as docstring requires); changed `<` to `<=` on line 24 so intervals that *touch* are also merged.\n\n3. **`find_free_slots`** (lines 46-54): Added clipping of busy intervals to `[day_start, day_end]`, added the check for trailing gaps after all busy intervals end, and changed `>` to `>=` on line 50 so a gap of *exactly* `min_len` is included (per \"a gap of exactly min_len minutes is long enough\").",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T22:17:32Z"
+    }
+  ]
+}

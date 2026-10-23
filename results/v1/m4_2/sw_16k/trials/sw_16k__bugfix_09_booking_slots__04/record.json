@@ -1,0 +1,58 @@
+{
+  "trial_id": "sw_16k__bugfix_09_booking_slots__04",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 4,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__c_ringbuf_03_ringbuffer__05",
+  "prev_task": "c_ringbuf_03_ringbuffer",
+  "seed": 1201408448,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T23:19:39Z",
+  "wall_start": 1792711179.7130325,
+  "wall_end": 1792711291.1474624,
+  "elapsed_s": 111.4,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 7,
+  "tokens_in": 65423,
+  "tokens_out": 2128,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "edit",
+    "edit",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": false,
+      "detail": "Ran 20 tests in 0.001s |  | FAILED (failures=2)"
+    }
+  ],
+  "final_answer": "All 7 tests pass now. The fixes were:\n\n1. **`overlaps`**: Changed `<=` to `<` so touching intervals (e.g., `(540,600)` and `(600,660)`) are no longer treated as overlapping per the docstring.\n2. **`merge_intervals`**: Made a sorted copy instead of mutating the argument in-place (`intervals.sort()`), and changed `<` to `<=` so touching intervals are merged.\n3. **`find_free_slots`**: Added clipping of busy intervals to the day window, merging of overlapping/touching intervals, correct `>= min_len` check (not strict `>`), and a final gap check after all busy intervals end back to `day_end`.",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T23:19:39Z"
+    }
+  ]
+}

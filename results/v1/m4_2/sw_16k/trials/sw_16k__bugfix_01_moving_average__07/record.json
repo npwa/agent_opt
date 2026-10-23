@@ -1,0 +1,55 @@
+{
+  "trial_id": "sw_16k__bugfix_01_moving_average__07",
+  "task": "bugfix_01_moving_average",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 7,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__coding_10_wcx_constrained__09",
+  "prev_task": "coding_10_wcx_constrained",
+  "seed": 2102039639,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T02:11:01Z",
+  "wall_start": 1792721461.0538065,
+  "wall_end": 1792721520.2337604,
+  "elapsed_s": 59.2,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 32742,
+  "tokens_out": 660,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "edit"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "The bug is on line 9 of `stats_utils.py`. The loop uses `range(len(values) - window)` which excludes the last valid window position. It should be `range(len(values) - window + 1)`.\nFixed! The loop boundary was off by one. With `range(len(values) - window)`, the last valid window position is excluded because Python's range upper bound is exclusive. For `[1, 2, 3, 4, 5]` with window=3, it should iterate over indices 0, 1, 2 (three windows), but was only iterating over 0 and 1. Added `+ 1` to include the final valid window position.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T02:11:01Z"
+    }
+  ]
+}

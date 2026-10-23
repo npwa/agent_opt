@@ -1,0 +1,60 @@
+{
+  "trial_id": "sw_32k__logtriage_04_pool_exhaustion__04",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 4,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__comms_07_confirm_send__02",
+  "prev_task": "comms_07_confirm_send",
+  "seed": 819515409,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T05:30:21Z",
+  "wall_start": 1792733421.5298407,
+  "wall_end": 1792733549.75383,
+  "elapsed_s": 127.9,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 6,
+  "tokens_in": 84050,
+  "tokens_out": 1541,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": false,
+      "detail": "missing 'first_host'"
+    }
+  ],
+  "final_answer": "Now let me confirm there were no errors before this window:\nHere are the three findings:\n\n**1) First error burst:** `2026-01-18T03:17:42Z`, hitting **all hosts simultaneously** (api-01 through api-08). The single non-outage ERROR at `02:41:07Z` (`TLS handshake failed`) is a one-off unrelated noise event.\n\n**2) Root cause:** Database connection pool exhaustion \u2014 the pool maxed out at 20 connections and no new ones were available, so all API hosts started returning **503 \"db pool exhausted\"** errors across api-01 through api-08 within seconds of each other (the burst lasted roughly 40+ seconds with ~789 error lines).\n\n**3) Responsible process:** The **`reconcile-ledger` batch job on `batch-01`**, running under user **`svc-batch`**. At `03:15:03Z` it started, then acquired connections 1/20 through 20/20 from the shared `primary` pool in rapid succession (one every ~5 seconds). It held all 20 connections until `03:41:30Z` when it finally finished (rows=48,210,112) and released them. During that ~26-hour hold of the entire connection pool, no API requests could get a database connection, causing the outage.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-23T05:30:21Z"
+    }
+  ]
+}

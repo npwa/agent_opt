@@ -1,0 +1,55 @@
+{
+  "trial_id": "sw_16k__logtriage_04_pool_exhaustion__01",
+  "task": "logtriage_04_pool_exhaustion",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__repoqa_05_retry_policy__01",
+  "prev_task": "repoqa_05_retry_policy",
+  "seed": 2067142537,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T22:27:53Z",
+  "wall_start": 1792708073.993808,
+  "wall_end": 1792708187.516805,
+  "elapsed_s": 113.2,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 46336,
+  "tokens_out": 940,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": false,
+      "detail": "missing 'first_host'; missing 'culprit_job'; missing 'culprit_user'"
+    }
+  ],
+  "final_answer": "302 ERROR lines found. Timeline of issues:\n\n- **24502**: `2026-01-18T02:41:07Z` - TLS handshake failed on api-02 (peer reset, client=10.4.2.9)\n- **46553**: `2026-01-18T03:17:42Z` - First `db pool exhausted (max=20)` error, with 14 waiting on path=/v1/orders\n- **~lines 46566-46917**: Cascading 503 errors across api-01 through api-08 (`upstream=db pool exhausted`) spanning ~03:17:43Z to ~03:18:08Z\n\nAll warnings (line 272+) are `slow request` alerts before the incident window, and `cache miss` warnings after.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-22T22:27:53Z"
+    }
+  ]
+}

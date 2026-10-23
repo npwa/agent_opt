@@ -1,0 +1,57 @@
+{
+  "trial_id": "sw_32k__bugfix_01_moving_average__01",
+  "task": "bugfix_01_moving_average",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__coding_02_fizzbuzz_gen__03",
+  "prev_task": "coding_02_fizzbuzz_gen",
+  "seed": 2134663703,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T05:52:14Z",
+  "wall_start": 1792734734.9563076,
+  "wall_end": 1792734766.0343397,
+  "elapsed_s": 31.1,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 6,
+  "tokens_in": 49875,
+  "tokens_out": 521,
+  "tool_sequence": [
+    "read",
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 5 tests pass. The bug was on line 9 of `stats_utils.py`: the loop used `range(len(values) - window)` which excluded the final window position. Adding `+ 1` to the range ensures the last window is included.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T05:52:14Z"
+    }
+  ]
+}

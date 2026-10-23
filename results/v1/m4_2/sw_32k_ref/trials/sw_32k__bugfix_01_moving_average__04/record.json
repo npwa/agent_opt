@@ -1,0 +1,56 @@
+{
+  "trial_id": "sw_32k__bugfix_01_moving_average__04",
+  "task": "bugfix_01_moving_average",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 4,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__longctx_11_harbor_report__02",
+  "prev_task": "longctx_11_harbor_report",
+  "seed": 147554503,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T02:48:20Z",
+  "wall_start": 1792723700.6604536,
+  "wall_end": 1792723762.6416535,
+  "elapsed_s": 62.0,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 33007,
+  "tokens_out": 702,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "read",
+    "edit"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "The bug is on line 9 of `stats_utils.py`: the loop uses `range(len(values) - window)` which excludes the last window. It should be `range(len(values) - window + 1)` to include it.\nIt will return `[]` \u2014 no exception is raised, it just produces an empty list because `len(values) - window + 1` is $\\leq 0$, so the range is empty and the loop never executes.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T02:48:20Z"
+    }
+  ]
+}

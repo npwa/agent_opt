@@ -1,0 +1,54 @@
+{
+  "trial_id": "sw_32k__coding_10_wcx_constrained__01",
+  "task": "coding_10_wcx_constrained",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__bugfix_01_moving_average__02",
+  "prev_task": "bugfix_01_moving_average",
+  "seed": 1850732429,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T02:59:14Z",
+  "wall_start": 1792724354.9959013,
+  "wall_end": 1792724421.2237022,
+  "elapsed_s": 66.2,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 30937,
+  "tokens_out": 964,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "write"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "gcc -std=c11 -Wall -Wextra -Werror -O2 -o wcx wcx.c",
+  "files": [
+    "wcx.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T02:59:14Z"
+    }
+  ]
+}

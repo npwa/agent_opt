@@ -1,0 +1,169 @@
+{
+  "trial_id": "sw_32k__research_08e_free_will__02",
+  "task": "research_08e_free_will",
+  "config": "sw_32k",
+  "attempt": 1,
+  "status": "fail",
+  "summary": {
+    "wall_start": 1792731537.5948675,
+    "wall_end": 1792731718.7367413,
+    "wall_s": 181.14187383651733,
+    "n_steps": 3,
+    "llm_s": 176.8622,
+    "ttft_s": 140.0707,
+    "decode_s": 36.7915,
+    "tool_s": 5.954999923706055,
+    "gap_s": 2.112396001815796,
+    "idle_gap_s": 1.0615529463841367,
+    "prefill_tokens": 51824,
+    "decode_tokens": 1243,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "sw_32k__research_08e_free_will__02#a1:1",
+      "t_start": 1792731539.7621453,
+      "t_end": 1792731578.3557453,
+      "ttft_s": 31.1053,
+      "llm_s": 38.5936,
+      "decode_s": 7.488300000000002,
+      "prefill_tokens": 7668,
+      "decode_tokens": 265,
+      "prefill_tok_s": 246.52,
+      "decode_tok_s": 35.39,
+      "n_chunks": 81,
+      "first_token_skew_s": 0.0185546875,
+      "itl_p50_ms": 28.999999999996362,
+      "itl_p99_ms": 1726.1099999999992,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 2.934000015258789,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792731574.875,
+          "end": 1792731575.965,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792731576.744,
+          "end": 1792731577.364,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792731578.332,
+          "end": 1792731579.556,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792731570.886,
+      "oc_step_finish": 1792731579.584,
+      "tool_errors": 0,
+      "gap_s": 1.2474820613861084,
+      "gpu_busy_pct_llm": 83.54145077720207,
+      "gpu_power_w_llm": 129.4238341968912,
+      "gpu_samples_llm": 386,
+      "gpu_busy_pct_gap": 4.846153846153846,
+      "gpu_samples_gap": 13,
+      "idle_gap_s": 0.9596015856816219
+    },
+    {
+      "step": 2,
+      "llm_call_id": "sw_32k__research_08e_free_will__02#a1:2",
+      "t_start": 1792731579.6032274,
+      "t_end": 1792731606.7748275,
+      "ttft_s": 20.3987,
+      "llm_s": 27.1716,
+      "decode_s": 6.7729,
+      "prefill_tokens": 12978,
+      "decode_tokens": 240,
+      "prefill_tok_s": 636.22,
+      "decode_tok_s": 35.44,
+      "n_chunks": 21,
+      "first_token_skew_s": 0.009072542190551758,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 1676.020000000001,
+      "tool_names": [
+        "searxng_web_url_read",
+        "searxng_web_url_read",
+        "searxng_web_url_read",
+        "searxng_web_url_read"
+      ],
+      "tool_latency_s": 3.0209999084472656,
+      "tools": [
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792731602.017,
+          "end": 1792731602.864,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792731603.697,
+          "end": 1792731603.96,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792731605.338,
+          "end": 1792731606.791,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792731606.742,
+          "end": 1792731607.2,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792731600.011,
+      "oc_step_finish": 1792731607.212,
+      "tool_errors": 1,
+      "gap_s": 0.4571084976196289,
+      "gpu_busy_pct_llm": 78.15867158671587,
+      "gpu_power_w_llm": 130.24280442804428,
+      "gpu_samples_llm": 271,
+      "gpu_busy_pct_gap": 21.0,
+      "gpu_samples_gap": 5,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 3,
+      "llm_call_id": "sw_32k__research_08e_free_will__02#a1:3",
+      "t_start": 1792731607.231936,
+      "t_end": 1792731718.3289359,
+      "ttft_s": 88.5667,
+      "llm_s": 111.097,
+      "decode_s": 22.530299999999997,
+      "prefill_tokens": 31178,
+      "decode_tokens": 738,
+      "prefill_tok_s": 352.03,
+      "decode_tok_s": 32.76,
+      "n_chunks": 711,
+      "first_token_skew_s": 0.010364055633544922,
+      "itl_p50_ms": 30.000000000001137,
+      "itl_p99_ms": 63.90999999999377,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792731695.809,
+      "oc_step_finish": 1792731718.345,
+      "tool_errors": 0,
+      "gap_s": 0.4078054428100586,
+      "gpu_busy_pct_llm": 83.1026102610261,
+      "gpu_power_w_llm": 132.16129612961296,
+      "gpu_samples_llm": 1111,
+      "gpu_busy_pct_gap": 14.25,
+      "gpu_samples_gap": 4,
+      "idle_gap_s": 0.10195136070251465
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

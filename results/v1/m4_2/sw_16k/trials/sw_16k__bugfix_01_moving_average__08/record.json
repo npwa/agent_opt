@@ -1,0 +1,56 @@
+{
+  "trial_id": "sw_16k__bugfix_01_moving_average__08",
+  "task": "bugfix_01_moving_average",
+  "config": "sw_16k",
+  "model": "ollama/qwen3.6-16k",
+  "k": 8,
+  "instrumented": true,
+  "prev_trial_id": "sw_16k__coding_01_my_sqrt_review__03",
+  "prev_task": "coding_01_my_sqrt_review",
+  "seed": 1966005843,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-22T22:45:29Z",
+  "wall_start": 1792709129.0753832,
+  "wall_end": 1792709190.3563583,
+  "elapsed_s": 61.3,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 33737,
+  "tokens_out": 705,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Fixed the off-by-one error in `stats_utils.py:9`. The range should be `len(values) - window + 1` to include the last valid window position, not `len(values) - window` which was skipping it.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-22T22:45:29Z"
+    }
+  ]
+}
