@@ -1,0 +1,69 @@
+{
+  "trial_id": "sw_32k__c_ringbuf_03_ringbuffer__09",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 9,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_verify__coding_10_wcx_constrained__05",
+  "prev_task": "coding_10_wcx_constrained",
+  "seed": 1547857586,
+  "run_seed": 2,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T18:50:02Z",
+  "wall_start": 1792867802.6215074,
+  "wall_end": 1792868232.9868693,
+  "elapsed_s": 430.4,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 16,
+  "tokens_in": 196093,
+  "tokens_out": 11947,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "read",
+    "write",
+    "write",
+    "bash",
+    "bash",
+    "write",
+    "bash",
+    "write",
+    "bash",
+    "read",
+    "edit",
+    "edit",
+    "bash",
+    "write"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": false,
+      "detail": "FAIL line 28: rb_write(rb, (const uint8_t *)\"ghijkl\", 6) == 6\nFAIL line 29: rb_size(rb) == 8\nFAIL line 30: rb_write(rb, (const uint8_t *)\"Z\", 1) == 0\nFAIL line 31: rb_read(rb, out, 8) == 8 && memcmp(out, \"efghijkl\", 8) == 0\nFAIL line 32: rb_size(rb) == 0\nFAIL line 35: rb_write(rb, (const uint8_t *)\""
+    }
+  ],
+  "final_answer": "Let me add debug output:",
+  "files": [
+    "ringbuf.c",
+    "test_debug.c",
+    "test_rb.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-24T18:50:02Z"
+    }
+  ]
+}

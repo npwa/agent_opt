@@ -1,0 +1,60 @@
+{
+  "trial_id": "sw_32k__bugfix_09_booking_slots__04",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 4,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__coding_06_tax_rates_lan__00",
+  "prev_task": "coding_06_tax_rates_lan",
+  "seed": 1973402375,
+  "run_seed": 2,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T22:18:16Z",
+  "wall_start": 1792880296.5973814,
+  "wall_end": 1792880369.2790623,
+  "elapsed_s": 72.7,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 7,
+  "tokens_in": 63960,
+  "tokens_out": 1567,
+  "tool_sequence": [
+    "read",
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 7 tests pass. Here's what was fixed:\n\n- **`overlaps`**: Changed `<=` to `<` so touching intervals don't report as overlapping.\n- **`merge_intervals`**: Uses `<` \u2192 `<=` for the merge condition (touching intervals merge), and uses `sorted()` instead of `.sort()` to avoid mutating the input.\n- **`total_busy_minutes`**: Now merges overlapping intervals before counting, so overlapping parts aren't double-counted.\n- **`find_free_slots`**: Fixed gap comparison from `>` to `>=`, clamped intervals to `day_start`/`day_end`, and added trailing gap check after the loop.",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T22:18:16Z"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "trial_id": "sw_32k_verify__c_ringbuf_03_ringbuffer__07",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_32k_verify",
+  "model": "ollama/qwen3.6-32k",
+  "k": 7,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__bugfix_09_booking_slots__02",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 1394866586,
+  "run_seed": 2,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T21:47:18Z",
+  "wall_start": 1792878438.9441478,
+  "wall_end": 1792878767.2480035,
+  "elapsed_s": 328.3,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 9,
+  "tokens_in": 79379,
+  "tokens_out": 8806,
+  "tool_sequence": [
+    "read",
+    "glob",
+    "read",
+    "write",
+    "write",
+    "bash",
+    "bash",
+    "write",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 43 tests pass. Here's a summary of what was done:\n\n**`ringbuf.c` \u2014 Implementation**\n\nThe ring buffer stores data in a fixed circular byte array with four internal members:\n- **`buf`** \u2014 the raw byte storage (allocated by `rb_create`)\n- **`capacity`** \u2014 total slots available\n- **`head`** \u2014 next write position  \n- **`tail`** \u2014 oldest data position\n- **`count`** \u2014 currently stored bytes\n\nBoth `rb_write` and `rb_read` use a two-segment copy strategy to handle wrap-around: the first segment copies from the current pointer to the end of the buffer, and the second (if needed) wraps to the beginning. Each call stores/returns the number of bytes actually written or read.\n\nKey behaviors per the spec:\n- Opaque struct \u2014 definition lives in `ringbuf.c`, not the header\n- Over-sized writes store what fits and return that count\n- `rb_destroy(NULL)` is safe (no-op)\n- Allocating with `capacity == 0` returns `NULL`\n- Wrapping around end of storage happens correctly\n\n**`test_ringbuf.c` \u2014 43 test cases cover:**\n1. Create / destroy / capacity queries\n2. NULL-input guards and empty/full edge cases\n3. Write-read round-trip\n4. **Wrap-around** (the critical path): fill partial, read some, then write across the boundary\n5. Peek without consuming\n6. Over-sized writes\n7. Multiple cycles of write-read to stress head/tail movement\n8. Clear and zero-length operations\n\nCompilation was done with `gcc -std=c11 -Wall -Werror` \u2014 no warnings at all.",
+  "files": [
+    "ringbuf.c",
+    "test_ringbuf.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T21:47:18Z"
+    }
+  ]
+}

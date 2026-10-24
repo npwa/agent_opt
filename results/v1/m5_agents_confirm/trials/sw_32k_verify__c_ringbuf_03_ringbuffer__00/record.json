@@ -1,0 +1,62 @@
+{
+  "trial_id": "sw_32k_verify__c_ringbuf_03_ringbuffer__00",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_32k_verify",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_verify__coding_06_tax_rates_lan__05",
+  "prev_task": "coding_06_tax_rates_lan",
+  "seed": 1914473198,
+  "run_seed": 2,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T22:11:29Z",
+  "wall_start": 1792879889.6964016,
+  "wall_end": 1792880090.3396423,
+  "elapsed_s": 200.6,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 9,
+  "tokens_in": 79950,
+  "tokens_out": 5558,
+  "tool_sequence": [
+    "read",
+    "read",
+    "glob",
+    "write",
+    "write",
+    "bash",
+    "edit",
+    "bash",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "30 tests pass. Here's a summary of what was done:\n\n### Files created\n\n- **`ringbuf.c`** \u2014 Full implementation of the ring buffer per `SPEC.md` and `ringbuf.h`:\n  - The struct (with `buf`, `capacity`, `head`, `tail`, `sz`) is defined in `ringbuf.c`, keeping the header's `ringbuf_t` opaque.\n  - **Wrap-around**: Both `rb_write` and `rb_read` use modulo (`% capacity`) on `head`/`tail` indices so reads and writes correctly wrap to the start of the buffer.\n  - **Partial write**: When a write exceeds free space, only what fits is stored and that count is returned (spec requirement).\n  - **NULL safety**: `rb_destroy(NULL)`, NULL data pointers, zero lengths, and `rb_create(0)` all handled gracefully.\n\n- **`test_ringbuf.c`** \u2014 30 test cases covering: creation/destruction, basic write/read, wrap-around write, peek vs read interleaving, partial writes (beyond free space), clear, NULL argument handling, zero-length input, and invalid capacity.\n\n### Compilation\n```\ngcc -std=c11 -Wall -Werror ringbuf.c test_ringbuf.c -o test_ringbuf\n```\nCompiles cleanly with **zero warnings**, runs with **30/30 passed**.",
+  "files": [
+    "ringbuf.c",
+    "test_ringbuf.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T22:11:29Z"
+    }
+  ]
+}

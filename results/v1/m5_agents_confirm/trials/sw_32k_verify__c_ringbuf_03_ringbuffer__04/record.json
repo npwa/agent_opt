@@ -1,0 +1,71 @@
+{
+  "trial_id": "sw_32k_verify__c_ringbuf_03_ringbuffer__04",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_32k_verify",
+  "model": "ollama/qwen3.6-32k",
+  "k": 4,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_verify__bugfix_09_booking_slots__08",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 1499243068,
+  "run_seed": 2,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T19:39:31Z",
+  "wall_start": 1792870771.0238574,
+  "wall_end": 1792871487.416536,
+  "elapsed_s": 716.4,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 18,
+  "tokens_in": 256606,
+  "tokens_out": 20435,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "read",
+    "read",
+    "todowrite",
+    "write",
+    "write",
+    "read",
+    "todowrite",
+    "write",
+    "read",
+    "write",
+    "edit",
+    "read",
+    "write",
+    "bash",
+    "read",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 4,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "",
+  "files": [
+    "ringbuf.c",
+    "test.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T19:39:31Z"
+    }
+  ]
+}

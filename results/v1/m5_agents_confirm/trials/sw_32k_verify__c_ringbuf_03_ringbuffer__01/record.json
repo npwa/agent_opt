@@ -1,0 +1,53 @@
+{
+  "trial_id": "sw_32k_verify__c_ringbuf_03_ringbuffer__01",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_32k_verify",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_verify__bugfix_09_booking_slots__04",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 799381714,
+  "run_seed": 2,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T20:05:38Z",
+  "wall_start": 1792872338.2722406,
+  "wall_end": 1792872360.9496584,
+  "elapsed_s": 22.7,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 18321,
+  "tokens_out": 404,
+  "tool_sequence": [
+    "read",
+    "glob",
+    "read",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": false,
+      "detail": "missing ['ringbuf.c']"
+    }
+  ],
+  "final_answer": "",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-24T20:05:38Z"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "trial_id": "sw_32k_verify__bugfix_09_booking_slots__06",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_32k_verify",
+  "model": "ollama/qwen3.6-32k",
+  "k": 6,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__coding_06_tax_rates_lan__01",
+  "prev_task": "coding_06_tax_rates_lan",
+  "seed": 2090140261,
+  "run_seed": 2,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T22:31:29Z",
+  "wall_start": 1792881089.5223763,
+  "wall_end": 1792881284.8152077,
+  "elapsed_s": 195.3,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 15,
+  "tokens_in": 145360,
+  "tokens_out": 4887,
+  "tool_sequence": [
+    "read",
+    "glob",
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "edit",
+    "edit",
+    "bash",
+    "bash",
+    "read",
+    "edit",
+    "edit",
+    "bash",
+    "read",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 7 tests pass. Here's a summary of the **5 bugs** I fixed in `bookings.py`:\n\n### Bugs caught by failing tests:\n\n1. **`overlaps` \u2014 wrong boundary check (`<=` should be `<`)**: The original `a[0] <= b[1] and b[0] <= a[1]` treated touching intervals `(540,600)` and `(600,660)` as overlapping. Fixed to `a[0] < b[1] and b[0] < a[1]`.\n\n2. **`merge_intervals` \u2014 doesn't merge touching intervals (`<` should be `<=`)**: The original `start < merged[-1][1]` only merged truly overlapping intervals, not touching ones. Fixed to `start <= merged[-1][1]`.\n\n3. **`find_free_slots` \u2014 no gap check after the last busy interval**: The function never checked whether there's a free gap between the final busy interval end and `day_end`. Added that check with `>=` (not `>`).\n\n### Bugs caught by docstring checks only:\n\n4. **`merge_intervals` \u2014 mutates its argument**: The original used `intervals.sort()` which modified the caller's list. Fixed to use `sorted(intervals)` which returns a new sorted copy.\n\n5. **`total_busy_minutes` \u2014 double-counts overlapping intervals**: The original `sum(end - start for ...)` counted minutes twice for overlapping intervals, but the docstring says \"a minute covered twice counts once.\" Fixed by merging overlapping intervals first and then summing.",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T22:31:29Z"
+    }
+  ]
+}

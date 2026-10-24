@@ -1,0 +1,606 @@
+{
+  "created_utc": "2026-10-24T17:53:17Z",
+  "run_seed": 2,
+  "n": 10,
+  "parity_fraction": 0.0,
+  "trials_per_task": {
+    "bugfix_09_booking_slots": 10,
+    "c_ringbuf_03_ringbuffer": 10,
+    "coding_06_tax_rates_lan": 10,
+    "coding_10_wcx_constrained": 10
+  },
+  "configs": {
+    "sw_32k": {
+      "id": "sw_32k",
+      "model": "ollama/qwen3.6-32k",
+      "description": "qwen3.6 35B-A3B, 32k context, KV f16, on a private Ollama (reference for the sweep)",
+      "seed_mode": "per_trial",
+      "options": {},
+      "server": {
+        "num_ctx": 32768
+      },
+      "agents": {}
+    },
+    "sw_32k_verify": {
+      "id": "sw_32k_verify",
+      "model": "ollama/qwen3.6-32k",
+      "description": "qwen3.6 35B-A3B, 32k context; default-agent tasks use the verification-step agent",
+      "seed_mode": "per_trial",
+      "options": {},
+      "server": {
+        "num_ctx": 32768
+      },
+      "agents": {
+        "default": "coding"
+      }
+    }
+  },
+  "tasks": {
+    "bugfix_09_booking_slots": "08ccab1fdffa",
+    "c_ringbuf_03_ringbuffer": "ab1cfbac8d0c",
+    "coding_06_tax_rates_lan": "7d1c4ebf3406",
+    "coding_10_wcx_constrained": "cfe72a61ec04"
+  },
+  "order": [
+    {
+      "trial_id": "sw_32k__bugfix_09_booking_slots__00",
+      "config": "sw_32k",
+      "task": "bugfix_09_booking_slots",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__bugfix_09_booking_slots__03",
+      "config": "sw_32k",
+      "task": "bugfix_09_booking_slots",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__coding_10_wcx_constrained__01",
+      "config": "sw_32k_verify",
+      "task": "coding_10_wcx_constrained",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__bugfix_09_booking_slots__06",
+      "config": "sw_32k",
+      "task": "bugfix_09_booking_slots",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__coding_06_tax_rates_lan__01",
+      "config": "sw_32k_verify",
+      "task": "coding_06_tax_rates_lan",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__coding_06_tax_rates_lan__06",
+      "config": "sw_32k_verify",
+      "task": "coding_06_tax_rates_lan",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__c_ringbuf_03_ringbuffer__07",
+      "config": "sw_32k",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_10_wcx_constrained__00",
+      "config": "sw_32k",
+      "task": "coding_10_wcx_constrained",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_10_wcx_constrained__08",
+      "config": "sw_32k",
+      "task": "coding_10_wcx_constrained",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__c_ringbuf_03_ringbuffer__08",
+      "config": "sw_32k",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__bugfix_09_booking_slots__09",
+      "config": "sw_32k",
+      "task": "bugfix_09_booking_slots",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_10_wcx_constrained__06",
+      "config": "sw_32k",
+      "task": "coding_10_wcx_constrained",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__c_ringbuf_03_ringbuffer__03",
+      "config": "sw_32k",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__05",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__c_ringbuf_03_ringbuffer__02",
+      "config": "sw_32k_verify",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_10_wcx_constrained__07",
+      "config": "sw_32k",
+      "task": "coding_10_wcx_constrained",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__coding_10_wcx_constrained__05",
+      "config": "sw_32k_verify",
+      "task": "coding_10_wcx_constrained",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__c_ringbuf_03_ringbuffer__09",
+      "config": "sw_32k",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__bugfix_09_booking_slots__03",
+      "config": "sw_32k_verify",
+      "task": "bugfix_09_booking_slots",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__bugfix_09_booking_slots__09",
+      "config": "sw_32k_verify",
+      "task": "bugfix_09_booking_slots",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__coding_10_wcx_constrained__09",
+      "config": "sw_32k_verify",
+      "task": "coding_10_wcx_constrained",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__c_ringbuf_03_ringbuffer__06",
+      "config": "sw_32k",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__bugfix_09_booking_slots__05",
+      "config": "sw_32k_verify",
+      "task": "bugfix_09_booking_slots",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__coding_06_tax_rates_lan__02",
+      "config": "sw_32k_verify",
+      "task": "coding_06_tax_rates_lan",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_10_wcx_constrained__01",
+      "config": "sw_32k",
+      "task": "coding_10_wcx_constrained",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__coding_10_wcx_constrained__04",
+      "config": "sw_32k_verify",
+      "task": "coding_10_wcx_constrained",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__c_ringbuf_03_ringbuffer__02",
+      "config": "sw_32k",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__coding_06_tax_rates_lan__00",
+      "config": "sw_32k_verify",
+      "task": "coding_06_tax_rates_lan",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__bugfix_09_booking_slots__05",
+      "config": "sw_32k",
+      "task": "bugfix_09_booking_slots",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__bugfix_09_booking_slots__08",
+      "config": "sw_32k_verify",
+      "task": "bugfix_09_booking_slots",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__c_ringbuf_03_ringbuffer__04",
+      "config": "sw_32k_verify",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__coding_06_tax_rates_lan__03",
+      "config": "sw_32k_verify",
+      "task": "coding_06_tax_rates_lan",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__02",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__bugfix_09_booking_slots__00",
+      "config": "sw_32k_verify",
+      "task": "bugfix_09_booking_slots",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__c_ringbuf_03_ringbuffer__03",
+      "config": "sw_32k_verify",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__06",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__08",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__bugfix_09_booking_slots__04",
+      "config": "sw_32k_verify",
+      "task": "bugfix_09_booking_slots",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__c_ringbuf_03_ringbuffer__01",
+      "config": "sw_32k_verify",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__bugfix_09_booking_slots__01",
+      "config": "sw_32k_verify",
+      "task": "bugfix_09_booking_slots",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__c_ringbuf_03_ringbuffer__08",
+      "config": "sw_32k_verify",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__bugfix_09_booking_slots__02",
+      "config": "sw_32k_verify",
+      "task": "bugfix_09_booking_slots",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__coding_10_wcx_constrained__03",
+      "config": "sw_32k_verify",
+      "task": "coding_10_wcx_constrained",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__bugfix_09_booking_slots__08",
+      "config": "sw_32k",
+      "task": "bugfix_09_booking_slots",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__coding_10_wcx_constrained__06",
+      "config": "sw_32k_verify",
+      "task": "coding_10_wcx_constrained",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__coding_06_tax_rates_lan__07",
+      "config": "sw_32k_verify",
+      "task": "coding_06_tax_rates_lan",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__coding_06_tax_rates_lan__08",
+      "config": "sw_32k_verify",
+      "task": "coding_06_tax_rates_lan",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__c_ringbuf_03_ringbuffer__09",
+      "config": "sw_32k_verify",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__c_ringbuf_03_ringbuffer__04",
+      "config": "sw_32k",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__c_ringbuf_03_ringbuffer__05",
+      "config": "sw_32k",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__coding_10_wcx_constrained__08",
+      "config": "sw_32k_verify",
+      "task": "coding_10_wcx_constrained",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_10_wcx_constrained__05",
+      "config": "sw_32k",
+      "task": "coding_10_wcx_constrained",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__coding_10_wcx_constrained__07",
+      "config": "sw_32k_verify",
+      "task": "coding_10_wcx_constrained",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_10_wcx_constrained__03",
+      "config": "sw_32k",
+      "task": "coding_10_wcx_constrained",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__coding_10_wcx_constrained__02",
+      "config": "sw_32k_verify",
+      "task": "coding_10_wcx_constrained",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__04",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__coding_10_wcx_constrained__00",
+      "config": "sw_32k_verify",
+      "task": "coding_10_wcx_constrained",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__09",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__03",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__bugfix_09_booking_slots__01",
+      "config": "sw_32k",
+      "task": "bugfix_09_booking_slots",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__coding_06_tax_rates_lan__09",
+      "config": "sw_32k_verify",
+      "task": "coding_06_tax_rates_lan",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__bugfix_09_booking_slots__02",
+      "config": "sw_32k",
+      "task": "bugfix_09_booking_slots",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__c_ringbuf_03_ringbuffer__07",
+      "config": "sw_32k_verify",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_10_wcx_constrained__04",
+      "config": "sw_32k",
+      "task": "coding_10_wcx_constrained",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__coding_06_tax_rates_lan__04",
+      "config": "sw_32k_verify",
+      "task": "coding_06_tax_rates_lan",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__c_ringbuf_03_ringbuffer__06",
+      "config": "sw_32k_verify",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__bugfix_09_booking_slots__07",
+      "config": "sw_32k_verify",
+      "task": "bugfix_09_booking_slots",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__coding_06_tax_rates_lan__05",
+      "config": "sw_32k_verify",
+      "task": "coding_06_tax_rates_lan",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__c_ringbuf_03_ringbuffer__00",
+      "config": "sw_32k_verify",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__c_ringbuf_03_ringbuffer__05",
+      "config": "sw_32k_verify",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__00",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__bugfix_09_booking_slots__04",
+      "config": "sw_32k",
+      "task": "bugfix_09_booking_slots",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__07",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_10_wcx_constrained__02",
+      "config": "sw_32k",
+      "task": "coding_10_wcx_constrained",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_10_wcx_constrained__09",
+      "config": "sw_32k",
+      "task": "coding_10_wcx_constrained",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__01",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_verify__bugfix_09_booking_slots__06",
+      "config": "sw_32k_verify",
+      "task": "bugfix_09_booking_slots",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__c_ringbuf_03_ringbuffer__00",
+      "config": "sw_32k",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__c_ringbuf_03_ringbuffer__01",
+      "config": "sw_32k",
+      "task": "c_ringbuf_03_ringbuffer",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__bugfix_09_booking_slots__07",
+      "config": "sw_32k",
+      "task": "bugfix_09_booking_slots",
+      "k": 7,
+      "instrumented": true
+    }
+  ]
+}

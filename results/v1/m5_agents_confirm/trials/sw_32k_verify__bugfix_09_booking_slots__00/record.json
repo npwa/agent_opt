@@ -1,0 +1,61 @@
+{
+  "trial_id": "sw_32k_verify__bugfix_09_booking_slots__00",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_32k_verify",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__coding_06_tax_rates_lan__02",
+  "prev_task": "coding_06_tax_rates_lan",
+  "seed": 1602825029,
+  "run_seed": 2,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T19:51:58Z",
+  "wall_start": 1792871518.36538,
+  "wall_end": 1792871643.3529904,
+  "elapsed_s": 125.0,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 9,
+  "tokens_in": 71354,
+  "tokens_out": 3189,
+  "tool_sequence": [
+    "bash",
+    "glob",
+    "bash",
+    "read",
+    "read",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 7 tests pass now. Here's a summary of the four bugs I fixed in `bookings.py`:\n\n1. **`overlaps(...)`**: Used `<=` so touching intervals `(540,600)` and `(600,660)` were incorrectly reported as overlapping. Changed both comparisons to strict `<` \u2014 touching intervals share no minute.\n\n2. **`merge_intervals(...)`**: Two bugs here:\n   - It mutated the caller's list via `intervals.sort()`, violating the doc \"The argument must not be modified.\" Fixed by using `sorted(intervals)`.\n   - The condition `start < merged[-1][1]` excluded touching intervals from merging. Changed to `<=` so touching intervals are merged, and added a leading copy of the input list to protect it further (since `sort()` still mutates even if we use `sorted`).\n\n3. **`total_busy_minutes(...)`**: Simply summed `(end - start)` for each interval without deduplicating overlaps, contradicting \"a minute covered twice counts once.\" Now calls `merge_intervals` first to deduplicate.\n\n4. **`find_free_slots(...)`**: Several issues:\n   - Used `>` instead of `>=`, excluding gaps exactly equal to `min_len`.\n   - Didn't handle a trailing free gap after all busy intervals. Added the post-loop check `if day_end - cursor >= min_len`.\n   - Didn't clamp busy intervals to the `[day_start, day_end]` window as the doc requires (\"parts of a busy interval that lie outside the day window are ignored\").",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T19:51:58Z"
+    }
+  ]
+}

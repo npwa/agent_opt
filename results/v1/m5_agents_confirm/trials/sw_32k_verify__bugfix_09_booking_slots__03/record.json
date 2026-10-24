@@ -1,0 +1,62 @@
+{
+  "trial_id": "sw_32k_verify__bugfix_09_booking_slots__03",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_32k_verify",
+  "model": "ollama/qwen3.6-32k",
+  "k": 3,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__c_ringbuf_03_ringbuffer__09",
+  "prev_task": "c_ringbuf_03_ringbuffer",
+  "seed": 1671250047,
+  "run_seed": 2,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T18:57:13Z",
+  "wall_start": 1792868233.1206217,
+  "wall_end": 1792868379.3069777,
+  "elapsed_s": 146.2,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 11,
+  "tokens_in": 91812,
+  "tokens_out": 3585,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "read",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 7 tests pass now. Here's a summary of the bugs I fixed:\n\n1. **`overlaps`** (line 13): Used `<=` instead of `<`, which caused touching intervals like `(540, 600)` and `(600, 660)` to falsely report as overlapping. Fixed by using strict `<` comparison on both sides.\n\n2. **`merge_intervals`** (line 21\u201324): Two bugs \u2014 it mutated the input list via `.sort()` (violating \"The argument must not be modified\") and used `start < merged[-1][1]` which didn't merge touching intervals. Fixed by using `sorted()` to create a new sorted copy, and changing `<` to `<=`.\n\n3. **`total_busy_minutes`** (line 32\u201334): Didn't merge overlapping intervals before summing, so overlapping intervals were counted double. Fixed by calling `merge_intervals` first.\n\n4. **`find_free_slots`** (lines 46\u201350): Three bugs:\n   - Used strict `>` instead of `>=` for min_len comparison (docstring says \"A gap of exactly min_len minutes is long enough\")\n   - Didn't clip busy intervals to the `day_end` boundary\n   - Didn't check for a trailing free slot after all busy intervals end before `day_end`. Added both fixes.",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T18:57:13Z"
+    }
+  ]
+}

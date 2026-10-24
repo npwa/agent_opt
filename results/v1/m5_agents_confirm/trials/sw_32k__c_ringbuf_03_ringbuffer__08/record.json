@@ -1,0 +1,85 @@
+{
+  "trial_id": "sw_32k__c_ringbuf_03_ringbuffer__08",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 8,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__coding_10_wcx_constrained__08",
+  "prev_task": "coding_10_wcx_constrained",
+  "seed": 1426772757,
+  "run_seed": 2,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T18:12:27Z",
+  "wall_start": 1792865547.780921,
+  "wall_end": 1792866164.2196674,
+  "elapsed_s": 616.4,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 33,
+  "tokens_in": 500174,
+  "tokens_out": 16448,
+  "tool_sequence": [
+    "read",
+    "glob",
+    "read",
+    "read",
+    "write",
+    "write",
+    "write",
+    "bash",
+    "edit",
+    "bash",
+    "write",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "read",
+    "bash",
+    "edit",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "write",
+    "bash",
+    "read",
+    "bash",
+    "read",
+    "write",
+    "bash",
+    "edit",
+    "bash",
+    "write",
+    "bash"
+  ],
+  "tool_errors": 2,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": false,
+      "detail": "FAIL line 38: rb_peek(rb, out, 64) == 7 && memcmp(out, \"34567AB\", 7) == 0"
+    }
+  ],
+  "final_answer": "",
+  "files": [
+    "ringbuf.c",
+    "test_ringbuf.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-24T18:12:27Z"
+    }
+  ]
+}

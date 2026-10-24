@@ -1,0 +1,67 @@
+{
+  "trial_id": "sw_32k_verify__c_ringbuf_03_ringbuffer__02",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_32k_verify",
+  "model": "ollama/qwen3.6-32k",
+  "k": 2,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__coding_06_tax_rates_lan__05",
+  "prev_task": "coding_06_tax_rates_lan",
+  "seed": 1042825207,
+  "run_seed": 2,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T18:33:06Z",
+  "wall_start": 1792866786.5727615,
+  "wall_end": 1792867050.9716148,
+  "elapsed_s": 264.4,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 14,
+  "tokens_in": 129310,
+  "tokens_out": 6718,
+  "tool_sequence": [
+    "read",
+    "glob",
+    "read",
+    "read",
+    "write",
+    "write",
+    "bash",
+    "edit",
+    "bash",
+    "bash",
+    "edit",
+    "read",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 1,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Here is a summary of everything that was done and the results:\n\n---\n\n## Files produced\n\n| File | Lines | Purpose |\n|------|-------|---------|\n| `ringbuf.c` | ~103 | Implementation (opaque struct, all 7 functions) |\n| `test_ringbuf.c` | ~112 | Self-contained test driver (29 checks) |\n\n## How the implementation works\n\nThe ring buffer uses a circular buffer with three state variables:\n\n- **`head`** \u2014 index of the next position to *write*\n- **`tail`** \u2014 index of the next position to *read*\n- **`count`** \u2014 number of valid bytes currently stored\n\nReads and writes wrap at `capacity` via `%`. A write larger than free space stores only what fits; reading or writing with any `NULL` pointer or zero length returns 0. `rb_destroy(NULL)` is explicitly handled.\n\n## Compilation\n\n```\ngcc -std=c11 -Wall -Werror -o test_ringbuf ringbuf.c test_ringbuf.c\n```\n\n**Result:** compiled cleanly \u2014 **zero warnings, zero errors**.\n\n## Test results (29 / 29 passed)\n\n| Category | Tests | Notes |\n|----------|-------|-------|\n| Creation / capacity | 4 | zero capacity \u2192 NULL; valid create \u2192 correct capacity/size |\n| Write / read round-trip | 5 | full capacity, partial write, content match |\n| Edge cases (NULL args) | 3 | NULL rb and zero length return 0 |\n| Peek (non-consuming) | 3 | content and size correctness |\n| Clear | 2 | size resets, capacity preserved |\n| Wrap-around | 5 | fill \u2192 drain \u2192 refill; full capacity round-trip after tail moves past end |\n| Full-buffer rejection | 1 | write on fully-filled buffer returns 0 |\n\nAll requirements from `SPEC.md` and every function declared in `ringbuf.h` are implemented and verified.",
+  "files": [
+    "ringbuf.c",
+    "test_ringbuf.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T18:33:06Z"
+    }
+  ]
+}

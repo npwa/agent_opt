@@ -1,0 +1,63 @@
+{
+  "trial_id": "sw_32k_verify__bugfix_09_booking_slots__04",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_32k_verify",
+  "model": "ollama/qwen3.6-32k",
+  "k": 4,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__coding_06_tax_rates_lan__08",
+  "prev_task": "coding_06_tax_rates_lan",
+  "seed": 1840105638,
+  "run_seed": 2,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T20:02:01Z",
+  "wall_start": 1792872121.8624454,
+  "wall_end": 1792872338.1576293,
+  "elapsed_s": 216.3,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 11,
+  "tokens_in": 97178,
+  "tokens_out": 5917,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "read",
+    "edit",
+    "edit",
+    "read",
+    "bash",
+    "edit"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 7 tests pass. Let me now also re-check every function against its docstring to catch issues not covered by these tests.\n\nLooking at `total_busy_minutes`: the docstring says \"a minute covered twice counts once,\" meaning it must deduplicate. The current implementation naively sums all intervals, double-counting overlaps. This is a bug per the docstring even though neither test covers overlapping input for this function.",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T20:02:01Z"
+    }
+  ]
+}

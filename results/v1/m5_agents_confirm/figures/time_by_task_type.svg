@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg class="chart" viewBox="0 0 782 232" width="100%" role="img" aria-label="Where the time goes, sw_32k" xmlns="http://www.w3.org/2000/svg"><style>
+:root{color-scheme:light;--surface:#fcfcfb;--page:#f9f9f7;--ink:#0b0b0b;--ink2:#52514e;--muted:#898781;
+--grid:#e1e0d9;--axis:#c3c2b7;--ring:rgba(11,11,11,.10);--good:#006300;
+--series-1:#2a78d6;--series-2:#eb6834;--series-3:#1baf7a;--series-4:#eda100;--series-5:#e87ba4;--series-6:#008300;
+--series-7:#6250d6;--series-8:#e34948;--series-x:#a9a8a1;--on-1:#fff;--on-x:#0b0b0b}
+@media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){color-scheme:dark;--surface:#1a1a19;--page:#0d0d0d;
+--ink:#f0efec;--ink2:#c3c2b7;--grid:#2c2c2a;--axis:#383835;--ring:rgba(255,255,255,.10);--good:#0ca30c;
+--series-1:#3987e5;--series-2:#d95926;--series-3:#199e70;--series-4:#c98500;--series-5:#d55181;--series-6:#008300;
+--series-7:#9085e9;--series-8:#e66767;--series-x:#5d5c57;--on-1:#0b0b0b}}
+:root[data-theme="dark"]{color-scheme:dark;--surface:#1a1a19;--page:#0d0d0d;--ink:#f0efec;--ink2:#c3c2b7;--grid:#2c2c2a;
+--axis:#383835;--ring:rgba(255,255,255,.10);--good:#0ca30c;--series-1:#3987e5;--series-2:#d95926;--series-3:#199e70;
+--series-4:#c98500;--series-5:#d55181;--series-6:#008300;--series-7:#9085e9;--series-8:#e66767;--series-x:#5d5c57;--on-1:#0b0b0b}
+body{margin:0;background:var(--page);color:var(--ink);font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1040px;margin:0 auto;padding:24px 16px 48px}
+h1{font-size:24px;margin:0 0 4px}h2{font-size:18px;margin:36px 0 8px}h3{font-size:15px;margin:20px 0 6px}
+.sub{color:var(--ink2);margin:0 0 16px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0}
+.tile{background:var(--surface);border-radius:8px;padding:12px 16px;box-shadow:0 0 0 1px var(--ring)}
+.tile .l{color:var(--ink2);font-size:12px}.tile .v{font-size:26px;font-weight:600;margin-top:2px}.tile .d{color:var(--ink2);font-size:12px}
+figure{margin:12px 0;background:var(--surface);border-radius:8px;padding:12px 16px;box-shadow:0 0 0 1px var(--ring)}
+figcaption{color:var(--ink2);font-size:12px;margin-top:6px}
+.legend{display:flex;flex-wrap:wrap;gap:4px 16px;margin:0 0 8px;color:var(--ink2);font-size:12px}
+.legend span.sw{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-2px}
+.legend span.ln{display:inline-block;width:16px;height:0;border-top:2px solid var(--series-1);margin-right:6px;vertical-align:3px}
+.sw.s1{background:var(--series-1)}.sw.s2{background:var(--series-2)}.sw.s3{background:var(--series-3)}
+.sw.s4{background:var(--series-4)}.sw.s5{background:var(--series-5)}.sw.s6{background:var(--series-6)}
+.sw.s7{background:var(--series-7)}.sw.s8{background:var(--series-8)}.sw.sx{background:var(--series-x)}
+.sw.dom{background:var(--muted);border-radius:50%}.sw.round{border-radius:50%}.sw.s1.front{border-radius:50%}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{padding:5px 8px;border-bottom:1px solid var(--grid);text-align:right;font-variant-numeric:tabular-nums}
+th:first-child,td:first-child,th.t,td.t{text-align:left}th{color:var(--ink2);font-weight:600}
+details{margin:6px 0}summary{cursor:pointer;color:var(--ink2);font-size:12px}
+.verdict-positive{color:var(--good);font-weight:600}.verdict-negative{font-weight:600}
+svg.chart{display:block;max-width:100%;height:auto}svg text{font:11px system-ui,-apple-system,"Segoe UI",sans-serif;fill:var(--ink2)}
+svg .tick{fill:var(--muted)}svg .rowlabel{fill:var(--ink)}svg .axislabel{fill:var(--ink2)}svg .pointlabel{fill:var(--ink)}
+svg .grid{stroke:var(--grid);stroke-width:1}svg .axis{stroke:var(--axis);stroke-width:1}
+svg .s1{fill:var(--series-1);stroke:var(--series-1)}svg .s2{fill:var(--series-2);stroke:var(--series-2)}
+svg .s3{fill:var(--series-3);stroke:var(--series-3)}svg .s4{fill:var(--series-4);stroke:var(--series-4)}
+svg .s5{fill:var(--series-5);stroke:var(--series-5)}svg .s6{fill:var(--series-6);stroke:var(--series-6)}
+svg .s7{fill:var(--series-7);stroke:var(--series-7)}svg .s8{fill:var(--series-8);stroke:var(--series-8)}
+svg .sx{fill:var(--series-x);stroke:none}svg .seg{stroke:none}
+svg .whisker{stroke-width:2;fill:none}svg .whisker2{stroke:var(--muted);stroke-width:1.5;fill:none}
+svg .dot{stroke:var(--surface);stroke-width:2}svg .pt.s1 .dot,svg .pt.s2 .dot,svg .pt.s3 .dot,svg .pt.s4 .dot,
+svg .pt.s5 .dot,svg .pt.s6 .dot,svg .pt.s7 .dot,svg .pt.s8 .dot{stroke:var(--surface)}
+svg .pt.s1 .whisker,svg .pt.s2 .whisker,svg .pt.s3 .whisker,svg .pt.s4 .whisker,svg .pt.s5 .whisker,
+svg .pt.s6 .whisker,svg .pt.s7 .whisker,svg .pt.s8 .whisker{fill:none}
+svg .pt.front .dot{fill:var(--series-1)}svg .pt.dominated .dot{fill:var(--muted)}
+svg .frontier{fill:none;stroke:var(--series-1);stroke-width:2;stroke-linejoin:round}
+svg .seglabel{fill:var(--ink);font-weight:600}svg .seglabel.on-s1{fill:var(--on-1)}
+svg .pt:hover .dot,svg .seg:hover{opacity:.82}
+@media (forced-colors:active){svg .seg,svg .dot{forced-color-adjust:none}}
+</style><rect width='100%' height='100%' fill='var(--surface)'/><line class="grid" x1="72.0" x2="72.0" y1="8.0" y2="168.0"/><text class="tick" x="72.0" y="183.0" text-anchor="middle">0%</text><line class="grid" x1="212.0" x2="212.0" y1="8.0" y2="168.0"/><text class="tick" x="212.0" y="183.0" text-anchor="middle">25%</text><line class="grid" x1="352.0" x2="352.0" y1="8.0" y2="168.0"/><text class="tick" x="352.0" y="183.0" text-anchor="middle">50%</text><line class="grid" x1="492.0" x2="492.0" y1="8.0" y2="168.0"/><text class="tick" x="492.0" y="183.0" text-anchor="middle">75%</text><line class="grid" x1="632.0" x2="632.0" y1="8.0" y2="168.0"/><text class="tick" x="632.0" y="183.0" text-anchor="middle">100%</text><line class="axis" x1="72.0" x2="632.0" y1="168.0" y2="168.0"/><text class="rowlabel" x="62.0" y="32.0" text-anchor="end">reasoning</text><rect class="seg s1" x="72.00" y="16.00" width="227.58" height="24"><title>reasoning: Prefill (time to first token) 41.0%</title></rect><text class="seglabel on-s1" x="185.8" y="32.0" text-anchor="middle">41%</text><rect class="seg s2" x="301.58" y="16.00" width="272.26" height="24"><title>reasoning: Decode 49.0%</title></rect><text class="seglabel on-s2" x="437.7" y="32.0" text-anchor="middle">49%</text><path class="seg s4" d="M575.84,16.00H628.00a4.00,4.00 0 0 1 4.00,4.00V36.00a4.00,4.00 0 0 1 -4.00,4.00H575.84Z"><title>reasoning: Harness / idle 10.0%</title></path><text class="seglabel on-s4" x="603.9" y="32.0" text-anchor="middle">10%</text><text class="tick" x="644.0" y="32.0">n=10 · 18 s/trial</text><text class="rowlabel" x="62.0" y="72.0" text-anchor="end">bugfix</text><rect class="seg s1" x="72.00" y="56.00" width="171.64" height="24"><title>bugfix: Prefill (time to first token) 31.0%</title></rect><text class="seglabel on-s1" x="157.8" y="72.0" text-anchor="middle">31%</text><rect class="seg s2" x="245.64" y="56.00" width="374.64" height="24"><title>bugfix: Decode 67.3%</title></rect><text class="seglabel on-s2" x="433.0" y="72.0" text-anchor="middle">67%</text><path class="seg s4" d="M622.27,56.00H627.95a4.00,4.00 0 0 1 4.00,4.00V76.00a4.00,4.00 0 0 1 -4.00,4.00H622.27Z"><title>bugfix: Harness / idle 1.7%</title></path><text class="tick" x="644.0" y="72.0">n=10 · 120 s/trial</text><text class="rowlabel" x="62.0" y="112.0" text-anchor="end">code gen</text><rect class="seg s1" x="72.00" y="96.00" width="108.47" height="24"><title>code_gen: Prefill (time to first token) 19.7%</title></rect><text class="seglabel on-s1" x="126.2" y="112.0" text-anchor="middle">20%</text><rect class="seg s2" x="182.47" y="96.00" width="419.57" height="24"><title>code_gen: Decode 75.3%</title></rect><text class="seglabel on-s2" x="392.3" y="112.0" text-anchor="middle">75%</text><rect class="seg s3" x="604.05" y="96.00" width="21.64" height="24"><title>code_gen: Tool execution 4.2%</title></rect><path class="seg s4" d="M627.68,96.00H628.00a4.00,4.00 0 0 1 4.00,4.00V116.00a4.00,4.00 0 0 1 -4.00,4.00H627.68Z"><title>code_gen: Harness / idle 0.8%</title></path><text class="tick" x="644.0" y="112.0">n=20 · 285 s/trial</text><text class="rowlabel" x="62.0" y="152.0" text-anchor="end">all tasks</text><rect class="seg s1" x="72.00" y="136.00" width="122.28" height="24"><title>all tasks: Prefill (time to first token) 22.2%</title></rect><text class="seglabel on-s1" x="133.1" y="152.0" text-anchor="middle">22%</text><rect class="seg s2" x="196.28" y="136.00" width="408.13" height="24"><title>all tasks: Decode 73.2%</title></rect><text class="seglabel on-s2" x="400.3" y="152.0" text-anchor="middle">73%</text><rect class="seg s3" x="606.41" y="136.00" width="17.02" height="24"><title>all tasks: Tool execution 3.4%</title></rect><path class="seg s4" d="M625.43,136.00H628.00a4.00,4.00 0 0 1 4.00,4.00V156.00a4.00,4.00 0 0 1 -4.00,4.00H625.43Z"><title>all tasks: Harness / idle 1.2%</title></path><text class="tick" x="644.0" y="152.0">n=40 · 177 s/trial</text><text class="axislabel" x="352.0" y="200.0" text-anchor="middle">share of wall-clock time</text><rect class="seg s1" x="12" y="210" width="12" height="12" rx="2"/><text x="30" y="220">Prefill (time to first token)</text><rect class="seg s2" x="231" y="210" width="12" height="12" rx="2"/><text x="249" y="220">Decode</text><rect class="seg s3" x="308" y="210" width="12" height="12" rx="2"/><text x="326" y="220">Tool execution</text><rect class="seg s4" x="434" y="210" width="12" height="12" rx="2"/><text x="452" y="220">Harness / idle</text></svg>

@@ -1,0 +1,57 @@
+{
+  "trial_id": "sw_32k__coding_10_wcx_constrained__07",
+  "task": "coding_10_wcx_constrained",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 7,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_verify__c_ringbuf_03_ringbuffer__02",
+  "prev_task": "c_ringbuf_03_ringbuffer",
+  "seed": 1659961775,
+  "run_seed": 2,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T18:37:31Z",
+  "wall_start": 1792867051.102507,
+  "wall_end": 1792867201.9919531,
+  "elapsed_s": 150.9,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 7,
+  "tokens_in": 61711,
+  "tokens_out": 4113,
+  "tool_sequence": [
+    "read",
+    "write",
+    "write",
+    "bash",
+    "write",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Compilation succeeded and all test cases produce correct results:\n\n| Input | Result | Verification |\n|---|---|---|\n| empty | `0 0 0 0` | 0 of everything |\n| `hello world\\n` | `1 2 12 11` | 1 line, 2 words, 12 bytes, longest 11 |\n| `a b\\nc d e\\n` | `2 5 10 5` | 2 lines, 5 words, 10 bytes, \"c d e\" = 5 |\n| no trailing newline | `1 5 22 17` | handles partial last line in maxlen |\n| `\\n\\n` | `2 0 2 0` | empty lines count as 0-length |\n| `line1\\r\\nwin\\r\\n` | `2 2 12 6` | \\r counted as byte for maxlen (6 = \"line1\\r\") |",
+  "files": [
+    "wcx.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T18:37:31Z"
+    }
+  ]
+}

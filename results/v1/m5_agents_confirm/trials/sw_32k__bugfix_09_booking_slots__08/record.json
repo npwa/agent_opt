@@ -1,0 +1,59 @@
+{
+  "trial_id": "sw_32k__bugfix_09_booking_slots__08",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 8,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_verify__coding_10_wcx_constrained__03",
+  "prev_task": "coding_10_wcx_constrained",
+  "seed": 1875482151,
+  "run_seed": 2,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T20:28:04Z",
+  "wall_start": 1792873684.1096995,
+  "wall_end": 1792873761.4448886,
+  "elapsed_s": 77.3,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 8,
+  "tokens_in": 73662,
+  "tokens_out": 1281,
+  "tool_sequence": [
+    "read",
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "edit",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": false,
+      "detail": "Ran 20 tests in 0.001s |  | FAILED (failures=3)"
+    }
+  ],
+  "final_answer": "All 7 tests pass. Here's what was fixed:\n\n1. **`overlaps`** (`bookings.py:13`): Changed `<=` to `<` so touching intervals (e.g., `(540,600)` and `(600,660)`) don't report as overlapping.\n\n2. **`merge_intervals`** (`bookings.py:21-25`): Two bugs \u2014 the function mutated its argument via `.sort()` (docstring says \"must not be modified\") and used `<` instead of `<=` for the merge condition (touching intervals weren't merged). Fixed by using `sorted()` to avoid mutation and `<=` to merge touching intervals.\n\n3. **`find_free_slots`** (`bookings.py:43-50`): The cursor was unclamped past its previous position not advancing correctly, and gaps of exactly `min_len` were excluded (used `>` instead of `>=`). Also didn't handle post-last-busy gaps or clamp intervals to `day_start`/`day_end`.",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-24T20:28:04Z"
+    }
+  ]
+}

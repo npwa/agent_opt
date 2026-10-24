@@ -1,0 +1,67 @@
+{
+  "trial_id": "sw_32k__coding_10_wcx_constrained__06",
+  "task": "coding_10_wcx_constrained",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 6,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__bugfix_09_booking_slots__09",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 1861224158,
+  "run_seed": 2,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T18:24:24Z",
+  "wall_start": 1792866264.449388,
+  "wall_end": 1792866572.488583,
+  "elapsed_s": 308.0,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 17,
+  "tokens_in": 172765,
+  "tokens_out": 8748,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "write",
+    "write",
+    "read",
+    "edit",
+    "read",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "edit",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Done. `wcx.c` has been written and compiled with `gcc -std=c11 -Wall -Wextra -Werror -O2 -o wcx wcx.c`. All edge cases pass: empty input, single line without newline, lines with `\\n`, NUL bytes, leading whitespace words, and long lines.",
+  "files": [
+    "wcx.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T18:24:24Z"
+    }
+  ]
+}

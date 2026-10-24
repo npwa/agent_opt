@@ -1,0 +1,73 @@
+{
+  "trial_id": "sw_32k_verify__c_ringbuf_03_ringbuffer__03",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_32k_verify",
+  "model": "ollama/qwen3.6-32k",
+  "k": 3,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_verify__bugfix_09_booking_slots__00",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 1556988706,
+  "run_seed": 2,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T19:54:03Z",
+  "wall_start": 1792871643.4448135,
+  "wall_end": 1792872087.6124547,
+  "elapsed_s": 444.2,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 21,
+  "tokens_in": 289418,
+  "tokens_out": 12320,
+  "tool_sequence": [
+    "read",
+    "glob",
+    "read",
+    "read",
+    "todowrite",
+    "write",
+    "write",
+    "edit",
+    "read",
+    "todowrite",
+    "write",
+    "bash",
+    "bash",
+    "read",
+    "edit",
+    "bash",
+    "edit",
+    "read",
+    "bash",
+    "bash",
+    "todowrite"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Everything is done:\n\n---\n\n### `ringbuf.c` \u2014 summary\n\nThe implementation uses an opaque `struct ringbuf` in the `.c` file with fields for the storage buffer, capacity, used-count, and write/read positions.\n\n**Key design decisions:**\n\n- **Dual-copy writes/reads.** Whenever a single logical block of data spans the boundary between the end of the allocated array and index 0, it is split into two `memcpy` calls (tail\u2192end-of-buf, then head\u2192wpos/rpos). This is done correctly in both directions.\n- **Wrap-around** of `wpos` / `rpos` is handled by `(pos + n) % cap`.\n- **Clamped writes:** if a request is larger than the free space (`rb->cap - rb->used`) only what fits is written and that count is returned.\n- **NULL safety:** `rb_destroy(NULL)`, `rb_clear(NULL)`, `rb_size(NULL)`, and `rb_capacity(NULL)` are all well-defined (no-op or returns 0). NULL data pointers yield 0 bytes.\n\nAll six public API functions are implemented:\n\n| Function | behavior |\n|---|---|\n| `rb_create` / `rb_destroy` | Allocates/frees; zero-capacity \u2192 NULL |\n| `rb_write` | Up to `len` bytes, clamped to free space; wraps at buffer end |\n| `rb_read` | Up to `len` bytes oldest-first; decrements used count |\n| `rb_peek` | Non-destructive copy of oldest bytes (same two-copy logic) |\n| `rb_size` / `rb_capacity` | O(1) query helpers |\n\n### Test results\n\nCompiled with:  `gcc -std=c11 -Wall -Werror ringbuf.c test.c -o test_prog` \u2014 **zero warnings**.\n\nRun:             `./test_prog` \u2192 **27 passed, 0 failed**\n\nTested the following edge cases:\n- NULL pointer arguments\n- Zero-capacity creation (returns NULL)\n- Writing when buffer is full\n- Reading from an empty buffer\n- Wrap-around writes that span both halves of the storage array\n- Partial-write clamping (write larger than free space)\n- Clear, then re-fill and drain across multiple wrap cycles\n- `peek` does not consume data  \n- Data integrity of clamped-overwritten region",
+  "files": [
+    "ringbuf.c",
+    "test.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T19:54:03Z"
+    }
+  ]
+}

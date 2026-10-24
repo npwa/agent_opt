@@ -1,0 +1,71 @@
+{
+  "trial_id": "sw_32k_verify__bugfix_09_booking_slots__08",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_32k_verify",
+  "model": "ollama/qwen3.6-32k",
+  "k": 8,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__bugfix_09_booking_slots__05",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 228099991,
+  "run_seed": 2,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T19:33:33Z",
+  "wall_start": 1792870413.2543344,
+  "wall_end": 1792870770.9154572,
+  "elapsed_s": 357.7,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 20,
+  "tokens_in": 228922,
+  "tokens_out": 9665,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "edit",
+    "read",
+    "read",
+    "edit",
+    "read",
+    "edit",
+    "read",
+    "bash",
+    "read",
+    "edit",
+    "bash",
+    "read",
+    "edit",
+    "read",
+    "bash"
+  ],
+  "tool_errors": 1,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 7 tests pass. Here's a summary of the bugs found and fixed in `bookings.py`:\n\n**1. `overlaps()` \u2014 wrong boundary comparison:**\n- Used `<=` which made touching intervals return `True`, but the docstring says \"Touching intervals do not overlap.\"\n- **Fix:** Changed to `<`.\n\n**2. `merge_intervals()` \u2014 two bugs:**\n- `intervals.sort()` mutated the input, violating \"The argument must not be modified.\"  \n  **Fix:** Used `sorted(intervals)` instead.\n- The merge condition `start < merged[-1][1]` excluded touching intervals, but the docstring says \"Intervals that overlap or touch are merged.\"  \n  **Fix:** Changed `<` to `<=`.\n\n**3. `total_busy_minutes()` \u2014 no deduplication of overlaps:**\n- Docstring says \"a minute covered twice counts once,\" but it simply summed raw interval lengths, double-counting overlapping periods.  \n  **Fix:** Added merge logic before summing to deduplicate.\n\n**4. `find_free_slots()` \u2014 three bugs:**\n- Busy intervals outside `[day_start, day_end]` weren't clipped per docstring (\"parts of a busy interval that lie outside the day window are ignored\"). Added clipping with `max(start, day_start)` / `min(end, day_end)`.\n- Gap check used `>` but should use `>=` (docstring: \"A gap of exactly min_len minutes is long enough\").\n- The remaining gap from cursor to `day_end` was never checked after the loop. Added that final check.",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T19:33:33Z"
+    }
+  ]
+}

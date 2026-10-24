@@ -1,0 +1,64 @@
+{
+  "trial_id": "sw_32k__c_ringbuf_03_ringbuffer__00",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_verify__bugfix_09_booking_slots__06",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 534458289,
+  "run_seed": 2,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T22:34:44Z",
+  "wall_start": 1792881284.9171684,
+  "wall_end": 1792881511.963671,
+  "elapsed_s": 227.0,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 11,
+  "tokens_in": 117628,
+  "tokens_out": 6172,
+  "tool_sequence": [
+    "read",
+    "glob",
+    "read",
+    "read",
+    "write",
+    "write",
+    "write",
+    "write",
+    "bash",
+    "edit",
+    "bash",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "The wrap-around test logic had a bug - it filled to full capacity leaving no room for `post`. Let me fix the test:",
+  "files": [
+    "ringbuf.c",
+    "test.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T22:34:44Z"
+    }
+  ]
+}

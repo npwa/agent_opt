@@ -1,0 +1,65 @@
+{
+  "trial_id": "sw_32k__c_ringbuf_03_ringbuffer__05",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 5,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__c_ringbuf_03_ringbuffer__04",
+  "prev_task": "c_ringbuf_03_ringbuffer",
+  "seed": 547675467,
+  "run_seed": 2,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T21:03:40Z",
+  "wall_start": 1792875820.4483395,
+  "wall_end": 1792876221.6271224,
+  "elapsed_s": 401.2,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 13,
+  "tokens_in": 141606,
+  "tokens_out": 7663,
+  "tool_sequence": [
+    "read",
+    "read",
+    "read",
+    "read",
+    "write",
+    "edit",
+    "write",
+    "bash",
+    "edit",
+    "read",
+    "edit",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Everything compiles and passes cleanly with ASan as well. Here's what was implemented:\n\n**`ringbuf.c`** \u2014 all 7 functions declared in `ringbuf.h`:\n\n| Function | Description |\n|---|---|\n| `rb_create` | Allocates opaque struct with a byte buffer of given capacity (0 \u2192 NULL) |\n| `rb_destroy` | Frees buffer + struct; accepts NULL |\n| `rb_write` | Writes up to `len` bytes, caps at free space so partial writes fit correctly |\n| `rb_read` | Reads oldest-first, removing from buffer as it goes |\n| `rb_peek` | Copies oldest-first without consuming data |\n| `rb_size` / `rb_capacity` | Query current/full size |\n| `rb_clear` | Resets head/tail/filled to 0 |\n\nAll read/write paths handle wrap-around by splitting into at most two contiguous `memcpy`s. Every function guards against NULL inputs as required by the spec and header comments.",
+  "files": [
+    "ringbuf.c",
+    "test.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T21:03:40Z"
+    }
+  ]
+}

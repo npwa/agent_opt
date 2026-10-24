@@ -1,0 +1,60 @@
+{
+  "trial_id": "sw_32k_verify__coding_10_wcx_constrained__09",
+  "task": "coding_10_wcx_constrained",
+  "config": "sw_32k_verify",
+  "model": "ollama/qwen3.6-32k",
+  "k": 9,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_verify__bugfix_09_booking_slots__09",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 1327289099,
+  "run_seed": 2,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T19:01:11Z",
+  "wall_start": 1792868471.4907036,
+  "wall_end": 1792868585.0268145,
+  "elapsed_s": 113.5,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 8,
+  "tokens_in": 55800,
+  "tokens_out": 2991,
+  "tool_sequence": [
+    "read",
+    "read",
+    "read",
+    "read",
+    "read",
+    "write",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 1,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": false,
+      "detail": "no trailing newline: expected '0 2 11 11\\n', got exit 0, '0 1 11 11\\n'; unterminated last line is the longest: expected '2 4 13 8\\n', got exit 0, '2 3 13 8\\n'; crlf: expected '2 3 11 6\\n', got exit 0, '2 2 11 6\\n'; tab vtab formfeed: expected '0 4 7 7\\n', got exit 0, '0 1 7 7\\n' (+3 more)"
+    }
+  ],
+  "final_answer": "Wait, the word count should be 2 for \"hello world\", not 1. Let me verify:",
+  "files": [
+    "wcx.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-24T19:01:11Z"
+    }
+  ]
+}

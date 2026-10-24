@@ -1,0 +1,62 @@
+{
+  "trial_id": "sw_32k__bugfix_09_booking_slots__05",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 5,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_verify__coding_06_tax_rates_lan__00",
+  "prev_task": "coding_06_tax_rates_lan",
+  "seed": 1579662101,
+  "run_seed": 2,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T19:29:43Z",
+  "wall_start": 1792870183.7676275,
+  "wall_end": 1792870413.1672497,
+  "elapsed_s": 229.4,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 10,
+  "tokens_in": 93508,
+  "tokens_out": 6405,
+  "tool_sequence": [
+    "read",
+    "read",
+    "read",
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 2,
+  "expected_sequence_matched": false,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 7 tests pass now. The four bugs fixed were:\n\n- **overlaps**: `<=` to `<` so touching intervals don't count as overlapping (lines 13)\n- **merge_intervals**: copy before sorting so argument isn't mutated, and `<=` so touching intervals are merged (line 24)\n- **total_busy_minutes**: call `merge_intervals` first to deduplicate overlapping minutes (line 33)\n- **find_free_slots**: `>=` so exact min_len gaps qualify, plus trailing gap check for remaining day window (lines 47-50)",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T19:29:43Z"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "trial_id": "sw_32k__coding_10_wcx_constrained__00",
+  "task": "coding_10_wcx_constrained",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__c_ringbuf_03_ringbuffer__07",
+  "prev_task": "c_ringbuf_03_ringbuffer",
+  "seed": 889975509,
+  "run_seed": 2,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T18:09:14Z",
+  "wall_start": 1792865354.8143756,
+  "wall_end": 1792865388.3428776,
+  "elapsed_s": 33.5,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 31577,
+  "tokens_out": 518,
+  "tool_sequence": [
+    "read",
+    "write",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Compiled cleanly. Quick smoke test:\n\n```\n$ printf 'hello world\\nfoo bar baz\\n' | ./wcx\n2 5 21 11\n```",
+  "files": [
+    "wcx.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T18:09:14Z"
+    }
+  ]
+}

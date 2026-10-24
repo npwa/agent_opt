@@ -1,0 +1,65 @@
+{
+  "trial_id": "sw_32k__c_ringbuf_03_ringbuffer__06",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 6,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_verify__coding_10_wcx_constrained__09",
+  "prev_task": "coding_10_wcx_constrained",
+  "seed": 1978595471,
+  "run_seed": 2,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T19:03:05Z",
+  "wall_start": 1792868585.377544,
+  "wall_end": 1792868978.027899,
+  "elapsed_s": 392.6,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 12,
+  "tokens_in": 132680,
+  "tokens_out": 6377,
+  "tool_sequence": [
+    "read",
+    "read",
+    "read",
+    "read",
+    "write",
+    "write",
+    "bash",
+    "write",
+    "write",
+    "bash",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All done. Here's a summary:\n\n- **`ringbuf.c`** \u2014 Implements the opaque ring buffer with `head`, `tail`, and `count` pointers in a circular buffer. All operations (`create`, `destroy`, `write`, `read`, `peek`, `size`, `capacity`, `clear`) wrap around the boundary correctly.\n- **`test.c`** \u2014 Tests creation, NULL safety, basic write/read, wrap-around writes and reads, peek, partial writes (wrote > free space), and size/caps checks. All pass with `-Wall -Werror`.",
+  "files": [
+    "ringbuf.c",
+    "test.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T19:03:05Z"
+    }
+  ]
+}

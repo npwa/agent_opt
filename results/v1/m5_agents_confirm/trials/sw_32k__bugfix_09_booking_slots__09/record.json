@@ -1,0 +1,59 @@
+{
+  "trial_id": "sw_32k__bugfix_09_booking_slots__09",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 9,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__c_ringbuf_03_ringbuffer__08",
+  "prev_task": "c_ringbuf_03_ringbuffer",
+  "seed": 1128036002,
+  "run_seed": 2,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T18:22:44Z",
+  "wall_start": 1792866164.3775945,
+  "wall_end": 1792866264.3651297,
+  "elapsed_s": 100.0,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 8,
+  "tokens_in": 74496,
+  "tokens_out": 2415,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "edit",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": false,
+      "detail": "Ran 20 tests in 0.001s |  | FAILED (failures=2)"
+    }
+  ],
+  "final_answer": "All 7 tests pass. Here's a summary of the three bugs fixed:\n\n1. **`overlaps`** (`bookings.py:13`): Used `<=` which treated touching intervals as overlapping. Changed to `<` so `(540, 600)` and `(600, 660)` correctly return `False`.\n\n2. **`merge_intervals`** (`bookings.py:21-24`): Two issues \u2014 it mutated the input list (docstring says it must not), and used `<` instead of `<=` for the merge condition, missing touching intervals. Fixed by using `sorted()` to create a copy and changing to `<=`.\n\n3. **`find_free_slots`** (`bookings.py:43-48`): The cursor wasn't clamped to the day window boundaries, busy intervals outside the day were included in cursor updates (eating into valid free time), and no final gap after the last busy interval was emitted. Fixed with proper clamping to `[day_start, day_end]` and adding the trailing gap check.",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-24T18:22:44Z"
+    }
+  ]
+}

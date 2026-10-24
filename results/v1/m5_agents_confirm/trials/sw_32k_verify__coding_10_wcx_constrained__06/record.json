@@ -1,0 +1,67 @@
+{
+  "trial_id": "sw_32k_verify__coding_10_wcx_constrained__06",
+  "task": "coding_10_wcx_constrained",
+  "config": "sw_32k_verify",
+  "model": "ollama/qwen3.6-32k",
+  "k": 6,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__bugfix_09_booking_slots__08",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 723808079,
+  "run_seed": 2,
+  "status": "timeout",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T20:29:21Z",
+  "wall_start": 1792873761.5444078,
+  "wall_end": 1792874361.6066315,
+  "elapsed_s": 600.1,
+  "timed_out": true,
+  "stalled": false,
+  "exit_codes": [
+    -9
+  ],
+  "steps": 10,
+  "tokens_in": 81474,
+  "tokens_out": 16917,
+  "tool_sequence": [
+    "read",
+    "write",
+    "write",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "write",
+    "bash",
+    "write",
+    "write",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": false,
+      "detail": "no trailing newline: expected '0 2 11 11\\n', got exit 0, '0 4 11 11\\n'; unterminated last line is the longest: expected '2 4 13 8\\n', got exit 0, '2 8 13 8\\n'; crlf: expected '2 3 11 6\\n', got exit 0, '2 6 11 6\\n'; tab vtab formfeed: expected '0 4 7 7\\n', got exit 0, '0 8 7 7\\n' (+5 more)"
+    }
+  ],
+  "final_answer": "",
+  "files": [
+    "wcx.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "timeout",
+      "reason": null,
+      "started_utc": "2026-10-24T20:29:21Z"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "trial_id": "sw_32k_verify__bugfix_09_booking_slots__07",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_32k_verify",
+  "model": "ollama/qwen3.6-32k",
+  "k": 7,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_verify__c_ringbuf_03_ringbuffer__06",
+  "prev_task": "c_ringbuf_03_ringbuffer",
+  "seed": 1991239767,
+  "run_seed": 2,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T22:06:52Z",
+  "wall_start": 1792879612.7006876,
+  "wall_end": 1792879876.2514887,
+  "elapsed_s": 263.5,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 15,
+  "tokens_in": 138092,
+  "tokens_out": 7071,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "read",
+    "bash",
+    "todowrite",
+    "todowrite",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "bash",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 7 tests pass, and the code now correctly follows its docstrings for every function. Here's a summary of the bugs fixed:\n\n1. **`overlaps()` (line 13)**: Changed `<=` to strict `<` on both sides so that touching intervals like `(540,600)` and `(600,660)` are **not** considered overlapping, matching the spec.\n\n2. **`merge_intervals()` (lines 21, 24)**: \n   - Changed `intervals.sort()` to `sorted(intervals)` so the argument is **not mutated** (spec says \"The argument must not be modified\").\n   - Changed `start < merged[-1][1]` to `start <= merged[-1][1]` so that touching intervals are also merged.\n\n3. **`total_busy_minutes()` (lines 32\u201345)**: Rewrote from a naive `sum(end - start)` to properly merge overlapping intervals first, so \"a minute covered twice counts once.\"\n\n4. **`find_free_slots()` (lines 55\u201363)**: \n   - Added a trailing gap check after the last busy interval (`day_end - cursor >= min_len`).\n   - Changed `start - cursor > min_len` to `>= min_len` since \"A gap of exactly min_len minutes is long enough.\"\n   - Added clipping of busy intervals to `[day_start, day_end]` per the spec (\"parts of a busy interval that lie outside the day window are ignored\").\n\n**Command run**: `python3 -m unittest` \u2014 output: `7 tests in 0.000s ... OK`",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T22:06:52Z"
+    }
+  ]
+}

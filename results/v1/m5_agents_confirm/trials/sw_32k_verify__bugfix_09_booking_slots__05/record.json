@@ -1,0 +1,58 @@
+{
+  "trial_id": "sw_32k_verify__bugfix_09_booking_slots__05",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_32k_verify",
+  "model": "ollama/qwen3.6-32k",
+  "k": 5,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__c_ringbuf_03_ringbuffer__06",
+  "prev_task": "c_ringbuf_03_ringbuffer",
+  "seed": 911505647,
+  "run_seed": 2,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T19:09:38Z",
+  "wall_start": 1792868978.1849356,
+  "wall_end": 1792869310.7453644,
+  "elapsed_s": 332.6,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 7,
+  "tokens_in": 53089,
+  "tokens_out": 9208,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "read",
+    "bash",
+    "todowrite",
+    "todowrite",
+    "edit"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": false,
+      "detail": "Ran 20 tests in 0.001s |  | FAILED (failures=8)"
+    }
+  ],
+  "final_answer": "Now let me apply all three fixes:",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-24T19:09:38Z"
+    }
+  ]
+}

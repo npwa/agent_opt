@@ -1,0 +1,62 @@
+{
+  "trial_id": "sw_32k__bugfix_09_booking_slots__00",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": null,
+  "prev_task": null,
+  "seed": 1450637891,
+  "run_seed": 2,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T17:53:44Z",
+  "wall_start": 1792864424.0372767,
+  "wall_end": 1792864614.3279617,
+  "elapsed_s": 190.3,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 10,
+  "tokens_in": 99817,
+  "tokens_out": 4245,
+  "tool_sequence": [
+    "read",
+    "glob",
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 7 tests pass. Here's what I fixed:\n\n1. **`overlaps`** \u2014 Changed `<=` to `<` on both comparisons so touching intervals (e.g., `(540,600)` and `(600,660)`) are correctly reported as non-overlapping.\n\n2. **`merge_intervals`** \u2014 Added `sorted()` instead of `.sort()` to avoid mutating the argument, and changed `<` to `<=` in the merge condition so touching intervals get merged.\n\n3. **`total_busy_minutes`** \u2014 Added `merge_intervals()` call so overlapping intervals are deduplicated (a minute covered by two intervals counts once).\n\n4. **`find_free_slots`** \u2014 Used `merge_intervals` instead of raw `sorted(busy)` to handle overlapping busy intervals, clamped busy intervals to `[day_start, day_end]`, changed `>` to `>=` for the gap comparison, and added handling for the gap after the last busy interval before `day_end`.",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T17:53:44Z"
+    }
+  ]
+}

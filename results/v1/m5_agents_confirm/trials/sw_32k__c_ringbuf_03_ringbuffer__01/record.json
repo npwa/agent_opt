@@ -1,0 +1,67 @@
+{
+  "trial_id": "sw_32k__c_ringbuf_03_ringbuffer__01",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__c_ringbuf_03_ringbuffer__00",
+  "prev_task": "c_ringbuf_03_ringbuffer",
+  "seed": 1979864916,
+  "run_seed": 2,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T22:38:32Z",
+  "wall_start": 1792881512.1130712,
+  "wall_end": 1792881712.8568444,
+  "elapsed_s": 200.7,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 14,
+  "tokens_in": 160216,
+  "tokens_out": 5323,
+  "tool_sequence": [
+    "read",
+    "glob",
+    "read",
+    "read",
+    "write",
+    "edit",
+    "write",
+    "bash",
+    "edit",
+    "edit",
+    "bash",
+    "edit",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 1,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "37/37 tests passed! The ring buffer implementation is complete:\n\n- **ringbuf.c** \u2014 Implements all functions from `ringbuf.h` with opaque struct, wrap-around write/read, and NULL safety matching the spec.\n- **test.c** \u2014 Exercises basic CRUD, wrap-around behavior, partial writes, peek clearing, null handling\n\nClean compilation with `-std=c11 -Wall -Werror`.",
+  "files": [
+    "ringbuf.c",
+    "test.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T22:38:32Z"
+    }
+  ]
+}
