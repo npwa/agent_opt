@@ -1,0 +1,64 @@
+{
+  "trial_id": "sw_32k__c_ringbuf_03_ringbuffer__00",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__comms_12_timezone_slot__00",
+  "prev_task": "comms_12_timezone_slot",
+  "seed": 468219121,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T23:07:28Z",
+  "wall_start": 1792796848.8113482,
+  "wall_end": 1792797143.5173547,
+  "elapsed_s": 294.7,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 11,
+  "tokens_in": 111786,
+  "tokens_out": 8803,
+  "tool_sequence": [
+    "read",
+    "glob",
+    "read",
+    "read",
+    "write",
+    "bash",
+    "edit",
+    "edit",
+    "write",
+    "bash",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All tests pass -- `ringbuf.c` compiles cleanly with `-Wall -Werror` and works correctly for all cases: create/destroy, wrap-around writes and reads, peek (non-destructive), partial fills, clearing, and NULL safety.",
+  "files": [
+    "ringbuf.c",
+    "ringbuf_test.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T23:07:28Z"
+    }
+  ]
+}

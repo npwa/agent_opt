@@ -1,0 +1,63 @@
+{
+  "trial_id": "sw_32k__bugfix_09_booking_slots__00",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__coding_03_compress_gen__00",
+  "prev_task": "coding_03_compress_gen",
+  "seed": 1806923808,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-23T23:01:44Z",
+  "wall_start": 1792796504.340697,
+  "wall_end": 1792796635.481623,
+  "elapsed_s": 131.1,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 13,
+  "tokens_in": 126412,
+  "tokens_out": 3265,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "bash",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 7 tests pass now. Here's a summary of the bugs fixed:\n\n1. **`overlaps`** \u2014 used `<=` which treated touching intervals as overlapping; changed to `<` so touching boundaries don't count as overlap\n2. **`merge_intervals`** \u2014 mutated the input argument (should not) and used `<` instead of `<=` for merge detection; fixed to copy the list first and use `<=` to also merge touching intervals\n3. **`total_busy_minutes`** \u2014 summed raw interval lengths without merging overlaps, so overlapping parts were double-counted; now calls `merge_intervals` first to count distinct minutes\n4. **`find_free_slots`** \u2014 cursor was unclamped to the day window (could exceed `day_end`) and used `>` instead of `>=` for gap detection; also missed the trailing gap after the last busy interval. Fixed clamping, gap threshold, and end-of-day check",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-23T23:01:44Z"
+    }
+  ]
+}

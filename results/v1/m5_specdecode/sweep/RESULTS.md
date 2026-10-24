@@ -1,0 +1,42 @@
+# Speculative decoding on replayed agent calls
+
+Greedy replay of recorded agent requests against Ollama's bundled `llama-server`, 32k context, one slot, flash attention on. `speed` = pooled decode tokens/s relative to `none`; `identical` = replies whose full text (thinking, content, tool calls) equals the reply without speculation; `none_repeat` is the same setting run a second time (the floor for identity).
+
+| Setting | Output | calls | tok/s | speed | drafted | accepted | acceptance | identical |
+|---|---|---:|---:|---:|---:|---:|---:|---|
+| none | tool_code | 14 | 37.93 | 1.00 | 0 | 0 |  | 14/14 [78%, 100%] |
+| none | tool_other | 28 | 37.34 | 1.00 | 0 | 0 |  | 28/28 [88%, 100%] |
+| none | prose | 7 | 38.04 | 1.00 | 0 | 0 |  | 7/7 [65%, 100%] |
+| none | all | 49 | 37.79 | 1.00 | 0 | 0 |  | 49/49 [93%, 100%] |
+| none_repeat | tool_code | 14 | 37.67 | 0.99 | 0 | 0 |  | 14/14 [78%, 100%] |
+| none_repeat | tool_other | 28 | 38.36 | 1.03 | 0 | 0 |  | 28/28 [88%, 100%] |
+| none_repeat | prose | 7 | 38.51 | 1.01 | 0 | 0 |  | 7/7 [65%, 100%] |
+| none_repeat | all | 49 | 38.05 | 1.01 | 0 | 0 |  | 49/49 [93%, 100%] |
+| mtp_n2 | tool_code | 14 | 36.67 | 0.97 | 7542 | 3981 | 53% | 2/14 [4%, 40%] |
+| mtp_n2 | tool_other | 28 | 40.03 | 1.07 | 4240 | 2709 | 64% | 11/28 [24%, 58%] |
+| mtp_n2 | prose | 7 | 38.71 | 1.02 | 3305 | 1851 | 56% | 1/7 [3%, 51%] |
+| mtp_n2 | all | 49 | 38.07 | 1.01 | 15087 | 8541 | 57% | 14/49 [18%, 42%] |
+| mtp_n3 | tool_code | 14 | 34.61 | 0.91 | 11115 | 5079 | 46% | 3/14 [8%, 48%] |
+| mtp_n3 | tool_other | 28 | 34.76 | 0.93 | 7033 | 3288 | 47% | 13/28 [30%, 64%] |
+| mtp_n3 | prose | 7 | 34.35 | 0.90 | 4884 | 2115 | 43% | 0/7 [0%, 35%] |
+| mtp_n3 | all | 49 | 34.61 | 0.92 | 23032 | 10482 | 46% | 16/49 [21%, 47%] |
+| mtp_n4 | tool_code | 14 | 30.81 | 0.81 | 15172 | 5484 | 36% | 4/14 [12%, 55%] |
+| mtp_n4 | tool_other | 28 | 30.29 | 0.81 | 7040 | 2850 | 40% | 12/28 [27%, 61%] |
+| mtp_n4 | prose | 7 | 28.55 | 0.75 | 5564 | 1937 | 35% | 0/7 [0%, 35%] |
+| mtp_n4 | all | 49 | 30.21 | 0.80 | 27776 | 10271 | 37% | 16/49 [21%, 47%] |
+| ngram_mod_n8 | tool_code | 14 | 35.44 | 0.93 | 1640 | 1477 | 90% | 10/14 [45%, 88%] |
+| ngram_mod_n8 | tool_other | 28 | 34.58 | 0.93 | 1240 | 969 | 78% | 24/28 [69%, 94%] |
+| ngram_mod_n8 | prose | 7 | 32.76 | 0.86 | 112 | 68 | 61% | 6/7 [49%, 97%] |
+| ngram_mod_n8 | all | 49 | 34.58 | 0.92 | 2992 | 2514 | 84% | 40/49 [69%, 90%] |
+| ngram_mod_n16 | tool_code | 14 | 40.79 | 1.07 | 1840 | 1450 | 79% | 8/14 [33%, 79%] |
+| ngram_mod_n16 | tool_other | 28 | 38.5 | 1.03 | 1728 | 995 | 58% | 22/28 [60%, 90%] |
+| ngram_mod_n16 | prose | 7 | 37.69 | 0.99 | 144 | 55 | 38% | 6/7 [49%, 97%] |
+| ngram_mod_n16 | all | 49 | 39.39 | 1.04 | 3712 | 2500 | 67% | 36/49 [60%, 84%] |
+| ngram_mod_n64 | tool_code | 14 | 33.03 | 0.87 | 3924 | 1432 | 36% | 7/14 [27%, 73%] |
+| ngram_mod_n64 | tool_other | 28 | 25.94 | 0.69 | 4391 | 966 | 22% | 24/28 [69%, 94%] |
+| ngram_mod_n64 | prose | 7 | 35.37 | 0.93 | 696 | 67 | 10% | 6/7 [49%, 97%] |
+| ngram_mod_n64 | all | 49 | 31.27 | 0.83 | 9011 | 2465 | 27% | 37/49 [62%, 85%] |
+| ngram_map_k | tool_code | 14 | 30.39 | 0.80 | 4166 | 1623 | 39% | 8/14 [33%, 79%] |
+| ngram_map_k | tool_other | 28 | 26.81 | 0.72 | 3801 | 1375 | 36% | 24/28 [69%, 94%] |
+| ngram_map_k | prose | 7 | 29.27 | 0.77 | 2011 | 176 | 9% | 3/7 [16%, 75%] |
+| ngram_map_k | all | 49 | 28.9 | 0.77 | 9978 | 3174 | 32% | 35/49 [58%, 82%] |
