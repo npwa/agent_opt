@@ -1,0 +1,53 @@
+{
+  "trial_id": "sw_32k__repoqa_05_retry_policy__00",
+  "task": "repoqa_05_retry_policy",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__coding_06_tax_rates_lan__p20",
+  "prev_task": "coding_06_tax_rates_lan",
+  "seed": 73118521,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T16:14:36Z",
+  "wall_start": 1792858476.5047634,
+  "wall_end": 1792858506.9316237,
+  "elapsed_s": 30.4,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 24366,
+  "tokens_out": 573,
+  "tool_sequence": [
+    "glob",
+    "grep",
+    "read",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "92 words, all checks ok"
+    }
+  ],
+  "final_answer": "Here are the answers about retry policy in the miniq package:\n\n| Question | Answer | Citation |\n|---|---|---|\n| Which function computes the delay before a retry? | `RetryPolicy.next_delay(attempt)` | `miniq/retry.py:20` |\n| Default maximum delay | **30.0 seconds** (`RETRY_MAX_DELAY_S`) | `miniq/config.py:9` |\n| Attempts after which a job stops being retried (default) | After attempt **5** (`RETRY_MAX_ATTEMPTS = 5`; retries while `attempt < max_attempts`) | `miniq/config.py:7`, `miniq/retry.py:18` |\n\nThe delay is computed using exponential backoff capped at the maximum:  \n`delay = base_delay * 2^(attempt-1)`, capped to `max_delay`, with \u00b110% jitter.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T16:14:36Z"
+    }
+  ]
+}

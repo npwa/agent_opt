@@ -1,0 +1,53 @@
+{
+  "trial_id": "sw_32k__repoqa_05_retry_policy__p05",
+  "task": "repoqa_05_retry_policy",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 5,
+  "instrumented": false,
+  "prev_trial_id": "sw_32k__coding_05_scientific_lan__11",
+  "prev_task": "coding_05_scientific_lan",
+  "seed": 1570598404,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T16:15:54Z",
+  "wall_start": 1792858554.2426615,
+  "wall_end": 1792858577.9724839,
+  "elapsed_s": 23.7,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 23297,
+  "tokens_out": 442,
+  "tool_sequence": [
+    "glob",
+    "glob",
+    "read",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "59 words, all checks ok"
+    }
+  ],
+  "final_answer": "1. **Delay computation**: `miniq/retry.py:20-25` \u2014 the `next_delay()` method on the `RetryPolicy` class computes the delay using exponential backoff with jitter.\n\n2. **Default maximum delay**: `miniq/config.py:9` \u2014 `RETRY_MAX_DELAY_S = 30.0`, so **30 seconds**.\n\n3. **Max attempts before stop retrying**: `miniq/config.py:7` \u2014 `RETRY_MAX_ATTEMPTS = 5`, meaning a job is retried by default up to **5 attempts** (per `miniq/retry.py:18`: `attempt < self.max_attempts`).",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T16:15:54Z"
+    }
+  ]
+}

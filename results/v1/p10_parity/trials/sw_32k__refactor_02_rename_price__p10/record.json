@@ -1,0 +1,79 @@
+{
+  "trial_id": "sw_32k__refactor_02_rename_price__p10",
+  "task": "refactor_02_rename_price",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 10,
+  "instrumented": false,
+  "prev_trial_id": "sw_32k__coding_06_tax_rates_lan__13",
+  "prev_task": "coding_06_tax_rates_lan",
+  "seed": 1842573758,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T17:18:03Z",
+  "wall_start": 1792862283.1434376,
+  "wall_end": 1792862346.6258998,
+  "elapsed_s": 63.5,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 43207,
+  "tokens_out": 1581,
+  "tool_sequence": [
+    "grep",
+    "glob",
+    "glob",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "read",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "The function `calc_price` has been renamed to `compute_total_price` across all files:\n\n- **pricing.py** - function definition and export\n- **cart.py** - import and call site\n- **report.py** - import and call site  \n- **test_cart.py** - import, function name, all call sites in tests\n- **README.md** - documentation reference (1 occurrence)\n\nAll 4 tests pass unchanged.",
+  "files": [
+    "README.md",
+    "cart.py",
+    "pricing.py",
+    "report.py",
+    "test_cart.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T17:18:03Z"
+    }
+  ]
+}

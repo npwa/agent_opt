@@ -1,0 +1,85 @@
+{
+  "trial_id": "sw_32k__refactor_02_rename_price__03",
+  "task": "refactor_02_rename_price",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 3,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__coding_05_scientific_lan__15",
+  "prev_task": "coding_05_scientific_lan",
+  "seed": 838773709,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T16:44:18Z",
+  "wall_start": 1792860258.4372675,
+  "wall_end": 1792860363.8250704,
+  "elapsed_s": 105.4,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 10,
+  "tokens_in": 101711,
+  "tokens_out": 2471,
+  "tool_sequence": [
+    "grep",
+    "glob",
+    "glob",
+    "read",
+    "read",
+    "read",
+    "read",
+    "read",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "read",
+    "edit",
+    "edit",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 2,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All `calc_price` references renamed to `compute_total_price` across all files:\n\n- `pricing.py:4` \u2014 function definition\n- `cart.py:1,2,13` \u2014 docstring, import call site\n- `report.py:3,9` \u2014 import, call site\n- `test_cart.py:4,9-15` \u2014 import, test method name, call sites\n- `README.md:3` \u2014 documentation\n\nAll 4 tests pass.",
+  "files": [
+    "README.md",
+    "cart.py",
+    "pricing.py",
+    "report.py",
+    "test_cart.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T16:44:18Z"
+    }
+  ]
+}

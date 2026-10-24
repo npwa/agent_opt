@@ -110,13 +110,12 @@ consistent (cells with mixed outcomes 6 / 9 / 4 of 14): the spread between runs 
 
 **Agent configuration (`results/v1/m5_agents/`).** A custom OpenCode agent replaces the built-in 9.6k-character system prompt, so the test used a short-prompt control. On nine code-writing tasks (n = 3, 81 trials) the short prompt alone leaves the pass rate unchanged (59 % against 56 %), while a short prompt plus a mandatory "run it, test an edge case, report what you ran" step reached 74 % with fewer false claims (1 against 3 and 5). The differences are not significant at this sample size (CI of the gain -7 to +41 points); a confirmation run on the three tasks that moved is the next step.
 
-**Caveats.** Instrumentation parity is still inconclusive (isolated run: uninstrumented/instrumented time ratio
-0.87, 95 % CI 0.73-1.01 against a ±5 % tolerance, 28 parity trials; it was 1.06 in the first run, so the direction is
-not stable and noise is the likeliest explanation; success 61 % vs 71 %). One parity trial hung waiting for Ollama and
+**Caveats.** Instrumentation parity is still inconclusive by its rule, but now with a clean same-run comparison (`results/v1/p10_parity/`: 96 proxied vs 96 direct trials of five
+low-variance tasks): uninstrumented/instrumented time ratio 1.04, 95 % CI 0.998-1.094 against a ±5 % tolerance, per-task medians within 2-7 %, success 58 % vs 65 %. There is no
+sign that the proxy slows anything down (earlier measurements 1.06 and 0.87 scatter around 1), but the overhead is bounded only to about ±5-9 %. One parity trial hung waiting for Ollama and
 was recorded as a timeout; it was kept in `results/v1/baseline_isolated/hung_trials/`, re-run after a stall detector was
 added to the runner (a trial with no events, an idle GPU and no working child process for 5 minutes is now a retried
-harness failure, `--stall-s`), and the re-run passed. One configuration only: the 32k vs 16k comparison and the re-check
-of the v0 claims (M4.2) are not yet run.
+harness failure, `--stall-s`), and the re-run passed.
 
 ## Repository map
 

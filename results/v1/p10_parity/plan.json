@@ -1,0 +1,1379 @@
+{
+  "created_utc": "2026-10-24T15:50:50Z",
+  "run_seed": 1,
+  "n": 12,
+  "parity_fraction": 1.0,
+  "trials_per_task": {
+    "coding_01_my_sqrt_review": 12,
+    "coding_05_scientific_lan": 30,
+    "coding_06_tax_rates_lan": 30,
+    "refactor_02_rename_price": 12,
+    "repoqa_05_retry_policy": 12
+  },
+  "configs": {
+    "sw_32k": {
+      "id": "sw_32k",
+      "model": "ollama/qwen3.6-32k",
+      "description": "qwen3.6 35B-A3B, 32k context, KV f16, on a private Ollama (reference for the sweep)",
+      "seed_mode": "per_trial",
+      "options": {},
+      "server": {
+        "num_ctx": 32768
+      },
+      "agents": {}
+    }
+  },
+  "tasks": {
+    "coding_01_my_sqrt_review": "cdb71d8a5953",
+    "coding_05_scientific_lan": "adf6f2792260",
+    "coding_06_tax_rates_lan": "7d1c4ebf3406",
+    "refactor_02_rename_price": "410b4bbf373e",
+    "repoqa_05_retry_policy": "790e1276cd56"
+  },
+  "order": [
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__27",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 27,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__08",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__03",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__20",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 20,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__10",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 10,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__07",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__p11",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 11,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__p09",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 9,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__19",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 19,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__09",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p17",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 17,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__p00",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 0,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__04",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__p06",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 6,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__p05",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 5,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__21",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 21,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__p00",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 0,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__25",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 25,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p29",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 29,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p13",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 13,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__10",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 10,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__p06",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 6,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__02",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__11",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 11,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__09",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__18",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 18,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__12",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 12,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__p07",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 7,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p26",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 26,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__18",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 18,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p16",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 16,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__p03",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 3,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__p05",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 5,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p03",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 3,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__04",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p22",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 22,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__17",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 17,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__04",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__p07",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 7,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p20",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 20,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__00",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p17",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 17,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p25",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 25,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__13",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 13,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__11",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 11,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__p05",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 5,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__16",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 16,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__p02",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 2,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__08",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__14",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 14,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__29",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 29,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__07",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p04",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 4,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__05",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__08",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__05",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__p02",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 2,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__12",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 12,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__17",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 17,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p22",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 22,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__11",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 11,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p09",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 9,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__07",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__28",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 28,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__14",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 14,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__03",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p09",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 9,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p07",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 7,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__p03",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 3,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p00",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 0,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__01",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__p08",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 8,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__p09",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 9,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p19",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 19,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__25",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 25,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__06",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p11",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 11,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__p11",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 11,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__03",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__21",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 21,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p19",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 19,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__20",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 20,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p07",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 7,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__27",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 27,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__p04",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 4,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p18",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 18,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p15",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 15,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__00",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__01",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__05",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p10",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 10,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__08",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__p09",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 9,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p28",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 28,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__02",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__04",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__p10",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 10,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p24",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 24,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__06",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__15",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 15,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__03",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p06",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 6,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__03",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__09",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p25",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 25,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p02",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 2,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__26",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 26,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__23",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 23,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p12",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 12,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__p08",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 8,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p05",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 5,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__p01",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 1,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__p08",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 8,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__00",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__06",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__11",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 11,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p29",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 29,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__10",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 10,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__02",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__09",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__05",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__p00",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 0,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p16",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 16,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__22",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 22,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__p10",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 10,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p26",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 26,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__p01",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 1,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__19",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 19,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p08",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 8,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p08",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 8,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__08",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__16",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 16,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p23",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 23,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p13",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 13,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p18",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 18,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p23",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 23,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__24",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 24,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p15",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 15,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__p04",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 4,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p14",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 14,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__01",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__p07",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 7,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p21",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 21,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__23",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 23,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__01",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p28",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 28,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__22",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 22,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__p03",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 3,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p20",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 20,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p03",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 3,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__p01",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 1,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__09",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__04",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p05",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 5,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p27",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 27,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__p06",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 6,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__28",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 28,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p02",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 2,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p21",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 21,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__p11",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 11,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__24",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 24,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p01",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 1,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__p02",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 2,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__02",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p24",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 24,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__06",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__05",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__10",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 10,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p27",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 27,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__02",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__07",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p04",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 4,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p14",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 14,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p00",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 0,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__00",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__11",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 11,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__26",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 26,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__15",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 15,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__07",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p10",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 10,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__00",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__29",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 29,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__13",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 13,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__p10",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 10,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p06",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 6,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p01",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 1,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__p12",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 12,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__06",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__p11",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 11,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__p04",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 4,
+      "instrumented": false
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__01",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__10",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 10,
+      "instrumented": true
+    }
+  ]
+}

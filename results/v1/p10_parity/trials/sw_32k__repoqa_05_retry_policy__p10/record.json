@@ -1,0 +1,53 @@
+{
+  "trial_id": "sw_32k__repoqa_05_retry_policy__p10",
+  "task": "repoqa_05_retry_policy",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 10,
+  "instrumented": false,
+  "prev_trial_id": "sw_32k__refactor_02_rename_price__04",
+  "prev_task": "refactor_02_rename_price",
+  "seed": 2088390627,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T16:43:12Z",
+  "wall_start": 1792860192.260768,
+  "wall_end": 1792860222.6370926,
+  "elapsed_s": 30.4,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 23529,
+  "tokens_out": 678,
+  "tool_sequence": [
+    "glob",
+    "bash",
+    "read",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "46 words, all checks ok"
+    }
+  ],
+  "final_answer": "1. **Delay function:** `next_delay` at `miniq/retry.py:20` (exponential backoff with jitter)\n2. **Default maximum delay:** 30.0 seconds, defined in `miniq/config.py:9`, used via `miniq/retry.py:11`\n3. **Default retry limit:** Stops being retried on the 5th attempt, set by `miniq/config.py:7` (`RETRY_MAX_ATTEMPTS = 5`) and evaluated in `miniq/retry.py:18` (`attempt < self.max_attempts`)",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T16:43:12Z"
+    }
+  ]
+}

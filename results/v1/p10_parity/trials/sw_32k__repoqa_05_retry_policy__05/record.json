@@ -1,0 +1,53 @@
+{
+  "trial_id": "sw_32k__repoqa_05_retry_policy__05",
+  "task": "repoqa_05_retry_policy",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 5,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__repoqa_05_retry_policy__08",
+  "prev_task": "repoqa_05_retry_policy",
+  "seed": 56356007,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T16:23:03Z",
+  "wall_start": 1792858983.1891265,
+  "wall_end": 1792859029.0213122,
+  "elapsed_s": 45.8,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 24360,
+  "tokens_out": 1073,
+  "tool_sequence": [
+    "glob",
+    "grep",
+    "read",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "29 words, all checks ok"
+    }
+  ],
+  "final_answer": "1. Function: `RetryPolicy.next_delay` \u2014 `/tmp/agent_opt_scratch/sw_32k__repoqa_05_retry_policy__05/work/miniq/retry.py:20`\n2. Default max delay: **30.0 seconds** \u2014 `/tmp/agent_opt_scratch/sw_32k__repoqa_05_retry_policy__05/work/miniq/config.py:9`\n3. Max attempts before stopping retry: **5 attempts** \u2014 `/tmp/agent_opt_scratch/sw_32k__repoqa_05_retry_policy__05/work/miniq/retry.py:18` (via `config.RETRY_MAX_ATTEMPTS = 5` at `/tmp/agent_opt_scratch/sw_32k__repoqa_05_retry_policy__05/work/miniq/config.py:7`)",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T16:23:03Z"
+    }
+  ]
+}
