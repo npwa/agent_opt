@@ -1,0 +1,65 @@
+{
+  "trial_id": "sw_32k__coding_10_wcx_constrained__00",
+  "task": "coding_10_wcx_constrained",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_lean__coding_10_wcx_constrained__00",
+  "prev_task": "coding_10_wcx_constrained",
+  "seed": 424256367,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T04:29:38Z",
+  "wall_start": 1792816178.3742507,
+  "wall_end": 1792816709.1533518,
+  "elapsed_s": 530.8,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 15,
+  "tokens_in": 147748,
+  "tokens_out": 16628,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "write",
+    "write",
+    "write",
+    "write",
+    "write",
+    "write",
+    "bash",
+    "bash",
+    "read",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Wait, I need to check one more edge case - when `\\r` doesn't break a line for maxlen counting:",
+  "files": [
+    "wcx.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T04:29:38Z"
+    }
+  ]
+}

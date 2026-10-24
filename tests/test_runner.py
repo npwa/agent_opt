@@ -37,6 +37,23 @@ def test_load_config_ok_and_errors(tmp_path):
             runner.load_config(bad)
 
 
+def test_config_agents_mapping(tmp_path):
+    f = tmp_path / "c.yaml"
+    f.write_text("id: a\nmodel: p/m\nagents:\n  default: coding\n")
+    assert runner.load_config(f).agents == {"default": "coding"}
+    assert runner.load_config(ROOT / "configs/baseline_32k.yaml").agents == {}
+    for body in ("agents: [coding]\n", "agents:\n  default: 3\n", "agents:\n  default: ''\n"):
+        f.write_text("id: a\nmodel: p/m\n" + body)
+        with pytest.raises(ValueError):
+            runner.load_config(f)
+
+
+def test_agent_variant_configs_load_and_agents_exist():
+    for name, agent in (("sw_32k_verify", "coding"), ("sw_32k_lean", "coding_lean")):
+        cfg = runner.load_config(ROOT / f"configs/sweep/{name}.yaml")
+        assert cfg.agents == {"default": agent} and (ROOT / f"agent-config/agent/{agent}.md").is_file()
+
+
 def test_repo_baseline_config_loads():
     assert runner.load_config(ROOT / "configs/baseline_32k.yaml").model == "ollama/qwen3.6-32k"
 

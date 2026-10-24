@@ -1,0 +1,58 @@
+{
+  "trial_id": "sw_32k__c_ringbuf_03_ringbuffer__02",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 2,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_verify__bugfix_09_booking_slots__02",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 1104173152,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T04:06:25Z",
+  "wall_start": 1792814785.9994624,
+  "wall_end": 1792814883.4842181,
+  "elapsed_s": 97.5,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 6,
+  "tokens_in": 52737,
+  "tokens_out": 2410,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "read",
+    "write",
+    "write",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 24 tests pass, compiles clean with `gcc -std=c11 -Wall -Werror`. Here's what was implemented in `ringbuf.c`:\n\n| Function | Behavior |\n|---|---|\n| `rb_create` | Allocates buffer + ringbuf struct; rejects capacity=0 |\n| `rb_destroy` | Frees both buf and struct; NULL-safe |\n| `rb_write` | Wraps head pointer, stores up to free space (truncates if too large) |\n| `rb_read` | Wraps tail pointer, returns oldest bytes first |\n| `rb_peek` | Same as read but doesn't advance tail or change size |\n| `rb_size` / `rb_capacity` | Return current bytes / total capacity; NULL-safe |\n| `rb_clear` | Resets head, tail, size to zero |",
+  "files": [
+    "ringbuf.c",
+    "test.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T04:06:25Z"
+    }
+  ]
+}

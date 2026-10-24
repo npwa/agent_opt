@@ -32,7 +32,7 @@ import shutil
 import sys
 import time
 import urllib.request
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -48,7 +48,7 @@ from harness.workdir import prepare_workdir
 
 ROOT = Path(__file__).resolve().parent.parent
 FINAL_STATUSES = {"pass", "fail", "timeout", "harness_failed"}
-CONFIG_KEYS = {"id", "model", "description", "seed_mode", "options", "server"}
+CONFIG_KEYS = {"id", "model", "description", "seed_mode", "options", "server", "agents"}
 CONFINE = True  # run OpenCode under Landlock (harness/landlock.py); --no-confine turns it off
 STALL_S = 300.0  # no events + idle GPU + no working child for this long = stalled trial (0 disables); set by --stall-s
 
@@ -65,6 +65,7 @@ class RunConfig:
     seed_mode: str = "per_trial"
     options: dict = field(default_factory=dict)
     server: dict | None = None  # settings of a private Ollama server for this config (harness/server.py)
+    agents: dict = field(default_factory=dict)  # task agent name -> OpenCode agent to use instead ("default" = the built-in one)
 
 
 def load_config(path: Path) -> RunConfig:
@@ -81,6 +82,8 @@ def load_config(path: Path) -> RunConfig:
         raise ValueError(f"{path}: seed_mode must be per_trial or none")
     if not str(data["id"]).replace("_", "").replace("-", "").isalnum():
         raise ValueError(f"{path}: id must be alphanumeric/_/-")
+    if "agents" in data and not (isinstance(data["agents"], dict) and all(isinstance(k, str) and isinstance(v, str) and v for k, v in data["agents"].items())):
+        raise ValueError(f"{path}: agents must map agent names to agent names")
     if "server" in data and (errs := serverlib.validate_server(data["server"])):
         raise ValueError(f"{path}: " + "; ".join(errs))
     return RunConfig(**data)
@@ -252,6 +255,7 @@ def save_comm_state(comm_dir: Path | None, trial_dir: Path) -> None:
 
 def run_attempt(spec: TaskSpec, cfg: RunConfig, tid: str, attempt: int, seed: int | None,
                 trial_dir: Path, scratch: Path, metrics: Path, instrumented: bool = True) -> dict:
+    spec = replace(spec, agent=cfg.agents.get(spec.agent, spec.agent))
     run_dir = scratch / tid
     shutil.rmtree(run_dir, ignore_errors=True)
     events = trial_dir / "events.jsonl"

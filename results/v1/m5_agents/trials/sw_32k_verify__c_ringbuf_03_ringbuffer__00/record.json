@@ -1,0 +1,60 @@
+{
+  "trial_id": "sw_32k_verify__c_ringbuf_03_ringbuffer__00",
+  "task": "c_ringbuf_03_ringbuffer",
+  "config": "sw_32k_verify",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_verify__coding_02_fizzbuzz_gen__00",
+  "prev_task": "coding_02_fizzbuzz_gen",
+  "seed": 293171276,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T06:02:20Z",
+  "wall_start": 1792821740.0710275,
+  "wall_end": 1792821899.412725,
+  "elapsed_s": 159.3,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 8,
+  "tokens_in": 62024,
+  "tokens_out": 4560,
+  "tool_sequence": [
+    "read",
+    "read",
+    "read",
+    "read",
+    "write",
+    "write",
+    "bash",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Clean compile with no warnings or errors under `-std=c11 -Wall -Werror`. Now let me run the tests:\nAll done. Here's what was implemented and verified:\n\n**`ringbuf.c`** implements all 8 functions from `ringbuf.h`:\n\n| Function | Behavior |\n|---|---|\n| `rb_create(capacity)` | Allocates a fixed-capacity FIFO; returns NULL for capacity=0 or alloc failure |\n| `rb_destroy(rb)` | Frees the buffer (safe for NULL) |\n| `rb_write(rb, data, len)` | Appends bytes, wraps at buffer edge, stores what fits and returns that count |\n| `rb_read(rb, out, len)` | Removes oldest-first bytes, returns actual count read |\n| `rb_peek(rb, out, len)` | Copies oldest bytes without removing them |\n| `rb_size(rb)` | Bytes currently stored (0 for NULL) |\n| `rb_capacity(rb)` | Total capacity at creation (0 for NULL) |\n| `rb_clear(rb)` | Resets head/tail/count to zero (safe for NULL) |\n\nKey design details:\n- The struct is defined in `ringbuf.c`, keeping it opaque per spec.\n- Write and read use a two-copy approach \u2014 the first memcpy goes from the current offset to the end of storage, the second wraps around to the start. This avoids reading/writing outside allocated memory.\n- NULL-pointer arguments return 0 (or no-op) consistently.\n\n**Test results: 37/37 passed**, covering:\n1. Create, destroy, capacity on a fresh buffer\n2. Zero-capacity allocation \u2192 NULL\n3. All-NULL operations are safe\n4. Basic write\u2192read round-trip\n5. Write exceeding capacity (partial fill)\n6. Peek doesn't remove data\n7. **Wrap-around correctness** (cross the boundary between head and tail)\n8. `rb_clear` emptying the buffer\n9. Single-byte edge case\n\nCompiled cleanly with `gcc -std=c11 -Wall -Werror` \u2014 zero warnings, zero errors.",
+  "files": [
+    "ringbuf.c",
+    "test_ringbuf.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T06:02:20Z"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "trial_id": "sw_32k_lean__coding_03_compress_gen__01",
+  "task": "coding_03_compress_gen",
+  "config": "sw_32k_lean",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__coding_02_fizzbuzz_gen__00",
+  "prev_task": "coding_02_fizzbuzz_gen",
+  "seed": 1222582904,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T05:26:52Z",
+  "wall_start": 1792819612.4298162,
+  "wall_end": 1792819644.556333,
+  "elapsed_s": 32.1,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 17765,
+  "tokens_out": 824,
+  "tool_sequence": [
+    "read",
+    "glob",
+    "write"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Done. The file `compress.c` contains the `void compress_string(const char *src, char *dest)` function that performs run-length compression, e.g. `\"aabcccccaaa\"` \u2192 `\"a2b1c5a3\"`.",
+  "files": [
+    "compress.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T05:26:52Z"
+    }
+  ]
+}

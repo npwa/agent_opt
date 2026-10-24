@@ -1,0 +1,10 @@
+# H6: the same server as the control sw_32k; every task that uses the default agent runs with the "coding" agent
+# (agent-config/agent/coding.md: run the code, test an edge case, report exactly what was run).
+id: sw_32k_verify
+model: ollama/qwen3.6-32k
+description: qwen3.6 35B-A3B, 32k context; default-agent tasks use the verification-step agent
+seed_mode: per_trial
+server:
+  num_ctx: 32768
+agents:
+  default: coding

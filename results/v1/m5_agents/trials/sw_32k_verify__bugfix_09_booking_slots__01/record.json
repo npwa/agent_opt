@@ -1,0 +1,60 @@
+{
+  "trial_id": "sw_32k_verify__bugfix_09_booking_slots__01",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_32k_verify",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__bugfix_09_booking_slots__00",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 723080355,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T05:37:32Z",
+  "wall_start": 1792820252.0638742,
+  "wall_end": 1792820371.2011647,
+  "elapsed_s": 119.1,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 9,
+  "tokens_in": 71780,
+  "tokens_out": 3048,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": false,
+      "detail": "Ran 20 tests in 0.001s |  | FAILED (failures=2)"
+    }
+  ],
+  "final_answer": "All 7 tests pass. Here's a summary of the bugs fixed:\n\n**1. `overlaps` \u2014 wrong boundary condition:** Used `<=` which made touching intervals appear to overlap. Changed to strict `<` so `(540,600)` and `(600,660)` correctly do **not** overlap per the docstring.\n\n**2. `merge_intervals` \u2014 two bugs:** \n- The merge condition used `<` instead of `<=`, so touching intervals weren't merged. Fixed to `<=`.\n- `intervals.sort()` mutated the caller's list. Changed to `sorted(intervals)` to return a new sorted list and leave the argument unmodified, as required by the docstring.\n\n**3. `find_free_slots` \u2014 three bugs:**\n- Used `>` instead of `>=` for the gap length check, so a gap exactly equal to `min_len` was rejected (docstring says it should be accepted).\n- Didn't clip busy intervals to the `[day_start, day_end]` window per the docstring (\"parts of a busy interval that lie outside the day window are ignored\").\n- Didn't check for free slots after the last busy interval up to `day_end`, so trailing gaps were lost.",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-24T05:37:32Z"
+    }
+  ]
+}

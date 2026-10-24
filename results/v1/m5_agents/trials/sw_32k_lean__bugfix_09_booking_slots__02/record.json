@@ -1,0 +1,59 @@
+{
+  "trial_id": "sw_32k_lean__bugfix_09_booking_slots__02",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_32k_lean",
+  "model": "ollama/qwen3.6-32k",
+  "k": 2,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__coding_10_wcx_constrained__00",
+  "prev_task": "coding_10_wcx_constrained",
+  "seed": 1639167701,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T04:38:29Z",
+  "wall_start": 1792816709.4904413,
+  "wall_end": 1792816816.075469,
+  "elapsed_s": 106.6,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 8,
+  "tokens_in": 61320,
+  "tokens_out": 2735,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "read",
+    "bash",
+    "edit",
+    "edit",
+    "edit",
+    "edit"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": false,
+      "detail": "Ran 20 tests in 0.001s |  | FAILED (failures=1, errors=3)"
+    }
+  ],
+  "final_answer": "Wait, let me re-read what's happening. The `merge_intervals` edit was already applied. Let me now fix `total_busy_minutes`. But I realized there might be an issue with calling `merged_intervals` \u2014 that function name doesn't exist. It should be `merge_intervals`:",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-24T04:38:29Z"
+    }
+  ]
+}

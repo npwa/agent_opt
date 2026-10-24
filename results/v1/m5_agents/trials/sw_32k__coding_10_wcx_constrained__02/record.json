@@ -1,0 +1,53 @@
+{
+  "trial_id": "sw_32k__coding_10_wcx_constrained__02",
+  "task": "coding_10_wcx_constrained",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 2,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__bugfix_09_booking_slots__01",
+  "prev_task": "bugfix_09_booking_slots",
+  "seed": 2020826525,
+  "run_seed": 1,
+  "status": "timeout",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T05:11:13Z",
+  "wall_start": 1792818673.407457,
+  "wall_end": 1792819273.4692154,
+  "elapsed_s": 600.1,
+  "timed_out": true,
+  "stalled": false,
+  "exit_codes": [
+    -9
+  ],
+  "steps": 2,
+  "tokens_in": 15148,
+  "tokens_out": 2468,
+  "tool_sequence": [
+    "read",
+    "write"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": false,
+      "detail": "compile failed: wcx.c: In function \u2018main\u2019:\nwcx.c:53:5: error: \u2018Actually\u2019 undeclared (first use in this function)\n   53 |     Actually, let me redo the logic more carefully.\n      |     ^~~~~~~~\nwcx.c:53:5: note: each undeclared identifier is reported only once for each function it appears in\nwcx.c:53:15: error: \u2018le"
+    }
+  ],
+  "final_answer": "",
+  "files": [
+    "wcx.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "timeout",
+      "reason": null,
+      "started_utc": "2026-10-24T05:11:13Z"
+    }
+  ]
+}

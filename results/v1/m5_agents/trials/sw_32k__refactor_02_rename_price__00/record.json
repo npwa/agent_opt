@@ -1,0 +1,73 @@
+{
+  "trial_id": "sw_32k__refactor_02_rename_price__00",
+  "task": "refactor_02_rename_price",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_lean__repoqa_05_retry_policy__01",
+  "prev_task": "repoqa_05_retry_policy",
+  "seed": 1868813550,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T03:50:38Z",
+  "wall_start": 1792813838.0622616,
+  "wall_end": 1792813886.8922482,
+  "elapsed_s": 48.8,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 34099,
+  "tokens_out": 642,
+  "tool_sequence": [
+    "glob",
+    "grep",
+    "read",
+    "read",
+    "read",
+    "read",
+    "read",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 5 files updated and all 4 tests pass.",
+  "files": [
+    "README.md",
+    "cart.py",
+    "pricing.py",
+    "report.py",
+    "test_cart.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T03:50:38Z"
+    }
+  ]
+}

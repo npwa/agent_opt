@@ -1,0 +1,61 @@
+{
+  "trial_id": "sw_32k_lean__bugfix_09_booking_slots__01",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_32k_lean",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_lean__c_ringbuf_03_ringbuffer__01",
+  "prev_task": "c_ringbuf_03_ringbuffer",
+  "seed": 84434182,
+  "run_seed": 1,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T04:50:15Z",
+  "wall_start": 1792817415.2987933,
+  "wall_end": 1792817536.737281,
+  "elapsed_s": 121.4,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 10,
+  "tokens_in": 82542,
+  "tokens_out": 3110,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "edit",
+    "edit",
+    "edit",
+    "read",
+    "edit",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": false,
+      "detail": "Ran 20 tests in 0.001s |  | FAILED (failures=2)"
+    }
+  ],
+  "final_answer": "All 7 tests pass. Here's a summary of the three bugs fixed:\n\n1. **`overlaps`** \u2014 used `<=` which made touching intervals (e.g. `(540,600)` and `(600,660)`) appear overlapping. Changed to `<` so only intervals sharing at least one minute overlap.\n\n2. **`merge_intervals`** \u2014 two issues: it mutated the input list via `.sort()` (violating the docstring \"must not be modified\") and used `<` instead of `<=` for the merge condition, preventing touching intervals from being merged. Fixed by sorting a copy and using `<=`.\n\n3. **`find_free_slots`** \u2014 three issues: used `>` (strictly greater than) instead of `>=` (docstring says \"A gap of exactly min_len minutes is long enough\"), didn't clamp busy intervals to the `[day_start, day_end]` window (docstring says \"parts...outside the day window are ignored\"), and didn't check for a trailing gap after the last busy interval.",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-24T04:50:15Z"
+    }
+  ]
+}

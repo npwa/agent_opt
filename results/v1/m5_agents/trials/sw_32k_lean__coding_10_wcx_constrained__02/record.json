@@ -1,0 +1,65 @@
+{
+  "trial_id": "sw_32k_lean__coding_10_wcx_constrained__02",
+  "task": "coding_10_wcx_constrained",
+  "config": "sw_32k_lean",
+  "model": "ollama/qwen3.6-32k",
+  "k": 2,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__refactor_02_rename_price__00",
+  "prev_task": "refactor_02_rename_price",
+  "seed": 1147406255,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T03:51:27Z",
+  "wall_start": 1792813887.0313914,
+  "wall_end": 1792814199.507328,
+  "elapsed_s": 312.5,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 9,
+  "tokens_in": 63021,
+  "tokens_out": 8284,
+  "tool_sequence": [
+    "read",
+    "glob",
+    "read",
+    "write",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "edit"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Found a bug \u2014 `bytes` counts only non-newline bytes but the spec says \"total number of bytes read.\" Let me fix:",
+  "files": [
+    "wcx.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T03:51:27Z"
+    }
+  ]
+}

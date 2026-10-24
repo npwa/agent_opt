@@ -1,0 +1,60 @@
+{
+  "trial_id": "sw_32k_lean__coding_10_wcx_constrained__00",
+  "task": "coding_10_wcx_constrained",
+  "config": "sw_32k_lean",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_verify__coding_06_tax_rates_lan__02",
+  "prev_task": "coding_06_tax_rates_lan",
+  "seed": 1753272459,
+  "run_seed": 1,
+  "status": "timeout",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T04:19:38Z",
+  "wall_start": 1792815578.0887709,
+  "wall_end": 1792816178.1512067,
+  "elapsed_s": 600.1,
+  "timed_out": true,
+  "stalled": false,
+  "exit_codes": [
+    -9
+  ],
+  "steps": 9,
+  "tokens_in": 68493,
+  "tokens_out": 19061,
+  "tool_sequence": [
+    "read",
+    "write",
+    "write",
+    "write",
+    "write",
+    "write",
+    "write",
+    "write",
+    "write"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": false,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "python",
+      "passed": false,
+      "detail": "unterminated last line is the longest: expected '2 4 13 8\\n', got exit 0, '2 2 13 8\\n'; crlf: expected '2 3 11 6\\n', got exit 0, '2 3 11 0\\n'; high bytes belong to words: expected '2 3 10 7\\n', got exit 0, '2 2 10 0\\n'; blank lines and spaces: expected '3 0 10 4\\n', got exit 0, '3 0 10 0\\n' (+2 more)"
+    }
+  ],
+  "final_answer": "",
+  "files": [
+    "wcx.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "timeout",
+      "reason": null,
+      "started_utc": "2026-10-24T04:19:38Z"
+    }
+  ]
+}

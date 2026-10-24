@@ -1,0 +1,55 @@
+{
+  "trial_id": "sw_32k_verify__coding_02_fizzbuzz_gen__01",
+  "task": "coding_02_fizzbuzz_gen",
+  "config": "sw_32k_verify",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__coding_10_wcx_constrained__01",
+  "prev_task": "coding_10_wcx_constrained",
+  "seed": 721788459,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T03:43:50Z",
+  "wall_start": 1792813430.846375,
+  "wall_end": 1792813473.376015,
+  "elapsed_s": 42.5,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 30092,
+  "tokens_out": 773,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "write",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "compile_run",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All four required test lines appear in the output. The code is written to `fizzbuzz.c` and produces correct results:\n\n- Numbers divisible only by 3 get `\" fizz\"` appended\n- Numbers divisible only by 5 get `\" buzz\"` appended\n- Numbers divisible by both 3 and 5 (like 15) get `\" fizz buzz\"` appended\n- Each line ends with a newline",
+  "files": [
+    "fizzbuzz.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T03:43:50Z"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "trial_id": "sw_32k_verify__bugfix_09_booking_slots__00",
+  "task": "bugfix_09_booking_slots",
+  "config": "sw_32k_verify",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_lean__coding_05_scientific_lan__02",
+  "prev_task": "coding_05_scientific_lan",
+  "seed": 733677625,
+  "run_seed": 1,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-24T05:04:13Z",
+  "wall_start": 1792818253.4097874,
+  "wall_end": 1792818578.9670582,
+  "elapsed_s": 325.6,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 17,
+  "tokens_in": 176167,
+  "tokens_out": 9336,
+  "tool_sequence": [
+    "glob",
+    "read",
+    "read",
+    "read",
+    "bash",
+    "todowrite",
+    "edit",
+    "todowrite",
+    "bash",
+    "todowrite",
+    "edit",
+    "edit",
+    "read",
+    "edit",
+    "edit",
+    "bash",
+    "read",
+    "todowrite"
+  ],
+  "tool_errors": 1,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All **7 tests pass**. Here's a summary of every bug I found and fixed, each tied to its docstring:\n\n### 1. `overlaps()` \u2014 treated touching as overlap\n- **Docstring says:** *\"Touching intervals do not overlap\"*\n- **Bug:** `a[0] <= b[1]` used `<=`, so `(540,600)` and `(600,660)` returned `True`\n- **Fix:** Changed to strict `<` on both sides: `a[0] < b[1] and b[0] < a[1]`\n\n### 2. `merge_intervals()` \u2014 missed touching intervals + mutated input\n- **Docstring says:** *\"Intervals that overlap or touch are merged\"* and *\"The argument must not be modified\"*\n- **Bug 1 (`<=` vs `<`):** `start < merged[-1][1]` skipped the touching case\n- **Fix 1:** Changed to `start <= merged[-1][1]`\n- **Bug 2:** `intervals.sort()` mutated the caller's list\n- **Fix 2:** Used `sorted(intervals)` which returns a new copy\n\n### 3. `total_busy_minutes()` \u2014 double-counted overlapping minutes\n- **Docstring says:** *\"a minute covered twice counts once\"*\n- **Bug:** Simple `sum(end - start for ... in intervals)` counted overlaps multiple times\n- **Fix:** First ran `merge_intervals(intervals)` to deduplicate, then summed\n\n### 4. `find_free_slots()` \u2014 three bugs\n- **Docstring says:** *\"A gap of exactly min_len minutes is long enough\"* and **\"parts of a busy interval that lie outside the day window are ignored\"**\n- **Bug 1 (`>` vs `>=`):** Condition used `> min_len`, excluding gaps equal to `min_len`\n- **Fix 1:** Changed to `>= min_len`\n- **Bug 2 (no day_end clamping on cursor):** `cursor = max(cursor, end)` could advance past `day_end`\n- **Fix 2:** Clamp with `cursor = max(cursor, min(end, day_end))` and skip busy windows starting outside the day\n- **Bug 3 (no trailing gap check):** After the loop, if `cursor < day_end`, a free slot at the end was silently dropped\n- **Fix 3:** Added trailing-gap check after the loop",
+  "files": [
+    "bookings.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-24T05:04:13Z"
+    }
+  ]
+}

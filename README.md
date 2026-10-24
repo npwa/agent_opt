@@ -108,6 +108,8 @@ consistent (cells with mixed outcomes 6 / 9 / 4 of 14): the spread between runs 
 
 **Speculative decoding (`results/v1/m5_specdecode/`).** Nine settings (multi-token prediction at draft lengths 2-4, n-gram speculation, no speculation twice) were replayed on 49 recorded agent calls: none is reliably faster (0.77x to 1.04x against 37.8 tok/s) although n-gram drafts are accepted up to 84 % of the time, because checking several tokens at once reads many more CPU-resident expert weights. Speculation also changes the generated text (identical replies: 29-33 % for MTP, 71-82 % for n-gram, 100 % for a repeated run without speculation). Keep it off.
 
+**Agent configuration (`results/v1/m5_agents/`).** A custom OpenCode agent replaces the built-in 9.6k-character system prompt, so the test used a short-prompt control. On nine code-writing tasks (n = 3, 81 trials) the short prompt alone leaves the pass rate unchanged (59 % against 56 %), while a short prompt plus a mandatory "run it, test an edge case, report what you ran" step reached 74 % with fewer false claims (1 against 3 and 5). The differences are not significant at this sample size (CI of the gain -7 to +41 points); a confirmation run on the three tasks that moved is the next step.
+
 **Caveats.** Instrumentation parity is still inconclusive (isolated run: uninstrumented/instrumented time ratio
 0.87, 95 % CI 0.73-1.01 against a ±5 % tolerance, 28 parity trials; it was 1.06 in the first run, so the direction is
 not stable and noise is the likeliest explanation; success 61 % vs 71 %). One parity trial hung waiting for Ollama and

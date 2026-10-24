@@ -1,0 +1,11 @@
+# H6 control for the verification agent: same server as sw_32k; tasks that use the default agent run with the short
+# "coding_lean" agent (agent-config/agent/coding_lean.md). A custom agent replaces OpenCode's 9.6k-character system
+# prompt (found in the smoke run), so this arm separates the effect of the shorter prompt from the verification text.
+id: sw_32k_lean
+model: ollama/qwen3.6-32k
+description: qwen3.6 35B-A3B, 32k context; default-agent tasks use the short prompt without verification text
+seed_mode: per_trial
+server:
+  num_ctx: 32768
+agents:
+  default: coding_lean
