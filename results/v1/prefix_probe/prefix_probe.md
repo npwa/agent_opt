@@ -1,0 +1,30 @@
+| Task | Edit | cold prime (s) | edited second call (s) | prompt tokens |
+|---|---|---:|---:|---:|
+| sw_32k__repoqa_05_retry_policy__00 | identical | 64.82 | 0.43 | 7395 |
+| sw_32k__repoqa_05_retry_policy__00 | identical | 32.77 | 0.47 | 7387 |
+| sw_32k__repoqa_05_retry_policy__00 | other_seed | 35.35 | 0.47 | 7391 |
+| sw_32k__repoqa_05_retry_policy__00 | other_seed | 33.79 | 0.4 | 7395 |
+| sw_32k__repoqa_05_retry_policy__00 | workdir_changed | 33.15 | 2.72 | 7376 |
+| sw_32k__repoqa_05_retry_policy__00 | workdir_changed | 34.41 | 2.59 | 7382 |
+| sw_32k__repoqa_05_retry_policy__00 | user_tail | 33.64 | 2.63 | 7394 |
+| sw_32k__repoqa_05_retry_policy__00 | user_tail | 32.78 | 2.47 | 7398 |
+| sw_32k__repoqa_05_retry_policy__00 | system_end | 32.25 | 2.8 | 7398 |
+| sw_32k__repoqa_05_retry_policy__00 | system_end | 32.82 | 2.51 | 7398 |
+| sw_32k__repoqa_05_retry_policy__00 | first_tool_edit | 30.93 | 30.81 | 7393 |
+| sw_32k__repoqa_05_retry_policy__00 | first_tool_edit | 30.81 | 30.34 | 7395 |
+| sw_32k__repoqa_05_retry_policy__00 | last_tool_edit | 30.58 | 30.21 | 7395 |
+| sw_32k__repoqa_05_retry_policy__00 | last_tool_edit | 30.41 | 30.21 | 7395 |
+| sw_32k__comms_12_timezone_slot__00 | identical | 27.88 | 0.37 | 6691 |
+| sw_32k__comms_12_timezone_slot__00 | identical | 27.26 | 0.37 | 6685 |
+| sw_32k__comms_12_timezone_slot__00 | other_seed | 27.94 | 0.37 | 6691 |
+| sw_32k__comms_12_timezone_slot__00 | other_seed | 27.17 | 0.38 | 6687 |
+| sw_32k__comms_12_timezone_slot__00 | workdir_changed | 27.8 | 26.97 | 6678 |
+| sw_32k__comms_12_timezone_slot__00 | workdir_changed | 27.38 | 27.06 | 6674 |
+| sw_32k__comms_12_timezone_slot__00 | user_tail | 27.18 | 2.31 | 6692 |
+| sw_32k__comms_12_timezone_slot__00 | user_tail | 28.11 | 2.28 | 6696 |
+| sw_32k__comms_12_timezone_slot__00 | system_end | 27.71 | 2.35 | 6694 |
+| sw_32k__comms_12_timezone_slot__00 | system_end | 27.25 | 2.28 | 6688 |
+| sw_32k__comms_12_timezone_slot__00 | first_tool_edit | 27.22 | 27.85 | 6689 |
+| sw_32k__comms_12_timezone_slot__00 | first_tool_edit | 27.11 | 27.81 | 6689 |
+| sw_32k__comms_12_timezone_slot__00 | last_tool_edit | 27.61 | 27.63 | 6693 |
+| sw_32k__comms_12_timezone_slot__00 | last_tool_edit | 27.12 | 27.54 | 6689 |
