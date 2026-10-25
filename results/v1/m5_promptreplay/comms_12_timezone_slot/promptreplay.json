@@ -1,0 +1,706 @@
+{
+  "meta": {
+    "sequence": "results/v1/m5_specdecode/capture/proxy/requests/sw_32k__comms_12_timezone_slot__00",
+    "calls": 2,
+    "repeats": 3,
+    "flush": "nonce",
+    "max_tokens": 1,
+    "model": "qwen3.6-32k"
+  },
+  "summary": [
+    {
+      "variant": "default",
+      "mode": "cold",
+      "repeats": 3,
+      "first_call_prompt_tokens": 6691,
+      "first_call_ttft_s": 27.67834231199231,
+      "sequence_ttft_s": 33.171846277080476,
+      "calls": 2,
+      "first_call_samples": [
+        27.774114113068208,
+        27.67834231199231,
+        27.63198507099878
+      ],
+      "sequence_samples": [
+        33.29141199705191,
+        33.171846277080476,
+        33.12369573605247
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch+list_mcp_resource_templates+list_mcp_resources+read_mcp_resource",
+      "mode": "cold",
+      "repeats": 3,
+      "first_call_prompt_tokens": 4404,
+      "first_call_ttft_s": 18.389384818961844,
+      "sequence_ttft_s": 23.875952688860707,
+      "calls": 2,
+      "first_call_samples": [
+        18.389384818961844,
+        18.327114920015447,
+        18.43875765101984
+      ],
+      "sequence_samples": [
+        23.875952688860707,
+        23.788921746076085,
+        23.924111747997813
+      ],
+      "vs_default_sequence_ratio": 0.7197655653359696,
+      "vs_default_sequence_ratio_ci": [
+        0.7145663196317024,
+        0.722265774285517
+      ],
+      "directional": true
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch",
+      "mode": "cold",
+      "repeats": 3,
+      "first_call_prompt_tokens": 4718,
+      "first_call_ttft_s": 19.990984762087464,
+      "sequence_ttft_s": 25.470371359959245,
+      "calls": 2,
+      "first_call_samples": [
+        19.990984762087464,
+        20.00667123903986,
+        19.939552869996987
+      ],
+      "sequence_samples": [
+        25.490470354096033,
+        25.470371359959245,
+        25.417613238911144
+      ],
+      "vs_default_sequence_ratio": 0.7678309837567758,
+      "vs_default_sequence_ratio_ci": [
+        0.7634885910264779,
+        0.7695539337523776
+      ],
+      "directional": true
+    },
+    {
+      "variant": "strip_skills",
+      "mode": "cold",
+      "repeats": 3,
+      "first_call_prompt_tokens": 6526,
+      "first_call_ttft_s": 26.828490628977306,
+      "sequence_ttft_s": 32.35029851901345,
+      "calls": 2,
+      "first_call_samples": [
+        26.828490628977306,
+        26.92834956792649,
+        26.81871326896362
+      ],
+      "sequence_samples": [
+        32.35029851901345,
+        32.56112039391883,
+        32.33258897496853
+      ],
+      "vs_default_sequence_ratio": 0.975233583587578,
+      "vs_default_sequence_ratio_ci": [
+        0.9711990881561802,
+        0.9830159247139405
+      ],
+      "directional": true
+    },
+    {
+      "variant": "default",
+      "mode": "warm",
+      "repeats": 3,
+      "first_call_prompt_tokens": 6653,
+      "first_call_ttft_s": 26.880890636937693,
+      "sequence_ttft_s": 32.39140921388753,
+      "calls": 2,
+      "first_call_samples": [
+        27.255662749055773,
+        26.854508845019154,
+        26.880890636937693
+      ],
+      "sequence_samples": [
+        32.76173642498907,
+        32.36517071002163,
+        32.39140921388753
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch+list_mcp_resource_templates+list_mcp_resources+read_mcp_resource",
+      "mode": "warm",
+      "repeats": 3,
+      "first_call_prompt_tokens": 4424,
+      "first_call_ttft_s": 18.37676599691622,
+      "sequence_ttft_s": 23.907298233010806,
+      "calls": 2,
+      "first_call_samples": [
+        18.430380234029144,
+        18.375496250926517,
+        18.37676599691622
+      ],
+      "sequence_samples": [
+        23.924474866129458,
+        23.907298233010806,
+        23.892308736918494
+      ],
+      "vs_default_sequence_ratio": 0.7380752740686801,
+      "vs_default_sequence_ratio_ci": [
+        0.7292747987159374,
+        0.7392043465638642
+      ],
+      "directional": true
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch",
+      "mode": "warm",
+      "repeats": 3,
+      "first_call_prompt_tokens": 4708,
+      "first_call_ttft_s": 19.843739187926985,
+      "sequence_ttft_s": 25.329860938014463,
+      "calls": 2,
+      "first_call_samples": [
+        19.843739187926985,
+        19.8367802380817,
+        19.875786697957665
+      ],
+      "sequence_samples": [
+        25.294561935937963,
+        25.329860938014463,
+        25.41773982194718
+      ],
+      "vs_default_sequence_ratio": 0.7819931751272653,
+      "vs_default_sequence_ratio_ci": [
+        0.7720763517480868,
+        0.7853423684886287
+      ],
+      "directional": true
+    },
+    {
+      "variant": "strip_skills",
+      "mode": "warm",
+      "repeats": 3,
+      "first_call_prompt_tokens": 6492,
+      "first_call_ttft_s": 26.650953655014746,
+      "sequence_ttft_s": 32.16962678404525,
+      "calls": 2,
+      "first_call_samples": [
+        26.63473015499767,
+        26.650953655014746,
+        26.697279813000932
+      ],
+      "sequence_samples": [
+        32.15831417602021,
+        32.16962678404525,
+        32.19444434996694
+      ],
+      "vs_default_sequence_ratio": 0.9931530478227174,
+      "vs_default_sequence_ratio_ci": [
+        0.981581493693094,
+        0.9947249973873358
+      ],
+      "directional": true
+    }
+  ],
+  "runs": [
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch+list_mcp_resource_templates+list_mcp_resources+read_mcp_resource",
+      "mode": "cold",
+      "repeat": 0,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 18.389384818961844,
+          "total_s": 18.38949503796175,
+          "prompt_tokens": 4404,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.486567869898863,
+          "total_s": 5.486764903995208,
+          "prompt_tokens": 5776,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch+list_mcp_resource_templates+list_mcp_resources+read_mcp_resource",
+      "mode": "warm",
+      "repeat": 0,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 18.430380234029144,
+          "total_s": 18.430546108051203,
+          "prompt_tokens": 4424,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.494094632100314,
+          "total_s": 5.49435070308391,
+          "prompt_tokens": 5796,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "default",
+      "mode": "cold",
+      "repeat": 0,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 27.774114113068208,
+          "total_s": 27.77453342906665,
+          "prompt_tokens": 6691,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.5172978839837015,
+          "total_s": 5.517735147965141,
+          "prompt_tokens": 8063,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "default",
+      "mode": "warm",
+      "repeat": 0,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 27.255662749055773,
+          "total_s": 27.255967561039142,
+          "prompt_tokens": 6653,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.506073675933294,
+          "total_s": 5.506428762921132,
+          "prompt_tokens": 8025,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch",
+      "mode": "cold",
+      "repeat": 0,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 19.990984762087464,
+          "total_s": 19.99114730907604,
+          "prompt_tokens": 4718,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.499485592008568,
+          "total_s": 5.499648830038495,
+          "prompt_tokens": 6090,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch",
+      "mode": "warm",
+      "repeat": 0,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 19.843739187926985,
+          "total_s": 19.84398148499895,
+          "prompt_tokens": 4708,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.450822748010978,
+          "total_s": 5.4511345269856974,
+          "prompt_tokens": 6080,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "strip_skills",
+      "mode": "cold",
+      "repeat": 0,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 26.828490628977306,
+          "total_s": 26.828724359045736,
+          "prompt_tokens": 6526,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.521807890036143,
+          "total_s": 5.5222307610092685,
+          "prompt_tokens": 7898,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "strip_skills",
+      "mode": "warm",
+      "repeat": 0,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 26.63473015499767,
+          "total_s": 26.635037494939752,
+          "prompt_tokens": 6492,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.523584021022543,
+          "total_s": 5.524073573062196,
+          "prompt_tokens": 7864,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "default",
+      "mode": "cold",
+      "repeat": 1,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 27.67834231199231,
+          "total_s": 27.678656360018067,
+          "prompt_tokens": 6689,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.493503965088166,
+          "total_s": 5.493877114029601,
+          "prompt_tokens": 8061,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "default",
+      "mode": "warm",
+      "repeat": 1,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 26.854508845019154,
+          "total_s": 26.854755708016455,
+          "prompt_tokens": 6653,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.510661865002476,
+          "total_s": 5.511034699971788,
+          "prompt_tokens": 8025,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "strip_skills",
+      "mode": "cold",
+      "repeat": 1,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 26.92834956792649,
+          "total_s": 26.928635169984773,
+          "prompt_tokens": 6524,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.632770825992338,
+          "total_s": 5.633045020978898,
+          "prompt_tokens": 7896,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "strip_skills",
+      "mode": "warm",
+      "repeat": 1,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 26.650953655014746,
+          "total_s": 26.651279742945917,
+          "prompt_tokens": 6492,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.518673129030503,
+          "total_s": 5.519047533976845,
+          "prompt_tokens": 7864,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch",
+      "mode": "cold",
+      "repeat": 1,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 20.00667123903986,
+          "total_s": 20.006767341052182,
+          "prompt_tokens": 4722,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.463700120919384,
+          "total_s": 5.463913213927299,
+          "prompt_tokens": 6094,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch",
+      "mode": "warm",
+      "repeat": 1,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 19.8367802380817,
+          "total_s": 19.836950864060782,
+          "prompt_tokens": 4708,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.4930806999327615,
+          "total_s": 5.493286532931961,
+          "prompt_tokens": 6080,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch+list_mcp_resource_templates+list_mcp_resources+read_mcp_resource",
+      "mode": "cold",
+      "repeat": 1,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 18.327114920015447,
+          "total_s": 18.327253218041733,
+          "prompt_tokens": 4406,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.461806826060638,
+          "total_s": 5.462038455996662,
+          "prompt_tokens": 5778,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch+list_mcp_resource_templates+list_mcp_resources+read_mcp_resource",
+      "mode": "warm",
+      "repeat": 1,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 18.375496250926517,
+          "total_s": 18.375797256012447,
+          "prompt_tokens": 4424,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.531801982084289,
+          "total_s": 5.532221324043348,
+          "prompt_tokens": 5796,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "strip_skills",
+      "mode": "cold",
+      "repeat": 2,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 26.81871326896362,
+          "total_s": 26.81896775297355,
+          "prompt_tokens": 6522,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.51387570600491,
+          "total_s": 5.5142392460256815,
+          "prompt_tokens": 7894,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "strip_skills",
+      "mode": "warm",
+      "repeat": 2,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 26.697279813000932,
+          "total_s": 26.697573198005557,
+          "prompt_tokens": 6492,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.497164536966011,
+          "total_s": 5.497489233035594,
+          "prompt_tokens": 7864,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch",
+      "mode": "cold",
+      "repeat": 2,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 19.939552869996987,
+          "total_s": 19.939708822988905,
+          "prompt_tokens": 4718,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.478060368914157,
+          "total_s": 5.4783554408932105,
+          "prompt_tokens": 6090,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch",
+      "mode": "warm",
+      "repeat": 2,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 19.875786697957665,
+          "total_s": 19.87595249095466,
+          "prompt_tokens": 4708,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.541953123989515,
+          "total_s": 5.542227223981172,
+          "prompt_tokens": 6080,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch+list_mcp_resource_templates+list_mcp_resources+read_mcp_resource",
+      "mode": "cold",
+      "repeat": 2,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 18.43875765101984,
+          "total_s": 18.43891085498035,
+          "prompt_tokens": 4400,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.4853540969779715,
+          "total_s": 5.485496080014855,
+          "prompt_tokens": 5772,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch+list_mcp_resource_templates+list_mcp_resources+read_mcp_resource",
+      "mode": "warm",
+      "repeat": 2,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 18.37676599691622,
+          "total_s": 18.377132541965693,
+          "prompt_tokens": 4424,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.5155427400022745,
+          "total_s": 5.516055625979789,
+          "prompt_tokens": 5796,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "default",
+      "mode": "cold",
+      "repeat": 2,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 27.63198507099878,
+          "total_s": 27.632310735993087,
+          "prompt_tokens": 6689,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.491710665053688,
+          "total_s": 5.491783356061205,
+          "prompt_tokens": 8061,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "default",
+      "mode": "warm",
+      "repeat": 2,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 26.880890636937693,
+          "total_s": 26.88121818494983,
+          "prompt_tokens": 6653,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 5.510518576949835,
+          "total_s": 5.510597254964523,
+          "prompt_tokens": 8025,
+          "completion_tokens": 1
+        }
+      ]
+    }
+  ]
+}

@@ -75,6 +75,13 @@ def test_perturb_changes_only_the_scratch_directory():
     assert p["tools"] == b["tools"] and p["messages"][1] == b["messages"][1]
 
 
+def test_perturb_keeps_the_shared_tmp_directory():
+    """Every trial has the same shared TMPDIR (it sits in the bash tool text); changing it would defeat the prefix cache."""
+    b = body([{"role": "tool", "content": "use /tmp/agent_opt_scratch/shared_tmp/opencode in /tmp/agent_opt_scratch/cfg__t__00/work"}])
+    s = json.dumps(pr.perturb(b, "replay_1"))
+    assert "/tmp/agent_opt_scratch/shared_tmp/opencode" in s and "cfg__t__00" not in s
+
+
 def test_add_nonce_marks_system_and_first_tool_only():
     b = body()
     n = pr.add_nonce(b, "abc")

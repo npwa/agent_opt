@@ -43,7 +43,7 @@ from analysis import stats
 from harness.proxy import usage_from_bytes
 
 DATA_RE = re.compile(rb"data:\s*(?!\[DONE\])\S")  # a data line that is not the terminator
-PATH_RE = re.compile(r"/tmp/agent_opt_scratch/([^/\s\"\\]+)/")
+PATH_RE = re.compile(r"/tmp/agent_opt_scratch/(?!shared_tmp/)([^/\s\"\\]+)/")  # shared_tmp is the same for every trial (bash tool text)
 SKILLS_MARK = "Skills provide specialized instructions"
 FILLER = ("The quick brown fox jumps over the lazy dog while seven quiet engineers measure prefill latency "
           "on a ten gigabyte graphics card. ")

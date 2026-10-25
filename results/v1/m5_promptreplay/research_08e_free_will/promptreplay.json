@@ -1,0 +1,1042 @@
+{
+  "meta": {
+    "sequence": "results/v1/m5_specdecode/capture/proxy/requests/sw_32k__research_08e_free_will__00",
+    "calls": 4,
+    "repeats": 3,
+    "flush": "nonce",
+    "max_tokens": 1,
+    "model": "qwen3.6-32k"
+  },
+  "summary": [
+    {
+      "variant": "default",
+      "mode": "cold",
+      "repeats": 3,
+      "first_call_prompt_tokens": 7684,
+      "first_call_ttft_s": 31.224847323959693,
+      "sequence_ttft_s": 183.61429622303694,
+      "calls": 4,
+      "first_call_samples": [
+        31.32461416500155,
+        31.224847323959693,
+        31.156893334002234
+      ],
+      "sequence_samples": [
+        183.61429622303694,
+        183.61234629002865,
+        183.88370312994812
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch+list_mcp_resource_templates+list_mcp_resources+read_mcp_resource",
+      "mode": "cold",
+      "repeats": 3,
+      "first_call_prompt_tokens": 5397,
+      "first_call_ttft_s": 22.677634611027315,
+      "sequence_ttft_s": 173.7550267529441,
+      "calls": 4,
+      "first_call_samples": [
+        22.47794634499587,
+        22.677634611027315,
+        22.72943337401375
+      ],
+      "sequence_samples": [
+        174.35185728722718,
+        173.7550267529441,
+        173.62070296006277
+      ],
+      "vs_default_sequence_ratio": 0.9463044562820057,
+      "vs_default_sequence_ratio_ci": [
+        0.9441875490040973,
+        0.9495649982699209
+      ],
+      "directional": true
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch",
+      "mode": "cold",
+      "repeats": 3,
+      "first_call_prompt_tokens": 5711,
+      "first_call_ttft_s": 23.952820267062634,
+      "sequence_ttft_s": 174.6722144620726,
+      "calls": 4,
+      "first_call_samples": [
+        23.952820267062634,
+        23.999752352014184,
+        23.936265191994607
+      ],
+      "sequence_samples": [
+        174.5867846881738,
+        174.74451556091662,
+        174.6722144620726
+      ],
+      "vs_default_sequence_ratio": 0.9512996430838785,
+      "vs_default_sequence_ratio_ci": [
+        0.9494413138112391,
+        0.9517035160854344
+      ],
+      "directional": true
+    },
+    {
+      "variant": "strip_skills",
+      "mode": "cold",
+      "repeats": 3,
+      "first_call_prompt_tokens": 7519,
+      "first_call_ttft_s": 31.14733913098462,
+      "sequence_ttft_s": 183.63291882898193,
+      "calls": 4,
+      "first_call_samples": [
+        31.112411887967028,
+        31.36058578803204,
+        31.14733913098462
+      ],
+      "sequence_samples": [
+        183.70608317002188,
+        183.53034158109222,
+        183.63291882898193
+      ],
+      "vs_default_sequence_ratio": 1.0001014224182325,
+      "vs_default_sequence_ratio_ci": [
+        0.9980783422193419,
+        1.0005105151254108
+      ],
+      "directional": true
+    },
+    {
+      "variant": "default",
+      "mode": "warm",
+      "repeats": 3,
+      "first_call_prompt_tokens": 7645,
+      "first_call_ttft_s": 30.885630122967996,
+      "sequence_ttft_s": 183.29624662303831,
+      "calls": 4,
+      "first_call_samples": [
+        30.885630122967996,
+        30.922005166998133,
+        30.832746539032087
+      ],
+      "sequence_samples": [
+        183.34844822785817,
+        183.29624662303831,
+        182.9327371539548
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch+list_mcp_resource_templates+list_mcp_resources+read_mcp_resource",
+      "mode": "warm",
+      "repeats": 3,
+      "first_call_prompt_tokens": 5416,
+      "first_call_ttft_s": 22.49740000697784,
+      "sequence_ttft_s": 173.87553869199473,
+      "calls": 4,
+      "first_call_samples": [
+        22.52918188192416,
+        22.49740000697784,
+        22.4876294269925
+      ],
+      "sequence_samples": [
+        173.77560175699182,
+        174.06816061399877,
+        173.87553869199473
+      ],
+      "vs_default_sequence_ratio": 0.9486039234048369,
+      "vs_default_sequence_ratio_ci": [
+        0.9477887783431382,
+        0.9515418799397526
+      ],
+      "directional": true
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch",
+      "mode": "warm",
+      "repeats": 3,
+      "first_call_prompt_tokens": 5700,
+      "first_call_ttft_s": 23.57079964701552,
+      "sequence_ttft_s": 174.97470371588133,
+      "calls": 4,
+      "first_call_samples": [
+        23.619791141012684,
+        23.56032787100412,
+        23.57079964701552
+      ],
+      "sequence_samples": [
+        174.97470371588133,
+        175.01938557787798,
+        174.61265494010877
+      ],
+      "vs_default_sequence_ratio": 0.9546005820606309,
+      "vs_default_sequence_ratio_ci": [
+        0.9523541465870881,
+        0.9567417418052571
+      ],
+      "directional": true
+    },
+    {
+      "variant": "strip_skills",
+      "mode": "warm",
+      "repeats": 3,
+      "first_call_prompt_tokens": 7484,
+      "first_call_ttft_s": 30.811181733035482,
+      "sequence_ttft_s": 183.46041617111769,
+      "calls": 4,
+      "first_call_samples": [
+        30.788892279961146,
+        30.85671632096637,
+        30.811181733035482
+      ],
+      "sequence_samples": [
+        183.46041617111769,
+        183.33402174082585,
+        183.49038879724685
+      ],
+      "vs_default_sequence_ratio": 1.0008956514446092,
+      "vs_default_sequence_ratio_ci": [
+        0.9999213165577797,
+        1.0030483971976143
+      ],
+      "directional": true
+    }
+  ],
+  "runs": [
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch+list_mcp_resource_templates+list_mcp_resources+read_mcp_resource",
+      "mode": "cold",
+      "repeat": 0,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 22.47794634499587,
+          "total_s": 22.47804602398537,
+          "prompt_tokens": 5397,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.466021547093987,
+          "total_s": 18.46656229905784,
+          "prompt_tokens": 10341,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.49453839706257,
+          "total_s": 63.49461311602499,
+          "prompt_tokens": 28433,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 69.91335099807475,
+          "total_s": 69.91473204805516,
+          "prompt_tokens": 24532,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch+list_mcp_resource_templates+list_mcp_resources+read_mcp_resource",
+      "mode": "warm",
+      "repeat": 0,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 22.52918188192416,
+          "total_s": 22.529401171952486,
+          "prompt_tokens": 5416,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.37749555206392,
+          "total_s": 18.377928846050054,
+          "prompt_tokens": 10360,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.34567030100152,
+          "total_s": 63.347041693050414,
+          "prompt_tokens": 28483,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 69.52325402200222,
+          "total_s": 69.52513393107802,
+          "prompt_tokens": 24582,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "default",
+      "mode": "cold",
+      "repeat": 0,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 31.32461416500155,
+          "total_s": 31.32502098393161,
+          "prompt_tokens": 7684,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.698810789035633,
+          "total_s": 18.699285999988206,
+          "prompt_tokens": 12628,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.74785712501034,
+          "total_s": 63.747932982980274,
+          "prompt_tokens": 30720,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 69.84301414398942,
+          "total_s": 69.84536576201208,
+          "prompt_tokens": 26819,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "default",
+      "mode": "warm",
+      "repeat": 0,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 30.885630122967996,
+          "total_s": 30.88603446597699,
+          "prompt_tokens": 7645,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.576426862971857,
+          "total_s": 18.577075371984392,
+          "prompt_tokens": 12589,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.876365202944726,
+          "total_s": 63.87644638202619,
+          "prompt_tokens": 30684,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 70.01002603897359,
+          "total_s": 70.01143254199997,
+          "prompt_tokens": 26783,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch",
+      "mode": "cold",
+      "repeat": 0,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 23.952820267062634,
+          "total_s": 23.95306256902404,
+          "prompt_tokens": 5711,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.287969158031046,
+          "total_s": 18.28846354794223,
+          "prompt_tokens": 10655,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.184615965001285,
+          "total_s": 63.18607699603308,
+          "prompt_tokens": 28747,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 69.16137929807883,
+          "total_s": 69.16281610110309,
+          "prompt_tokens": 24846,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch",
+      "mode": "warm",
+      "repeat": 0,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 23.619791141012684,
+          "total_s": 23.620053892955184,
+          "prompt_tokens": 5700,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.384297188953497,
+          "total_s": 18.384972175001167,
+          "prompt_tokens": 10644,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.30487198999617,
+          "total_s": 63.30494872608688,
+          "prompt_tokens": 28751,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 69.66574339591898,
+          "total_s": 69.66735776793212,
+          "prompt_tokens": 24850,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "strip_skills",
+      "mode": "cold",
+      "repeat": 0,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 31.112411887967028,
+          "total_s": 31.11274767795112,
+          "prompt_tokens": 7519,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.633839400019497,
+          "total_s": 18.634360448108055,
+          "prompt_tokens": 12463,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.76278732100036,
+          "total_s": 63.764483010047115,
+          "prompt_tokens": 30555,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 70.197044561035,
+          "total_s": 70.1986786860507,
+          "prompt_tokens": 26654,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "strip_skills",
+      "mode": "warm",
+      "repeat": 0,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 30.788892279961146,
+          "total_s": 30.789264278952032,
+          "prompt_tokens": 7484,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.550913486047648,
+          "total_s": 18.551722296047956,
+          "prompt_tokens": 12428,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.92750499607064,
+          "total_s": 63.9292759380769,
+          "prompt_tokens": 30524,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 70.19310540903825,
+          "total_s": 70.19455942104105,
+          "prompt_tokens": 26623,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "default",
+      "mode": "cold",
+      "repeat": 1,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 31.224847323959693,
+          "total_s": 31.22528657899238,
+          "prompt_tokens": 7682,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.584644495043904,
+          "total_s": 18.585295021999627,
+          "prompt_tokens": 12626,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.84745340002701,
+          "total_s": 63.84900051506702,
+          "prompt_tokens": 30718,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 69.95540107099805,
+          "total_s": 69.95686579192989,
+          "prompt_tokens": 26817,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "default",
+      "mode": "warm",
+      "repeat": 1,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 30.922005166998133,
+          "total_s": 30.922368208062835,
+          "prompt_tokens": 7645,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.54976152908057,
+          "total_s": 18.550349352066405,
+          "prompt_tokens": 12589,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.84374053799547,
+          "total_s": 63.84381668292917,
+          "prompt_tokens": 30684,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 69.98073938896414,
+          "total_s": 69.98240741097834,
+          "prompt_tokens": 26783,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "strip_skills",
+      "mode": "cold",
+      "repeat": 1,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 31.36058578803204,
+          "total_s": 31.360899316030554,
+          "prompt_tokens": 7517,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.532341929967515,
+          "total_s": 18.532881513936445,
+          "prompt_tokens": 12461,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.73048935004044,
+          "total_s": 63.73207887203898,
+          "prompt_tokens": 30553,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 69.90692451305222,
+          "total_s": 69.90844111295883,
+          "prompt_tokens": 26652,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "strip_skills",
+      "mode": "warm",
+      "repeat": 1,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 30.85671632096637,
+          "total_s": 30.857076858985238,
+          "prompt_tokens": 7484,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.59122787800152,
+          "total_s": 18.591818515909836,
+          "prompt_tokens": 12428,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.69135768990964,
+          "total_s": 63.69299515290186,
+          "prompt_tokens": 30524,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 70.19471985194832,
+          "total_s": 70.1963596829446,
+          "prompt_tokens": 26623,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch",
+      "mode": "cold",
+      "repeat": 1,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 23.999752352014184,
+          "total_s": 24.000053898082115,
+          "prompt_tokens": 5715,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.34510544303339,
+          "total_s": 18.345641377032734,
+          "prompt_tokens": 10659,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.165841641952284,
+          "total_s": 63.165918199927546,
+          "prompt_tokens": 28751,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 69.23381612391677,
+          "total_s": 69.23512278997805,
+          "prompt_tokens": 24850,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch",
+      "mode": "warm",
+      "repeat": 1,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 23.56032787100412,
+          "total_s": 23.560573749942705,
+          "prompt_tokens": 5700,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.40544919297099,
+          "total_s": 18.406016338965856,
+          "prompt_tokens": 10644,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.376035177963786,
+          "total_s": 63.37756323791109,
+          "prompt_tokens": 28751,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 69.67757333593909,
+          "total_s": 69.67915288999211,
+          "prompt_tokens": 24850,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch+list_mcp_resource_templates+list_mcp_resources+read_mcp_resource",
+      "mode": "cold",
+      "repeat": 1,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 22.677634611027315,
+          "total_s": 22.677836230024695,
+          "prompt_tokens": 5399,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.352421884890646,
+          "total_s": 18.35285502090119,
+          "prompt_tokens": 10343,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.458269560011104,
+          "total_s": 63.45972546003759,
+          "prompt_tokens": 28435,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 69.26670069701504,
+          "total_s": 69.26806314906571,
+          "prompt_tokens": 24534,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch+list_mcp_resource_templates+list_mcp_resources+read_mcp_resource",
+      "mode": "warm",
+      "repeat": 1,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 22.49740000697784,
+          "total_s": 22.497594424989074,
+          "prompt_tokens": 5416,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.440174637013115,
+          "total_s": 18.440686246030964,
+          "prompt_tokens": 10360,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.47335910901893,
+          "total_s": 63.474857255932875,
+          "prompt_tokens": 28483,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 69.65722686098889,
+          "total_s": 69.65857010602485,
+          "prompt_tokens": 24582,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "strip_skills",
+      "mode": "cold",
+      "repeat": 2,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 31.14733913098462,
+          "total_s": 31.14801448804792,
+          "prompt_tokens": 7515,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.532556439051405,
+          "total_s": 18.5331773100188,
+          "prompt_tokens": 12459,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.64907233696431,
+          "total_s": 63.650752970948815,
+          "prompt_tokens": 30551,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 70.3039509219816,
+          "total_s": 70.30532516201492,
+          "prompt_tokens": 26650,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "strip_skills",
+      "mode": "warm",
+      "repeat": 2,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 30.811181733035482,
+          "total_s": 30.811540520982817,
+          "prompt_tokens": 7484,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.683737592073157,
+          "total_s": 18.68442730908282,
+          "prompt_tokens": 12428,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.87917568907142,
+          "total_s": 63.87925458105747,
+          "prompt_tokens": 30524,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 70.1162937830668,
+          "total_s": 70.1177292939974,
+          "prompt_tokens": 26623,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch",
+      "mode": "cold",
+      "repeat": 2,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 23.936265191994607,
+          "total_s": 23.936506713042036,
+          "prompt_tokens": 5711,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.3312042549951,
+          "total_s": 18.331690278020687,
+          "prompt_tokens": 10655,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.200643941992894,
+          "total_s": 63.20215096103493,
+          "prompt_tokens": 28747,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 69.20410107308999,
+          "total_s": 69.20545811101329,
+          "prompt_tokens": 24846,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch",
+      "mode": "warm",
+      "repeat": 2,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 23.57079964701552,
+          "total_s": 23.571058506029658,
+          "prompt_tokens": 5700,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.389800142031163,
+          "total_s": 18.390273483935744,
+          "prompt_tokens": 10644,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.27261999307666,
+          "total_s": 63.272693722043186,
+          "prompt_tokens": 28751,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 69.37943515798543,
+          "total_s": 69.38070477801375,
+          "prompt_tokens": 24850,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch+list_mcp_resource_templates+list_mcp_resources+read_mcp_resource",
+      "mode": "cold",
+      "repeat": 2,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 22.72943337401375,
+          "total_s": 22.729563602013513,
+          "prompt_tokens": 5393,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.42215842998121,
+          "total_s": 18.42262650700286,
+          "prompt_tokens": 10337,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.192417163052596,
+          "total_s": 63.193878391059116,
+          "prompt_tokens": 28429,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 69.27669399301521,
+          "total_s": 69.27902447595261,
+          "prompt_tokens": 24528,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "drop_tools=task+todowrite+skill+webfetch+list_mcp_resource_templates+list_mcp_resources+read_mcp_resource",
+      "mode": "warm",
+      "repeat": 2,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 22.4876294269925,
+          "total_s": 22.487847245065495,
+          "prompt_tokens": 5416,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.400626664981246,
+          "total_s": 18.401104807970114,
+          "prompt_tokens": 10360,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.36416994605679,
+          "total_s": 63.365598066011444,
+          "prompt_tokens": 28483,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 69.6231126539642,
+          "total_s": 69.62443442305084,
+          "prompt_tokens": 24582,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "default",
+      "mode": "cold",
+      "repeat": 2,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 31.156893334002234,
+          "total_s": 31.157275940058753,
+          "prompt_tokens": 7682,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.58545289002359,
+          "total_s": 18.586053549079224,
+          "prompt_tokens": 12626,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.874614399974234,
+          "total_s": 63.87669875693973,
+          "prompt_tokens": 30718,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 70.26674250594806,
+          "total_s": 70.26823863899335,
+          "prompt_tokens": 26817,
+          "completion_tokens": 1
+        }
+      ]
+    },
+    {
+      "variant": "default",
+      "mode": "warm",
+      "repeat": 2,
+      "calls": [
+        {
+          "status": 200,
+          "ttft_s": 30.832746539032087,
+          "total_s": 30.833080182084814,
+          "prompt_tokens": 7645,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 18.536739604896866,
+          "total_s": 18.53734560299199,
+          "prompt_tokens": 12589,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 63.74514660006389,
+          "total_s": 63.745230932021514,
+          "prompt_tokens": 30684,
+          "completion_tokens": 1
+        },
+        {
+          "status": 200,
+          "ttft_s": 69.81810440996196,
+          "total_s": 69.819578360999,
+          "prompt_tokens": 26783,
+          "completion_tokens": 1
+        }
+      ]
+    }
+  ]
+}
