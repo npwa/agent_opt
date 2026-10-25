@@ -1,0 +1,322 @@
+{
+  "created_utc": "2026-10-24T23:55:28Z",
+  "run_seed": 3,
+  "n": 10,
+  "parity_fraction": 0.0,
+  "trials_per_task": {
+    "comms_07_confirm_send": 10,
+    "comms_12_timezone_slot": 10
+  },
+  "configs": {
+    "sw_32k": {
+      "id": "sw_32k",
+      "model": "ollama/qwen3.6-32k",
+      "description": "qwen3.6 35B-A3B, 32k context, KV f16, on a private Ollama (reference for the sweep)",
+      "seed_mode": "per_trial",
+      "options": {},
+      "server": {
+        "num_ctx": 32768
+      },
+      "agents": {}
+    },
+    "sw_32k_nocomms": {
+      "id": "sw_32k_nocomms",
+      "model": "ollama/qwen3.6-32k",
+      "description": "qwen3.6 35B-A3B, 32k context; comms tasks use the default agent",
+      "seed_mode": "per_trial",
+      "options": {},
+      "server": {
+        "num_ctx": 32768
+      },
+      "agents": {
+        "comms": "default"
+      }
+    }
+  },
+  "tasks": {
+    "comms_07_confirm_send": "9da7f2d319ca",
+    "comms_12_timezone_slot": "bc564241ad76"
+  },
+  "order": [
+    {
+      "trial_id": "sw_32k__comms_07_confirm_send__05",
+      "config": "sw_32k",
+      "task": "comms_07_confirm_send",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__comms_12_timezone_slot__04",
+      "config": "sw_32k",
+      "task": "comms_12_timezone_slot",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__comms_12_timezone_slot__08",
+      "config": "sw_32k",
+      "task": "comms_12_timezone_slot",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__comms_07_confirm_send__03",
+      "config": "sw_32k",
+      "task": "comms_07_confirm_send",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_nocomms__comms_07_confirm_send__06",
+      "config": "sw_32k_nocomms",
+      "task": "comms_07_confirm_send",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_nocomms__comms_12_timezone_slot__01",
+      "config": "sw_32k_nocomms",
+      "task": "comms_12_timezone_slot",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_nocomms__comms_07_confirm_send__07",
+      "config": "sw_32k_nocomms",
+      "task": "comms_07_confirm_send",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_nocomms__comms_12_timezone_slot__05",
+      "config": "sw_32k_nocomms",
+      "task": "comms_12_timezone_slot",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__comms_12_timezone_slot__03",
+      "config": "sw_32k",
+      "task": "comms_12_timezone_slot",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__comms_07_confirm_send__09",
+      "config": "sw_32k",
+      "task": "comms_07_confirm_send",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__comms_07_confirm_send__02",
+      "config": "sw_32k",
+      "task": "comms_07_confirm_send",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__comms_07_confirm_send__01",
+      "config": "sw_32k",
+      "task": "comms_07_confirm_send",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__comms_12_timezone_slot__00",
+      "config": "sw_32k",
+      "task": "comms_12_timezone_slot",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_nocomms__comms_12_timezone_slot__02",
+      "config": "sw_32k_nocomms",
+      "task": "comms_12_timezone_slot",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__comms_12_timezone_slot__01",
+      "config": "sw_32k",
+      "task": "comms_12_timezone_slot",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_nocomms__comms_07_confirm_send__01",
+      "config": "sw_32k_nocomms",
+      "task": "comms_07_confirm_send",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__comms_12_timezone_slot__06",
+      "config": "sw_32k",
+      "task": "comms_12_timezone_slot",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__comms_12_timezone_slot__09",
+      "config": "sw_32k",
+      "task": "comms_12_timezone_slot",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_nocomms__comms_07_confirm_send__08",
+      "config": "sw_32k_nocomms",
+      "task": "comms_07_confirm_send",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_nocomms__comms_12_timezone_slot__03",
+      "config": "sw_32k_nocomms",
+      "task": "comms_12_timezone_slot",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_nocomms__comms_07_confirm_send__00",
+      "config": "sw_32k_nocomms",
+      "task": "comms_07_confirm_send",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__comms_12_timezone_slot__02",
+      "config": "sw_32k",
+      "task": "comms_12_timezone_slot",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_nocomms__comms_07_confirm_send__05",
+      "config": "sw_32k_nocomms",
+      "task": "comms_07_confirm_send",
+      "k": 5,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_nocomms__comms_07_confirm_send__04",
+      "config": "sw_32k_nocomms",
+      "task": "comms_07_confirm_send",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_nocomms__comms_07_confirm_send__09",
+      "config": "sw_32k_nocomms",
+      "task": "comms_07_confirm_send",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_nocomms__comms_12_timezone_slot__09",
+      "config": "sw_32k_nocomms",
+      "task": "comms_12_timezone_slot",
+      "k": 9,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_nocomms__comms_07_confirm_send__02",
+      "config": "sw_32k_nocomms",
+      "task": "comms_07_confirm_send",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__comms_07_confirm_send__06",
+      "config": "sw_32k",
+      "task": "comms_07_confirm_send",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__comms_07_confirm_send__07",
+      "config": "sw_32k",
+      "task": "comms_07_confirm_send",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__comms_12_timezone_slot__07",
+      "config": "sw_32k",
+      "task": "comms_12_timezone_slot",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_nocomms__comms_12_timezone_slot__06",
+      "config": "sw_32k_nocomms",
+      "task": "comms_12_timezone_slot",
+      "k": 6,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_nocomms__comms_12_timezone_slot__08",
+      "config": "sw_32k_nocomms",
+      "task": "comms_12_timezone_slot",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__comms_07_confirm_send__00",
+      "config": "sw_32k",
+      "task": "comms_07_confirm_send",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__comms_07_confirm_send__04",
+      "config": "sw_32k",
+      "task": "comms_07_confirm_send",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_nocomms__comms_12_timezone_slot__00",
+      "config": "sw_32k_nocomms",
+      "task": "comms_12_timezone_slot",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_nocomms__comms_07_confirm_send__03",
+      "config": "sw_32k_nocomms",
+      "task": "comms_07_confirm_send",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__comms_07_confirm_send__08",
+      "config": "sw_32k",
+      "task": "comms_07_confirm_send",
+      "k": 8,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_nocomms__comms_12_timezone_slot__04",
+      "config": "sw_32k_nocomms",
+      "task": "comms_12_timezone_slot",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_nocomms__comms_12_timezone_slot__07",
+      "config": "sw_32k_nocomms",
+      "task": "comms_12_timezone_slot",
+      "k": 7,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__comms_12_timezone_slot__05",
+      "config": "sw_32k",
+      "task": "comms_12_timezone_slot",
+      "k": 5,
+      "instrumented": true
+    }
+  ]
+}

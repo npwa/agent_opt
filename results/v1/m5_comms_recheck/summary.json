@@ -1,0 +1,315 @@
+{
+  "baseline": "sw_32k",
+  "categories": {
+    "comms_07_confirm_send": "comms",
+    "comms_12_timezone_slot": "comms"
+  },
+  "cells": {
+    "sw_32k_nocomms|comms_07_confirm_send": {
+      "harness_failed": 0,
+      "median_ci": [
+        76.5,
+        109.0
+      ],
+      "median_s": 89.15,
+      "n": 10,
+      "passes": 9,
+      "rate": 0.9,
+      "timeouts": 0,
+      "times": [
+        74.5,
+        143.3,
+        95.8,
+        91.2,
+        118.6,
+        75.3,
+        109.0,
+        87.1,
+        76.5,
+        81.3
+      ],
+      "wilson": [
+        0.5958499732047615,
+        0.9821237869049271
+      ]
+    },
+    "sw_32k_nocomms|comms_12_timezone_slot": {
+      "harness_failed": 0,
+      "median_ci": [
+        119.2,
+        244.15
+      ],
+      "median_s": 190.14999999999998,
+      "n": 10,
+      "passes": 6,
+      "rate": 0.6,
+      "timeouts": 0,
+      "times": [
+        210.7,
+        229.6,
+        169.6,
+        266.0,
+        117.9,
+        119.2,
+        434.8,
+        222.3,
+        167.4,
+        54.2
+      ],
+      "wilson": [
+        0.31267376973365824,
+        0.8318196702937638
+      ]
+    },
+    "sw_32k|comms_07_confirm_send": {
+      "harness_failed": 0,
+      "median_ci": [
+        87.7,
+        117.3
+      ],
+      "median_s": 95.75,
+      "n": 10,
+      "passes": 10,
+      "rate": 1.0,
+      "timeouts": 0,
+      "times": [
+        87.7,
+        123.0,
+        92.5,
+        115.2,
+        85.4,
+        114.3,
+        97.0,
+        94.5,
+        76.2,
+        120.3
+      ],
+      "wilson": [
+        0.7224672001371107,
+        0.9999999999999999
+      ]
+    },
+    "sw_32k|comms_12_timezone_slot": {
+      "harness_failed": 0,
+      "median_ci": [
+        161.25,
+        900.1
+      ],
+      "median_s": 273.2,
+      "n": 10,
+      "passes": 3,
+      "rate": 0.3,
+      "timeouts": 3,
+      "times": [
+        900.1,
+        171.0,
+        169.2,
+        900.1,
+        116.6,
+        151.5,
+        900.1,
+        361.0,
+        185.4,
+        482.2
+      ],
+      "wilson": [
+        0.10779126740630099,
+        0.6032218525388546
+      ]
+    }
+  },
+  "common_tasks": [
+    "comms_07_confirm_send",
+    "comms_12_timezone_slot"
+  ],
+  "comparisons": [
+    {
+      "category": "comms",
+      "config": "sw_32k_nocomms",
+      "p_holm": 0.08579606601557895,
+      "success": {
+        "ci_method": "Wilson intervals; Newcombe hybrid score interval for the difference",
+        "diff": 0.09999999999999998,
+        "diff_ci": [
+          -0.17627210159827733,
+          0.3573605538770012
+        ],
+        "directional": false,
+        "n_baseline": 20,
+        "n_variant": 20,
+        "rate_baseline": 0.65,
+        "rate_variant": 0.75,
+        "wilson_baseline": [
+          0.43285427668523624,
+          0.818808175898918
+        ],
+        "wilson_variant": [
+          0.531299122381256,
+          0.8881382985923343
+        ]
+      },
+      "tasks": [
+        "comms_07_confirm_send",
+        "comms_12_timezone_slot"
+      ],
+      "time": {
+        "ci_method": "percentile bootstrap, 10000 resamples",
+        "delta_ci": [
+          -0.46370757180156663,
+          0.04086376195099913
+        ],
+        "delta_median": -0.17295021961932644,
+        "directional": false,
+        "effect_size": {
+          "prob_superiority": 0.34,
+          "rank_biserial": -0.31999999999999995
+        },
+        "improved": false,
+        "median_baseline": 1.0,
+        "median_variant": 0.8270497803806736,
+        "n_baseline": 20,
+        "n_variant": 20,
+        "p": 0.08579606601557895,
+        "ratio_ci": [
+          0.629706196271685,
+          1.0446901551746002
+        ],
+        "ratio_median": 0.8270497803806736,
+        "test": "Mann-Whitney U (asymptotic)"
+      },
+      "verdict": "inconclusive"
+    }
+  ],
+  "configs": [
+    "sw_32k",
+    "sw_32k_nocomms"
+  ],
+  "created_utc": "2026-10-24T23:55:28Z",
+  "decomposition": {
+    "sw_32k": {
+      "all": {
+        "n": 20,
+        "pct": {
+          "decode": 88.66787892049337,
+          "harness": 3.104897178493203,
+          "prefill": 8.21888176089522,
+          "tool": 0.008374598432471956,
+          "unattributed": -3.245831425846115e-05
+        },
+        "wall_s": 5343.212285757065
+      },
+      "categories": {
+        "comms": {
+          "n": 20,
+          "not_ok": 0,
+          "pct": {
+            "decode": 88.66787892049337,
+            "harness": 3.104897178493203,
+            "prefill": 8.21888176089522,
+            "tool": 0.008374598432471956,
+            "unattributed": -3.245831425846115e-05
+          },
+          "wall_s": 5343.212285757065
+        }
+      },
+      "first_call_share_pct": 24.645024390620982,
+      "flagged": [],
+      "gpu_duty_pct": 90.09532810118067
+    },
+    "sw_32k_nocomms": {
+      "all": {
+        "n": 20,
+        "pct": {
+          "decode": 75.65939550710662,
+          "harness": 5.568759792211493,
+          "prefill": 18.754315679791645,
+          "tool": 0.01752904032437408,
+          "unattributed": -1.9434128353290433e-08
+        },
+        "wall_s": 2944.328705072403
+      },
+      "categories": {
+        "comms": {
+          "n": 20,
+          "not_ok": 0,
+          "pct": {
+            "decode": 75.65939550710662,
+            "harness": 5.568759792211493,
+            "prefill": 18.754315679791645,
+            "tool": 0.01752904032437408,
+            "unattributed": -1.9434128353290433e-08
+          },
+          "wall_s": 2944.328705072403
+        }
+      },
+      "first_call_share_pct": 45.41426660995175,
+      "flagged": [],
+      "gpu_duty_pct": 89.71762419342492
+    }
+  },
+  "n": 10,
+  "name": "m5_comms_recheck",
+  "overview": {
+    "sw_32k": {
+      "harness_failed": 0,
+      "n": 20,
+      "n_common": 20,
+      "passes": 13,
+      "passes_common": 13,
+      "rate_common": 0.65,
+      "suite_hi": 1017.4,
+      "suite_lo": 248.95,
+      "suite_s": 368.95,
+      "timeouts": 3,
+      "wilson": [
+        0.43285427668523624,
+        0.818808175898918
+      ],
+      "wilson_common": [
+        0.43285427668523624,
+        0.818808175898918
+      ]
+    },
+    "sw_32k_nocomms": {
+      "harness_failed": 0,
+      "n": 20,
+      "n_common": 20,
+      "passes": 15,
+      "passes_common": 15,
+      "rate_common": 0.75,
+      "suite_hi": 353.15,
+      "suite_lo": 195.7,
+      "suite_s": 279.29999999999995,
+      "timeouts": 0,
+      "wilson": [
+        0.531299122381256,
+        0.8881382985923343
+      ],
+      "wilson_common": [
+        0.531299122381256,
+        0.8881382985923343
+      ]
+    }
+  },
+  "parity": null,
+  "parity_fraction": 0.0,
+  "parity_trials": 0,
+  "platform": {
+    "cuda": "13.0",
+    "driver": "580.126.09",
+    "gpu": "NVIDIA GeForce RTX 3080",
+    "llama_cpp": "b2f036c0f",
+    "ollama": "0.32.5",
+    "opencode": "1.18.11",
+    "python": "3.12.3"
+  },
+  "run_seed": 3,
+  "tasks": [
+    "comms_07_confirm_send",
+    "comms_12_timezone_slot"
+  ],
+  "trials": {
+    "harness_failed": 0,
+    "measured": 40
+  }
+}

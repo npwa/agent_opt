@@ -1,0 +1,10 @@
+# H6 re-check: the same server as the control sw_32k; the comms tasks run with the default agent instead of the "comms" agent
+# (agent-config/agent/comms.md: answer in the same turn as the tool call).
+id: sw_32k_nocomms
+model: ollama/qwen3.6-32k
+description: qwen3.6 35B-A3B, 32k context; comms tasks use the default agent
+seed_mode: per_trial
+server:
+  num_ctx: 32768
+agents:
+  comms: default
