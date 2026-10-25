@@ -43,6 +43,7 @@ attempt("move-out", lambda: os.rename({str(work / 'a.txt')!r}, {str(other / 'a.t
 attempt("delete-inside", lambda: os.remove({str(work / 'a.txt')!r}))
 """
     r = confined_python(work, code)
+    assert r.returncode == 0, r.stderr
     out = dict(line.split(" ", 1) for line in r.stdout.splitlines())
     assert out["write-inside"] == "ALLOWED" and out["mkdir-inside"] == "ALLOWED" and out["read-system"] == "ALLOWED"
     assert out["delete-inside"] == "ALLOWED"
@@ -58,6 +59,7 @@ def test_children_inherit_the_confinement(tmp_path):
     r = subprocess.run([sys.executable, str(LANDLOCK), "--rw", str(work), "--", "/bin/sh", "-c",
                         f"echo ok > {work}/in.txt; echo bad > {ROOT}/should_not_exist.txt; ls {Path.home()}"],
                        capture_output=True, text=True, timeout=60)
+    assert (work / "in.txt").exists(), r.stderr
     assert (work / "in.txt").read_text() == "ok\n"
     assert not (ROOT / "should_not_exist.txt").exists() and "Permission denied" in r.stderr
 
@@ -89,3 +91,14 @@ def test_runner_confines_by_default_and_has_an_off_switch():
 def test_a_missing_writable_path_is_an_error_not_a_silent_denial(tmp_path):
     with pytest.raises(landlock.LandlockError, match="does not exist"):
         landlock.restrict([tmp_path / "missing"], [])
+
+
+@needs_landlock
+def test_missing_default_writable_path_is_skipped(tmp_path, monkeypatch):
+    """A fresh machine has no ~/.npm: that must not stop the confinement (it failed on GitHub's runner)."""
+    monkeypatch.setattr(landlock, "DEFAULT_RW", [Path("/dev"), tmp_path / "no-such-dir"])
+    monkeypatch.setattr(landlock, "restrict", lambda rw, ro: seen.update(rw=rw))
+    seen = {}
+    monkeypatch.setattr(landlock.os, "execvp", lambda *a: None)
+    assert landlock.main(["--rw", str(tmp_path), "--", "true"]) is None
+    assert seen["rw"] == [tmp_path, Path("/dev")]

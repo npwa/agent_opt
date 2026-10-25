@@ -106,7 +106,7 @@ def main(argv: list[str] | None = None) -> int:
     if not cmd:
         ap.error("no command given")
     ro = a.ro + ([] if a.no_defaults else DEFAULT_RO)
-    rw = a.rw + ([] if a.no_defaults else DEFAULT_RW)
+    rw = a.rw + ([] if a.no_defaults else [p for p in DEFAULT_RW if p.exists()])  # ~/.npm is absent on a fresh machine
     try:
         restrict(rw, ro)
     except LandlockError as e:
