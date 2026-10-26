@@ -1,0 +1,18 @@
+id: research_m6_11_urban_heat
+title: Citation-heavy research question 11 (urban heat)
+category: research
+prompts:
+  - "What does the literature say about urban green space and tree cover as a way to reduce urban heat island effects and heat-related mortality? Cite specific sources for every claim (authors, title or venue, year, and URL where you have one)."
+agent: research
+mcp: [searxng]
+tools: [webfetch]
+timeout_s: 1500
+expected_tool_sequence: [searxng_searxng_web_search]
+tags: [citations, web, m6]
+suite: [m6]
+verify:
+  - type: rubric
+    min_words: 200
+    required:
+      - name: gives_years
+        any_of: ["19", "20"]

@@ -1,0 +1,18 @@
+id: research_m6_19_vitamin_d
+title: Citation-heavy research question 19 (vitamin d)
+category: research
+prompts:
+  - "Do large randomized trials such as VITAL support vitamin D supplementation for preventing cancer, cardiovascular disease or fractures in the general population? Cite specific sources for every claim (authors, title or venue, year, and URL where you have one)."
+agent: research
+mcp: [searxng]
+tools: [webfetch]
+timeout_s: 1500
+expected_tool_sequence: [searxng_searxng_web_search]
+tags: [citations, web, m6]
+suite: [m6]
+verify:
+  - type: rubric
+    min_words: 200
+    required:
+      - name: gives_years
+        any_of: ["19", "20"]

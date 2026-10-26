@@ -1,0 +1,18 @@
+id: research_m6_17_ancient_dna
+title: Citation-heavy research question 17 (ancient dna)
+category: research
+prompts:
+  - "What has ancient DNA research revealed about the Yamnaya migration and the spread of Indo-European languages, and where do researchers disagree? Cite specific sources for every claim (authors, title or venue, year, and URL where you have one)."
+agent: research
+mcp: [searxng]
+tools: [webfetch]
+timeout_s: 1500
+expected_tool_sequence: [searxng_searxng_web_search]
+tags: [citations, web, m6]
+suite: [m6]
+verify:
+  - type: rubric
+    min_words: 200
+    required:
+      - name: gives_years
+        any_of: ["19", "20"]

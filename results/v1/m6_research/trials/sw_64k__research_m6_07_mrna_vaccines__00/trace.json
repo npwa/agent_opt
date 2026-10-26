@@ -1,0 +1,1660 @@
+{
+  "trial_id": "sw_64k__research_m6_07_mrna_vaccines__00",
+  "task": "research_m6_07_mrna_vaccines",
+  "config": "sw_64k",
+  "attempt": 1,
+  "status": "pass",
+  "summary": {
+    "wall_start": 1792964975.495446,
+    "wall_end": 1792965734.1274443,
+    "wall_s": 758.6319983005524,
+    "n_steps": 38,
+    "llm_s": 586.6945,
+    "ttft_s": 223.3792,
+    "decode_s": 363.3153,
+    "tool_s": 238.73799872398376,
+    "gap_s": 168.48192834854126,
+    "idle_gap_s": 150.96855633952043,
+    "prefill_tokens": 1319285,
+    "decode_tokens": 11820,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:1",
+      "t_start": 1792964978.9510162,
+      "t_end": 1792964991.3822162,
+      "ttft_s": 3.0559,
+      "llm_s": 12.4312,
+      "decode_s": 9.375300000000001,
+      "prefill_tokens": 7652,
+      "decode_tokens": 313,
+      "prefill_tok_s": 2504.01,
+      "decode_tok_s": 33.39,
+      "n_chunks": 156,
+      "first_token_skew_s": 0.018083810806274414,
+      "itl_p50_ms": 30.00000000000025,
+      "itl_p99_ms": 86.30000000000065,
+      "tool_names": [
+        "todowrite"
+      ],
+      "tool_latency_s": 0.005000114440917969,
+      "tools": [
+        {
+          "tool": "todowrite",
+          "start": 1792964991.363,
+          "end": 1792964991.368,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792964982.025,
+      "oc_step_finish": 1792964991.402,
+      "tool_errors": 0,
+      "gap_s": 0.042478084564208984,
+      "gpu_busy_pct_llm": 29.344,
+      "gpu_power_w_llm": 117.1656,
+      "gpu_samples_llm": 125,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 2,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:2",
+      "t_start": 1792964991.4246943,
+      "t_end": 1792965002.1025944,
+      "ttft_s": 2.1805,
+      "llm_s": 10.6779,
+      "decode_s": 8.497399999999999,
+      "prefill_tokens": 8002,
+      "decode_tokens": 283,
+      "prefill_tok_s": 3669.8,
+      "decode_tok_s": 33.3,
+      "n_chunks": 113,
+      "first_token_skew_s": 0.0058057308197021484,
+      "itl_p50_ms": 30.999999999999694,
+      "itl_p99_ms": 2055.2600000000016,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 20.03600025177002,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792964999.783,
+          "end": 1792965009.811,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965002.076,
+          "end": 1792965012.084,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792964993.611,
+      "oc_step_finish": 1792965012.101,
+      "tool_errors": 2,
+      "gap_s": 10.018840312957764,
+      "gpu_busy_pct_llm": 33.76635514018692,
+      "gpu_power_w_llm": 119.54485981308412,
+      "gpu_samples_llm": 107,
+      "gpu_busy_pct_gap": 1.29,
+      "gpu_samples_gap": 100,
+      "idle_gap_s": 8.91676787853241
+    },
+    {
+      "step": 3,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:3",
+      "t_start": 1792965012.1214347,
+      "t_end": 1792965020.0224347,
+      "ttft_s": 2.0331,
+      "llm_s": 7.901,
+      "decode_s": 5.8679,
+      "prefill_tokens": 8225,
+      "decode_tokens": 167,
+      "prefill_tok_s": 4045.55,
+      "decode_tok_s": 28.46,
+      "n_chunks": 9,
+      "first_token_skew_s": 0.006465435028076172,
+      "itl_p50_ms": 39.499999999999645,
+      "itl_p99_ms": 2888.59,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 10.154999732971191,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965017.256,
+          "end": 1792965017.396,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965019.992,
+          "end": 1792965030.007,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792965014.161,
+      "oc_step_finish": 1792965030.028,
+      "tool_errors": 1,
+      "gap_s": 10.020821332931519,
+      "gpu_busy_pct_llm": 24.531645569620252,
+      "gpu_power_w_llm": 114.34050632911392,
+      "gpu_samples_llm": 79,
+      "gpu_busy_pct_gap": 0.32,
+      "gpu_samples_gap": 100,
+      "idle_gap_s": 9.820404906272888
+    },
+    {
+      "step": 4,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:4",
+      "t_start": 1792965030.043256,
+      "t_end": 1792965038.417156,
+      "ttft_s": 2.1223,
+      "llm_s": 8.3739,
+      "decode_s": 6.251600000000001,
+      "prefill_tokens": 8477,
+      "decode_tokens": 215,
+      "prefill_tok_s": 3994.25,
+      "decode_tok_s": 34.39,
+      "n_chunks": 31,
+      "first_token_skew_s": 0.005444049835205078,
+      "itl_p50_ms": 30.00000000000025,
+      "itl_p99_ms": 1854.6499999999999,
+      "tool_names": [
+        "searxng_searxng_instance_info",
+        "webfetch",
+        "webfetch",
+        "searxng_searxng_instance_info"
+      ],
+      "tool_latency_s": 0.3279998302459717,
+      "tools": [
+        {
+          "tool": "searxng_searxng_instance_info",
+          "start": 1792965033.624,
+          "end": 1792965033.641,
+          "status": "completed"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792965035.466,
+          "end": 1792965035.656,
+          "status": "error"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792965037.323,
+          "end": 1792965037.437,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_searxng_instance_info",
+          "start": 1792965038.392,
+          "end": 1792965038.399,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792965032.171,
+      "oc_step_finish": 1792965038.431,
+      "tool_errors": 2,
+      "gap_s": 0.03003072738647461,
+      "gpu_busy_pct_llm": 30.80952380952381,
+      "gpu_power_w_llm": 117.65714285714287,
+      "gpu_samples_llm": 84,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 5,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:5",
+      "t_start": 1792965038.4471867,
+      "t_end": 1792965071.6157868,
+      "ttft_s": 27.1806,
+      "llm_s": 33.1686,
+      "decode_s": 5.9879999999999995,
+      "prefill_tokens": 15559,
+      "decode_tokens": 204,
+      "prefill_tok_s": 572.43,
+      "decode_tok_s": 34.07,
+      "n_chunks": 52,
+      "first_token_skew_s": 0.005213260650634766,
+      "itl_p50_ms": 30.000000000001137,
+      "itl_p99_ms": 2240.999999999998,
+      "tool_names": [
+        "todowrite"
+      ],
+      "tool_latency_s": 0.0029997825622558594,
+      "tools": [
+        {
+          "tool": "todowrite",
+          "start": 1792965071.594,
+          "end": 1792965071.597,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792965065.633,
+      "oc_step_finish": 1792965071.627,
+      "tool_errors": 0,
+      "gap_s": 0.027648210525512695,
+      "gpu_busy_pct_llm": 84.91566265060241,
+      "gpu_power_w_llm": 132.78102409638555,
+      "gpu_samples_llm": 332,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 6,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:6",
+      "t_start": 1792965071.643435,
+      "t_end": 1792965081.020135,
+      "ttft_s": 2.2386,
+      "llm_s": 9.3767,
+      "decode_s": 7.1381,
+      "prefill_tokens": 15875,
+      "decode_tokens": 245,
+      "prefill_tok_s": 7091.49,
+      "decode_tok_s": 34.32,
+      "n_chunks": 28,
+      "first_token_skew_s": 0.004965066909790039,
+      "itl_p50_ms": 30.00000000000025,
+      "itl_p99_ms": 3196.3999999999996,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 2.4679999351501465,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965077.844,
+          "end": 1792965079.867,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965081.004,
+          "end": 1792965081.449,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792965073.887,
+      "oc_step_finish": 1792965081.477,
+      "tool_errors": 0,
+      "gap_s": 0.47361159324645996,
+      "gpu_busy_pct_llm": 36.808510638297875,
+      "gpu_power_w_llm": 123.22234042553191,
+      "gpu_samples_llm": 94,
+      "gpu_busy_pct_gap": 8.6,
+      "gpu_samples_gap": 5,
+      "idle_gap_s": 0.28416695594787594
+    },
+    {
+      "step": 7,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:7",
+      "t_start": 1792965081.4937465,
+      "t_end": 1792965093.6953466,
+      "ttft_s": 4.491,
+      "llm_s": 12.2016,
+      "decode_s": 7.7105999999999995,
+      "prefill_tokens": 16917,
+      "decode_tokens": 256,
+      "prefill_tok_s": 3766.87,
+      "decode_tok_s": 33.2,
+      "n_chunks": 37,
+      "first_token_skew_s": 0.006253480911254883,
+      "itl_p50_ms": 31.00000000000014,
+      "itl_p99_ms": 3326.45,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 1.194000244140625,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965090.508,
+          "end": 1792965091.163,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965093.668,
+          "end": 1792965094.207,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792965085.991,
+      "oc_step_finish": 1792965094.224,
+      "tool_errors": 0,
+      "gap_s": 0.5457026958465576,
+      "gpu_busy_pct_llm": 43.377049180327866,
+      "gpu_power_w_llm": 123.1655737704918,
+      "gpu_samples_llm": 122,
+      "gpu_busy_pct_gap": 21.0,
+      "gpu_samples_gap": 5,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 8,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:8",
+      "t_start": 1792965094.2410493,
+      "t_end": 1792965119.0342493,
+      "ttft_s": 17.2548,
+      "llm_s": 24.7932,
+      "decode_s": 7.538399999999999,
+      "prefill_tokens": 21474,
+      "decode_tokens": 256,
+      "prefill_tok_s": 1244.52,
+      "decode_tok_s": 33.96,
+      "n_chunks": 26,
+      "first_token_skew_s": 0.005150556564331055,
+      "itl_p50_ms": 30.000000000001137,
+      "itl_p99_ms": 3423.7200000000016,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 1.3970003128051758,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965115.58,
+          "end": 1792965116.617,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965119.007,
+          "end": 1792965119.367,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792965111.501,
+      "oc_step_finish": 1792965119.382,
+      "tool_errors": 0,
+      "gap_s": 0.36704468727111816,
+      "gpu_busy_pct_llm": 74.15322580645162,
+      "gpu_power_w_llm": 129.8100806451613,
+      "gpu_samples_llm": 248,
+      "gpu_busy_pct_gap": 10.0,
+      "gpu_samples_gap": 4,
+      "idle_gap_s": 0.18352234363555908
+    },
+    {
+      "step": 9,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:9",
+      "t_start": 1792965119.401294,
+      "t_end": 1792965138.348194,
+      "ttft_s": 17.1355,
+      "llm_s": 18.9469,
+      "decode_s": 1.811399999999999,
+      "prefill_tokens": 25260,
+      "decode_tokens": 110,
+      "prefill_tok_s": 1474.13,
+      "decode_tok_s": 60.73,
+      "n_chunks": 3,
+      "first_token_skew_s": 0.010205984115600586,
+      "itl_p50_ms": 905.5,
+      "itl_p99_ms": 1754.670000000002,
+      "tool_names": [
+        "webfetch",
+        "webfetch"
+      ],
+      "tool_latency_s": 0.6349999904632568,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792965136.545,
+          "end": 1792965136.811,
+          "status": "completed"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792965138.316,
+          "end": 1792965138.685,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792965136.547,
+      "oc_step_finish": 1792965138.694,
+      "tool_errors": 0,
+      "gap_s": 0.35677242279052734,
+      "gpu_busy_pct_llm": 82.73544973544973,
+      "gpu_power_w_llm": 131.55661375661376,
+      "gpu_samples_llm": 189,
+      "gpu_busy_pct_gap": 17.0,
+      "gpu_samples_gap": 4,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 10,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:10",
+      "t_start": 1792965138.7049663,
+      "t_end": 1792965145.2697663,
+      "ttft_s": 4.5424,
+      "llm_s": 6.5648,
+      "decode_s": 2.0224,
+      "prefill_tokens": 25491,
+      "decode_tokens": 123,
+      "prefill_tok_s": 5611.79,
+      "decode_tok_s": 60.82,
+      "n_chunks": 3,
+      "first_token_skew_s": 0.009633779525756836,
+      "itl_p50_ms": 1011.0,
+      "itl_p99_ms": 1965.5200000000002,
+      "tool_names": [
+        "webfetch",
+        "webfetch"
+      ],
+      "tool_latency_s": 0.5109996795654297,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792965143.255,
+          "end": 1792965143.449,
+          "status": "error"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792965145.237,
+          "end": 1792965145.554,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792965143.257,
+      "oc_step_finish": 1792965145.564,
+      "tool_errors": 1,
+      "gap_s": 0.3151545524597168,
+      "gpu_busy_pct_llm": 37.30769230769231,
+      "gpu_power_w_llm": 118.83076923076923,
+      "gpu_samples_llm": 65,
+      "gpu_busy_pct_gap": 16.0,
+      "gpu_samples_gap": 4,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 11,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:11",
+      "t_start": 1792965145.584921,
+      "t_end": 1792965171.3389208,
+      "ttft_s": 18.4924,
+      "llm_s": 25.754,
+      "decode_s": 7.261600000000001,
+      "prefill_tokens": 30093,
+      "decode_tokens": 245,
+      "prefill_tok_s": 1627.32,
+      "decode_tok_s": 33.74,
+      "n_chunks": 28,
+      "first_token_skew_s": 0.005679130554199219,
+      "itl_p50_ms": 30.999999999998806,
+      "itl_p99_ms": 3251.420000000001,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 0.8710000514984131,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965168.087,
+          "end": 1792965168.628,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965171.312,
+          "end": 1792965171.642,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792965164.083,
+      "oc_step_finish": 1792965171.665,
+      "tool_errors": 0,
+      "gap_s": 0.3442678451538086,
+      "gpu_busy_pct_llm": 76.02334630350195,
+      "gpu_power_w_llm": 132.50466926070038,
+      "gpu_samples_llm": 257,
+      "gpu_busy_pct_gap": 22.0,
+      "gpu_samples_gap": 4,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 12,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:12",
+      "t_start": 1792965171.6831887,
+      "t_end": 1792965180.9688888,
+      "ttft_s": 6.2314,
+      "llm_s": 9.2857,
+      "decode_s": 3.0543000000000005,
+      "prefill_tokens": 30777,
+      "decode_tokens": 163,
+      "prefill_tok_s": 4939.02,
+      "decode_tok_s": 53.37,
+      "n_chunks": 3,
+      "first_token_skew_s": 0.008411407470703125,
+      "itl_p50_ms": 1527.0,
+      "itl_p99_ms": 2982.3000000000006,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 20.0239999294281,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965177.922,
+          "end": 1792965187.934,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965180.93,
+          "end": 1792965190.942,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792965177.923,
+      "oc_step_finish": 1792965190.962,
+      "tool_errors": 2,
+      "gap_s": 10.0122549533844,
+      "gpu_busy_pct_llm": 54.19565217391305,
+      "gpu_power_w_llm": 125.6858695652174,
+      "gpu_samples_llm": 92,
+      "gpu_busy_pct_gap": 0.5346534653465347,
+      "gpu_samples_gap": 101,
+      "idle_gap_s": 9.714861241897735
+    },
+    {
+      "step": 13,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:13",
+      "t_start": 1792965190.9811437,
+      "t_end": 1792965198.5185437,
+      "ttft_s": 2.1348,
+      "llm_s": 7.5374,
+      "decode_s": 5.4026,
+      "prefill_tokens": 31002,
+      "decode_tokens": 183,
+      "prefill_tok_s": 14522.2,
+      "decode_tok_s": 33.87,
+      "n_chunks": 21,
+      "first_token_skew_s": 0.004056215286254883,
+      "itl_p50_ms": 30.49999999999997,
+      "itl_p99_ms": 2446.2299999999996,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 10.763000011444092,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965196.03,
+          "end": 1792965196.782,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965198.493,
+          "end": 1792965208.504,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792965193.12,
+      "oc_step_finish": 1792965208.531,
+      "tool_errors": 1,
+      "gap_s": 10.032020568847656,
+      "gpu_busy_pct_llm": 28.04,
+      "gpu_power_w_llm": 121.96666666666667,
+      "gpu_samples_llm": 75,
+      "gpu_busy_pct_gap": 1.47,
+      "gpu_samples_gap": 100,
+      "idle_gap_s": 9.32977912902832
+    },
+    {
+      "step": 14,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:14",
+      "t_start": 1792965208.5505643,
+      "t_end": 1792965215.7319643,
+      "ttft_s": 2.1846,
+      "llm_s": 7.1814,
+      "decode_s": 4.9968,
+      "prefill_tokens": 31253,
+      "decode_tokens": 169,
+      "prefill_tok_s": 14306.05,
+      "decode_tok_s": 33.82,
+      "n_chunks": 12,
+      "first_token_skew_s": 0.004835605621337891,
+      "itl_p50_ms": 31.00000000000014,
+      "itl_p99_ms": 2445.5,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 11.380000114440918,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965213.464,
+          "end": 1792965214.832,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965215.688,
+          "end": 1792965225.7,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792965210.74,
+      "oc_step_finish": 1792965225.715,
+      "tool_errors": 1,
+      "gap_s": 10.005500316619873,
+      "gpu_busy_pct_llm": 40.90277777777778,
+      "gpu_power_w_llm": 121.73055555555555,
+      "gpu_samples_llm": 72,
+      "gpu_busy_pct_gap": 1.05,
+      "gpu_samples_gap": 100,
+      "idle_gap_s": 9.50522530078888
+    },
+    {
+      "step": 15,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:15",
+      "t_start": 1792965225.7374647,
+      "t_end": 1792965234.1942647,
+      "ttft_s": 2.2163,
+      "llm_s": 8.4568,
+      "decode_s": 6.240499999999999,
+      "prefill_tokens": 31502,
+      "decode_tokens": 209,
+      "prefill_tok_s": 14213.78,
+      "decode_tok_s": 33.49,
+      "n_chunks": 31,
+      "first_token_skew_s": 0.007235288619995117,
+      "itl_p50_ms": 30.49999999999997,
+      "itl_p99_ms": 2757.5,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "webfetch"
+      ],
+      "tool_latency_s": 1.2849998474121094,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965231.661,
+          "end": 1792965232.244,
+          "status": "completed"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792965234.168,
+          "end": 1792965234.87,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792965227.961,
+      "oc_step_finish": 1792965234.882,
+      "tool_errors": 0,
+      "gap_s": 0.7050209045410156,
+      "gpu_busy_pct_llm": 30.470588235294116,
+      "gpu_power_w_llm": 120.80588235294118,
+      "gpu_samples_llm": 85,
+      "gpu_busy_pct_gap": 21.0,
+      "gpu_samples_gap": 7,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 16,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:16",
+      "t_start": 1792965234.8992856,
+      "t_end": 1792965260.4255855,
+      "ttft_s": 25.4762,
+      "llm_s": 25.5263,
+      "decode_s": 0.05010000000000048,
+      "prefill_tokens": 36974,
+      "decode_tokens": 77,
+      "prefill_tok_s": 1451.32,
+      "decode_tok_s": 1535.79,
+      "n_chunks": 2,
+      "first_token_skew_s": 0.011514425277709961,
+      "itl_p50_ms": 50.00000000000071,
+      "itl_p99_ms": 50.00000000000071,
+      "tool_names": [
+        "webfetch"
+      ],
+      "tool_latency_s": 0.18499994277954102,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792965260.384,
+          "end": 1792965260.569,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792965260.387,
+      "oc_step_finish": 1792965260.579,
+      "tool_errors": 1,
+      "gap_s": 0.16733241081237793,
+      "gpu_busy_pct_llm": 87.94901960784314,
+      "gpu_power_w_llm": 136.86705882352942,
+      "gpu_samples_llm": 255,
+      "gpu_busy_pct_gap": 17.0,
+      "gpu_samples_gap": 2,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 17,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:17",
+      "t_start": 1792965260.592918,
+      "t_end": 1792965270.6169178,
+      "ttft_s": 1.9495,
+      "llm_s": 10.024,
+      "decode_s": 8.074499999999999,
+      "prefill_tokens": 37117,
+      "decode_tokens": 266,
+      "prefill_tok_s": 19039.24,
+      "decode_tok_s": 32.94,
+      "n_chunks": 33,
+      "first_token_skew_s": 0.004581928253173828,
+      "itl_p50_ms": 31.00000000000014,
+      "itl_p99_ms": 3591.21,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 2.5219998359680176,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965266.967,
+          "end": 1792965268.988,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965270.588,
+          "end": 1792965271.089,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792965262.547,
+      "oc_step_finish": 1792965271.109,
+      "tool_errors": 0,
+      "gap_s": 0.5126891136169434,
+      "gpu_busy_pct_llm": 36.26,
+      "gpu_power_w_llm": 122.098,
+      "gpu_samples_llm": 100,
+      "gpu_busy_pct_gap": 21.0,
+      "gpu_samples_gap": 5,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 18,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:18",
+      "t_start": 1792965271.129607,
+      "t_end": 1792965280.290407,
+      "ttft_s": 2.3059,
+      "llm_s": 9.1608,
+      "decode_s": 6.854900000000001,
+      "prefill_tokens": 37481,
+      "decode_tokens": 230,
+      "prefill_tok_s": 16254.39,
+      "decode_tok_s": 33.55,
+      "n_chunks": 25,
+      "first_token_skew_s": 0.004492998123168945,
+      "itl_p50_ms": 31.00000000000014,
+      "itl_p99_ms": 3138.1499999999996,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 20.0239999294281,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965277.354,
+          "end": 1792965287.366,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965280.263,
+          "end": 1792965290.275,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792965273.44,
+      "oc_step_finish": 1792965290.297,
+      "tool_errors": 2,
+      "gap_s": 10.028238773345947,
+      "gpu_busy_pct_llm": 35.67391304347826,
+      "gpu_power_w_llm": 124.22391304347826,
+      "gpu_samples_llm": 92,
+      "gpu_busy_pct_gap": 1.89,
+      "gpu_samples_gap": 100,
+      "idle_gap_s": 9.125697283744813
+    },
+    {
+      "step": 19,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:19",
+      "t_start": 1792965290.3186457,
+      "t_end": 1792965296.6746457,
+      "ttft_s": 2.2407,
+      "llm_s": 6.356,
+      "decode_s": 4.1152999999999995,
+      "prefill_tokens": 37747,
+      "decode_tokens": 116,
+      "prefill_tok_s": 16846.07,
+      "decode_tok_s": 28.19,
+      "n_chunks": 32,
+      "first_token_skew_s": 0.0046541690826416016,
+      "itl_p50_ms": 34.000000000000256,
+      "itl_p99_ms": 2173.799999999998,
+      "tool_names": [
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 10.013999938964844,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965296.634,
+          "end": 1792965306.648,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792965292.564,
+      "oc_step_finish": 1792965306.671,
+      "tool_errors": 1,
+      "gap_s": 10.021464347839355,
+      "gpu_busy_pct_llm": 41.3968253968254,
+      "gpu_power_w_llm": 117.03492063492064,
+      "gpu_samples_llm": 63,
+      "gpu_busy_pct_gap": 1.00990099009901,
+      "gpu_samples_gap": 101,
+      "idle_gap_s": 9.426129832126126
+    },
+    {
+      "step": 20,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:20",
+      "t_start": 1792965306.69611,
+      "t_end": 1792965320.09251,
+      "ttft_s": 1.9916,
+      "llm_s": 13.3964,
+      "decode_s": 11.4048,
+      "prefill_tokens": 37867,
+      "decode_tokens": 368,
+      "prefill_tok_s": 19013.36,
+      "decode_tok_s": 32.27,
+      "n_chunks": 211,
+      "first_token_skew_s": 0.006289958953857422,
+      "itl_p50_ms": 31.00000000000014,
+      "itl_p99_ms": 69.91000000000025,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 20.022000074386597,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965318.004,
+          "end": 1792965328.016,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965320.054,
+          "end": 1792965330.064,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792965308.694,
+      "oc_step_finish": 1792965330.082,
+      "tool_errors": 2,
+      "gap_s": 10.013967514038086,
+      "gpu_busy_pct_llm": 26.917910447761194,
+      "gpu_power_w_llm": 117.89402985074626,
+      "gpu_samples_llm": 134,
+      "gpu_busy_pct_gap": 1.03,
+      "gpu_samples_gap": 100,
+      "idle_gap_s": 8.912431087493896
+    },
+    {
+      "step": 21,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:21",
+      "t_start": 1792965330.1064775,
+      "t_end": 1792965336.3163774,
+      "ttft_s": 2.1782,
+      "llm_s": 6.2099,
+      "decode_s": 4.031700000000001,
+      "prefill_tokens": 38071,
+      "decode_tokens": 111,
+      "prefill_tok_s": 17478.19,
+      "decode_tok_s": 27.53,
+      "n_chunks": 26,
+      "first_token_skew_s": 0.006322383880615234,
+      "itl_p50_ms": 36.99999999999992,
+      "itl_p99_ms": 2381.480000000005,
+      "tool_names": [
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 0.24699997901916504,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965336.28,
+          "end": 1792965336.527,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792965332.291,
+      "oc_step_finish": 1792965336.537,
+      "tool_errors": 0,
+      "gap_s": 0.24215126037597656,
+      "gpu_busy_pct_llm": 40.45161290322581,
+      "gpu_power_w_llm": 117.79193548387097,
+      "gpu_samples_llm": 62,
+      "gpu_busy_pct_gap": 18.0,
+      "gpu_samples_gap": 2,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 22,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:22",
+      "t_start": 1792965336.5585287,
+      "t_end": 1792965347.8114285,
+      "ttft_s": 3.0113,
+      "llm_s": 11.2529,
+      "decode_s": 8.2416,
+      "prefill_tokens": 38610,
+      "decode_tokens": 274,
+      "prefill_tok_s": 12821.7,
+      "decode_tok_s": 33.25,
+      "n_chunks": 70,
+      "first_token_skew_s": 0.004171133041381836,
+      "itl_p50_ms": 30.999999999999694,
+      "itl_p99_ms": 3052.279999999999,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 0.9529998302459717,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965344.775,
+          "end": 1792965345.27,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965347.783,
+          "end": 1792965348.241,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792965339.574,
+      "oc_step_finish": 1792965348.261,
+      "tool_errors": 0,
+      "gap_s": 0.47510361671447754,
+      "gpu_busy_pct_llm": 34.35398230088496,
+      "gpu_power_w_llm": 123.52566371681415,
+      "gpu_samples_llm": 113,
+      "gpu_busy_pct_gap": 16.8,
+      "gpu_samples_gap": 5,
+      "idle_gap_s": 0.09502072334289552
+    },
+    {
+      "step": 23,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:23",
+      "t_start": 1792965348.2865322,
+      "t_end": 1792965357.6236322,
+      "ttft_s": 3.9912,
+      "llm_s": 9.3371,
+      "decode_s": 5.345899999999999,
+      "prefill_tokens": 39276,
+      "decode_tokens": 179,
+      "prefill_tok_s": 9840.65,
+      "decode_tok_s": 33.48,
+      "n_chunks": 39,
+      "first_token_skew_s": 0.0052678585052490234,
+      "itl_p50_ms": 30.999999999999694,
+      "itl_p99_ms": 2137.920000000001,
+      "tool_names": [
+        "webfetch",
+        "webfetch"
+      ],
+      "tool_latency_s": 0.500999927520752,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792965355.391,
+          "end": 1792965355.721,
+          "status": "completed"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792965357.596,
+          "end": 1792965357.767,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792965352.283,
+      "oc_step_finish": 1792965357.777,
+      "tool_errors": 1,
+      "gap_s": 0.1683206558227539,
+      "gpu_busy_pct_llm": 50.58064516129032,
+      "gpu_power_w_llm": 127.42258064516128,
+      "gpu_samples_llm": 93,
+      "gpu_busy_pct_gap": 21.0,
+      "gpu_samples_gap": 2,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 24,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:24",
+      "t_start": 1792965357.7919528,
+      "t_end": 1792965376.3180528,
+      "ttft_s": 18.4834,
+      "llm_s": 18.5261,
+      "decode_s": 0.04269999999999996,
+      "prefill_tokens": 42939,
+      "decode_tokens": 72,
+      "prefill_tok_s": 2323.11,
+      "decode_tok_s": 1686.24,
+      "n_chunks": 2,
+      "first_token_skew_s": 0.008646965026855469,
+      "itl_p50_ms": 42.99999999999926,
+      "itl_p99_ms": 42.99999999999926,
+      "tool_names": [
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 10.007999897003174,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965376.282,
+          "end": 1792965386.29,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792965376.284,
+      "oc_step_finish": 1792965386.305,
+      "tool_errors": 1,
+      "gap_s": 10.01215147972107,
+      "gpu_busy_pct_llm": 83.36216216216216,
+      "gpu_power_w_llm": 136.89729729729729,
+      "gpu_samples_llm": 185,
+      "gpu_busy_pct_gap": 1.62,
+      "gpu_samples_gap": 100,
+      "idle_gap_s": 9.111057846546174
+    },
+    {
+      "step": 25,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:25",
+      "t_start": 1792965386.3302042,
+      "t_end": 1792965391.1187043,
+      "ttft_s": 1.895,
+      "llm_s": 4.7885,
+      "decode_s": 2.8935,
+      "prefill_tokens": 43045,
+      "decode_tokens": 96,
+      "prefill_tok_s": 22715.04,
+      "decode_tok_s": 33.18,
+      "n_chunks": 23,
+      "first_token_skew_s": 0.005795717239379883,
+      "itl_p50_ms": 31.00000000000014,
+      "itl_p99_ms": 1762.4099999999983,
+      "tool_names": [
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 1.2379999160766602,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965391.092,
+          "end": 1792965392.33,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792965388.231,
+      "oc_step_finish": 1792965392.351,
+      "tool_errors": 0,
+      "gap_s": 1.2548813819885254,
+      "gpu_busy_pct_llm": 50.166666666666664,
+      "gpu_power_w_llm": 119.02083333333333,
+      "gpu_samples_llm": 48,
+      "gpu_busy_pct_gap": 19.333333333333332,
+      "gpu_samples_gap": 12,
+      "idle_gap_s": 0.10457344849904378
+    },
+    {
+      "step": 26,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:26",
+      "t_start": 1792965392.3735857,
+      "t_end": 1792965397.8865857,
+      "ttft_s": 2.0427,
+      "llm_s": 5.513,
+      "decode_s": 3.4703,
+      "prefill_tokens": 43192,
+      "decode_tokens": 115,
+      "prefill_tok_s": 21144.56,
+      "decode_tok_s": 33.14,
+      "n_chunks": 32,
+      "first_token_skew_s": 0.004714250564575195,
+      "itl_p50_ms": 31.00000000000014,
+      "itl_p99_ms": 1768.2999999999984,
+      "tool_names": [
+        "webfetch"
+      ],
+      "tool_latency_s": 0.19300007820129395,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792965397.862,
+          "end": 1792965398.055,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792965394.421,
+      "oc_step_finish": 1792965398.076,
+      "tool_errors": 1,
+      "gap_s": 0.20351052284240723,
+      "gpu_busy_pct_llm": 45.964285714285715,
+      "gpu_power_w_llm": 120.18214285714285,
+      "gpu_samples_llm": 56,
+      "gpu_busy_pct_gap": 22.0,
+      "gpu_samples_gap": 2,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 27,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:27",
+      "t_start": 1792965398.0900962,
+      "t_end": 1792965413.5299962,
+      "ttft_s": 2.0221,
+      "llm_s": 15.4399,
+      "decode_s": 13.4178,
+      "prefill_tokens": 43349,
+      "decode_tokens": 411,
+      "prefill_tok_s": 21437.61,
+      "decode_tok_s": 30.63,
+      "n_chunks": 295,
+      "first_token_skew_s": 0.004803895950317383,
+      "itl_p50_ms": 31.000000000000583,
+      "itl_p99_ms": 64.07000000000001,
+      "tool_names": [
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 0.4810001850128174,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965413.495,
+          "end": 1792965413.976,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792965400.117,
+      "oc_step_finish": 1792965413.99,
+      "tool_errors": 0,
+      "gap_s": 0.48589515686035156,
+      "gpu_busy_pct_llm": 24.01948051948052,
+      "gpu_power_w_llm": 118.73311688311689,
+      "gpu_samples_llm": 154,
+      "gpu_busy_pct_gap": 19.0,
+      "gpu_samples_gap": 5,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 28,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:28",
+      "t_start": 1792965414.0158913,
+      "t_end": 1792965424.8348913,
+      "ttft_s": 4.6092,
+      "llm_s": 10.819,
+      "decode_s": 6.2098,
+      "prefill_tokens": 44356,
+      "decode_tokens": 205,
+      "prefill_tok_s": 9623.36,
+      "decode_tok_s": 33.01,
+      "n_chunks": 42,
+      "first_token_skew_s": 0.0059087276458740234,
+      "itl_p50_ms": 30.999999999999694,
+      "itl_p99_ms": 2631.6000000000017,
+      "tool_names": [
+        "webfetch",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 1.0749998092651367,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792965421.575,
+          "end": 1792965421.872,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965424.805,
+          "end": 1792965425.583,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792965418.631,
+      "oc_step_finish": 1792965425.6,
+      "tool_errors": 0,
+      "gap_s": 0.7910575866699219,
+      "gpu_busy_pct_llm": 48.51851851851852,
+      "gpu_power_w_llm": 127.36203703703704,
+      "gpu_samples_llm": 108,
+      "gpu_busy_pct_gap": 11.0,
+      "gpu_samples_gap": 8,
+      "idle_gap_s": 0.39552879333496094
+    },
+    {
+      "step": 29,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:29",
+      "t_start": 1792965425.625949,
+      "t_end": 1792965444.434949,
+      "ttft_s": 18.775,
+      "llm_s": 18.809,
+      "decode_s": 0.03400000000000247,
+      "prefill_tokens": 48489,
+      "decode_tokens": 66,
+      "prefill_tok_s": 2582.64,
+      "decode_tok_s": 1942.44,
+      "n_chunks": 2,
+      "first_token_skew_s": 0.016051054000854492,
+      "itl_p50_ms": 34.00000000000247,
+      "itl_p99_ms": 34.00000000000247,
+      "tool_names": [
+        "webfetch"
+      ],
+      "tool_latency_s": 0.13100004196166992,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792965444.414,
+          "end": 1792965444.545,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792965444.417,
+      "oc_step_finish": 1792965444.564,
+      "tool_errors": 1,
+      "gap_s": 0.14729857444763184,
+      "gpu_busy_pct_llm": 91.56382978723404,
+      "gpu_power_w_llm": 135.6776595744681,
+      "gpu_samples_llm": 188,
+      "gpu_busy_pct_gap": 22.0,
+      "gpu_samples_gap": 2,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 30,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:30",
+      "t_start": 1792965444.5822475,
+      "t_end": 1792965451.7518475,
+      "ttft_s": 1.9898,
+      "llm_s": 7.1696,
+      "decode_s": 5.1798,
+      "prefill_tokens": 48610,
+      "decode_tokens": 155,
+      "prefill_tok_s": 24429.59,
+      "decode_tok_s": 29.92,
+      "n_chunks": 67,
+      "first_token_skew_s": 0.005952596664428711,
+      "itl_p50_ms": 31.00000000000014,
+      "itl_p99_ms": 1116.3499999999824,
+      "tool_names": [
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 10.01199984550476,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965451.719,
+          "end": 1792965461.731,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792965446.578,
+      "oc_step_finish": 1792965461.748,
+      "tool_errors": 1,
+      "gap_s": 10.018852949142456,
+      "gpu_busy_pct_llm": 42.49295774647887,
+      "gpu_power_w_llm": 124.47183098591549,
+      "gpu_samples_llm": 71,
+      "gpu_busy_pct_gap": 0.95,
+      "gpu_samples_gap": 100,
+      "idle_gap_s": 9.517910301685333
+    },
+    {
+      "step": 31,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:31",
+      "t_start": 1792965461.7707005,
+      "t_end": 1792965479.6415005,
+      "ttft_s": 1.9886,
+      "llm_s": 17.8708,
+      "decode_s": 15.8822,
+      "prefill_tokens": 48733,
+      "decode_tokens": 508,
+      "prefill_tok_s": 24506.19,
+      "decode_tok_s": 31.99,
+      "n_chunks": 324,
+      "first_token_skew_s": 0.0046994686126708984,
+      "itl_p50_ms": 31.000000000000583,
+      "itl_p99_ms": 66.9000000000004,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 20.013000011444092,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965477.01,
+          "end": 1792965487.017,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965479.612,
+          "end": 1792965489.618,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792965463.764,
+      "oc_step_finish": 1792965489.631,
+      "tool_errors": 2,
+      "gap_s": 10.017261743545532,
+      "gpu_busy_pct_llm": 24.446927374301676,
+      "gpu_power_w_llm": 119.18324022346368,
+      "gpu_samples_llm": 179,
+      "gpu_busy_pct_gap": 1.44,
+      "gpu_samples_gap": 100,
+      "idle_gap_s": 9.4162260389328
+    },
+    {
+      "step": 32,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:32",
+      "t_start": 1792965489.6587622,
+      "t_end": 1792965513.9458623,
+      "ttft_s": 2.3444,
+      "llm_s": 24.2871,
+      "decode_s": 21.9427,
+      "prefill_tokens": 48965,
+      "decode_tokens": 690,
+      "prefill_tok_s": 20885.94,
+      "decode_tok_s": 31.45,
+      "n_chunks": 548,
+      "first_token_skew_s": 0.005837917327880859,
+      "itl_p50_ms": 31.00000000000236,
+      "itl_p99_ms": 93.9999999999986,
+      "tool_names": [
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 10.010999917984009,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965513.921,
+          "end": 1792965523.932,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792965492.009,
+      "oc_step_finish": 1792965523.949,
+      "tool_errors": 1,
+      "gap_s": 10.028443098068237,
+      "gpu_busy_pct_llm": 26.02469135802469,
+      "gpu_power_w_llm": 119.97901234567902,
+      "gpu_samples_llm": 243,
+      "gpu_busy_pct_gap": 0.66,
+      "gpu_samples_gap": 100,
+      "idle_gap_s": 9.72758980512619
+    },
+    {
+      "step": 33,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:33",
+      "t_start": 1792965523.9743054,
+      "t_end": 1792965530.8374054,
+      "ttft_s": 2.0101,
+      "llm_s": 6.8631,
+      "decode_s": 4.853,
+      "prefill_tokens": 49091,
+      "decode_tokens": 128,
+      "prefill_tok_s": 24422.17,
+      "decode_tok_s": 26.38,
+      "n_chunks": 49,
+      "first_token_skew_s": 0.005594730377197266,
+      "itl_p50_ms": 37.00000000000037,
+      "itl_p99_ms": 1580.7100000000028,
+      "tool_names": [
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 10.009000062942505,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965530.802,
+          "end": 1792965540.811,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792965525.99,
+      "oc_step_finish": 1792965540.822,
+      "tool_errors": 1,
+      "gap_s": 10.010323762893677,
+      "gpu_busy_pct_llm": 25.91304347826087,
+      "gpu_power_w_llm": 118.17536231884058,
+      "gpu_samples_llm": 69,
+      "gpu_busy_pct_gap": 0.72,
+      "gpu_samples_gap": 100,
+      "idle_gap_s": 9.60991081237793
+    },
+    {
+      "step": 34,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:34",
+      "t_start": 1792965540.8477292,
+      "t_end": 1792965546.1151292,
+      "ttft_s": 2.0091,
+      "llm_s": 5.2674,
+      "decode_s": 3.2583,
+      "prefill_tokens": 49223,
+      "decode_tokens": 108,
+      "prefill_tok_s": 24500.02,
+      "decode_tok_s": 33.15,
+      "n_chunks": 30,
+      "first_token_skew_s": 0.0051708221435546875,
+      "itl_p50_ms": 31.00000000000014,
+      "itl_p99_ms": 1709.559999999997,
+      "tool_names": [
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 10.008999824523926,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965546.088,
+          "end": 1792965556.097,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792965542.862,
+      "oc_step_finish": 1792965556.107,
+      "tool_errors": 1,
+      "gap_s": 10.015607357025146,
+      "gpu_busy_pct_llm": 30.528301886792452,
+      "gpu_power_w_llm": 120.39622641509433,
+      "gpu_samples_llm": 53,
+      "gpu_busy_pct_gap": 1.02,
+      "gpu_samples_gap": 100,
+      "idle_gap_s": 8.91389054775238
+    },
+    {
+      "step": 35,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:35",
+      "t_start": 1792965556.1307366,
+      "t_end": 1792965563.8780365,
+      "ttft_s": 1.9559,
+      "llm_s": 7.7473,
+      "decode_s": 5.7914,
+      "prefill_tokens": 49337,
+      "decode_tokens": 190,
+      "prefill_tok_s": 25224.7,
+      "decode_tok_s": 32.81,
+      "n_chunks": 21,
+      "first_token_skew_s": 0.004363536834716797,
+      "itl_p50_ms": 31.00000000000014,
+      "itl_p99_ms": 2611.44,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 20.019999980926514,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965561.258,
+          "end": 1792965571.267,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965563.848,
+          "end": 1792965573.859,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792965558.091,
+      "oc_step_finish": 1792965573.883,
+      "tool_errors": 2,
+      "gap_s": 10.031602382659912,
+      "gpu_busy_pct_llm": 28.98701298701299,
+      "gpu_power_w_llm": 121.75584415584416,
+      "gpu_samples_llm": 77,
+      "gpu_busy_pct_gap": 0.8712871287128713,
+      "gpu_samples_gap": 101,
+      "idle_gap_s": 9.634311199188232
+    },
+    {
+      "step": 36,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:36",
+      "t_start": 1792965573.909639,
+      "t_end": 1792965585.4262388,
+      "ttft_s": 2.2774,
+      "llm_s": 11.5166,
+      "decode_s": 9.2392,
+      "prefill_tokens": 49568,
+      "decode_tokens": 297,
+      "prefill_tok_s": 21765.17,
+      "decode_tok_s": 32.15,
+      "n_chunks": 205,
+      "first_token_skew_s": 0.005961179733276367,
+      "itl_p50_ms": 31.000000000000583,
+      "itl_p99_ms": 62.969999999999736,
+      "tool_names": [
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 10.010999917984009,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792965585.398,
+          "end": 1792965595.409,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792965576.193,
+      "oc_step_finish": 1792965595.422,
+      "tool_errors": 1,
+      "gap_s": 10.025598764419556,
+      "gpu_busy_pct_llm": 28.017391304347825,
+      "gpu_power_w_llm": 121.74173913043478,
+      "gpu_samples_llm": 115,
+      "gpu_busy_pct_gap": 1.68,
+      "gpu_samples_gap": 100,
+      "idle_gap_s": 9.223550863265991
+    },
+    {
+      "step": 37,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:37",
+      "t_start": 1792965595.4518375,
+      "t_end": 1792965608.7995377,
+      "ttft_s": 1.9876,
+      "llm_s": 13.3477,
+      "decode_s": 11.3601,
+      "prefill_tokens": 49685,
+      "decode_tokens": 317,
+      "prefill_tok_s": 24997.48,
+      "decode_tok_s": 27.9,
+      "n_chunks": 182,
+      "first_token_skew_s": 0.0045623779296875,
+      "itl_p50_ms": 35.99999999999959,
+      "itl_p99_ms": 80.59999999999971,
+      "tool_names": [
+        "todowrite"
+      ],
+      "tool_latency_s": 0.003999948501586914,
+      "tools": [
+        {
+          "tool": "todowrite",
+          "start": 1792965608.776,
+          "end": 1792965608.78,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792965597.444,
+      "oc_step_finish": 1792965608.814,
+      "tool_errors": 0,
+      "gap_s": 0.039734840393066406,
+      "gpu_busy_pct_llm": 29.850746268656717,
+      "gpu_power_w_llm": 117.63880597014925,
+      "gpu_samples_llm": 134,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 38,
+      "llm_call_id": "sw_64k__research_m6_07_mrna_vaccines__00#a1:38",
+      "t_start": 1792965608.8392725,
+      "t_end": 1792965733.6541724,
+      "ttft_s": 2.3501,
+      "llm_s": 124.8149,
+      "decode_s": 122.4648,
+      "prefill_tokens": 50001,
+      "decode_tokens": 3700,
+      "prefill_tok_s": 21276.12,
+      "decode_tok_s": 30.21,
+      "n_chunks": 3513,
+      "first_token_skew_s": 0.00562739372253418,
+      "itl_p50_ms": 31.999999999996476,
+      "itl_p99_ms": 74.0000000000115,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792965611.195,
+      "oc_step_finish": 1792965733.681,
+      "tool_errors": 0,
+      "gap_s": 0.47327184677124023,
+      "gpu_busy_pct_llm": 21.47596153846154,
+      "gpu_power_w_llm": 119.45088141025641,
+      "gpu_samples_llm": 1248,
+      "gpu_busy_pct_gap": 23.0,
+      "gpu_samples_gap": 5,
+      "idle_gap_s": 0.0
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

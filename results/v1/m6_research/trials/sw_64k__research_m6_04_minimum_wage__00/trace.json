@@ -1,0 +1,148 @@
+{
+  "trial_id": "sw_64k__research_m6_04_minimum_wage__00",
+  "task": "research_m6_04_minimum_wage",
+  "config": "sw_64k",
+  "attempt": 1,
+  "status": "fail",
+  "summary": {
+    "wall_start": 1792969178.105501,
+    "wall_end": 1792969238.2240212,
+    "wall_s": 60.11852025985718,
+    "n_steps": 3,
+    "llm_s": 37.0618,
+    "ttft_s": 8.1,
+    "decode_s": 28.9618,
+    "tool_s": 40.045000076293945,
+    "gap_s": 20.53002691268921,
+    "idle_gap_s": 18.75271568517874,
+    "prefill_tokens": 23659,
+    "decode_tokens": 770,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "sw_64k__research_m6_04_minimum_wage__00#a1:1",
+      "t_start": 1792969180.6321943,
+      "t_end": 1792969193.7350943,
+      "ttft_s": 3.4178,
+      "llm_s": 13.1029,
+      "decode_s": 9.6851,
+      "prefill_tokens": 7649,
+      "decode_tokens": 289,
+      "prefill_tok_s": 2237.99,
+      "decode_tok_s": 29.84,
+      "n_chunks": 100,
+      "first_token_skew_s": 0.01700568199157715,
+      "itl_p50_ms": 34.000000000000696,
+      "itl_p99_ms": 2075.8599999999997,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 30.03600025177002,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792969189.625,
+          "end": 1792969199.641,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792969191.734,
+          "end": 1792969201.742,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792969193.701,
+          "end": 1792969203.713,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792969184.067,
+      "oc_step_finish": 1792969203.738,
+      "tool_errors": 3,
+      "gap_s": 10.026378870010376,
+      "gpu_busy_pct_llm": 27.412213740458014,
+      "gpu_power_w_llm": 113.64198473282443,
+      "gpu_samples_llm": 131,
+      "gpu_busy_pct_gap": 1.19,
+      "gpu_samples_gap": 100,
+      "idle_gap_s": 9.324532349109651
+    },
+    {
+      "step": 2,
+      "llm_call_id": "sw_64k__research_m6_04_minimum_wage__00#a1:2",
+      "t_start": 1792969203.7614732,
+      "t_end": 1792969210.8639731,
+      "ttft_s": 2.4908,
+      "llm_s": 7.1025,
+      "decode_s": 4.6117,
+      "prefill_tokens": 7954,
+      "decode_tokens": 115,
+      "prefill_tok_s": 3193.35,
+      "decode_tok_s": 24.94,
+      "n_chunks": 54,
+      "first_token_skew_s": 0.0107269287109375,
+      "itl_p50_ms": 42.000000000000256,
+      "itl_p99_ms": 1142.7199999999937,
+      "tool_names": [
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 10.008999824523926,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792969210.838,
+          "end": 1792969220.847,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792969206.263,
+      "oc_step_finish": 1792969220.865,
+      "tool_errors": 1,
+      "gap_s": 10.023647546768188,
+      "gpu_busy_pct_llm": 36.67605633802817,
+      "gpu_power_w_llm": 112.0450704225352,
+      "gpu_samples_llm": 71,
+      "gpu_busy_pct_gap": 0.9504950495049505,
+      "gpu_samples_gap": 101,
+      "idle_gap_s": 9.428183336069088
+    },
+    {
+      "step": 3,
+      "llm_call_id": "sw_64k__research_m6_04_minimum_wage__00#a1:3",
+      "t_start": 1792969220.8876207,
+      "t_end": 1792969237.7440207,
+      "ttft_s": 2.1914,
+      "llm_s": 16.8564,
+      "decode_s": 14.665000000000001,
+      "prefill_tokens": 8056,
+      "decode_tokens": 366,
+      "prefill_tok_s": 3676.19,
+      "decode_tok_s": 24.96,
+      "n_chunks": 353,
+      "first_token_skew_s": 0.011979341506958008,
+      "itl_p50_ms": 40.000000000000924,
+      "itl_p99_ms": 81.9599999999999,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792969223.091,
+      "oc_step_finish": 1792969237.77,
+      "tool_errors": 0,
+      "gap_s": 0.48000049591064453,
+      "gpu_busy_pct_llm": 23.24404761904762,
+      "gpu_power_w_llm": 109.48273809523809,
+      "gpu_samples_llm": 168,
+      "gpu_busy_pct_gap": 15.0,
+      "gpu_samples_gap": 5,
+      "idle_gap_s": 0.0
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

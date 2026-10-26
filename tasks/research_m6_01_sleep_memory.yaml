@@ -1,0 +1,18 @@
+id: research_m6_01_sleep_memory
+title: Citation-heavy research question 01 (sleep memory)
+category: research
+prompts:
+  - "Does sleep after learning improve memory consolidation in humans, and how strong is the evidence for the role of slow-wave sleep versus REM sleep? Cite specific sources for every claim (authors, title or venue, year, and URL where you have one)."
+agent: research
+mcp: [searxng]
+tools: [webfetch]
+timeout_s: 1500
+expected_tool_sequence: [searxng_searxng_web_search]
+tags: [citations, web, m6]
+suite: [m6]
+verify:
+  - type: rubric
+    min_words: 200
+    required:
+      - name: gives_years
+        any_of: ["19", "20"]

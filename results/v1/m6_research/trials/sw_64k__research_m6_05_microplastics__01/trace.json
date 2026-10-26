@@ -1,0 +1,654 @@
+{
+  "trial_id": "sw_64k__research_m6_05_microplastics__01",
+  "task": "research_m6_05_microplastics",
+  "config": "sw_64k",
+  "attempt": 1,
+  "status": "pass",
+  "summary": {
+    "wall_start": 1792967257.5050797,
+    "wall_end": 1792967801.7085035,
+    "wall_s": 544.2034237384796,
+    "n_steps": 14,
+    "llm_s": 490.2494,
+    "ttft_s": 196.152,
+    "decode_s": 294.0974,
+    "tool_s": 91.64299964904785,
+    "gap_s": 51.55107378959656,
+    "idle_gap_s": 44.89643658446071,
+    "prefill_tokens": 360312,
+    "decode_tokens": 8760,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "sw_64k__research_m6_05_microplastics__01#a1:1",
+      "t_start": 1792967259.9080303,
+      "t_end": 1792967274.7523303,
+      "ttft_s": 3.124,
+      "llm_s": 14.8443,
+      "decode_s": 11.7203,
+      "prefill_tokens": 7646,
+      "decode_tokens": 366,
+      "prefill_tok_s": 2447.5,
+      "decode_tok_s": 31.23,
+      "n_chunks": 163,
+      "first_token_skew_s": 0.01896977424621582,
+      "itl_p50_ms": 32.49999999999975,
+      "itl_p99_ms": 2021.349999999997,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 30.0310001373291,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967270.639,
+          "end": 1792967280.654,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967272.757,
+          "end": 1792967282.764,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967274.714,
+          "end": 1792967284.723,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792967263.051,
+      "oc_step_finish": 1792967284.74,
+      "tool_errors": 3,
+      "gap_s": 10.008266687393188,
+      "gpu_busy_pct_llm": 26.87837837837838,
+      "gpu_power_w_llm": 115.92432432432432,
+      "gpu_samples_llm": 148,
+      "gpu_busy_pct_gap": 1.02,
+      "gpu_samples_gap": 100,
+      "idle_gap_s": 9.407770686149597
+    },
+    {
+      "step": 2,
+      "llm_call_id": "sw_64k__research_m6_05_microplastics__01#a1:2",
+      "t_start": 1792967284.760597,
+      "t_end": 1792967291.522197,
+      "ttft_s": 2.2842,
+      "llm_s": 6.7616,
+      "decode_s": 4.477399999999999,
+      "prefill_tokens": 7988,
+      "decode_tokens": 138,
+      "prefill_tok_s": 3497.07,
+      "decode_tok_s": 30.82,
+      "n_chunks": 75,
+      "first_token_skew_s": 0.007203102111816406,
+      "itl_p50_ms": 32.00000000000003,
+      "itl_p99_ms": 596.7199999999931,
+      "tool_names": [
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 10.010999917984009,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967291.5,
+          "end": 1792967301.511,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792967287.052,
+      "oc_step_finish": 1792967301.523,
+      "tool_errors": 1,
+      "gap_s": 10.02390170097351,
+      "gpu_busy_pct_llm": 39.94117647058823,
+      "gpu_power_w_llm": 117.46029411764707,
+      "gpu_samples_llm": 68,
+      "gpu_busy_pct_gap": 1.44,
+      "gpu_samples_gap": 100,
+      "idle_gap_s": 9.22198956489563
+    },
+    {
+      "step": 3,
+      "llm_call_id": "sw_64k__research_m6_05_microplastics__01#a1:3",
+      "t_start": 1792967301.5460987,
+      "t_end": 1792967306.5548987,
+      "ttft_s": 1.9531,
+      "llm_s": 5.0088,
+      "decode_s": 3.0557,
+      "prefill_tokens": 8103,
+      "decode_tokens": 94,
+      "prefill_tok_s": 4148.79,
+      "decode_tok_s": 30.76,
+      "n_chunks": 69,
+      "first_token_skew_s": 0.0078012943267822266,
+      "itl_p50_ms": 32.999999999999915,
+      "itl_p99_ms": 303.6899999999985,
+      "tool_names": [
+        "searxng_searxng_instance_info"
+      ],
+      "tool_latency_s": 0.028999805450439453,
+      "tools": [
+        {
+          "tool": "searxng_searxng_instance_info",
+          "start": 1792967306.512,
+          "end": 1792967306.541,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792967303.507,
+      "oc_step_finish": 1792967306.564,
+      "tool_errors": 0,
+      "gap_s": 0.025716781616210938,
+      "gpu_busy_pct_llm": 47.36,
+      "gpu_power_w_llm": 116.17399999999999,
+      "gpu_samples_llm": 50,
+      "gpu_busy_pct_gap": 19.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 4,
+      "llm_call_id": "sw_64k__research_m6_05_microplastics__01#a1:4",
+      "t_start": 1792967306.5806155,
+      "t_end": 1792967317.7234156,
+      "ttft_s": 7.3887,
+      "llm_s": 11.1428,
+      "decode_s": 3.7540999999999993,
+      "prefill_tokens": 9670,
+      "decode_tokens": 120,
+      "prefill_tok_s": 1308.76,
+      "decode_tok_s": 31.97,
+      "n_chunks": 43,
+      "first_token_skew_s": 0.010684490203857422,
+      "itl_p50_ms": 32.999999999999474,
+      "itl_p99_ms": 1416.5600000000072,
+      "tool_names": [
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 10.006999969482422,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967317.697,
+          "end": 1792967327.704,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792967313.98,
+      "oc_step_finish": 1792967327.718,
+      "tool_errors": 1,
+      "gap_s": 10.012130498886108,
+      "gpu_busy_pct_llm": 69.50450450450451,
+      "gpu_power_w_llm": 126.13423423423423,
+      "gpu_samples_llm": 111,
+      "gpu_busy_pct_gap": 1.08,
+      "gpu_samples_gap": 100,
+      "idle_gap_s": 9.411402668952942
+    },
+    {
+      "step": 5,
+      "llm_call_id": "sw_64k__research_m6_05_microplastics__01#a1:5",
+      "t_start": 1792967327.735546,
+      "t_end": 1792967333.976746,
+      "ttft_s": 2.0238,
+      "llm_s": 6.2412,
+      "decode_s": 4.2174,
+      "prefill_tokens": 9805,
+      "decode_tokens": 134,
+      "prefill_tok_s": 4844.85,
+      "decode_tok_s": 31.77,
+      "n_chunks": 68,
+      "first_token_skew_s": 0.005654096603393555,
+      "itl_p50_ms": 32.00000000000003,
+      "itl_p99_ms": 730.100000000007,
+      "tool_names": [
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 3.7339999675750732,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967333.953,
+          "end": 1792967337.687,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792967329.765,
+      "oc_step_finish": 1792967337.698,
+      "tool_errors": 0,
+      "gap_s": 3.7396512031555176,
+      "gpu_busy_pct_llm": 42.54838709677419,
+      "gpu_power_w_llm": 116.54354838709678,
+      "gpu_samples_llm": 62,
+      "gpu_busy_pct_gap": 1.894736842105263,
+      "gpu_samples_gap": 38,
+      "idle_gap_s": 3.3460037080865157
+    },
+    {
+      "step": 6,
+      "llm_call_id": "sw_64k__research_m6_05_microplastics__01#a1:6",
+      "t_start": 1792967337.7163973,
+      "t_end": 1792967359.8565972,
+      "ttft_s": 14.1125,
+      "llm_s": 22.1402,
+      "decode_s": 8.0277,
+      "prefill_tokens": 13282,
+      "decode_tokens": 245,
+      "prefill_tok_s": 941.15,
+      "decode_tok_s": 30.52,
+      "n_chunks": 94,
+      "first_token_skew_s": 0.02710270881652832,
+      "itl_p50_ms": 33.99999999999892,
+      "itl_p99_ms": 2304.6,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 2.9170000553131104,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967357.462,
+          "end": 1792967359.44,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967359.829,
+          "end": 1792967360.768,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792967351.856,
+      "oc_step_finish": 1792967360.783,
+      "tool_errors": 0,
+      "gap_s": 0.9477181434631348,
+      "gpu_busy_pct_llm": 69.36651583710407,
+      "gpu_power_w_llm": 126.7950226244344,
+      "gpu_samples_llm": 221,
+      "gpu_busy_pct_gap": 9.0,
+      "gpu_samples_gap": 10,
+      "idle_gap_s": 0.4738590717315674
+    },
+    {
+      "step": 7,
+      "llm_call_id": "sw_64k__research_m6_05_microplastics__01#a1:7",
+      "t_start": 1792967360.8043153,
+      "t_end": 1792967393.0579152,
+      "ttft_s": 24.3847,
+      "llm_s": 32.2536,
+      "decode_s": 7.8689,
+      "prefill_tokens": 19016,
+      "decode_tokens": 243,
+      "prefill_tok_s": 779.83,
+      "decode_tok_s": 30.88,
+      "n_chunks": 91,
+      "first_token_skew_s": 0.00598454475402832,
+      "itl_p50_ms": 33.00000000000125,
+      "itl_p99_ms": 1549.9600000000005,
+      "tool_names": [
+        "searxng_web_url_read",
+        "searxng_web_url_read",
+        "searxng_web_url_read"
+      ],
+      "tool_latency_s": 5.0,
+      "tools": [
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792967389.844,
+          "end": 1792967390.877,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792967391.358,
+          "end": 1792967392.303,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792967393.031,
+          "end": 1792967396.053,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792967385.195,
+      "oc_step_finish": 1792967396.069,
+      "tool_errors": 0,
+      "gap_s": 3.0371592044830322,
+      "gpu_busy_pct_llm": 77.68012422360249,
+      "gpu_power_w_llm": 129.7807453416149,
+      "gpu_samples_llm": 322,
+      "gpu_busy_pct_gap": 1.8387096774193548,
+      "gpu_samples_gap": 31,
+      "idle_gap_s": 2.7432405717911257
+    },
+    {
+      "step": 8,
+      "llm_call_id": "sw_64k__research_m6_05_microplastics__01#a1:8",
+      "t_start": 1792967396.0950744,
+      "t_end": 1792967445.0462744,
+      "ttft_s": 40.6849,
+      "llm_s": 48.9512,
+      "decode_s": 8.266300000000001,
+      "prefill_tokens": 29555,
+      "decode_tokens": 255,
+      "prefill_tok_s": 726.44,
+      "decode_tok_s": 30.85,
+      "n_chunks": 112,
+      "first_token_skew_s": 0.011025428771972656,
+      "itl_p50_ms": 33.00000000000125,
+      "itl_p99_ms": 1820.4000000000115,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 14.86299991607666,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967445.016,
+          "end": 1792967449.871,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967442.608,
+          "end": 1792967452.616,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792967436.791,
+      "oc_step_finish": 1792967452.63,
+      "tool_errors": 1,
+      "gap_s": 7.606204032897949,
+      "gpu_busy_pct_llm": 84.58691206543968,
+      "gpu_power_w_llm": 132.4754601226994,
+      "gpu_samples_llm": 489,
+      "gpu_busy_pct_gap": 0.75,
+      "gpu_samples_gap": 76,
+      "idle_gap_s": 7.305959136862504
+    },
+    {
+      "step": 9,
+      "llm_call_id": "sw_64k__research_m6_05_microplastics__01#a1:9",
+      "t_start": 1792967452.6524785,
+      "t_end": 1792967471.2194784,
+      "ttft_s": 11.0975,
+      "llm_s": 18.567,
+      "decode_s": 7.4695,
+      "prefill_tokens": 32029,
+      "decode_tokens": 231,
+      "prefill_tok_s": 2886.15,
+      "decode_tok_s": 30.93,
+      "n_chunks": 67,
+      "first_token_skew_s": 0.0060214996337890625,
+      "itl_p50_ms": 32.999999999999474,
+      "itl_p99_ms": 2591.399999999999,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 2.7649998664855957,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967468.483,
+          "end": 1792967470.116,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967471.191,
+          "end": 1792967472.323,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792967463.756,
+      "oc_step_finish": 1792967472.338,
+      "tool_errors": 0,
+      "gap_s": 1.1445612907409668,
+      "gpu_busy_pct_llm": 66.33870967741936,
+      "gpu_power_w_llm": 126.06290322580645,
+      "gpu_samples_llm": 186,
+      "gpu_busy_pct_gap": 7.363636363636363,
+      "gpu_samples_gap": 11,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 10,
+      "llm_call_id": "sw_64k__research_m6_05_microplastics__01#a1:10",
+      "t_start": 1792967472.3640397,
+      "t_end": 1792967498.9405396,
+      "ttft_s": 19.3937,
+      "llm_s": 26.5765,
+      "decode_s": 7.1828,
+      "prefill_tokens": 36572,
+      "decode_tokens": 222,
+      "prefill_tok_s": 1885.77,
+      "decode_tok_s": 30.91,
+      "n_chunks": 68,
+      "first_token_skew_s": 0.009260416030883789,
+      "itl_p50_ms": 33.99999999999892,
+      "itl_p99_ms": 2409.8599999999997,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 2.4040000438690186,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967496.531,
+          "end": 1792967497.905,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967498.912,
+          "end": 1792967499.942,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792967491.767,
+      "oc_step_finish": 1792967499.96,
+      "tool_errors": 0,
+      "gap_s": 1.0444414615631104,
+      "gpu_busy_pct_llm": 76.22556390977444,
+      "gpu_power_w_llm": 130.9270676691729,
+      "gpu_samples_llm": 266,
+      "gpu_busy_pct_gap": 7.636363636363637,
+      "gpu_samples_gap": 11,
+      "idle_gap_s": 0.6646445664492521
+    },
+    {
+      "step": 11,
+      "llm_call_id": "sw_64k__research_m6_05_microplastics__01#a1:11",
+      "t_start": 1792967499.984981,
+      "t_end": 1792967527.923481,
+      "ttft_s": 19.6615,
+      "llm_s": 27.9385,
+      "decode_s": 8.277000000000001,
+      "prefill_tokens": 41080,
+      "decode_tokens": 227,
+      "prefill_tok_s": 2089.36,
+      "decode_tok_s": 27.43,
+      "n_chunks": 53,
+      "first_token_skew_s": 0.0065190792083740234,
+      "itl_p50_ms": 39.00000000000148,
+      "itl_p99_ms": 2169.500000000003,
+      "tool_names": [
+        "searxng_web_url_read",
+        "searxng_web_url_read",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 3.6449999809265137,
+      "tools": [
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792967523.561,
+          "end": 1792967524.654,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792967525.391,
+          "end": 1792967526.378,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967527.894,
+          "end": 1792967529.459,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792967519.653,
+      "oc_step_finish": 1792967529.472,
+      "tool_errors": 0,
+      "gap_s": 1.5745675563812256,
+      "gpu_busy_pct_llm": 72.9247311827957,
+      "gpu_power_w_llm": 131.11290322580646,
+      "gpu_samples_llm": 279,
+      "gpu_busy_pct_gap": 5.25,
+      "gpu_samples_gap": 16,
+      "idle_gap_s": 1.1809256672859192
+    },
+    {
+      "step": 12,
+      "llm_call_id": "sw_64k__research_m6_05_microplastics__01#a1:12",
+      "t_start": 1792967529.4980485,
+      "t_end": 1792967551.1303484,
+      "ttft_s": 15.0118,
+      "llm_s": 21.6323,
+      "decode_s": 6.620500000000002,
+      "prefill_tokens": 44496,
+      "decode_tokens": 205,
+      "prefill_tok_s": 2964.07,
+      "decode_tok_s": 30.96,
+      "n_chunks": 49,
+      "first_token_skew_s": 0.012151479721069336,
+      "itl_p50_ms": 32.999999999999474,
+      "itl_p99_ms": 2554.2599999999993,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 2.4570000171661377,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967548.732,
+          "end": 1792967550.153,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967551.099,
+          "end": 1792967552.135,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792967544.522,
+      "oc_step_finish": 1792967552.15,
+      "tool_errors": 0,
+      "gap_s": 1.0477731227874756,
+      "gpu_busy_pct_llm": 74.61111111111111,
+      "gpu_power_w_llm": 130.9763888888889,
+      "gpu_samples_llm": 216,
+      "gpu_busy_pct_gap": 3.4,
+      "gpu_samples_gap": 10,
+      "idle_gap_s": 0.8382184982299805
+    },
+    {
+      "step": 13,
+      "llm_call_id": "sw_64k__research_m6_05_microplastics__01#a1:13",
+      "t_start": 1792967552.1781216,
+      "t_end": 1792967580.7495215,
+      "ttft_s": 19.3549,
+      "llm_s": 28.5714,
+      "decode_s": 9.2165,
+      "prefill_tokens": 48796,
+      "decode_tokens": 279,
+      "prefill_tok_s": 2521.12,
+      "decode_tok_s": 30.27,
+      "n_chunks": 63,
+      "first_token_skew_s": 0.012978553771972656,
+      "itl_p50_ms": 33.00000000000125,
+      "itl_p99_ms": 2564.730000000001,
+      "tool_names": [
+        "searxng_web_url_read",
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 3.7799999713897705,
+      "tools": [
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792967575.568,
+          "end": 1792967576.401,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967578.091,
+          "end": 1792967580.138,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967580.718,
+          "end": 1792967581.618,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792967571.546,
+      "oc_step_finish": 1792967581.631,
+      "tool_errors": 0,
+      "gap_s": 0.9072673320770264,
+      "gpu_busy_pct_llm": 72.16783216783217,
+      "gpu_power_w_llm": 130.2451048951049,
+      "gpu_samples_llm": 286,
+      "gpu_busy_pct_gap": 10.0,
+      "gpu_samples_gap": 9,
+      "idle_gap_s": 0.3024224440256754
+    },
+    {
+      "step": 14,
+      "llm_call_id": "sw_64k__research_m6_05_microplastics__01#a1:14",
+      "t_start": 1792967581.6567888,
+      "t_end": 1792967801.2767887,
+      "ttft_s": 15.6767,
+      "llm_s": 219.62,
+      "decode_s": 203.9433,
+      "prefill_tokens": 52274,
+      "decode_tokens": 6001,
+      "prefill_tok_s": 3334.5,
+      "decode_tok_s": 29.42,
+      "n_chunks": 5770,
+      "first_token_skew_s": 0.005511045455932617,
+      "itl_p50_ms": 33.00000000001546,
+      "itl_p99_ms": 68.99999999999068,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792967597.339,
+      "oc_step_finish": 1792967801.314,
+      "tool_errors": 0,
+      "gap_s": 0.4317147731781006,
+      "gpu_busy_pct_llm": 26.233606557377048,
+      "gpu_power_w_llm": 119.78073770491804,
+      "gpu_samples_llm": 2196,
+      "gpu_busy_pct_gap": 18.6,
+      "gpu_samples_gap": 5,
+      "idle_gap_s": 0.0
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

@@ -1,0 +1,18 @@
+id: research_m6_06_replication_psychology
+title: Citation-heavy research question 06 (replication psychology)
+category: research
+prompts:
+  - "What did the large-scale replication projects in psychology find about the reproducibility of published results, and how have the findings been criticized? Cite specific sources for every claim (authors, title or venue, year, and URL where you have one)."
+agent: research
+mcp: [searxng]
+tools: [webfetch]
+timeout_s: 1500
+expected_tool_sequence: [searxng_searxng_web_search]
+tags: [citations, web, m6]
+suite: [m6]
+verify:
+  - type: rubric
+    min_words: 200
+    required:
+      - name: gives_years
+        any_of: ["19", "20"]

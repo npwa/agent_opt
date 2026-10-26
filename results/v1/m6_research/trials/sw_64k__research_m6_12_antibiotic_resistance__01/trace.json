@@ -1,0 +1,625 @@
+{
+  "trial_id": "sw_64k__research_m6_12_antibiotic_resistance__01",
+  "task": "research_m6_12_antibiotic_resistance",
+  "config": "sw_64k",
+  "attempt": 1,
+  "status": "fail",
+  "summary": {
+    "wall_start": 1792949139.4976923,
+    "wall_end": 1792949715.8882442,
+    "wall_s": 576.3905518054962,
+    "n_steps": 12,
+    "llm_s": 558.2694,
+    "ttft_s": 453.1824,
+    "decode_s": 105.087,
+    "tool_s": 55.3410005569458,
+    "gap_s": 15.694080591201782,
+    "idle_gap_s": 9.95849169869861,
+    "prefill_tokens": 347372,
+    "decode_tokens": 3290,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "sw_64k__research_m6_12_antibiotic_resistance__01#a1:1",
+      "t_start": 1792949141.9247634,
+      "t_end": 1792949153.2671635,
+      "ttft_s": 3.2357,
+      "llm_s": 11.3424,
+      "decode_s": 8.1067,
+      "prefill_tokens": 7652,
+      "decode_tokens": 276,
+      "prefill_tok_s": 2364.87,
+      "decode_tok_s": 34.05,
+      "n_chunks": 96,
+      "first_token_skew_s": 0.014536619186401367,
+      "itl_p50_ms": 30.00000000000025,
+      "itl_p99_ms": 1667.36,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 1.7060000896453857,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792949149.954,
+          "end": 1792949150.527,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792949151.6,
+          "end": 1792949152.29,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792949153.218,
+          "end": 1792949153.661,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792949145.175,
+      "oc_step_finish": 1792949153.688,
+      "tool_errors": 0,
+      "gap_s": 0.4387977123260498,
+      "gpu_busy_pct_llm": 30.707964601769913,
+      "gpu_power_w_llm": 117.48318584070796,
+      "gpu_samples_llm": 113,
+      "gpu_busy_pct_gap": 12.0,
+      "gpu_samples_gap": 5,
+      "idle_gap_s": 0.17551908493041993
+    },
+    {
+      "step": 2,
+      "llm_call_id": "sw_64k__research_m6_12_antibiotic_resistance__01#a1:2",
+      "t_start": 1792949153.7059612,
+      "t_end": 1792949158.2296612,
+      "ttft_s": 2.2017,
+      "llm_s": 4.5237,
+      "decode_s": 2.3219999999999996,
+      "prefill_tokens": 7997,
+      "decode_tokens": 66,
+      "prefill_tok_s": 3632.19,
+      "decode_tok_s": 28.42,
+      "n_chunks": 41,
+      "first_token_skew_s": 0.005338907241821289,
+      "itl_p50_ms": 35.00000000000014,
+      "itl_p99_ms": 535.2799999999996,
+      "tool_names": [
+        "searxng_searxng_instance_info"
+      ],
+      "tool_latency_s": 0.016000032424926758,
+      "tools": [
+        {
+          "tool": "searxng_searxng_instance_info",
+          "start": 1792949158.2,
+          "end": 1792949158.216,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792949155.913,
+      "oc_step_finish": 1792949158.238,
+      "tool_errors": 0,
+      "gap_s": 0.02427959442138672,
+      "gpu_busy_pct_llm": 49.888888888888886,
+      "gpu_power_w_llm": 121.36444444444443,
+      "gpu_samples_llm": 45,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 3,
+      "llm_call_id": "sw_64k__research_m6_12_antibiotic_resistance__01#a1:3",
+      "t_start": 1792949158.2539408,
+      "t_end": 1792949170.759641,
+      "ttft_s": 7.2486,
+      "llm_s": 12.5057,
+      "decode_s": 5.257099999999999,
+      "prefill_tokens": 9575,
+      "decode_tokens": 180,
+      "prefill_tok_s": 1320.94,
+      "decode_tok_s": 34.24,
+      "n_chunks": 38,
+      "first_token_skew_s": 0.010459184646606445,
+      "itl_p50_ms": 29.99999999999936,
+      "itl_p99_ms": 2060.9600000000005,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 2.3989999294281006,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792949168.656,
+          "end": 1792949170.017,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792949170.73,
+          "end": 1792949171.768,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792949165.513,
+      "oc_step_finish": 1792949171.781,
+      "tool_errors": 0,
+      "gap_s": 1.0405771732330322,
+      "gpu_busy_pct_llm": 56.12,
+      "gpu_power_w_llm": 126.492,
+      "gpu_samples_llm": 125,
+      "gpu_busy_pct_gap": 14.545454545454545,
+      "gpu_samples_gap": 11,
+      "idle_gap_s": 0.2837937745180997
+    },
+    {
+      "step": 4,
+      "llm_call_id": "sw_64k__research_m6_12_antibiotic_resistance__01#a1:4",
+      "t_start": 1792949171.800218,
+      "t_end": 1792949209.013618,
+      "ttft_s": 23.2265,
+      "llm_s": 37.2134,
+      "decode_s": 13.986899999999999,
+      "prefill_tokens": 15340,
+      "decode_tokens": 419,
+      "prefill_tok_s": 660.45,
+      "decode_tok_s": 29.96,
+      "n_chunks": 134,
+      "first_token_skew_s": 0.005281925201416016,
+      "itl_p50_ms": 37.000000000002586,
+      "itl_p99_ms": 2241.3599999999997,
+      "tool_names": [
+        "searxng_web_url_read",
+        "searxng_searxng_web_search",
+        "searxng_web_url_read",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 5.9720001220703125,
+      "tools": [
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792949202.419,
+          "end": 1792949202.783,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792949206.56,
+          "end": 1792949207.198,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792949204.666,
+          "end": 1792949209.126,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792949208.986,
+          "end": 1792949209.496,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792949195.032,
+      "oc_step_finish": 1792949209.513,
+      "tool_errors": 1,
+      "gap_s": 0.5166518688201904,
+      "gpu_busy_pct_llm": 68.0510752688172,
+      "gpu_power_w_llm": 126.55564516129031,
+      "gpu_samples_llm": 372,
+      "gpu_busy_pct_gap": 19.0,
+      "gpu_samples_gap": 5,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 5,
+      "llm_call_id": "sw_64k__research_m6_12_antibiotic_resistance__01#a1:5",
+      "t_start": 1792949209.5302699,
+      "t_end": 1792949226.0511699,
+      "ttft_s": 9.563,
+      "llm_s": 16.5209,
+      "decode_s": 6.9579,
+      "prefill_tokens": 17632,
+      "decode_tokens": 233,
+      "prefill_tok_s": 1843.77,
+      "decode_tok_s": 33.49,
+      "n_chunks": 32,
+      "first_token_skew_s": 0.005730152130126953,
+      "itl_p50_ms": 31.000000000000583,
+      "itl_p99_ms": 2151.5999999999995,
+      "tool_names": [
+        "searxng_web_url_read",
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 2.1619999408721924,
+      "tools": [
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792949221.782,
+          "end": 1792949222.101,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792949223.977,
+          "end": 1792949225.007,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792949226.024,
+          "end": 1792949226.837,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792949219.099,
+      "oc_step_finish": 1792949226.85,
+      "tool_errors": 1,
+      "gap_s": 0.8165609836578369,
+      "gpu_busy_pct_llm": 62.21212121212121,
+      "gpu_power_w_llm": 127.66060606060606,
+      "gpu_samples_llm": 165,
+      "gpu_busy_pct_gap": 13.125,
+      "gpu_samples_gap": 8,
+      "idle_gap_s": 0.30621036887168884
+    },
+    {
+      "step": 6,
+      "llm_call_id": "sw_64k__research_m6_12_antibiotic_resistance__01#a1:6",
+      "t_start": 1792949226.8677309,
+      "t_end": 1792949238.0478308,
+      "ttft_s": 2.312,
+      "llm_s": 11.1801,
+      "decode_s": 8.8681,
+      "prefill_tokens": 17991,
+      "decode_tokens": 276,
+      "prefill_tok_s": 7781.57,
+      "decode_tok_s": 31.12,
+      "n_chunks": 30,
+      "first_token_skew_s": 0.005269050598144531,
+      "itl_p50_ms": 32.00000000000003,
+      "itl_p99_ms": 2752.44,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 4.309000015258789,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792949232.735,
+          "end": 1792949234.349,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792949235.255,
+          "end": 1792949236.607,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792949238.016,
+          "end": 1792949239.359,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792949229.185,
+      "oc_step_finish": 1792949239.369,
+      "tool_errors": 0,
+      "gap_s": 1.3404247760772705,
+      "gpu_busy_pct_llm": 31.5625,
+      "gpu_power_w_llm": 118.50446428571429,
+      "gpu_samples_llm": 112,
+      "gpu_busy_pct_gap": 6.071428571428571,
+      "gpu_samples_gap": 14,
+      "idle_gap_s": 0.8617016417639597
+    },
+    {
+      "step": 7,
+      "llm_call_id": "sw_64k__research_m6_12_antibiotic_resistance__01#a1:7",
+      "t_start": 1792949239.3882556,
+      "t_end": 1792949277.4491556,
+      "ttft_s": 28.8079,
+      "llm_s": 38.0609,
+      "decode_s": 9.252999999999997,
+      "prefill_tokens": 24938,
+      "decode_tokens": 282,
+      "prefill_tok_s": 865.67,
+      "decode_tok_s": 30.48,
+      "n_chunks": 65,
+      "first_token_skew_s": 0.008844375610351562,
+      "itl_p50_ms": 30.000000000001137,
+      "itl_p99_ms": 2638.5299999999957,
+      "tool_names": [
+        "searxng_web_url_read",
+        "searxng_web_url_read",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 1.7309999465942383,
+      "tools": [
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792949271.858,
+          "end": 1792949272.094,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792949274.099,
+          "end": 1792949274.352,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792949277.41,
+          "end": 1792949278.652,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792949268.205,
+      "oc_step_finish": 1792949278.665,
+      "tool_errors": 2,
+      "gap_s": 1.2367994785308838,
+      "gpu_busy_pct_llm": 78.03421052631579,
+      "gpu_power_w_llm": 129.63842105263157,
+      "gpu_samples_llm": 380,
+      "gpu_busy_pct_gap": 12.846153846153847,
+      "gpu_samples_gap": 13,
+      "idle_gap_s": 0.1902768428509052
+    },
+    {
+      "step": 8,
+      "llm_call_id": "sw_64k__research_m6_12_antibiotic_resistance__01#a1:8",
+      "t_start": 1792949278.685955,
+      "t_end": 1792949299.034955,
+      "ttft_s": 12.8349,
+      "llm_s": 20.349,
+      "decode_s": 7.514100000000001,
+      "prefill_tokens": 27859,
+      "decode_tokens": 255,
+      "prefill_tok_s": 2170.57,
+      "decode_tok_s": 33.94,
+      "n_chunks": 28,
+      "first_token_skew_s": 0.005145072937011719,
+      "itl_p50_ms": 30.000000000001137,
+      "itl_p99_ms": 2323.4000000000005,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 6.651000022888184,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792949296.767,
+          "end": 1792949297.81,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792949294.416,
+          "end": 1792949298.626,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792949299.008,
+          "end": 1792949300.406,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792949291.526,
+      "oc_step_finish": 1792949300.424,
+      "tool_errors": 0,
+      "gap_s": 1.4097096920013428,
+      "gpu_busy_pct_llm": 69.08866995073892,
+      "gpu_power_w_llm": 129.36847290640392,
+      "gpu_samples_llm": 203,
+      "gpu_busy_pct_gap": 7.5,
+      "gpu_samples_gap": 14,
+      "idle_gap_s": 0.9062419448580061
+    },
+    {
+      "step": 9,
+      "llm_call_id": "sw_64k__research_m6_12_antibiotic_resistance__01#a1:9",
+      "t_start": 1792949300.4446647,
+      "t_end": 1792949344.3029647,
+      "ttft_s": 35.791,
+      "llm_s": 43.8583,
+      "decode_s": 8.067300000000003,
+      "prefill_tokens": 36600,
+      "decode_tokens": 251,
+      "prefill_tok_s": 1022.6,
+      "decode_tok_s": 31.11,
+      "n_chunks": 30,
+      "first_token_skew_s": 0.00933527946472168,
+      "itl_p50_ms": 30.999999999998806,
+      "itl_p99_ms": 2920.4400000000037,
+      "tool_names": [
+        "searxng_web_url_read",
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 23.07800006866455,
+      "tools": [
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792949338.514,
+          "end": 1792949347.896,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792949344.273,
+          "end": 1792949349.357,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792949341.482,
+          "end": 1792949350.094,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792949336.245,
+      "oc_step_finish": 1792949350.111,
+      "tool_errors": 0,
+      "gap_s": 5.835079908370972,
+      "gpu_busy_pct_llm": 83.30751708428247,
+      "gpu_power_w_llm": 134.07858769931664,
+      "gpu_samples_llm": 439,
+      "gpu_busy_pct_gap": 0.6551724137931034,
+      "gpu_samples_gap": 58,
+      "idle_gap_s": 5.63387025635818
+    },
+    {
+      "step": 10,
+      "llm_call_id": "sw_64k__research_m6_12_antibiotic_resistance__01#a1:10",
+      "t_start": 1792949350.1380446,
+      "t_end": 1792949434.9674447,
+      "ttft_s": 73.9989,
+      "llm_s": 84.8294,
+      "decode_s": 10.8305,
+      "prefill_tokens": 55571,
+      "decode_tokens": 309,
+      "prefill_tok_s": 750.97,
+      "decode_tok_s": 28.53,
+      "n_chunks": 71,
+      "first_token_skew_s": 0.007055521011352539,
+      "itl_p50_ms": 31.00000000000591,
+      "itl_p99_ms": 2970.930000000002,
+      "tool_names": [
+        "searxng_web_url_read",
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 3.4720001220703125,
+      "tools": [
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792949428.657,
+          "end": 1792949429.058,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792949432.246,
+          "end": 1792949433.943,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792949434.938,
+          "end": 1792949436.312,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792949424.144,
+      "oc_step_finish": 1792949436.327,
+      "tool_errors": 1,
+      "gap_s": 1.3858892917633057,
+      "gpu_busy_pct_llm": 88.4504716981132,
+      "gpu_power_w_llm": 137.31002358490565,
+      "gpu_samples_llm": 848,
+      "gpu_busy_pct_gap": 10.285714285714286,
+      "gpu_samples_gap": 14,
+      "idle_gap_s": 0.7919367381504603
+    },
+    {
+      "step": 11,
+      "llm_call_id": "sw_64k__research_m6_12_antibiotic_resistance__01#a1:11",
+      "t_start": 1792949436.353334,
+      "t_end": 1792949470.084934,
+      "ttft_s": 23.7013,
+      "llm_s": 33.7316,
+      "decode_s": 10.0303,
+      "prefill_tokens": 61116,
+      "decode_tokens": 308,
+      "prefill_tok_s": 2578.59,
+      "decode_tok_s": 30.71,
+      "n_chunks": 44,
+      "first_token_skew_s": 0.006366252899169922,
+      "itl_p50_ms": 32.00000000000003,
+      "itl_p99_ms": 3110.0999999999967,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 3.8450002670288086,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792949463.994,
+          "end": 1792949465.408,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792949466.52,
+          "end": 1792949467.742,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792949470.047,
+          "end": 1792949471.256,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792949460.061,
+      "oc_step_finish": 1792949471.269,
+      "tool_errors": 0,
+      "gap_s": 1.213411569595337,
+      "gpu_busy_pct_llm": 74.21301775147928,
+      "gpu_power_w_llm": 135.19378698224853,
+      "gpu_samples_llm": 338,
+      "gpu_busy_pct_gap": 6.333333333333333,
+      "gpu_samples_gap": 12,
+      "idle_gap_s": 0.8089410463968912
+    },
+    {
+      "step": 12,
+      "llm_call_id": "sw_64k__research_m6_12_antibiotic_resistance__01#a1:12",
+      "t_start": 1792949471.2983456,
+      "t_end": 1792949715.4523456,
+      "ttft_s": 230.2609,
+      "llm_s": 244.154,
+      "decode_s": 13.893100000000004,
+      "prefill_tokens": 65101,
+      "decode_tokens": 435,
+      "prefill_tok_s": 282.73,
+      "decode_tok_s": 31.31,
+      "n_chunks": 423,
+      "first_token_skew_s": 0.009754419326782227,
+      "itl_p50_ms": 31.999999999982265,
+      "itl_p99_ms": 63.00000000001063,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792949701.569,
+      "oc_step_finish": 1792949715.468,
+      "tool_errors": 0,
+      "gap_s": 0.4358985424041748,
+      "gpu_busy_pct_llm": 94.20196640721016,
+      "gpu_power_w_llm": 137.50786562884065,
+      "gpu_samples_llm": 2441,
+      "gpu_busy_pct_gap": 13.4,
+      "gpu_samples_gap": 5,
+      "idle_gap_s": 0.0
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

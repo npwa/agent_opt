@@ -1,0 +1,18 @@
+id: research_m6_07_mrna_vaccines
+title: Citation-heavy research question 07 (mrna vaccines)
+category: research
+prompts:
+  - "What clinical trial evidence supports the efficacy and safety of mRNA COVID-19 vaccines, and what do follow-up studies show about waning protection? Cite specific sources for every claim (authors, title or venue, year, and URL where you have one)."
+agent: research
+mcp: [searxng]
+tools: [webfetch]
+timeout_s: 1500
+expected_tool_sequence: [searxng_searxng_web_search]
+tags: [citations, web, m6]
+suite: [m6]
+verify:
+  - type: rubric
+    min_words: 200
+    required:
+      - name: gives_years
+        any_of: ["19", "20"]

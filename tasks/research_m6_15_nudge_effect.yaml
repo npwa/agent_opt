@@ -1,0 +1,18 @@
+id: research_m6_15_nudge_effect
+title: Citation-heavy research question 15 (nudge effect)
+category: research
+prompts:
+  - "How large are the effects of behavioral nudges in field experiments, and what do meta-analyses say about publication bias in this literature? Cite specific sources for every claim (authors, title or venue, year, and URL where you have one)."
+agent: research
+mcp: [searxng]
+tools: [webfetch]
+timeout_s: 1500
+expected_tool_sequence: [searxng_searxng_web_search]
+tags: [citations, web, m6]
+suite: [m6]
+verify:
+  - type: rubric
+    min_words: 200
+    required:
+      - name: gives_years
+        any_of: ["19", "20"]

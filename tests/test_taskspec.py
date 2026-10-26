@@ -115,7 +115,7 @@ def test_check_assets_reports_missing(tmp_path):
 def test_committed_tasks_are_valid_and_complete():
     specs = taskspec.load_all(TASKS)
     ids = {s.id for s in specs}
-    assert len(specs) == 18  # 14 original tasks + the four hard tasks (P5)
+    assert len(specs) == 38  # 14 original tasks + the four hard tasks (P5) + 20 citation tasks of suite m6 (M6)
     assert {s.category for s in specs} >= {
         "bugfix", "refactor", "log_triage", "repo_qa", "long_context", "code_gen"}
     assert {"coding_01_my_sqrt_review", "comms_07_confirm_send", "research_08e_free_will"} <= ids
@@ -144,7 +144,7 @@ def test_trials_and_suite_are_accepted_and_parsed():
 
 
 def test_repo_suites_partition_the_tasks():
-    specs = taskspec.load_all(TASKS)
+    specs = [s for s in taskspec.load_all(TASKS) if "m6" not in s.suite]  # m6: separate citation-evaluation tasks
     core = {s.id for s in specs if "core" in s.suite}
     guard = {s.id for s in specs if "guard" in s.suite}
     assert core and guard and not core & guard and core | guard == {s.id for s in specs}

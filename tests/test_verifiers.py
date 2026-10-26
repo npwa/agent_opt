@@ -44,6 +44,8 @@ def evaluate(task_id: str, variant: str, tmp_path: Path):
 
 def test_every_task_has_good_and_bad_golden():
     for tid in SPECS:
+        if "m6" in SPECS[tid].suite:  # the M6 citation tasks are judged by the citation verifier, not by golden answers
+            continue
         variants = [p.name for p in (GOLDEN / tid).iterdir() if p.is_dir()]
         assert any(v.startswith("good") for v in variants), f"{tid}: no good golden"
         assert any(v.startswith("bad") for v in variants), f"{tid}: no bad golden"

@@ -1,0 +1,537 @@
+{
+  "trial_id": "sw_64k__research_m6_14_placebo_surgery__00",
+  "task": "research_m6_14_placebo_surgery",
+  "config": "sw_64k",
+  "attempt": 1,
+  "status": "fail",
+  "summary": {
+    "wall_start": 1792948302.6622295,
+    "wall_end": 1792948613.0098357,
+    "wall_s": 310.3476061820984,
+    "n_steps": 11,
+    "llm_s": 303.8956,
+    "ttft_s": 234.5695,
+    "decode_s": 69.3261,
+    "tool_s": 8.985999822616577,
+    "gap_s": 4.0680506229400635,
+    "idle_gap_s": 1.8629541637921574,
+    "prefill_tokens": 328049,
+    "decode_tokens": 2220,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "sw_64k__research_m6_14_placebo_surgery__00#a1:1",
+      "t_start": 1792948305.0461853,
+      "t_end": 1792948316.2819853,
+      "ttft_s": 3.1292,
+      "llm_s": 11.2358,
+      "decode_s": 8.1066,
+      "prefill_tokens": 7650,
+      "decode_tokens": 276,
+      "prefill_tok_s": 2444.71,
+      "decode_tok_s": 34.05,
+      "n_chunks": 97,
+      "first_token_skew_s": 0.01461482048034668,
+      "itl_p50_ms": 30.00000000000025,
+      "itl_p99_ms": 1719.9000000000008,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 3.2830002307891846,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792948312.88,
+          "end": 1792948313.403,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792948314.541,
+          "end": 1792948316.232,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792948316.266,
+          "end": 1792948317.335,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792948308.19,
+      "oc_step_finish": 1792948317.376,
+      "tool_errors": 0,
+      "gap_s": 1.112903356552124,
+      "gpu_busy_pct_llm": 31.07079646017699,
+      "gpu_power_w_llm": 116.67964601769911,
+      "gpu_samples_llm": 113,
+      "gpu_busy_pct_gap": 1.7272727272727273,
+      "gpu_samples_gap": 11,
+      "idle_gap_s": 1.0117303241382944
+    },
+    {
+      "step": 2,
+      "llm_call_id": "sw_64k__research_m6_14_placebo_surgery__00#a1:2",
+      "t_start": 1792948317.3948886,
+      "t_end": 1792948324.6722887,
+      "ttft_s": 2.1937,
+      "llm_s": 7.2774,
+      "decode_s": 5.0837,
+      "prefill_tokens": 7998,
+      "decode_tokens": 169,
+      "prefill_tok_s": 3645.9,
+      "decode_tok_s": 33.24,
+      "n_chunks": 135,
+      "first_token_skew_s": 0.005411386489868164,
+      "itl_p50_ms": 30.00000000000025,
+      "itl_p99_ms": 97.84999999999906,
+      "tool_names": [
+        "invalid"
+      ],
+      "tool_latency_s": 0.004999876022338867,
+      "tools": [
+        {
+          "tool": "invalid",
+          "start": 1792948324.65,
+          "end": 1792948324.655,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792948319.594,
+      "oc_step_finish": 1792948324.684,
+      "tool_errors": 0,
+      "gap_s": 0.028842926025390625,
+      "gpu_busy_pct_llm": 38.30555555555556,
+      "gpu_power_w_llm": 118.83333333333333,
+      "gpu_samples_llm": 72,
+      "gpu_busy_pct_gap": 19.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 3,
+      "llm_call_id": "sw_64k__research_m6_14_placebo_surgery__00#a1:3",
+      "t_start": 1792948324.7011316,
+      "t_end": 1792948332.3629315,
+      "ttft_s": 2.2036,
+      "llm_s": 7.6618,
+      "decode_s": 5.458200000000001,
+      "prefill_tokens": 8313,
+      "decode_tokens": 188,
+      "prefill_tok_s": 3772.46,
+      "decode_tok_s": 34.44,
+      "n_chunks": 21,
+      "first_token_skew_s": 0.006268501281738281,
+      "itl_p50_ms": 30.00000000000025,
+      "itl_p99_ms": 1757.0599999999995,
+      "tool_names": [
+        "webfetch",
+        "webfetch",
+        "webfetch"
+      ],
+      "tool_latency_s": 0.7230002880096436,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792948328.98,
+          "end": 1792948329.177,
+          "status": "error"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792948330.541,
+          "end": 1792948330.681,
+          "status": "error"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792948332.34,
+          "end": 1792948332.726,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792948326.911,
+      "oc_step_finish": 1792948332.748,
+      "tool_errors": 3,
+      "gap_s": 0.396240234375,
+      "gpu_busy_pct_llm": 40.171052631578945,
+      "gpu_power_w_llm": 120.65789473684211,
+      "gpu_samples_llm": 76,
+      "gpu_busy_pct_gap": 10.25,
+      "gpu_samples_gap": 4,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 4,
+      "llm_call_id": "sw_64k__research_m6_14_placebo_surgery__00#a1:4",
+      "t_start": 1792948332.7591717,
+      "t_end": 1792948339.3636718,
+      "ttft_s": 2.2244,
+      "llm_s": 6.6045,
+      "decode_s": 4.3801,
+      "prefill_tokens": 8643,
+      "decode_tokens": 144,
+      "prefill_tok_s": 3885.54,
+      "decode_tok_s": 32.88,
+      "n_chunks": 15,
+      "first_token_skew_s": 0.009428262710571289,
+      "itl_p50_ms": 29.999999999999805,
+      "itl_p99_ms": 1499.37,
+      "tool_names": [
+        "webfetch",
+        "webfetch",
+        "webfetch"
+      ],
+      "tool_latency_s": 0.4219996929168701,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792948336.519,
+          "end": 1792948336.697,
+          "status": "completed"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792948337.799,
+          "end": 1792948337.906,
+          "status": "completed"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792948339.331,
+          "end": 1792948339.468,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792948334.993,
+      "oc_step_finish": 1792948339.479,
+      "tool_errors": 1,
+      "gap_s": 0.12452507019042969,
+      "gpu_busy_pct_llm": 41.86363636363637,
+      "gpu_power_w_llm": 120.0560606060606,
+      "gpu_samples_llm": 66,
+      "gpu_busy_pct_gap": 11.0,
+      "gpu_samples_gap": 2,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 5,
+      "llm_call_id": "sw_64k__research_m6_14_placebo_surgery__00#a1:5",
+      "t_start": 1792948339.4881968,
+      "t_end": 1792948348.3158967,
+      "ttft_s": 2.2118,
+      "llm_s": 8.8277,
+      "decode_s": 6.6159,
+      "prefill_tokens": 8943,
+      "decode_tokens": 225,
+      "prefill_tok_s": 4043.31,
+      "decode_tok_s": 34.01,
+      "n_chunks": 60,
+      "first_token_skew_s": 0.007003068923950195,
+      "itl_p50_ms": 29.999999999999805,
+      "itl_p99_ms": 1784.9200000000003,
+      "tool_names": [
+        "webfetch",
+        "webfetch",
+        "webfetch"
+      ],
+      "tool_latency_s": 1.8440001010894775,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792948345.157,
+          "end": 1792948345.57,
+          "status": "completed"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792948347.041,
+          "end": 1792948347.525,
+          "status": "completed"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792948348.291,
+          "end": 1792948349.238,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792948341.707,
+      "oc_step_finish": 1792948349.263,
+      "tool_errors": 1,
+      "gap_s": 0.9576268196105957,
+      "gpu_busy_pct_llm": 35.97727272727273,
+      "gpu_power_w_llm": 119.63636363636364,
+      "gpu_samples_llm": 88,
+      "gpu_busy_pct_gap": 2.0,
+      "gpu_samples_gap": 9,
+      "idle_gap_s": 0.8512238396538628
+    },
+    {
+      "step": 6,
+      "llm_call_id": "sw_64k__research_m6_14_placebo_surgery__00#a1:6",
+      "t_start": 1792948349.2735236,
+      "t_end": 1792948418.3352237,
+      "ttft_s": 58.5219,
+      "llm_s": 69.0617,
+      "decode_s": 10.5398,
+      "prefill_tokens": 23968,
+      "decode_tokens": 316,
+      "prefill_tok_s": 409.56,
+      "decode_tok_s": 29.98,
+      "n_chunks": 271,
+      "first_token_skew_s": 0.010576486587524414,
+      "itl_p50_ms": 32.00000000000003,
+      "itl_p99_ms": 78.92999999999319,
+      "tool_names": [
+        "webfetch"
+      ],
+      "tool_latency_s": 0.3939998149871826,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792948418.311,
+          "end": 1792948418.705,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792948407.806,
+      "oc_step_finish": 1792948418.718,
+      "tool_errors": 0,
+      "gap_s": 0.4031360149383545,
+      "gpu_busy_pct_llm": 86.06222865412445,
+      "gpu_power_w_llm": 133.1382054992764,
+      "gpu_samples_llm": 691,
+      "gpu_busy_pct_gap": 9.75,
+      "gpu_samples_gap": 4,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 7,
+      "llm_call_id": "sw_64k__research_m6_14_placebo_surgery__00#a1:7",
+      "t_start": 1792948418.7383597,
+      "t_end": 1792948456.0912597,
+      "ttft_s": 26.2948,
+      "llm_s": 37.3529,
+      "decode_s": 11.0581,
+      "prefill_tokens": 30560,
+      "decode_tokens": 335,
+      "prefill_tok_s": 1162.21,
+      "decode_tok_s": 30.29,
+      "n_chunks": 209,
+      "first_token_skew_s": 0.005840301513671875,
+      "itl_p50_ms": 35.00000000000014,
+      "itl_p99_ms": 116.48000000000017,
+      "tool_names": [
+        "webfetch",
+        "webfetch"
+      ],
+      "tool_latency_s": 0.879000186920166,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792948454.582,
+          "end": 1792948455.216,
+          "status": "completed"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792948456.066,
+          "end": 1792948456.311,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792948445.039,
+      "oc_step_finish": 1792948456.323,
+      "tool_errors": 1,
+      "gap_s": 0.24638867378234863,
+      "gpu_busy_pct_llm": 74.88235294117646,
+      "gpu_power_w_llm": 129.98128342245988,
+      "gpu_samples_llm": 374,
+      "gpu_busy_pct_gap": 22.0,
+      "gpu_samples_gap": 2,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 8,
+      "llm_call_id": "sw_64k__research_m6_14_placebo_surgery__00#a1:8",
+      "t_start": 1792948456.3376484,
+      "t_end": 1792948486.5668483,
+      "ttft_s": 24.4798,
+      "llm_s": 30.2292,
+      "decode_s": 5.749399999999998,
+      "prefill_tokens": 36498,
+      "decode_tokens": 178,
+      "prefill_tok_s": 1490.94,
+      "decode_tok_s": 30.96,
+      "n_chunks": 28,
+      "first_token_skew_s": 0.007551670074462891,
+      "itl_p50_ms": 30.999999999998806,
+      "itl_p99_ms": 1981.3599999999997,
+      "tool_names": [
+        "webfetch",
+        "webfetch",
+        "webfetch"
+      ],
+      "tool_latency_s": 0.8309998512268066,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792948482.867,
+          "end": 1792948483.321,
+          "status": "completed"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792948484.391,
+          "end": 1792948484.622,
+          "status": "completed"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792948486.533,
+          "end": 1792948486.679,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792948480.825,
+      "oc_step_finish": 1792948486.691,
+      "tool_errors": 1,
+      "gap_s": 0.1497054100036621,
+      "gpu_busy_pct_llm": 82.94701986754967,
+      "gpu_power_w_llm": 133.98344370860926,
+      "gpu_samples_llm": 302,
+      "gpu_busy_pct_gap": 18.0,
+      "gpu_samples_gap": 2,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 9,
+      "llm_call_id": "sw_64k__research_m6_14_placebo_surgery__00#a1:9",
+      "t_start": 1792948486.7165537,
+      "t_end": 1792948598.9452536,
+      "ttft_s": 108.5348,
+      "llm_s": 112.2287,
+      "decode_s": 3.6938999999999993,
+      "prefill_tokens": 64934,
+      "decode_tokens": 113,
+      "prefill_tok_s": 598.28,
+      "decode_tok_s": 30.59,
+      "n_chunks": 25,
+      "first_token_skew_s": 0.009646177291870117,
+      "itl_p50_ms": 31.500000000001194,
+      "itl_p99_ms": 1538.5100000000052,
+      "tool_names": [
+        "webfetch",
+        "webfetch"
+      ],
+      "tool_latency_s": 0.2760000228881836,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792948597.336,
+          "end": 1792948597.521,
+          "status": "completed"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792948598.911,
+          "end": 1792948599.002,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792948595.261,
+      "oc_step_finish": 1792948599.014,
+      "tool_errors": 0,
+      "gap_s": 0.0880279541015625,
+      "gpu_busy_pct_llm": 96.4536541889483,
+      "gpu_power_w_llm": 141.88672014260248,
+      "gpu_samples_llm": 1122,
+      "gpu_busy_pct_gap": 21.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 10,
+      "llm_call_id": "sw_64k__research_m6_14_placebo_surgery__00#a1:10",
+      "t_start": 1792948599.0332816,
+      "t_end": 1792948605.0858815,
+      "ttft_s": 2.5411,
+      "llm_s": 6.0526,
+      "decode_s": 3.5115,
+      "prefill_tokens": 65167,
+      "decode_tokens": 115,
+      "prefill_tok_s": 25645.19,
+      "decode_tok_s": 32.75,
+      "n_chunks": 18,
+      "first_token_skew_s": 0.006618499755859375,
+      "itl_p50_ms": 38.9999999999997,
+      "itl_p99_ms": 1564.2399999999998,
+      "tool_names": [
+        "webfetch",
+        "webfetch"
+      ],
+      "tool_latency_s": 0.32899975776672363,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792948603.447,
+          "end": 1792948603.592,
+          "status": "error"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792948605.051,
+          "end": 1792948605.235,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792948601.581,
+      "oc_step_finish": 1792948605.249,
+      "tool_errors": 2,
+      "gap_s": 0.18189215660095215,
+      "gpu_busy_pct_llm": 31.62295081967213,
+      "gpu_power_w_llm": 126.43770491803278,
+      "gpu_samples_llm": 61,
+      "gpu_busy_pct_gap": 25.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 11,
+      "llm_call_id": "sw_64k__research_m6_14_placebo_surgery__00#a1:11",
+      "t_start": 1792948605.2677736,
+      "t_end": 1792948612.6310737,
+      "ttft_s": 2.2344,
+      "llm_s": 7.3633,
+      "decode_s": 5.1289,
+      "prefill_tokens": 65375,
+      "decode_tokens": 161,
+      "prefill_tok_s": 29258.41,
+      "decode_tok_s": 31.39,
+      "n_chunks": 158,
+      "first_token_skew_s": 0.00482630729675293,
+      "itl_p50_ms": 32.00000000000003,
+      "itl_p99_ms": 62.44000000000003,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792948607.507,
+      "oc_step_finish": 1792948612.645,
+      "tool_errors": 0,
+      "gap_s": 0.37876200675964355,
+      "gpu_busy_pct_llm": 36.13513513513514,
+      "gpu_power_w_llm": 125.4945945945946,
+      "gpu_samples_llm": 74,
+      "gpu_busy_pct_gap": 22.0,
+      "gpu_samples_gap": 4,
+      "idle_gap_s": 0.0
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

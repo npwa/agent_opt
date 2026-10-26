@@ -1,0 +1,63 @@
+{
+  "trial_id": "sw_64k__research_m6_01_sleep_memory__01",
+  "task": "research_m6_01_sleep_memory",
+  "config": "sw_64k",
+  "model": "ollama/qwen3.6-64k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_64k__research_m6_07_mrna_vaccines__00",
+  "prev_task": "research_m6_07_mrna_vaccines",
+  "seed": 1117387165,
+  "run_seed": 4,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-25T22:02:14Z",
+  "wall_start": 1792965734.2217176,
+  "wall_end": 1792966315.588515,
+  "elapsed_s": 581.4,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 8,
+  "tokens_in": 259815,
+  "tokens_out": 3632,
+  "tool_sequence": [
+    "searxng_searxng_web_search",
+    "searxng_searxng_web_search",
+    "searxng_searxng_web_search",
+    "searxng_searxng_instance_info",
+    "searxng_searxng_web_search",
+    "searxng_searxng_web_search",
+    "searxng_searxng_web_search",
+    "searxng_searxng_web_search",
+    "searxng_web_url_read",
+    "searxng_web_url_read",
+    "searxng_searxng_web_search",
+    "searxng_searxng_web_search",
+    "searxng_searxng_web_search",
+    "searxng_searxng_web_search"
+  ],
+  "tool_errors": 3,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "909 words, all checks ok"
+    }
+  ],
+  "final_answer": "Based on all the research retrieved, here is a comprehensive review of the scientific evidence on how Rapid Eye Movement (REM) sleep specifically facilitates memory consolidation:\n\n---\n\n## How REM Sleep Facilitates Memory Consolidation: A Survey of Empirical Evidence\n\n### I. Introduction\u2014The \"Why\" of Sleep-Dependent Memory Consolidation\n\nSince the late 1980s, extensive human and animal evidence has established that memory consolidation\u2014the processes by which labile, newly acquired memories become stable and integrated into long-term knowledge\u2014is actively dependent on post-learning sleep (Rasch & Born, *Neuron* 2007; Diekelmann & Born, *Physiological Reviews* 2010). For declarative (fact/event) memory, slowwave sleep (SWS/NREM stage N3) plays a dominant role through hippocampal-neocortical **systems-dependent consolidation**: during SWS, sharp-wave ripples in the hippocampus, slow oscillations, spindles, and thalamocortical waves interact to replay daytime learning experiences, progressively transferring memory traces from hippocampal to neocortical storage, a process formalized in the \"standard\" hierarchical model of systems consolidation (Frankland & Josselyn, *Nature Neuroscience* 2014). For procedural (skill-based) memory, sleep enhances consolidation through cortico-striatal interactions during both NREM and REM stages.\n\n**REM sleep**\u2014characterised by electroencephalographic desynchronisation (theta, beta, gamma activity), rapid eye movements, and near-skeletal atonia\u2014occupies ~20\u201325 % of total nocturnal sleep in adults, increases across consecutive cycles (from ~10% in the first third to up to ~45% late in the night), and interacts richly with limbic, brainstem, and basal forebrain circuits. The scientific question is not whether sleep *in general* matters for memory, but **how REM sleep\u2014distinct from NREM/SWS and wakefulness\u2014contributes uniquely to memory consolidation.**\n\n---\n\n### II. Mechanistic Evidence\u2014How Sleep Stages Differ in What They Consolidate\n\n#### A. Complementary Roles of NREM vs. REM for Different Memory Types (Rasch & Born, *Neuron* 2007; Diekelmann & Born, *Physiological Reviews* 2010; see also Yoshida & Toyoizumi, *Current Opinion in Neurobiology* 2023)\n\nThe foundational framework distinguishes two complementary sleep-dependent processes:\n- **NREM/slow-wave sleep**: preferentially consolidates **declarative/factual** and **procedural** memory through replay of hippocampal-dependent traces within cortico-thalamo-cortical loops. Hippocampal sharp-wave ripples (~80\u2013200 Hz, 50\u2013150 ms) occur at the down-to-up transition of slow oscillations; their temporal coordination with thalamocortical spindles (11\u201316 Hz, particularly 12\u201315 Hz) predicts stronger next-day recall. During SWS, neuromodulatory tone shifts: **low acetylcholine (ACh)** and **noradrenaline**, and **high somatostatin** in the hippocampus facilitate the \"replay-and-retrieve\" mechanism by which hippocampal-neocortical synaptic weights are reactivated offline.\n  \n- **REM sleep**: preferentially consolidates **emotional memory**, **procedural motor skills**, **pattern separation/completion**, and, increasingly recognised, **creative problem solving and insight retrieval**. REM is characterised by **high ACh** (comparable to or exceeding waking levels), low noradrenaline, prominent theta oscillations (~6\u20138 Hz hippocampal; 4\u20137 Hz rhinal-entorhinal), and robust activity in amygdala, septum, locus coeruleus (LC) bursting, VTA dopamine neurons, and the basolateral amygdala. This neuromodulatory milieu supports synaptic reorganisation, emotional memory tagging (McGaugh's arousal-tagging theory extended to sleep: Walker & van der Helm, *Sleep Medicine Clinics* 2009; Rasch & Born, *Neuron* 2007), and the weakening of overly specific (potentially maladaptive) episodic links via \"synaptic downscaling\" processes during NREM that set stage for REM's integrative reorganisation.\n\nCritically, **REM sleep contributes to declarative/memory consolidation not as a passive correlate but through active mechanisms:**\n- During REM, hippocampal theta-gamma coupling enables memory trace reactivation without the SWS spike-ripple \"replay\"\u2014the memory networks remain active and undergo **associative integration** (e.g., linking items across separate experiences).\n- The LC is silent during most phasic REM; this absence of noradrenaline, combined with high ACh, creates conditions for synaptic plasticity that are permissive for new links between previously encoded representations\u2014a process sometimes termed \"integrative encoding\" or \"associative REM.\"\n- VTA dopamine neurons fire phasically during REM reward-context learning, supporting the link between emotional salience and subsequent recognition memory.\n\n#### B. The Two-State/Synergy Model of Consolidation (Buzs\u00e1ki, *Science* 1989; Rasch & Born, *Neuron* 2007)\n\nSleep-dependent consolidation is best described as a **two-stage synergy**:\n1. **\"Replay\" phase** (NREM/SWS first half of night): hippocampal sharp-wave ripples reactivate cortical ensembles in temporally precise sequences that mirror waking learning. This strengthens specific memory traces and initiates transfer.\n2. **Integration/reorganisation phase** (REM-dominant second half, with more SWS later): the newly activated cortical networks are reorganised through associational linking during REM. High ACh/large-amplitude theta promote synaptic plasticity without requiring external input; this allows generalisation from specific traces to broader schemas.\n\nThe complementary model is well supported empirically: SWS correlates with **item-by-item recall**, REM correlates with **pattern completion and interference reduction** (Peyrache et al., *Nature Neuroscience* 2009).\n\n---\n\n### III. Direct Human Evidence\u2014Experimental Manipulations of REM Sleep and Memory\n\n#### A. Classical REM-Deprivation Experiments (1960s\u20131980s)\n\nThe earliest body of evidence comes from **paradoxical (REM) sleep deprivation**:\n- **Eich et al.** and others repeatedly showed that selectively interrupting REM during the night impairs procedural memory (e.g., mirror-tracing task: Williams et al. 1964; Jacobs et al. 1977) while leaving declarative memory relatively spared. Conversely, deprivation focused on slow-wave NREM impairs declarative but spares procedural performance.\n- **Fogel & Smith** (multiple studies across the 2000s with human and rodent subjects) showed that REM sleep during prior learning is selectively necessary for motor skill consolidation; removal of Stage 2 non-REM also degrades this, indicating an interaction between stages.\n\nThese findings are reviewed in **Diao et al.'s meta-analysis** (Behav Brain Res, 2023): systematic evaluation across dozens of paradoxical sleep-deprivation studies found that MMP-induced REM loss significantly impairs memory\u2014e.g., rats showed reduced time spent in target quadrants in the Morris water maze (p < 0.01) and fewer platform-area crossings\u2014as well as shortened latency in passive avoidance tasks, demonstrating broadly harmful effects on both spatial and fear/motor learning when REM is deprived experimentally (Diao et al., *Behav Brain Res*, 2023; DOI: 10.1016/j.bbr.2023.1146",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-25T22:02:14Z"
+    }
+  ]
+}

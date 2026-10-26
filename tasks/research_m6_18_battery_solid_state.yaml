@@ -1,0 +1,18 @@
+id: research_m6_18_battery_solid_state
+title: Citation-heavy research question 18 (battery solid state)
+category: research
+prompts:
+  - "What is the state of solid-state battery research for electric vehicles, and which published results support or question claims about energy density and cycle life? Cite specific sources for every claim (authors, title or venue, year, and URL where you have one)."
+agent: research
+mcp: [searxng]
+tools: [webfetch]
+timeout_s: 1500
+expected_tool_sequence: [searxng_searxng_web_search]
+tags: [citations, web, m6]
+suite: [m6]
+verify:
+  - type: rubric
+    min_words: 200
+    required:
+      - name: gives_years
+        any_of: ["19", "20"]

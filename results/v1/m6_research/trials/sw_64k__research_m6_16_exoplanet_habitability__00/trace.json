@@ -1,0 +1,406 @@
+{
+  "trial_id": "sw_64k__research_m6_16_exoplanet_habitability__00",
+  "task": "research_m6_16_exoplanet_habitability",
+  "config": "sw_64k",
+  "attempt": 1,
+  "status": "fail",
+  "summary": {
+    "wall_start": 1792967801.7697008,
+    "wall_end": 1792968333.1389053,
+    "wall_s": 531.3692045211792,
+    "n_steps": 8,
+    "llm_s": 508.4537,
+    "ttft_s": 448.5381,
+    "decode_s": 59.91560000000001,
+    "tool_s": 53.16200065612793,
+    "gap_s": 20.28194761276245,
+    "idle_gap_s": 16.553828460790687,
+    "prefill_tokens": 227256,
+    "decode_tokens": 1786,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "sw_64k__research_m6_16_exoplanet_habitability__00#a1:1",
+      "t_start": 1792967804.4032576,
+      "t_end": 1792967817.3627577,
+      "ttft_s": 3.4815,
+      "llm_s": 12.9595,
+      "decode_s": 9.478,
+      "prefill_tokens": 7651,
+      "decode_tokens": 303,
+      "prefill_tok_s": 2197.62,
+      "decode_tok_s": 31.97,
+      "n_chunks": 106,
+      "first_token_skew_s": 0.02024245262145996,
+      "itl_p50_ms": 32.00000000000003,
+      "itl_p99_ms": 1978.5199999999986,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 30.045000076293945,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967813.536,
+          "end": 1792967823.56,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967815.353,
+          "end": 1792967825.362,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967817.337,
+          "end": 1792967827.349,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792967807.905,
+      "oc_step_finish": 1792967827.367,
+      "tool_errors": 3,
+      "gap_s": 10.023716449737549,
+      "gpu_busy_pct_llm": 27.906976744186046,
+      "gpu_power_w_llm": 116.51550387596899,
+      "gpu_samples_llm": 129,
+      "gpu_busy_pct_gap": 1.881188118811881,
+      "gpu_samples_gap": 101,
+      "idle_gap_s": 9.031269276496207
+    },
+    {
+      "step": 2,
+      "llm_call_id": "sw_64k__research_m6_16_exoplanet_habitability__00#a1:2",
+      "t_start": 1792967827.3864741,
+      "t_end": 1792967831.879574,
+      "ttft_s": 2.2212,
+      "llm_s": 4.4931,
+      "decode_s": 2.2719,
+      "prefill_tokens": 7960,
+      "decode_tokens": 72,
+      "prefill_tok_s": 3583.65,
+      "decode_tok_s": 31.69,
+      "n_chunks": 47,
+      "first_token_skew_s": 0.007325887680053711,
+      "itl_p50_ms": 32.999999999999915,
+      "itl_p99_ms": 443.1999999999983,
+      "tool_names": [
+        "searxng_searxng_instance_info"
+      ],
+      "tool_latency_s": 0.029999971389770508,
+      "tools": [
+        {
+          "tool": "searxng_searxng_instance_info",
+          "start": 1792967831.851,
+          "end": 1792967831.881,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792967829.615,
+      "oc_step_finish": 1792967831.893,
+      "tool_errors": 0,
+      "gap_s": 0.032514095306396484,
+      "gpu_busy_pct_llm": 50.48888888888889,
+      "gpu_power_w_llm": 118.57555555555555,
+      "gpu_samples_llm": 45,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 3,
+      "llm_call_id": "sw_64k__research_m6_16_exoplanet_habitability__00#a1:3",
+      "t_start": 1792967831.9120882,
+      "t_end": 1792967845.983988,
+      "ttft_s": 7.4722,
+      "llm_s": 14.0719,
+      "decode_s": 6.5996999999999995,
+      "prefill_tokens": 9534,
+      "decode_tokens": 177,
+      "prefill_tok_s": 1275.93,
+      "decode_tok_s": 26.82,
+      "n_chunks": 29,
+      "first_token_skew_s": 0.005712032318115234,
+      "itl_p50_ms": 37.00000000000037,
+      "itl_p99_ms": 2741.98,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 3.1620001792907715,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967843.235,
+          "end": 1792967845.054,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967845.955,
+          "end": 1792967847.298,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792967839.39,
+      "oc_step_finish": 1792967847.311,
+      "tool_errors": 0,
+      "gap_s": 1.346038818359375,
+      "gpu_busy_pct_llm": 58.340425531914896,
+      "gpu_power_w_llm": 122.9241134751773,
+      "gpu_samples_llm": 141,
+      "gpu_busy_pct_gap": 3.230769230769231,
+      "gpu_samples_gap": 13,
+      "idle_gap_s": 1.0354144756610577
+    },
+    {
+      "step": 4,
+      "llm_call_id": "sw_64k__research_m6_16_exoplanet_habitability__00#a1:4",
+      "t_start": 1792967847.3300269,
+      "t_end": 1792967889.191927,
+      "ttft_s": 29.6664,
+      "llm_s": 41.8619,
+      "decode_s": 12.1955,
+      "prefill_tokens": 17019,
+      "decode_tokens": 358,
+      "prefill_tok_s": 573.68,
+      "decode_tok_s": 29.35,
+      "n_chunks": 125,
+      "first_token_skew_s": 0.007573127746582031,
+      "itl_p50_ms": 32.9999999999977,
+      "itl_p99_ms": 2484.2100000000028,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 3.5759999752044678,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967883.574,
+          "end": 1792967885.088,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967886.071,
+          "end": 1792967887.105,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967889.161,
+          "end": 1792967890.189,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792967877.004,
+      "oc_step_finish": 1792967890.201,
+      "tool_errors": 0,
+      "gap_s": 1.0335421562194824,
+      "gpu_busy_pct_llm": 74.16229116945108,
+      "gpu_power_w_llm": 127.85202863961814,
+      "gpu_samples_llm": 419,
+      "gpu_busy_pct_gap": 6.1,
+      "gpu_samples_gap": 10,
+      "idle_gap_s": 0.9301879405975342
+    },
+    {
+      "step": 5,
+      "llm_call_id": "sw_64k__research_m6_16_exoplanet_habitability__00#a1:5",
+      "t_start": 1792967890.225469,
+      "t_end": 1792967944.8850691,
+      "ttft_s": 42.8429,
+      "llm_s": 54.6596,
+      "decode_s": 11.816699999999997,
+      "prefill_tokens": 27355,
+      "decode_tokens": 343,
+      "prefill_tok_s": 638.5,
+      "decode_tok_s": 29.03,
+      "n_chunks": 100,
+      "first_token_skew_s": 0.008630752563476562,
+      "itl_p50_ms": 39.00000000000148,
+      "itl_p99_ms": 2542.9199999999964,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 3.2140002250671387,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967939.792,
+          "end": 1792967941.341,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967942.333,
+          "end": 1792967943.153,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792967944.858,
+          "end": 1792967945.703,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792967933.077,
+      "oc_step_finish": 1792967945.724,
+      "tool_errors": 0,
+      "gap_s": 0.8627345561981201,
+      "gpu_busy_pct_llm": 80.53199268738574,
+      "gpu_power_w_llm": 129.73619744058502,
+      "gpu_samples_llm": 547,
+      "gpu_busy_pct_gap": 10.5,
+      "gpu_samples_gap": 8,
+      "idle_gap_s": 0.43136727809906006
+    },
+    {
+      "step": 6,
+      "llm_call_id": "sw_64k__research_m6_16_exoplanet_habitability__00#a1:6",
+      "t_start": 1792967945.7478037,
+      "t_end": 1792967993.2643037,
+      "ttft_s": 41.6306,
+      "llm_s": 47.5165,
+      "decode_s": 5.8858999999999995,
+      "prefill_tokens": 37125,
+      "decode_tokens": 187,
+      "prefill_tok_s": 891.77,
+      "decode_tok_s": 31.77,
+      "n_chunks": 18,
+      "first_token_skew_s": 0.00959634780883789,
+      "itl_p50_ms": 33.00000000000125,
+      "itl_p99_ms": 1923.2000000000003,
+      "tool_names": [
+        "searxng_web_url_read",
+        "searxng_web_url_read",
+        "searxng_web_url_read"
+      ],
+      "tool_latency_s": 7.80400013923645,
+      "tools": [
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792967991.316,
+          "end": 1792967991.821,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792967989.74,
+          "end": 1792967992.645,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_web_url_read",
+          "start": 1792967993.234,
+          "end": 1792967997.628,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792967987.388,
+      "oc_step_finish": 1792967997.645,
+      "tool_errors": 0,
+      "gap_s": 4.408608913421631,
+      "gpu_busy_pct_llm": 88.33684210526316,
+      "gpu_power_w_llm": 133.95263157894738,
+      "gpu_samples_llm": 475,
+      "gpu_busy_pct_gap": 2.0454545454545454,
+      "gpu_samples_gap": 44,
+      "idle_gap_s": 3.306456685066223
+    },
+    {
+      "step": 7,
+      "llm_call_id": "sw_64k__research_m6_16_exoplanet_habitability__00#a1:7",
+      "t_start": 1792967997.6729126,
+      "t_end": 1792968082.0030127,
+      "ttft_s": 72.7415,
+      "llm_s": 84.3301,
+      "decode_s": 11.5886,
+      "prefill_tokens": 55079,
+      "decode_tokens": 343,
+      "prefill_tok_s": 757.19,
+      "decode_tok_s": 29.6,
+      "n_chunks": 100,
+      "first_token_skew_s": 0.006587505340576172,
+      "itl_p50_ms": 33.00000000000125,
+      "itl_p99_ms": 2704.259999999998,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 5.331000089645386,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792968076.454,
+          "end": 1792968078.945,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792968079.155,
+          "end": 1792968079.884,
+          "status": "completed"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792968081.971,
+          "end": 1792968084.082,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792968070.421,
+      "oc_step_finish": 1792968084.096,
+      "tool_errors": 0,
+      "gap_s": 2.122321605682373,
+      "gpu_busy_pct_llm": 88.78791469194313,
+      "gpu_power_w_llm": 135.8983412322275,
+      "gpu_samples_llm": 844,
+      "gpu_busy_pct_gap": 3.0,
+      "gpu_samples_gap": 21,
+      "idle_gap_s": 1.8191328048706055
+    },
+    {
+      "step": 8,
+      "llm_call_id": "sw_64k__research_m6_16_exoplanet_habitability__00#a1:8",
+      "t_start": 1792968084.1253343,
+      "t_end": 1792968332.6864343,
+      "ttft_s": 248.4818,
+      "llm_s": 248.5611,
+      "decode_s": 0.07930000000001769,
+      "prefill_tokens": 65533,
+      "decode_tokens": 3,
+      "prefill_tok_s": 263.73,
+      "decode_tok_s": 37.8,
+      "n_chunks": 4,
+      "first_token_skew_s": 0.01086568832397461,
+      "itl_p50_ms": 34.99999999999659,
+      "itl_p99_ms": 39.89999999999213,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792968332.618,
+      "oc_step_finish": 1792968332.7,
+      "tool_errors": 0,
+      "gap_s": 0.4524710178375244,
+      "gpu_busy_pct_llm": 98.53580048270314,
+      "gpu_power_w_llm": 135.67936444086888,
+      "gpu_samples_llm": 2486,
+      "gpu_busy_pct_gap": 100.0,
+      "gpu_samples_gap": 4,
+      "idle_gap_s": 0.0
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

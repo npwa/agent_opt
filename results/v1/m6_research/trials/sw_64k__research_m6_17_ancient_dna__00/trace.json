@@ -1,0 +1,952 @@
+{
+  "trial_id": "sw_64k__research_m6_17_ancient_dna__00",
+  "task": "research_m6_17_ancient_dna",
+  "config": "sw_64k",
+  "attempt": 1,
+  "status": "pass",
+  "summary": {
+    "wall_start": 1792953436.3601472,
+    "wall_end": 1792954220.1912067,
+    "wall_s": 783.8310594558716,
+    "n_steps": 22,
+    "llm_s": 725.9408,
+    "ttft_s": 515.6091,
+    "decode_s": 210.3317,
+    "tool_s": 77.21700024604797,
+    "gap_s": 55.55775046348572,
+    "idle_gap_s": 46.80735584981371,
+    "prefill_tokens": 962388,
+    "decode_tokens": 6234,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "sw_64k__research_m6_17_ancient_dna__00#a1:1",
+      "t_start": 1792953438.6926563,
+      "t_end": 1792953451.9119563,
+      "ttft_s": 3.1801,
+      "llm_s": 13.2193,
+      "decode_s": 10.039200000000001,
+      "prefill_tokens": 7649,
+      "decode_tokens": 295,
+      "prefill_tok_s": 2405.27,
+      "decode_tok_s": 29.38,
+      "n_chunks": 98,
+      "first_token_skew_s": 0.013243675231933594,
+      "itl_p50_ms": 36.99999999999992,
+      "itl_p99_ms": 1979.7600000000032,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 30.06599998474121,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792953448.11,
+          "end": 1792953458.143,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792953449.931,
+          "end": 1792953459.945,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792953451.889,
+          "end": 1792953461.908,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792953441.886,
+      "oc_step_finish": 1792953461.932,
+      "tool_errors": 3,
+      "gap_s": 10.039796829223633,
+      "gpu_busy_pct_llm": 33.77272727272727,
+      "gpu_power_w_llm": 114.31969696969696,
+      "gpu_samples_llm": 132,
+      "gpu_busy_pct_gap": 1.52,
+      "gpu_samples_gap": 100,
+      "idle_gap_s": 9.236613082885743
+    },
+    {
+      "step": 2,
+      "llm_call_id": "sw_64k__research_m6_17_ancient_dna__00#a1:2",
+      "t_start": 1792953461.9517531,
+      "t_end": 1792953466.806653,
+      "ttft_s": 2.1368,
+      "llm_s": 4.8549,
+      "decode_s": 2.7180999999999997,
+      "prefill_tokens": 7971,
+      "decode_tokens": 94,
+      "prefill_tok_s": 3730.34,
+      "decode_tok_s": 34.58,
+      "n_chunks": 22,
+      "first_token_skew_s": 0.007446765899658203,
+      "itl_p50_ms": 30.00000000000025,
+      "itl_p99_ms": 1637.8000000000015,
+      "tool_names": [
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 0.8910000324249268,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792953466.777,
+          "end": 1792953467.668,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792953464.096,
+      "oc_step_finish": 1792953467.679,
+      "tool_errors": 0,
+      "gap_s": 0.8884263038635254,
+      "gpu_busy_pct_llm": 48.95918367346939,
+      "gpu_power_w_llm": 118.14285714285714,
+      "gpu_samples_llm": 49,
+      "gpu_busy_pct_gap": 19.0,
+      "gpu_samples_gap": 9,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 3,
+      "llm_call_id": "sw_64k__research_m6_17_ancient_dna__00#a1:3",
+      "t_start": 1792953467.6950793,
+      "t_end": 1792953472.0417793,
+      "ttft_s": 1.9168,
+      "llm_s": 4.3467,
+      "decode_s": 2.4299,
+      "prefill_tokens": 8114,
+      "decode_tokens": 84,
+      "prefill_tok_s": 4233.1,
+      "decode_tok_s": 34.57,
+      "n_chunks": 26,
+      "first_token_skew_s": 0.0061206817626953125,
+      "itl_p50_ms": 30.00000000000025,
+      "itl_p99_ms": 1255.7600000000027,
+      "tool_names": [
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 10.009000062942505,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792953472.017,
+          "end": 1792953482.026,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792953469.618,
+      "oc_step_finish": 1792953482.04,
+      "tool_errors": 1,
+      "gap_s": 10.016090869903564,
+      "gpu_busy_pct_llm": 32.48837209302326,
+      "gpu_power_w_llm": 116.7279069767442,
+      "gpu_samples_llm": 43,
+      "gpu_busy_pct_gap": 1.33,
+      "gpu_samples_gap": 100,
+      "idle_gap_s": 9.314964509010315
+    },
+    {
+      "step": 4,
+      "llm_call_id": "sw_64k__research_m6_17_ancient_dna__00#a1:4",
+      "t_start": 1792953482.0578701,
+      "t_end": 1792953485.1583703,
+      "ttft_s": 1.8748,
+      "llm_s": 3.1005,
+      "decode_s": 1.2256999999999998,
+      "prefill_tokens": 8215,
+      "decode_tokens": 34,
+      "prefill_tok_s": 4381.8,
+      "decode_tok_s": 27.74,
+      "n_chunks": 12,
+      "first_token_skew_s": 0.006329774856567383,
+      "itl_p50_ms": 37.999999999999815,
+      "itl_p99_ms": 747.5000000000002,
+      "tool_names": [
+        "searxng_searxng_instance_info"
+      ],
+      "tool_latency_s": 0.017999887466430664,
+      "tools": [
+        {
+          "tool": "searxng_searxng_instance_info",
+          "start": 1792953485.128,
+          "end": 1792953485.146,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792953483.939,
+      "oc_step_finish": 1792953485.167,
+      "tool_errors": 0,
+      "gap_s": 0.022904396057128906,
+      "gpu_busy_pct_llm": 66.58064516129032,
+      "gpu_power_w_llm": 106.76774193548388,
+      "gpu_samples_llm": 31,
+      "gpu_busy_pct_gap": 16.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 5,
+      "llm_call_id": "sw_64k__research_m6_17_ancient_dna__00#a1:5",
+      "t_start": 1792953485.1812747,
+      "t_end": 1792953494.5659747,
+      "ttft_s": 7.042,
+      "llm_s": 9.3847,
+      "decode_s": 2.3427000000000007,
+      "prefill_tokens": 9782,
+      "decode_tokens": 81,
+      "prefill_tok_s": 1389.09,
+      "decode_tok_s": 34.58,
+      "n_chunks": 16,
+      "first_token_skew_s": 0.005725383758544922,
+      "itl_p50_ms": 30.00000000000025,
+      "itl_p99_ms": 1647.3399999999988,
+      "tool_names": [
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 10.015000104904175,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792953494.543,
+          "end": 1792953504.558,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792953492.229,
+      "oc_step_finish": 1792953504.575,
+      "tool_errors": 1,
+      "gap_s": 10.026244878768921,
+      "gpu_busy_pct_llm": 79.61290322580645,
+      "gpu_power_w_llm": 130.7247311827957,
+      "gpu_samples_llm": 93,
+      "gpu_busy_pct_gap": 0.3564356435643564,
+      "gpu_samples_gap": 101,
+      "idle_gap_s": 9.827705376219042
+    },
+    {
+      "step": 6,
+      "llm_call_id": "sw_64k__research_m6_17_ancient_dna__00#a1:6",
+      "t_start": 1792953504.5922196,
+      "t_end": 1792953511.8035195,
+      "ttft_s": 1.8238,
+      "llm_s": 7.2113,
+      "decode_s": 5.387499999999999,
+      "prefill_tokens": 9885,
+      "decode_tokens": 173,
+      "prefill_tok_s": 5420.0,
+      "decode_tok_s": 32.11,
+      "n_chunks": 35,
+      "first_token_skew_s": 0.005980253219604492,
+      "itl_p50_ms": 31.00000000000014,
+      "itl_p99_ms": 2196.140000000001,
+      "tool_names": [
+        "webfetch",
+        "webfetch"
+      ],
+      "tool_latency_s": 1.813999891281128,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792953509.452,
+          "end": 1792953511.12,
+          "status": "completed"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792953511.762,
+          "end": 1792953511.908,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792953506.422,
+      "oc_step_finish": 1792953511.923,
+      "tool_errors": 1,
+      "gap_s": 0.13234877586364746,
+      "gpu_busy_pct_llm": 26.625,
+      "gpu_power_w_llm": 116.60277777777777,
+      "gpu_samples_llm": 72,
+      "gpu_busy_pct_gap": 17.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 7,
+      "llm_call_id": "sw_64k__research_m6_17_ancient_dna__00#a1:7",
+      "t_start": 1792953511.9358683,
+      "t_end": 1792953615.8785682,
+      "ttft_s": 91.1688,
+      "llm_s": 103.9427,
+      "decode_s": 12.773899999999998,
+      "prefill_tokens": 31137,
+      "decode_tokens": 273,
+      "prefill_tok_s": 341.53,
+      "decode_tok_s": 21.37,
+      "n_chunks": 72,
+      "first_token_skew_s": 0.01033163070678711,
+      "itl_p50_ms": 42.00000000000159,
+      "itl_p99_ms": 3372.699999999995,
+      "tool_names": [
+        "webfetch",
+        "webfetch",
+        "webfetch"
+      ],
+      "tool_latency_s": 1.119999885559082,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792953610.436,
+          "end": 1792953610.786,
+          "status": "completed"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792953613.5,
+          "end": 1792953613.643,
+          "status": "error"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792953615.846,
+          "end": 1792953616.473,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792953603.115,
+      "oc_step_finish": 1792953616.487,
+      "tool_errors": 1,
+      "gap_s": 0.6344280242919922,
+      "gpu_busy_pct_llm": 88.79980750721847,
+      "gpu_power_w_llm": 129.77237728585177,
+      "gpu_samples_llm": 1039,
+      "gpu_busy_pct_gap": 17.0,
+      "gpu_samples_gap": 7,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 8,
+      "llm_call_id": "sw_64k__research_m6_17_ancient_dna__00#a1:8",
+      "t_start": 1792953616.5129962,
+      "t_end": 1792953754.8511963,
+      "ttft_s": 127.0974,
+      "llm_s": 138.3382,
+      "decode_s": 11.240800000000007,
+      "prefill_tokens": 62421,
+      "decode_tokens": 295,
+      "prefill_tok_s": 491.13,
+      "decode_tok_s": 26.24,
+      "n_chunks": 58,
+      "first_token_skew_s": 0.013603925704956055,
+      "itl_p50_ms": 39.00000000000148,
+      "itl_p99_ms": 3311.6000000000004,
+      "tool_names": [
+        "webfetch",
+        "webfetch",
+        "webfetch"
+      ],
+      "tool_latency_s": 0.9779999256134033,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792953748.058,
+          "end": 1792953748.782,
+          "status": "completed"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792953750.851,
+          "end": 1792953751.01,
+          "status": "error"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792953754.818,
+          "end": 1792953754.913,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792953743.624,
+      "oc_step_finish": 1792953754.94,
+      "tool_errors": 2,
+      "gap_s": 0.11306595802307129,
+      "gpu_busy_pct_llm": 92.38105567606652,
+      "gpu_power_w_llm": 136.8719450469993,
+      "gpu_samples_llm": 1383,
+      "gpu_busy_pct_gap": 19.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 9,
+      "llm_call_id": "sw_64k__research_m6_17_ancient_dna__00#a1:9",
+      "t_start": 1792953754.9642622,
+      "t_end": 1792953961.7517622,
+      "ttft_s": 200.5273,
+      "llm_s": 206.7875,
+      "decode_s": 6.2601999999999975,
+      "prefill_tokens": 53924,
+      "decode_tokens": 178,
+      "prefill_tok_s": 268.91,
+      "decode_tok_s": 28.43,
+      "n_chunks": 100,
+      "first_token_skew_s": 0.010437965393066406,
+      "itl_p50_ms": 33.999999999991815,
+      "itl_p99_ms": 198.33999999999133,
+      "tool_names": [
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 10.006999969482422,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792953961.715,
+          "end": 1792953971.722,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792953955.502,
+      "oc_step_finish": 1792953971.735,
+      "tool_errors": 1,
+      "gap_s": 10.01262378692627,
+      "gpu_busy_pct_llm": 95.62959381044487,
+      "gpu_power_w_llm": 133.7468568665377,
+      "gpu_samples_llm": 2068,
+      "gpu_busy_pct_gap": 1.9,
+      "gpu_samples_gap": 100,
+      "idle_gap_s": 9.011361408233643
+    },
+    {
+      "step": 10,
+      "llm_call_id": "sw_64k__research_m6_17_ancient_dna__00#a1:10",
+      "t_start": 1792953971.764386,
+      "t_end": 1792953979.653486,
+      "ttft_s": 3.6854,
+      "llm_s": 7.8891,
+      "decode_s": 4.2036999999999995,
+      "prefill_tokens": 54045,
+      "decode_tokens": 132,
+      "prefill_tok_s": 14664.62,
+      "decode_tok_s": 31.4,
+      "n_chunks": 37,
+      "first_token_skew_s": 0.00521397590637207,
+      "itl_p50_ms": 32.00000000000003,
+      "itl_p99_ms": 1964.899999999996,
+      "tool_names": [
+        "webfetch"
+      ],
+      "tool_latency_s": 0.2349998950958252,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792953979.627,
+          "end": 1792953979.862,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792953975.455,
+      "oc_step_finish": 1792953979.878,
+      "tool_errors": 1,
+      "gap_s": 0.24322867393493652,
+      "gpu_busy_pct_llm": 23.139240506329113,
+      "gpu_power_w_llm": 111.8113924050633,
+      "gpu_samples_llm": 79,
+      "gpu_busy_pct_gap": 12.0,
+      "gpu_samples_gap": 3,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 11,
+      "llm_call_id": "sw_64k__research_m6_17_ancient_dna__00#a1:11",
+      "t_start": 1792953979.8967147,
+      "t_end": 1792954001.7550147,
+      "ttft_s": 3.4745,
+      "llm_s": 21.8583,
+      "decode_s": 18.3838,
+      "prefill_tokens": 54209,
+      "decode_tokens": 572,
+      "prefill_tok_s": 15601.96,
+      "decode_tok_s": 31.11,
+      "n_chunks": 380,
+      "first_token_skew_s": 0.004785299301147461,
+      "itl_p50_ms": 32.00000000000003,
+      "itl_p99_ms": 68.21999999999952,
+      "tool_names": [
+        "webfetch",
+        "webfetch"
+      ],
+      "tool_latency_s": 0.8889999389648438,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792953999.365,
+          "end": 1792953999.659,
+          "status": "completed"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792954001.728,
+          "end": 1792954002.323,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792953983.376,
+      "oc_step_finish": 1792954002.336,
+      "tool_errors": 0,
+      "gap_s": 0.6072371006011963,
+      "gpu_busy_pct_llm": 22.779816513761467,
+      "gpu_power_w_llm": 117.66743119266054,
+      "gpu_samples_llm": 218,
+      "gpu_busy_pct_gap": 21.0,
+      "gpu_samples_gap": 6,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 12,
+      "llm_call_id": "sw_64k__research_m6_17_ancient_dna__00#a1:12",
+      "t_start": 1792954002.3622518,
+      "t_end": 1792954018.9771519,
+      "ttft_s": 13.6408,
+      "llm_s": 16.6149,
+      "decode_s": 2.974099999999998,
+      "prefill_tokens": 57070,
+      "decode_tokens": 92,
+      "prefill_tok_s": 4183.77,
+      "decode_tok_s": 30.93,
+      "n_chunks": 18,
+      "first_token_skew_s": 0.006948232650756836,
+      "itl_p50_ms": 32.00000000000003,
+      "itl_p99_ms": 2055.1199999999985,
+      "tool_names": [
+        "webfetch"
+      ],
+      "tool_latency_s": 0.28999996185302734,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792954018.95,
+          "end": 1792954019.24,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792954016.01,
+      "oc_step_finish": 1792954019.266,
+      "tool_errors": 1,
+      "gap_s": 0.30843305587768555,
+      "gpu_busy_pct_llm": 75.66265060240964,
+      "gpu_power_w_llm": 130.84819277108434,
+      "gpu_samples_llm": 166,
+      "gpu_busy_pct_gap": 23.0,
+      "gpu_samples_gap": 4,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 13,
+      "llm_call_id": "sw_64k__research_m6_17_ancient_dna__00#a1:13",
+      "t_start": 1792954019.285585,
+      "t_end": 1792954027.119585,
+      "ttft_s": 3.6079,
+      "llm_s": 7.834,
+      "decode_s": 4.2261,
+      "prefill_tokens": 57194,
+      "decode_tokens": 134,
+      "prefill_tok_s": 15852.43,
+      "decode_tok_s": 31.71,
+      "n_chunks": 72,
+      "first_token_skew_s": 0.0065152645111083984,
+      "itl_p50_ms": 32.00000000000003,
+      "itl_p99_ms": 617.799999999995,
+      "tool_names": [
+        "invalid"
+      ],
+      "tool_latency_s": 0.003999948501586914,
+      "tools": [
+        {
+          "tool": "invalid",
+          "start": 1792954027.092,
+          "end": 1792954027.096,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792954022.9,
+      "oc_step_finish": 1792954027.136,
+      "tool_errors": 0,
+      "gap_s": 0.04302477836608887,
+      "gpu_busy_pct_llm": 36.46153846153846,
+      "gpu_power_w_llm": 118.0525641025641,
+      "gpu_samples_llm": 78,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 14,
+      "llm_call_id": "sw_64k__research_m6_17_ancient_dna__00#a1:14",
+      "t_start": 1792954027.1626098,
+      "t_end": 1792954040.0600097,
+      "ttft_s": 4.0634,
+      "llm_s": 12.8974,
+      "decode_s": 8.834,
+      "prefill_tokens": 57446,
+      "decode_tokens": 270,
+      "prefill_tok_s": 14137.42,
+      "decode_tok_s": 30.56,
+      "n_chunks": 93,
+      "first_token_skew_s": 0.005990266799926758,
+      "itl_p50_ms": 32.00000000000003,
+      "itl_p99_ms": 2665.8700000000017,
+      "tool_names": [
+        "webfetch",
+        "webfetch"
+      ],
+      "tool_latency_s": 0.48400020599365234,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792954036.873,
+          "end": 1792954037.18,
+          "status": "error"
+        },
+        {
+          "tool": "webfetch",
+          "start": 1792954040.031,
+          "end": 1792954040.208,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792954031.232,
+      "oc_step_finish": 1792954040.231,
+      "tool_errors": 2,
+      "gap_s": 0.1884782314300537,
+      "gpu_busy_pct_llm": 30.550387596899224,
+      "gpu_power_w_llm": 120.25736434108528,
+      "gpu_samples_llm": 129,
+      "gpu_busy_pct_gap": 21.0,
+      "gpu_samples_gap": 2,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 15,
+      "llm_call_id": "sw_64k__research_m6_17_ancient_dna__00#a1:15",
+      "t_start": 1792954040.248488,
+      "t_end": 1792954048.748288,
+      "ttft_s": 3.9997,
+      "llm_s": 8.4998,
+      "decode_s": 4.500100000000001,
+      "prefill_tokens": 57744,
+      "decode_tokens": 141,
+      "prefill_tok_s": 14437.08,
+      "decode_tok_s": 31.33,
+      "n_chunks": 74,
+      "first_token_skew_s": 0.004812002182006836,
+      "itl_p50_ms": 32.00000000000003,
+      "itl_p99_ms": 625.0400000000022,
+      "tool_names": [
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 10.004999876022339,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792954048.719,
+          "end": 1792954058.724,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792954044.253,
+      "oc_step_finish": 1792954058.734,
+      "tool_errors": 1,
+      "gap_s": 10.011730670928955,
+      "gpu_busy_pct_llm": 34.64705882352941,
+      "gpu_power_w_llm": 121.1470588235294,
+      "gpu_samples_llm": 85,
+      "gpu_busy_pct_gap": 2.2,
+      "gpu_samples_gap": 100,
+      "idle_gap_s": 9.01055760383606
+    },
+    {
+      "step": 16,
+      "llm_call_id": "sw_64k__research_m6_17_ancient_dna__00#a1:16",
+      "t_start": 1792954058.7600186,
+      "t_end": 1792954068.9246185,
+      "ttft_s": 3.6339,
+      "llm_s": 10.1646,
+      "decode_s": 6.5306999999999995,
+      "prefill_tokens": 57840,
+      "decode_tokens": 199,
+      "prefill_tok_s": 15916.78,
+      "decode_tok_s": 30.47,
+      "n_chunks": 106,
+      "first_token_skew_s": 0.0050814151763916016,
+      "itl_p50_ms": 32.999999999999474,
+      "itl_p99_ms": 125.59999999999958,
+      "tool_names": [
+        "bash"
+      ],
+      "tool_latency_s": 0.026000022888183594,
+      "tools": [
+        {
+          "tool": "bash",
+          "start": 1792954068.905,
+          "end": 1792954068.931,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792954062.399,
+      "oc_step_finish": 1792954068.951,
+      "tool_errors": 0,
+      "gap_s": 0.05564403533935547,
+      "gpu_busy_pct_llm": 22.88235294117647,
+      "gpu_power_w_llm": 114.68431372549018,
+      "gpu_samples_llm": 102,
+      "gpu_busy_pct_gap": 22.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 17,
+      "llm_call_id": "sw_64k__research_m6_17_ancient_dna__00#a1:17",
+      "t_start": 1792954068.9802625,
+      "t_end": 1792954077.9622626,
+      "ttft_s": 3.8312,
+      "llm_s": 8.982,
+      "decode_s": 5.150799999999999,
+      "prefill_tokens": 58015,
+      "decode_tokens": 163,
+      "prefill_tok_s": 15142.78,
+      "decode_tok_s": 31.65,
+      "n_chunks": 82,
+      "first_token_skew_s": 0.006537675857543945,
+      "itl_p50_ms": 32.00000000000003,
+      "itl_p99_ms": 585.6000000000067,
+      "tool_names": [
+        "bash"
+      ],
+      "tool_latency_s": 0.00800013542175293,
+      "tools": [
+        {
+          "tool": "bash",
+          "start": 1792954078.372,
+          "end": 1792954078.38,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792954072.818,
+      "oc_step_finish": 1792954078.392,
+      "tool_errors": 0,
+      "gap_s": 0.4574441909790039,
+      "gpu_busy_pct_llm": 35.056179775280896,
+      "gpu_power_w_llm": 117.5741573033708,
+      "gpu_samples_llm": 89,
+      "gpu_busy_pct_gap": 23.0,
+      "gpu_samples_gap": 5,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 18,
+      "llm_call_id": "sw_64k__research_m6_17_ancient_dna__00#a1:18",
+      "t_start": 1792954078.4197068,
+      "t_end": 1792954099.604807,
+      "ttft_s": 14.483,
+      "llm_s": 21.1851,
+      "decode_s": 6.702099999999998,
+      "prefill_tokens": 60745,
+      "decode_tokens": 179,
+      "prefill_tok_s": 4194.23,
+      "decode_tok_s": 26.71,
+      "n_chunks": 89,
+      "first_token_skew_s": 0.005293130874633789,
+      "itl_p50_ms": 38.9999999999997,
+      "itl_p99_ms": 493.38999999998543,
+      "tool_names": [
+        "bash"
+      ],
+      "tool_latency_s": 0.003999948501586914,
+      "tools": [
+        {
+          "tool": "bash",
+          "start": 1792954100.073,
+          "end": 1792954100.077,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792954092.908,
+      "oc_step_finish": 1792954100.087,
+      "tool_errors": 0,
+      "gap_s": 0.5076923370361328,
+      "gpu_busy_pct_llm": 65.51886792452831,
+      "gpu_power_w_llm": 127.75283018867924,
+      "gpu_samples_llm": 212,
+      "gpu_busy_pct_gap": 7.0,
+      "gpu_samples_gap": 5,
+      "idle_gap_s": 0.40615386962890626
+    },
+    {
+      "step": 19,
+      "llm_call_id": "sw_64k__research_m6_17_ancient_dna__00#a1:19",
+      "t_start": 1792954100.1124992,
+      "t_end": 1792954117.3485992,
+      "ttft_s": 6.0359,
+      "llm_s": 17.2361,
+      "decode_s": 11.2002,
+      "prefill_tokens": 61336,
+      "decode_tokens": 363,
+      "prefill_tok_s": 10161.86,
+      "decode_tok_s": 32.41,
+      "n_chunks": 51,
+      "first_token_skew_s": 0.0046007633209228516,
+      "itl_p50_ms": 31.500000000000306,
+      "itl_p99_ms": 3467.329999999998,
+      "tool_names": [
+        "bash",
+        "bash",
+        "bash"
+      ],
+      "tool_latency_s": 0.018000364303588867,
+      "tools": [
+        {
+          "tool": "bash",
+          "start": 1792954112.618,
+          "end": 1792954112.624,
+          "status": "completed"
+        },
+        {
+          "tool": "bash",
+          "start": 1792954114.784,
+          "end": 1792954114.788,
+          "status": "completed"
+        },
+        {
+          "tool": "bash",
+          "start": 1792954117.554,
+          "end": 1792954117.562,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792954106.153,
+      "oc_step_finish": 1792954117.572,
+      "tool_errors": 0,
+      "gap_s": 0.2518439292907715,
+      "gpu_busy_pct_llm": 31.5,
+      "gpu_power_w_llm": 119.83837209302327,
+      "gpu_samples_llm": 172,
+      "gpu_busy_pct_gap": 24.0,
+      "gpu_samples_gap": 3,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 20,
+      "llm_call_id": "sw_64k__research_m6_17_ancient_dna__00#a1:20",
+      "t_start": 1792954117.6004431,
+      "t_end": 1792954129.051943,
+      "ttft_s": 5.2395,
+      "llm_s": 11.4515,
+      "decode_s": 6.212,
+      "prefill_tokens": 61930,
+      "decode_tokens": 198,
+      "prefill_tok_s": 11819.83,
+      "decode_tok_s": 31.87,
+      "n_chunks": 119,
+      "first_token_skew_s": 0.0040569305419921875,
+      "itl_p50_ms": 32.00000000000003,
+      "itl_p99_ms": 68.32000000000001,
+      "tool_names": [
+        "webfetch"
+      ],
+      "tool_latency_s": 0.33300018310546875,
+      "tools": [
+        {
+          "tool": "webfetch",
+          "start": 1792954129.024,
+          "end": 1792954129.357,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792954122.844,
+      "oc_step_finish": 1792954129.377,
+      "tool_errors": 0,
+      "gap_s": 0.34423041343688965,
+      "gpu_busy_pct_llm": 36.95614035087719,
+      "gpu_power_w_llm": 122.44035087719298,
+      "gpu_samples_llm": 114,
+      "gpu_busy_pct_gap": 23.0,
+      "gpu_samples_gap": 4,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 21,
+      "llm_call_id": "sw_64k__research_m6_17_ancient_dna__00#a1:21",
+      "t_start": 1792954129.3961735,
+      "t_end": 1792954146.7176735,
+      "ttft_s": 3.6376,
+      "llm_s": 17.3215,
+      "decode_s": 13.683900000000001,
+      "prefill_tokens": 62056,
+      "decode_tokens": 408,
+      "prefill_tok_s": 17059.6,
+      "decode_tok_s": 29.82,
+      "n_chunks": 302,
+      "first_token_skew_s": 0.0042266845703125,
+      "itl_p50_ms": 32.00000000000003,
+      "itl_p99_ms": 76.00000000000051,
+      "tool_names": [
+        "bash"
+      ],
+      "tool_latency_s": 0.003000020980834961,
+      "tools": [
+        {
+          "tool": "bash",
+          "start": 1792954146.873,
+          "end": 1792954146.876,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792954133.038,
+      "oc_step_finish": 1792954146.889,
+      "tool_errors": 0,
+      "gap_s": 0.20025944709777832,
+      "gpu_busy_pct_llm": 27.971098265895954,
+      "gpu_power_w_llm": 118.84277456647398,
+      "gpu_samples_llm": 173,
+      "gpu_busy_pct_gap": 24.0,
+      "gpu_samples_gap": 2,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 22,
+      "llm_call_id": "sw_64k__research_m6_17_ancient_dna__00#a1:22",
+      "t_start": 1792954146.917933,
+      "t_end": 1792954219.738633,
+      "ttft_s": 9.5085,
+      "llm_s": 72.8207,
+      "decode_s": 63.312200000000004,
+      "prefill_tokens": 63660,
+      "decode_tokens": 1876,
+      "prefill_tok_s": 6695.06,
+      "decode_tok_s": 29.63,
+      "n_chunks": 1812,
+      "first_token_skew_s": 0.005566835403442383,
+      "itl_p50_ms": 32.00000000000358,
+      "itl_p99_ms": 71.00000000000435,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792954156.432,
+      "oc_step_finish": 1792954219.764,
+      "tool_errors": 0,
+      "gap_s": 0.4525737762451172,
+      "gpu_busy_pct_llm": 28.395604395604394,
+      "gpu_power_w_llm": 121.84711538461538,
+      "gpu_samples_llm": 728,
+      "gpu_busy_pct_gap": 23.0,
+      "gpu_samples_gap": 5,
+      "idle_gap_s": 0.0
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

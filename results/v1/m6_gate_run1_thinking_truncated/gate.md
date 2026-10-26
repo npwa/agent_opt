@@ -1,0 +1,8 @@
+# Citation gate
+
+| Arm | trials | citations | flagged | flagged share (95% Wilson) | supported kept | words kept |
+|---|---:|---:|---:|---|---:|---:|
+| none | 27 | 567 | 157 | 28% [24%, 32%] | 264/264 | 100% |
+| mark | 27 | 567 | 157 | 28% [24%, 32%] | 263/264 | 100% |
+| drop | 27 | 410 | 0 | 0% [0%, 1%] | 263/264 | 99% |
+| rewrite | 27 | 134 | 0 | 0% [0%, 3%] | 120/264 | 46% |

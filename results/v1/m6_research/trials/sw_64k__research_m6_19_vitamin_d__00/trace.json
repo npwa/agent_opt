@@ -1,0 +1,141 @@
+{
+  "trial_id": "sw_64k__research_m6_19_vitamin_d__00",
+  "task": "research_m6_19_vitamin_d",
+  "config": "sw_64k",
+  "attempt": 1,
+  "status": "fail",
+  "summary": {
+    "wall_start": 1792964085.0419564,
+    "wall_end": 1792964116.311155,
+    "wall_s": 31.269198656082153,
+    "n_steps": 3,
+    "llm_s": 18.2892,
+    "ttft_s": 7.0063,
+    "decode_s": 11.2829,
+    "tool_s": 20.205000162124634,
+    "gap_s": 10.632719278335571,
+    "idle_gap_s": 9.60712372303009,
+    "prefill_tokens": 15507,
+    "decode_tokens": 300,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "sw_64k__research_m6_19_vitamin_d__00#a1:1",
+      "t_start": 1792964087.389236,
+      "t_end": 1792964098.509436,
+      "ttft_s": 3.0653,
+      "llm_s": 11.1202,
+      "decode_s": 8.0549,
+      "prefill_tokens": 7646,
+      "decode_tokens": 232,
+      "prefill_tok_s": 2494.37,
+      "decode_tok_s": 28.8,
+      "n_chunks": 100,
+      "first_token_skew_s": 0.013463973999023438,
+      "itl_p50_ms": 36.99999999999992,
+      "itl_p99_ms": 2086.019999999999,
+      "tool_names": [
+        "searxng_searxng_web_search",
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 20.05500030517578,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792964096.406,
+          "end": 1792964106.446,
+          "status": "error"
+        },
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792964098.484,
+          "end": 1792964108.499,
+          "status": "error"
+        }
+      ],
+      "oc_step_start": 1792964090.468,
+      "oc_step_finish": 1792964108.52,
+      "tool_errors": 2,
+      "gap_s": 10.031237363815308,
+      "gpu_busy_pct_llm": 28.64864864864865,
+      "gpu_power_w_llm": 113.8981981981982,
+      "gpu_samples_llm": 111,
+      "gpu_busy_pct_gap": 1.2,
+      "gpu_samples_gap": 100,
+      "idle_gap_s": 9.42936312198639
+    },
+    {
+      "step": 2,
+      "llm_call_id": "sw_64k__research_m6_19_vitamin_d__00#a1:2",
+      "t_start": 1792964108.5406733,
+      "t_end": 1792964112.4902732,
+      "ttft_s": 2.0703,
+      "llm_s": 3.9496,
+      "decode_s": 1.8793000000000002,
+      "prefill_tokens": 7861,
+      "decode_tokens": 68,
+      "prefill_tok_s": 3797.03,
+      "decode_tok_s": 36.18,
+      "n_chunks": 8,
+      "first_token_skew_s": 0.008026599884033203,
+      "itl_p50_ms": 29.999999999999805,
+      "itl_p99_ms": 1599.8000000000009,
+      "tool_names": [
+        "searxng_searxng_web_search"
+      ],
+      "tool_latency_s": 0.14999985694885254,
+      "tools": [
+        {
+          "tool": "searxng_searxng_web_search",
+          "start": 1792964112.466,
+          "end": 1792964112.616,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1792964110.619,
+      "oc_step_finish": 1792964112.631,
+      "tool_errors": 0,
+      "gap_s": 0.15708041191101074,
+      "gpu_busy_pct_llm": 56.65,
+      "gpu_power_w_llm": 116.57750000000001,
+      "gpu_samples_llm": 40,
+      "gpu_busy_pct_gap": 19.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 3,
+      "llm_call_id": "sw_64k__research_m6_19_vitamin_d__00#a1:3",
+      "t_start": 1792964112.6473536,
+      "t_end": 1792964115.8667536,
+      "ttft_s": 1.8707,
+      "llm_s": 3.2194,
+      "decode_s": 1.3486999999999998,
+      "prefill_tokens": null,
+      "decode_tokens": 0,
+      "prefill_tok_s": null,
+      "decode_tok_s": null,
+      "n_chunks": 19,
+      "first_token_skew_s": 0.00594639778137207,
+      "itl_p50_ms": 30.00000000000003,
+      "itl_p99_ms": 697.9999999999987,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1792964114.524,
+      "oc_step_finish": 1792964115.89,
+      "tool_errors": 0,
+      "gap_s": 0.44440150260925293,
+      "gpu_busy_pct_llm": 69.40625,
+      "gpu_power_w_llm": 120.66875,
+      "gpu_samples_llm": 32,
+      "gpu_busy_pct_gap": 10.8,
+      "gpu_samples_gap": 5,
+      "idle_gap_s": 0.17776060104370117
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

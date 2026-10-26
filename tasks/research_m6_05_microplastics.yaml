@@ -1,0 +1,18 @@
+id: research_m6_05_microplastics
+title: Citation-heavy research question 05 (microplastics)
+category: research
+prompts:
+  - "What is currently known about microplastics in human tissue and their health effects, and how reliable are the measurement methods used? Cite specific sources for every claim (authors, title or venue, year, and URL where you have one)."
+agent: research
+mcp: [searxng]
+tools: [webfetch]
+timeout_s: 1500
+expected_tool_sequence: [searxng_searxng_web_search]
+tags: [citations, web, m6]
+suite: [m6]
+verify:
+  - type: rubric
+    min_words: 200
+    required:
+      - name: gives_years
+        any_of: ["19", "20"]
