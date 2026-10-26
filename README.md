@@ -9,6 +9,27 @@ For a non-technical overview see the slide deck [`Doc/Agent_opt.pptx`](Doc/Agent
 requirements and progress log are in [`improvement_plan.md`](improvement_plan.md); the original direction and its
 limits are in [`DIRECTION.md`](DIRECTION.md).
 
+## Headline results
+
+All on `qwen3.6` (35B-A3B) with OpenCode on an RTX 3080 (10 GB). Intervals are 95 %; sample sizes and sources are in the sections below.
+
+| Question | Answer | Evidence |
+|---|---|---|
+| Where does the time go? | 60 % decode, 33 % prefill, 3 % tools; the GPU is actually busy only **11.7 %** of the wall-clock (NVML reports 37-83 %): about two thirds of the expert weights sit in system memory, so the CPU is the bottleneck | 140 trials; 20 Nsight captures |
+| Biggest lever found | Removing a prompt block leaked from the author's `~/.claude` made trials **~42 % faster** (time ratio 0.58, CI 0.52-0.63), success unchanged (71 % vs 74 %) | two full baselines, n = 10 |
+| Trimming unused tool schemas | Cold first call **-26 to -34 %** (~8-12 s per new session), nothing once the cache is warm; success impact not measured | prompt replay of 4 sequences |
+| Smaller context (16k) | No overall loss (65 % vs 72 %, CI -18.6 to +5.6), but tasks whose context passes ~14k tokens fail (`logtriage_04` 1/10 vs 4/5) | 239 trials |
+| Smaller model (`qwen3:8b`) | Faster, but passes 24 % vs 66 % (CI of the difference -57 to -23) | 42 + 62 trials |
+| Speculative decoding | Not faster (0.77x-1.04x), changes the text; keep off. Verifying several tokens reads many more CPU-resident experts | 9 settings, 49 calls |
+| Verification step in the agent prompt | No pass-rate gain after confirmation (45 % vs 48 %); the screen's +18 pp was regression to the mean; more timeouts | 80 + 81 trials |
+| `comms` agent, temperature 0.3/0.6 | No measurable benefit (the earlier 36 -> 12 call reduction does not reproduce) | 40 + 126 trials |
+| Citations in research answers | **28 % of 567 citations** are not backed by the pages the agent retrieved (author-year 50 %, URLs 15 %); a drop gate removes all of them, keeps 263/264 supported ones and 99 % of the text; a model rewrite leaves 87 | 27 answers to 20 prompts |
+| Does the proxy distort timing? | Uninstrumented/instrumented 1.04 (CI 0.998-1.094): no sign of overhead, bounded to about +/-5-9 % | 192 trials |
+
+**What this means.** The speed-ups that worked were about the prompt and the cache (leak removal, smaller tool block), not about the model settings; every decode-side lever (speculation, temperature, a smaller model) either did nothing or cost quality, and the reason is one fact: the card is mostly waiting for the CPU. Agent-prompt tweaks that looked good at n = 3 did not survive n = 10. Trials with a custom OpenCode agent start with a cold prefix cache because the working directory sits early in their short prompt (`results/v1/prefix_probe/`).
+
+**Limits.** One GPU and one model; most lever tests are n = 3-10 per cell, so only large effects are detectable. "Flagged" citations are those not found in the retrieved pages: they are not shown to be invented (a manual audit sheet of 117 citations, `results/v1/m6_audit/`, is prepared but not yet labelled). The research tasks need a 64k window; at 32k most answers fail. Success criteria status: see the tally in `improvement_plan.md`.
+
 ## Status
 
 | Milestone | What | State |
@@ -18,14 +39,14 @@ limits are in [`DIRECTION.md`](DIRECTION.md).
 | M2 | Trial runner, trace join, 10 Hz GPU telemetry, time decomposition, parity check, Nsight capture (tag `m2`) | done |
 | M3 | Statistics, report generator, replay mode with golden fixtures and a CI job (tag `m3`) | done |
 | M4 | Baseline campaign: whole suite, n = 10, 32k vs 16k re-check | **done** (tag `m4`): M4.1 done (two 168-trial baselines: first and isolated); M4.2 done (16k vs 32k); M4.3 done (GPU activity); tag `m4` |
-| M5 | Lever experiments: context/KV size, prompt budget, speculative decoding, second model, agent configs | planned |
-| M6 | Automated citation verifier and research evaluation | planned |
-| M7 | Write-up (README, deck, results) | planned |
+| M5 | Lever experiments: context/KV size, prompt budget, speculative decoding, second model, agent configs, temperature | **done** (mostly negative results; see above) |
+| M6 | Automated citation verifier and research evaluation | **done except the manual audit** |
+| M7 | Write-up (README, deck, results) | **done except the manual citation audit** |
 
 Earlier pilots: `results/v1/calibration/` (one run of every task), `results/v1/parity_pilot/` (does the proxy
 distort results?) and `results/v1/nsys_pilot/` (what the GPU does, kernel by kernel).
 
-## Baseline results (M4.1)
+## Detailed results
 
 The whole suite (`qwen3.6` at 32k context, 10 trials per task, seeded random order, RTX 3080; 140 measured plus
 28 uninstrumented parity trials) was run twice:
@@ -121,9 +142,9 @@ harness failure, `--stall-s`), and the re-run passed.
 
 | Path | Contents |
 |---|---|
-| `harness/` | the measurement tooling: `runner` (seeded, resumable trials), `proxy` (passive metrics proxy), `telemetry` (NVML sampler), `trace` and `decompose` (per-step timeline and time breakdown), `verifiers` + `sandbox` (automatic pass/fail), `taskspec`, `replay`, `promptreplay` (time prompt variants from captured requests), `server` (per-configuration Ollama server settings), `vocabcheck` + `ggufmeta` (draft-model compatibility), `nsys`, `manifest` |
+| `harness/` | the measurement tooling: `runner` (seeded, resumable trials), `proxy` (passive metrics proxy), `telemetry` (NVML sampler), `trace` and `decompose` (per-step timeline and time breakdown), `verifiers` + `sandbox` (automatic pass/fail), `taskspec`, `replay`, `promptreplay` (time prompt variants from captured requests), `server` (per-configuration Ollama server settings), `vocabcheck` + `ggufmeta` (draft-model compatibility), `citations` + `citegate` (citation verifier and post-hoc gate), `nsys`, `manifest` |
 | `analysis/` | `stats` (Wilson, bootstrap, Mann-Whitney, Holm), `parity`, `report` + `svg` (Markdown and inline-SVG HTML report), `figures` (standalone SVG charts), `compare_runs`, `claims` (verification-claim check), `determinism` |
-| `tasks/` | the 18 task specs (YAML): prompts, tool permissions, timeout, verifiers (14 original, 4 harder ones added after the baseline) |
+| `tasks/` | the 38 task specs (YAML): prompts, tool permissions, timeout, verifiers (14 original, 4 harder ones added after the baseline, 20 citation-heavy research prompts for M6) |
 | `fixtures/` | task inputs (`tasks/`), hidden verifier assets (`verify/`), known-good/bad examples (`golden/`), recorded traces (`traces/`) and the replay runs with committed golden outputs (`replay/`) |
 | `configs/` | run configurations: `baseline_32k.yaml` and the `sweep/` set (context size, KV cache type, flash attention, fit margin) |
 | `agent-config/` | OpenCode agents, the mock email/calendar MCP tools, Modelfiles, SearXNG settings |
@@ -196,252 +217,16 @@ config and does not touch your global one.
 
 ---
 
-## First pass (v0): the OpenCode + Ollama proof of concept
+## Earlier work (v0)
 
-### Project Scope and Setup
+The first, informal proof of concept (n = 1-2 runs per task: model selection, the 16k/32k GPU-fit experiment, the
+communication tools and the SearXNG research agent) is archived in [`docs/v0_first_pass.md`](docs/v0_first_pass.md).
+Its numbers are superseded by the results above; its reports are in `results/v0/` and `results/report-*.md`.
 
-The target user is a developer using a local agent for coding and some research/benchmarks,
-prioritizing privacy and offline capability over raw throughput. The original scope called
-for a `Panther Lake` system with 64 GB unified memory and an Intel `Arc B390` GPU. That
-hardware wasn't available to me for this phase, so I substituted my home desktop instead;
-a deliberate, documented deviation (see `DIRECTION.md` for how the findings here are expected
-to generalize, and where they won't) - with the following features:
+## AI disclosure
 
-| Feature | Description                                              |
-|---------|----------------------------------------------------------|
-| CPU     | 11th Gen Intel Core i7-11700K @ 3.60GHz                  |
-| Memory  | 64GiB, 4 x 16GiB DIMM DDR4 Synchronous 2667 MHz (0.4 ns) |
-| Disk    | 1TB NVME (64 bits, 33MHz); 2TB SSD                       |
-| GPU     | Nvidia GeForce RTX 3080 - 10G VRAM                       |
-
-
-### Model selection
-
-Initially, I used `qwen2.5:14b-instruct` but this model doesn't fully fit into my 3080's 10GB VRAM,
-so a large chunk was running on CPU. This led to sluggish performance, about 4.47 tokens per
-second. I should expect more than 40tok/s if the model fits into VRAM.
-
-The model `qwen2.5:14b-instruct-q4_K_M` performed better on the sample prompt `produce a C-code
-function to calculate the square root of a floating-point number` and I saw it processing the prompt
-1423.73 tok/s and generating 31.63 tok/s. 
-
-> The smaller model first tried to just generate a wrapper and use math.h and I had to prompt again
-> for an iterative solution, this did not happen on the `qwen2.5:14b-instruct` model. Clearly the
-> quality of the smaller model required more explicit prompting.
-
-
-ollama launch opencode
-> opencode was unable to run any tools calls, so I extended the context window to 32k tokens
-
-Use this `Modelfile` to extend the context window:
-```
-FROM qwen3.6
-PARAMETER num_ctx 32768
-```
-
-Then build and launch it:
-
-```bash
-ollama create qwen3.6-32k -f Modelfile
-ollama launch opencode --model qwen3.6-32k
-```
-
-This fixed the tools call. However, the initial baseline has no retrieval tool; the model attempts
-to answer from training data alone, producing no verifiable citations.  A search tool will used in other test cases.
-
-#### Test cases:
-
-> The suite has since grown to 14 executable tasks in `tasks/` (fixtures in `fixtures/`). The six coding/reasoning
-> prompts below are tasks 01 to 06 of it, with the output file names made explicit.
-
-I defined four coding prompts and two language/logic reasoning prompts
-
-1. In working directory `/home/npalmass/work/OpenCode/claude-files`, review the file `my_sqrt.c` and check if the function correctly calculates the square root of a float number.
-   >  expected is a missing check for negative numbers, tolerance does not scale, potential infinite loop
-2. Read the requirements in the file `fizzbuzz.md` and create C-code for it. Write to file `fizzbuzz.c`
-   >  expected is valid C-code and current execution that matches the given test case
-3. Follow requirements in `compress.md` and produce the C-function
-   > expected is a simple string compressor function to test manual memory/pointer handling
-4. Write the bash script requested in `dir_stats.md`
-   > expected is a script that shows content stats of a directory path
-5. What is the current scientific consensus for the MMR vaccine being linked to autism?
-   > it turns out that OpenCode can follow links and fetch content, but at this time it has no access to search engine so the expected output of this question is all from training
-6. Explain in less than 150 words why lowering corporate tax rates will not boost long-term job growth
-   > designed to test reasoning from training data alone
-
-### Methodology
-
-> This is an AI assisted summary of the setup issues encountered during instrumentation:
-
-Per-query performance metrics (time-to-first-token, input/output tok/s, and GPU/CPU/RAM utilization) were captured via a lightweight logging proxy inserted between OpenCode and Ollama's OpenAI-compatible endpoint, with a background sampler recording system resource utilization at one-second intervals for later correlation against each request's timestamps. This approach proved to carry a real, non-obvious risk that is worth stating explicitly rather than treating as a solved implementation detail: the instrumentation layer itself was, over the course of development, the source of multiple failure modes that were difficult to distinguish from genuine model or agent-harness problems. A Content-Length mismatch in the proxy caused every request to fail outright after the request body was modified; a missing SSE blank-line delimiter caused generation to complete successfully while the client received no usable stream, producing silent, errorless non-output; and - most subtly - injecting a `stream_options` flag to obtain exact token counts altered how Ollama's compatibility layer split model output between reasoning and final-answer fields, causing well-formed responses to appear as empty, failing turns purely as an artifact of the measurement setup. Each of these was initially indistinguishable from a real model or harness limitation, and each cost significant time to isolate precisely because the instrumentation was positioned to observe the same signal it could also corrupt. The methodological implication is that any benchmark relying on a custom instrumentation or proxy layer must budget for this class of risk explicitly: a proxy in the request path is not a passive observer, and apparent model failures, degraded output, or missing results should be cross-checked against an uninstrumented baseline before being attributed to the model or agent harness under test.
-
-### Run test cases: ollama launch opencode:
-
-> **Historical.** This is the manual v0 procedure. The scripts below now live in `harness/`
-> (`python -m harness.proxy` etc.) and the whole loop is automated by `python -m harness.runner`;
-> see the quickstart above. `join_metrics.py` was never committed in v0 and has been reconstructed as
-> `harness/join_metrics.py`.
-
-Setup instrumentation:
-1. Set up proxy to track the timing of API calls for each test.
-```
-python3 metrics_proxy.py        # terminal 1 - leave running
-```
-2. Start the sampler to record usage stats.
-```
-rm samples.csv ; python3 sampler.py   # terminal 2 - leave running
-```
-3. Record the test name before each run so reports are grouped by test.
-```
-echo "coding_01_my_sqrt_review" > current_task.txt
-```
-
-4. Launch opencode in a terminal:
-> I am deliberately launching opencode from ollama, to inherit its configuration and avoid the issues encountered with the missing generated response (See above summary)
-```
-export OLLAMA_HOST=127.0.0.1:11435  # route through instrumentation proxy
-ollama launch opencode --model qwen3.6-32k`
-```
-
-### Generate the initial report
-
-This will generate a Markdown report for each test showing TTFT, throughput, and resource utilization.
-
-```bash
-python3 join_metrics.py
-python3 report.py
-```
-
-----
-
-### First pass: Context window / GPU-layer-fit experiment
-
-I attempted a performance improvement to reduce num_ctx (e.g., 16k instead of 32k) to make
-sure the quantization better fits the GeForce RTX 3080 10GB VRAM with less need to offload
-inference to CPU.
-
-Create a new model:
-
-```
-ollama create qwen3.6-16k -f Modelfile2
-ollama launch opencode --model qwen3.6-16k
-```
-
-See test cases 1-6 above.
-
-
-### Second Pass: enable comm-tools to send emails and calendar appointments
-
-#### Test cases:
-
-I was using the following prompts to simulate a common workflow:
-
-"Use the send_email tool to draft an email to `alice@example.com` with subject \"Project update\" and body \"The benchmark suite is on track.\" Do not send it until I explicitly approve it."  
-"show the draft"  
-"Looks good, send it."  
-"Use the create_event tool to schedule \"Benchmark review\" from 2026-08-10T14:00:00 to 2026-08-10T14:30:00 with attendees `alice@example.com` and `bob@example.com`. Confirm with me before creating it."  
-"Send that same email again using send_email, exact same recipient, subject, and body."  
-"ok, create the event now"  
-
-
-### Third Pass: enable Web search, add to MCP for OpenCode
-
-I selected a self-hosted SearXNG instance (the actual search engine), and an MCP bridge that
-exposes it to OpenCode as a tool. SearXNG's default config only returns HTML, so I added a
-custom `settings.yml` to explicitly enable JSON format.
-
-```bash
-mkdir -p ~/work/searxng-config
-cat > ~/work/searxng-config/settings.yml << EOF
-use_default_settings: true
-search:
-  formats:
-    - html
-    - json
-server:
-  secret_key: "AgenitcPoniesinthewinter"
-  limiter: false
-outgoing:
-  request_timeout: 10.0
-  max_request_timeout: 15.0
-EOF
-```
-
-Then start the docker on port 8090 since port 8080 is taken by Ollama web UI
-
-```bash
-docker run -d --name searxng -p 8090:8080  \
-  -v ~/work/searxng-config/settings.yml:/etc/searxng/settings.yml:ro  \
-  searxng/searxng
-```
-
-> use `curl "http://localhost:8090/search?q=test&format=json"` to verify it's serving JSON correctly.
-
-Once it is running, we can add it as MCP bridge to OpenCode:
-
-```bash
-opencode mcp add
-```
-
-When prompted:  
-- Name: `searxng`  
-- Command: `npx -y mcp-searxng`  
-
-Since it's not letting us enter the environment, we need to edit the config file manually as follows:
-
-```json
-{
-  "$schema": "https://opencode.ai/config.json",
-  "permission": "allow",
-  "provider": {
-    ... 
- },
-  "mcp": {
-    "searxng": {
-      "type": "local",
-	"command": ["npx", "-y", "mcp-searxng"],
-	"environment": {
-	    "SEARXNG_URL": "http://localhost:8090"
-	},
-	"enabled": true
-    }
-  }
-}
-
-```
-
-This command to confirm it is registered correctly:
-
-```bash
-opencode mcp list
-```
-
-Expected output:
-```
-┌  MCP Servers
-│
-●  ✓ searxng connected
-│      npx -y mcp-searxng
-│
-●  ✓ comm-tools connected
-│      python3 /home/npalmass/work/OpenCode/claude-files/comm-tools/comm_tools_mcp.py
-│
-└  2 server(s)
-```
-
-#### Test case for deep research using web_search
-
-The test case requires the model to search the web for current research and opinions and
-line up verifiable citations.
-
-8. Does neuroscience research on decision-making - such as Libet-style readiness-potential
-   experiments - support the conclusion that free will is an illusion, or is that conclusion
-   scientifically and philosophically contested? Summarize the strongest evidence and
-   arguments on both sides, citing specific studies.
-   > Expected: retrieval of multiple named studies (not just Libet's original), correct
-   > representation of methodological critiques (e.g. Schurger et al.'s challenge to the
-   > readiness-potential interpretation), and citations traceable to real fetched sources
-   > rather than confident-sounding but ungrounded claims
-
-After observing incorrect citations, a new `research` agent was defined, this showed some
-improvement but systemic model-based issues remained (see `results/README.md`).
+The measurement harness, analysis code, tests and most of the write-up were developed with AI assistance (Claude Code)
+under the author's direction. The author chose the questions and the tasks, ran the experiments on their own hardware,
+reviewed the results and decides what the data supports. Every number in this repository comes from recorded runs
+that can be re-derived with the tooling; `DIRECTION.md` and parts of this README were drafted with AI assistance
+from the author's own testing, debugging and analysis.
