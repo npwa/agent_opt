@@ -1,0 +1,62 @@
+{
+  "trial_id": "sw_32k_trimtools__bugfix_01_moving_average__03",
+  "task": "bugfix_01_moving_average",
+  "config": "sw_32k_trimtools",
+  "model": "ollama/qwen3.6-32k",
+  "k": 3,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__refactor_02_rename_price__03",
+  "prev_task": "refactor_02_rename_price",
+  "seed": 2060689274,
+  "run_seed": 5,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-28T04:30:09Z",
+  "wall_start": 1793161809.2508564,
+  "wall_end": 1793161881.8837898,
+  "elapsed_s": 72.6,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 11,
+  "tokens_in": 90734,
+  "tokens_out": 1518,
+  "tool_sequence": [
+    "bash",
+    "bash",
+    "glob",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "read",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 1,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Fixed the off-by-one error in `stats_utils.py:9`. The range was `range(len(values) - window)` which missed the last window position. Changed it to `range(len(values) - window + 1)` so all windows are included, including when the window equals the full length of the values list.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-28T04:30:09Z"
+    }
+  ]
+}

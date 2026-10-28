@@ -1,0 +1,619 @@
+{
+  "created_utc": "2026-10-28T04:03:30Z",
+  "run_seed": 5,
+  "n": 5,
+  "parity_fraction": 0.0,
+  "trials_per_task": {
+    "bugfix_01_moving_average": 5,
+    "coding_01_my_sqrt_review": 5,
+    "coding_02_fizzbuzz_gen": 5,
+    "coding_03_compress_gen": 5,
+    "coding_05_scientific_lan": 5,
+    "coding_06_tax_rates_lan": 5,
+    "refactor_02_rename_price": 5,
+    "repoqa_05_retry_policy": 5
+  },
+  "configs": {
+    "sw_32k": {
+      "id": "sw_32k",
+      "model": "ollama/qwen3.6-32k",
+      "description": "qwen3.6 35B-A3B, 32k context, KV f16, on a private Ollama (reference for the sweep)",
+      "seed_mode": "per_trial",
+      "options": {},
+      "server": {
+        "num_ctx": 32768
+      },
+      "agents": {},
+      "deny_tools": []
+    },
+    "sw_32k_trimtools": {
+      "id": "sw_32k_trimtools",
+      "model": "ollama/qwen3.6-32k",
+      "description": "qwen3.6 35B-A3B, 32k context; tools task, todowrite, skill and webfetch removed from the prompt",
+      "seed_mode": "per_trial",
+      "options": {},
+      "server": {
+        "num_ctx": 32768
+      },
+      "agents": {},
+      "deny_tools": [
+        "task",
+        "todowrite",
+        "skill",
+        "webfetch"
+      ]
+    }
+  },
+  "tasks": {
+    "bugfix_01_moving_average": "6bf7937511c3",
+    "coding_01_my_sqrt_review": "cdb71d8a5953",
+    "coding_02_fizzbuzz_gen": "518590ba1bd6",
+    "coding_03_compress_gen": "9d03ea0a9236",
+    "coding_05_scientific_lan": "adf6f2792260",
+    "coding_06_tax_rates_lan": "7d1c4ebf3406",
+    "refactor_02_rename_price": "410b4bbf373e",
+    "repoqa_05_retry_policy": "790e1276cd56"
+  },
+  "order": [
+    {
+      "trial_id": "sw_32k_trimtools__repoqa_05_retry_policy__00",
+      "config": "sw_32k_trimtools",
+      "task": "repoqa_05_retry_policy",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__refactor_02_rename_price__02",
+      "config": "sw_32k_trimtools",
+      "task": "refactor_02_rename_price",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__repoqa_05_retry_policy__03",
+      "config": "sw_32k_trimtools",
+      "task": "repoqa_05_retry_policy",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_03_compress_gen__00",
+      "config": "sw_32k",
+      "task": "coding_03_compress_gen",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__02",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_05_scientific_lan__03",
+      "config": "sw_32k_trimtools",
+      "task": "coding_05_scientific_lan",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__refactor_02_rename_price__04",
+      "config": "sw_32k_trimtools",
+      "task": "refactor_02_rename_price",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_05_scientific_lan__04",
+      "config": "sw_32k_trimtools",
+      "task": "coding_05_scientific_lan",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_06_tax_rates_lan__04",
+      "config": "sw_32k_trimtools",
+      "task": "coding_06_tax_rates_lan",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_03_compress_gen__01",
+      "config": "sw_32k",
+      "task": "coding_03_compress_gen",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__refactor_02_rename_price__00",
+      "config": "sw_32k_trimtools",
+      "task": "refactor_02_rename_price",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__02",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__00",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__02",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_06_tax_rates_lan__03",
+      "config": "sw_32k_trimtools",
+      "task": "coding_06_tax_rates_lan",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__01",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__03",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__02",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__04",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__03",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_03_compress_gen__04",
+      "config": "sw_32k",
+      "task": "coding_03_compress_gen",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__00",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_02_fizzbuzz_gen__03",
+      "config": "sw_32k_trimtools",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__bugfix_01_moving_average__02",
+      "config": "sw_32k",
+      "task": "bugfix_01_moving_average",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__repoqa_05_retry_policy__02",
+      "config": "sw_32k_trimtools",
+      "task": "repoqa_05_retry_policy",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_02_fizzbuzz_gen__02",
+      "config": "sw_32k_trimtools",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__00",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__00",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__03",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__bugfix_01_moving_average__03",
+      "config": "sw_32k_trimtools",
+      "task": "bugfix_01_moving_average",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__04",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_03_compress_gen__02",
+      "config": "sw_32k_trimtools",
+      "task": "coding_03_compress_gen",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__01",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_03_compress_gen__03",
+      "config": "sw_32k_trimtools",
+      "task": "coding_03_compress_gen",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__bugfix_01_moving_average__01",
+      "config": "sw_32k_trimtools",
+      "task": "bugfix_01_moving_average",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__04",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_02_fizzbuzz_gen__02",
+      "config": "sw_32k",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__refactor_02_rename_price__01",
+      "config": "sw_32k_trimtools",
+      "task": "refactor_02_rename_price",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_03_compress_gen__03",
+      "config": "sw_32k",
+      "task": "coding_03_compress_gen",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__bugfix_01_moving_average__00",
+      "config": "sw_32k_trimtools",
+      "task": "bugfix_01_moving_average",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_02_fizzbuzz_gen__04",
+      "config": "sw_32k_trimtools",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__bugfix_01_moving_average__02",
+      "config": "sw_32k_trimtools",
+      "task": "bugfix_01_moving_average",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_05_scientific_lan__01",
+      "config": "sw_32k_trimtools",
+      "task": "coding_05_scientific_lan",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__bugfix_01_moving_average__04",
+      "config": "sw_32k_trimtools",
+      "task": "bugfix_01_moving_average",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__bugfix_01_moving_average__00",
+      "config": "sw_32k",
+      "task": "bugfix_01_moving_average",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_05_scientific_lan__02",
+      "config": "sw_32k_trimtools",
+      "task": "coding_05_scientific_lan",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_02_fizzbuzz_gen__00",
+      "config": "sw_32k_trimtools",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__03",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_03_compress_gen__01",
+      "config": "sw_32k_trimtools",
+      "task": "coding_03_compress_gen",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__repoqa_05_retry_policy__04",
+      "config": "sw_32k",
+      "task": "repoqa_05_retry_policy",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__03",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__bugfix_01_moving_average__04",
+      "config": "sw_32k",
+      "task": "bugfix_01_moving_average",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_02_fizzbuzz_gen__01",
+      "config": "sw_32k_trimtools",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_06_tax_rates_lan__01",
+      "config": "sw_32k_trimtools",
+      "task": "coding_06_tax_rates_lan",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_02_fizzbuzz_gen__00",
+      "config": "sw_32k",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__04",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_01_my_sqrt_review__04",
+      "config": "sw_32k_trimtools",
+      "task": "coding_01_my_sqrt_review",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_03_compress_gen__00",
+      "config": "sw_32k_trimtools",
+      "task": "coding_03_compress_gen",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_02_fizzbuzz_gen__01",
+      "config": "sw_32k",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_03_compress_gen__02",
+      "config": "sw_32k",
+      "task": "coding_03_compress_gen",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_06_tax_rates_lan__01",
+      "config": "sw_32k",
+      "task": "coding_06_tax_rates_lan",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_06_tax_rates_lan__00",
+      "config": "sw_32k_trimtools",
+      "task": "coding_06_tax_rates_lan",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_01_my_sqrt_review__01",
+      "config": "sw_32k_trimtools",
+      "task": "coding_01_my_sqrt_review",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__bugfix_01_moving_average__01",
+      "config": "sw_32k",
+      "task": "bugfix_01_moving_average",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__repoqa_05_retry_policy__01",
+      "config": "sw_32k_trimtools",
+      "task": "repoqa_05_retry_policy",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_02_fizzbuzz_gen__03",
+      "config": "sw_32k",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_01_my_sqrt_review__03",
+      "config": "sw_32k_trimtools",
+      "task": "coding_01_my_sqrt_review",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__refactor_02_rename_price__03",
+      "config": "sw_32k_trimtools",
+      "task": "refactor_02_rename_price",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_05_scientific_lan__00",
+      "config": "sw_32k_trimtools",
+      "task": "coding_05_scientific_lan",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_01_my_sqrt_review__02",
+      "config": "sw_32k_trimtools",
+      "task": "coding_01_my_sqrt_review",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_02_fizzbuzz_gen__04",
+      "config": "sw_32k",
+      "task": "coding_02_fizzbuzz_gen",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_05_scientific_lan__00",
+      "config": "sw_32k",
+      "task": "coding_05_scientific_lan",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__coding_01_my_sqrt_review__01",
+      "config": "sw_32k",
+      "task": "coding_01_my_sqrt_review",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__01",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 1,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_03_compress_gen__04",
+      "config": "sw_32k_trimtools",
+      "task": "coding_03_compress_gen",
+      "k": 4,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__bugfix_01_moving_average__03",
+      "config": "sw_32k",
+      "task": "bugfix_01_moving_average",
+      "k": 3,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_06_tax_rates_lan__02",
+      "config": "sw_32k_trimtools",
+      "task": "coding_06_tax_rates_lan",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__coding_01_my_sqrt_review__00",
+      "config": "sw_32k_trimtools",
+      "task": "coding_01_my_sqrt_review",
+      "k": 0,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k__refactor_02_rename_price__02",
+      "config": "sw_32k",
+      "task": "refactor_02_rename_price",
+      "k": 2,
+      "instrumented": true
+    },
+    {
+      "trial_id": "sw_32k_trimtools__repoqa_05_retry_policy__04",
+      "config": "sw_32k_trimtools",
+      "task": "repoqa_05_retry_policy",
+      "k": 4,
+      "instrumented": true
+    }
+  ]
+}

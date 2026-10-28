@@ -1,0 +1,226 @@
+{
+  "trial_id": "sw_32k_trimtools__bugfix_01_moving_average__01",
+  "task": "bugfix_01_moving_average",
+  "config": "sw_32k_trimtools",
+  "attempt": 1,
+  "status": "pass",
+  "summary": {
+    "wall_start": 1793165320.5077543,
+    "wall_end": 1793165358.3887458,
+    "wall_s": 37.88099145889282,
+    "n_steps": 5,
+    "llm_s": 35.9105,
+    "ttft_s": 14.3925,
+    "decode_s": 21.518,
+    "tool_s": 0.05900001525878906,
+    "gap_s": 0.25708460807800293,
+    "idle_gap_s": 0.0,
+    "prefill_tokens": 31521,
+    "decode_tokens": 729,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "sw_32k_trimtools__bugfix_01_moving_average__01#a1:1",
+      "t_start": 1793165322.221161,
+      "t_end": 1793165329.151461,
+      "ttft_s": 2.649,
+      "llm_s": 6.9303,
+      "decode_s": 4.2813,
+      "prefill_tokens": 5207,
+      "decode_tokens": 149,
+      "prefill_tok_s": 1965.65,
+      "decode_tok_s": 34.8,
+      "n_chunks": 58,
+      "first_token_skew_s": 0.01783919334411621,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 1246.9199999999992,
+      "tool_names": [
+        "bash",
+        "read"
+      ],
+      "tool_latency_s": 0.0280001163482666,
+      "tools": [
+        {
+          "tool": "bash",
+          "start": 1793165327.81,
+          "end": 1793165327.831,
+          "status": "completed"
+        },
+        {
+          "tool": "read",
+          "start": 1793165329.131,
+          "end": 1793165329.138,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1793165324.888,
+      "oc_step_finish": 1793165329.165,
+      "tool_errors": 0,
+      "gap_s": 0.0324397087097168,
+      "gpu_busy_pct_llm": 47.72463768115942,
+      "gpu_power_w_llm": 119.64057971014493,
+      "gpu_samples_llm": 69,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 2,
+      "llm_call_id": "sw_32k_trimtools__bugfix_01_moving_average__01#a1:2",
+      "t_start": 1793165329.1839006,
+      "t_end": 1793165335.7498007,
+      "ttft_s": 3.2661,
+      "llm_s": 6.5659,
+      "decode_s": 3.2998000000000003,
+      "prefill_tokens": 5770,
+      "decode_tokens": 120,
+      "prefill_tok_s": 1766.63,
+      "decode_tok_s": 36.37,
+      "n_chunks": 13,
+      "first_token_skew_s": 0.006999492645263672,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 1508.9000000000005,
+      "tool_names": [
+        "read",
+        "read"
+      ],
+      "tool_latency_s": 0.018000125885009766,
+      "tools": [
+        {
+          "tool": "read",
+          "start": 1793165334.214,
+          "end": 1793165334.225,
+          "status": "completed"
+        },
+        {
+          "tool": "read",
+          "start": 1793165335.722,
+          "end": 1793165335.729,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1793165332.457,
+      "oc_step_finish": 1793165335.759,
+      "tool_errors": 0,
+      "gap_s": 0.02496814727783203,
+      "gpu_busy_pct_llm": 56.31818181818182,
+      "gpu_power_w_llm": 126.01515151515152,
+      "gpu_samples_llm": 66,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 3,
+      "llm_call_id": "sw_32k_trimtools__bugfix_01_moving_average__01#a1:3",
+      "t_start": 1793165335.7747688,
+      "t_end": 1793165344.8077688,
+      "ttft_s": 4.3393,
+      "llm_s": 9.033,
+      "decode_s": 4.6937,
+      "prefill_tokens": 6669,
+      "decode_tokens": 144,
+      "prefill_tok_s": 1536.88,
+      "decode_tok_s": 30.68,
+      "n_chunks": 37,
+      "first_token_skew_s": 0.006931304931640625,
+      "itl_p50_ms": 32.00000000000003,
+      "itl_p99_ms": 2219.2499999999955,
+      "tool_names": [
+        "edit"
+      ],
+      "tool_latency_s": 0.004999876022338867,
+      "tools": [
+        {
+          "tool": "edit",
+          "start": 1793165344.786,
+          "end": 1793165344.791,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1793165340.121,
+      "oc_step_finish": 1793165344.816,
+      "tool_errors": 0,
+      "gap_s": 0.023459911346435547,
+      "gpu_busy_pct_llm": 53.94444444444444,
+      "gpu_power_w_llm": 124.4888888888889,
+      "gpu_samples_llm": 90,
+      "gpu_busy_pct_gap": 15.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 4,
+      "llm_call_id": "sw_32k_trimtools__bugfix_01_moving_average__01#a1:4",
+      "t_start": 1793165344.8312287,
+      "t_end": 1793165352.2126288,
+      "ttft_s": 2.1275,
+      "llm_s": 7.3814,
+      "decode_s": 5.2539,
+      "prefill_tokens": 6830,
+      "decode_tokens": 181,
+      "prefill_tok_s": 3210.34,
+      "decode_tok_s": 34.45,
+      "n_chunks": 136,
+      "first_token_skew_s": 0.010271310806274414,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 59.00000000000016,
+      "tool_names": [
+        "bash"
+      ],
+      "tool_latency_s": 0.007999897003173828,
+      "tools": [
+        {
+          "tool": "bash",
+          "start": 1793165352.232,
+          "end": 1793165352.24,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1793165346.969,
+      "oc_step_finish": 1793165352.253,
+      "tool_errors": 0,
+      "gap_s": 0.05818939208984375,
+      "gpu_busy_pct_llm": 40.64383561643836,
+      "gpu_power_w_llm": 120.17671232876712,
+      "gpu_samples_llm": 73,
+      "gpu_busy_pct_gap": 19.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    },
+    {
+      "step": 5,
+      "llm_call_id": "sw_32k_trimtools__bugfix_01_moving_average__01#a1:5",
+      "t_start": 1793165352.2708182,
+      "t_end": 1793165358.2707183,
+      "ttft_s": 2.0106,
+      "llm_s": 5.9999,
+      "decode_s": 3.9893,
+      "prefill_tokens": 7045,
+      "decode_tokens": 135,
+      "prefill_tok_s": 3503.93,
+      "decode_tok_s": 33.84,
+      "n_chunks": 121,
+      "first_token_skew_s": 0.006581783294677734,
+      "itl_p50_ms": 28.999999999999915,
+      "itl_p99_ms": 64.6199999999999,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1793165354.288,
+      "oc_step_finish": 1793165358.286,
+      "tool_errors": 0,
+      "gap_s": 0.1180274486541748,
+      "gpu_busy_pct_llm": 46.06666666666667,
+      "gpu_power_w_llm": 122.93166666666666,
+      "gpu_samples_llm": 60,
+      "gpu_busy_pct_gap": 20.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

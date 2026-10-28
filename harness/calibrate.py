@@ -37,7 +37,8 @@ SEARXNG_URL = "http://localhost:8090"
 
 def build_config(spec: TaskSpec, model: str, comm_tools_dir: Path | None,
                  trial_id: str | None = None, attempt: int | None = None,
-                 model_options: dict | None = None, base_url: str = PROXY_URL) -> dict:
+                 model_options: dict | None = None, base_url: str = PROXY_URL,
+                 deny_tools: list[str] | None = None) -> dict:
     model_id = model.split("/", 1)[1]
     cfg: dict = {
         "permission": "allow",
@@ -57,7 +58,10 @@ def build_config(spec: TaskSpec, model: str, comm_tools_dir: Path | None,
         cfg["provider"]["ollama"]["options"]["headers"] = headers
     if model_options:  # sampling options such as seed/temperature
         cfg["provider"]["ollama"]["models"][model_id]["options"] = dict(model_options)
-    if spec.tools is not None:
+    if deny_tools:  # a permission "deny" removes the tool (and its mentions in the system prompt) from the request
+        # the legacy `tools` map must not be set as well: next to the permission rules it conflicted (only `skill` was removed)
+        cfg["permission"] = {"*": "allow", **{t: "deny" for t in deny_tools}}
+    elif spec.tools is not None:  # note: with the global `permission: allow` OpenCode 1.18 ignores this map (all tools are sent)
         cfg["tools"] = {t: t in spec.tools for t in sorted(TOOLS)}
     if "searxng" in spec.mcp:
         cfg["mcp"]["searxng"] = {"type": "local", "command": ["npx", "-y", "mcp-searxng"],

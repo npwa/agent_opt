@@ -1,0 +1,141 @@
+{
+  "trial_id": "sw_32k_trimtools__repoqa_05_retry_policy__04",
+  "task": "repoqa_05_retry_policy",
+  "config": "sw_32k_trimtools",
+  "attempt": 1,
+  "status": "fail",
+  "summary": {
+    "wall_start": 1793163583.0508025,
+    "wall_end": 1793163612.6807792,
+    "wall_s": 29.629976749420166,
+    "n_steps": 3,
+    "llm_s": 27.756,
+    "ttft_s": 8.6706,
+    "decode_s": 19.0854,
+    "tool_s": 0.03600001335144043,
+    "gap_s": 0.14258503913879395,
+    "idle_gap_s": 0.0,
+    "prefill_tokens": 22319,
+    "decode_tokens": 640,
+    "gpu_telemetry": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "llm_call_id": "sw_32k_trimtools__repoqa_05_retry_policy__04#a1:1",
+      "t_start": 1793163584.7821944,
+      "t_end": 1793163589.7794943,
+      "ttft_s": 2.8745,
+      "llm_s": 4.9973,
+      "decode_s": 2.1228000000000002,
+      "prefill_tokens": 7060,
+      "decode_tokens": 74,
+      "prefill_tok_s": 2456.08,
+      "decode_tok_s": 34.86,
+      "n_chunks": 43,
+      "first_token_skew_s": 0.020305633544921875,
+      "itl_p50_ms": 29.00000000000036,
+      "itl_p99_ms": 546.7100000000027,
+      "tool_names": [
+        "glob"
+      ],
+      "tool_latency_s": 0.01699995994567871,
+      "tools": [
+        {
+          "tool": "glob",
+          "start": 1793163589.764,
+          "end": 1793163589.781,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1793163587.677,
+      "oc_step_finish": 1793163589.797,
+      "tool_errors": 0,
+      "gap_s": 0.03765106201171875,
+      "gpu_busy_pct_llm": 48.6,
+      "gpu_power_w_llm": 119.21,
+      "gpu_samples_llm": 50,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 2,
+      "llm_call_id": "sw_32k_trimtools__repoqa_05_retry_policy__04#a1:2",
+      "t_start": 1793163589.8171453,
+      "t_end": 1793163597.4635453,
+      "ttft_s": 1.8898,
+      "llm_s": 7.6464,
+      "decode_s": 5.7566,
+      "prefill_tokens": 7261,
+      "decode_tokens": 198,
+      "prefill_tok_s": 3842.21,
+      "decode_tok_s": 34.39,
+      "n_chunks": 87,
+      "first_token_skew_s": 0.00605463981628418,
+      "itl_p50_ms": 29.00000000000036,
+      "itl_p99_ms": 1540.000000000001,
+      "tool_names": [
+        "read",
+        "read"
+      ],
+      "tool_latency_s": 0.01900005340576172,
+      "tools": [
+        {
+          "tool": "read",
+          "start": 1793163595.913,
+          "end": 1793163595.924,
+          "status": "completed"
+        },
+        {
+          "tool": "read",
+          "start": 1793163597.438,
+          "end": 1793163597.446,
+          "status": "completed"
+        }
+      ],
+      "oc_step_start": 1793163591.713,
+      "oc_step_finish": 1793163597.474,
+      "tool_errors": 0,
+      "gap_s": 0.02796769142150879,
+      "gpu_busy_pct_llm": 34.45454545454545,
+      "gpu_power_w_llm": 121.39870129870131,
+      "gpu_samples_llm": 77,
+      "gpu_busy_pct_gap": null,
+      "gpu_samples_gap": 0,
+      "idle_gap_s": null
+    },
+    {
+      "step": 3,
+      "llm_call_id": "sw_32k_trimtools__repoqa_05_retry_policy__04#a1:3",
+      "t_start": 1793163597.491513,
+      "t_end": 1793163612.603813,
+      "ttft_s": 3.9063,
+      "llm_s": 15.1123,
+      "decode_s": 11.206,
+      "prefill_tokens": 7998,
+      "decode_tokens": 368,
+      "prefill_tok_s": 2047.46,
+      "decode_tok_s": 32.84,
+      "n_chunks": 343,
+      "first_token_skew_s": 0.0071868896484375,
+      "itl_p50_ms": 29.99999999999936,
+      "itl_p99_ms": 64.00000000000006,
+      "tool_names": [],
+      "tool_latency_s": 0,
+      "tools": [],
+      "oc_step_start": 1793163601.405,
+      "oc_step_finish": 1793163612.618,
+      "tool_errors": 0,
+      "gap_s": 0.0769662857055664,
+      "gpu_busy_pct_llm": 33.34437086092715,
+      "gpu_power_w_llm": 120.14635761589403,
+      "gpu_samples_llm": 151,
+      "gpu_busy_pct_gap": 16.0,
+      "gpu_samples_gap": 1,
+      "idle_gap_s": 0.0
+    }
+  ],
+  "unmatched_event_steps": [],
+  "warnings": []
+}

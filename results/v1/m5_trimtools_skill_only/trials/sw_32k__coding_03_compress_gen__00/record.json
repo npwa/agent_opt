@@ -1,0 +1,53 @@
+{
+  "trial_id": "sw_32k__coding_03_compress_gen__00",
+  "task": "coding_03_compress_gen",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_trimtools__repoqa_05_retry_policy__03",
+  "prev_task": "repoqa_05_retry_policy",
+  "seed": 2038663483,
+  "run_seed": 5,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-28T04:06:27Z",
+  "wall_start": 1793160387.4392784,
+  "wall_end": 1793160435.1200838,
+  "elapsed_s": 47.7,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 22852,
+  "tokens_out": 389,
+  "tool_sequence": [
+    "read",
+    "write"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "c_test",
+      "passed": false,
+      "detail": "FAIL: \"aabcccccaaa\" -> \"a1b1c1a1\" (want \"a2b1c5a3\")\nFAIL: \"aabccc\" -> \"a1b1c1\" (want \"a2b1c3\")\nFAIL: \"AAaa\" -> \"A1a1\" (want \"A2a2\")\nFAIL: \"zzzzzzzzzzzz\" -> \"z1\" (want \"z12\")"
+    }
+  ],
+  "final_answer": "<|mask_end|>\n/compact:1",
+  "files": [
+    "compress.c"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-28T04:06:27Z"
+    }
+  ]
+}

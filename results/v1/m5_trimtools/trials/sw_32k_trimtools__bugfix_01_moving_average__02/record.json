@@ -1,0 +1,56 @@
+{
+  "trial_id": "sw_32k_trimtools__bugfix_01_moving_average__02",
+  "task": "bugfix_01_moving_average",
+  "config": "sw_32k_trimtools",
+  "model": "ollama/qwen3.6-32k",
+  "k": 2,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_trimtools__coding_06_tax_rates_lan__03",
+  "prev_task": "coding_06_tax_rates_lan",
+  "seed": 1033667876,
+  "run_seed": 5,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-28T05:16:08Z",
+  "wall_start": 1793164568.4298584,
+  "wall_end": 1793164601.3076036,
+  "elapsed_s": 32.9,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 25179,
+  "tokens_out": 619,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Fixed the off-by-one bug on line 9. The range was exclusive of the last valid window position \u2014 changed `len(values) - window` to `len(values) - window + 1`. All 5 tests pass.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-28T05:16:08Z"
+    }
+  ]
+}

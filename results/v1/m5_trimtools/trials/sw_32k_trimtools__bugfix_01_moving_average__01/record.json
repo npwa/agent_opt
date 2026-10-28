@@ -1,0 +1,57 @@
+{
+  "trial_id": "sw_32k_trimtools__bugfix_01_moving_average__01",
+  "task": "bugfix_01_moving_average",
+  "config": "sw_32k_trimtools",
+  "model": "ollama/qwen3.6-32k",
+  "k": 1,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_trimtools__coding_06_tax_rates_lan__04",
+  "prev_task": "coding_06_tax_rates_lan",
+  "seed": 922135402,
+  "run_seed": 5,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-28T05:28:40Z",
+  "wall_start": 1793165320.5077543,
+  "wall_end": 1793165358.3887458,
+  "elapsed_s": 37.9,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 31521,
+  "tokens_out": 729,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 5 tests pass. The bug was an off-by-one error on line 9 of `stats_utils.py`. The range `len(values) - window` excluded the last full window \u2014 it should be `len(values) - window + 1` to include it (e.g., for a 5-element array with window size 3, we need indices 0, 1, and 2).",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-28T05:28:40Z"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "trial_id": "sw_32k_trimtools__repoqa_05_retry_policy__03",
+  "task": "repoqa_05_retry_policy",
+  "config": "sw_32k_trimtools",
+  "model": "ollama/qwen3.6-32k",
+  "k": 3,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_trimtools__refactor_02_rename_price__02",
+  "prev_task": "refactor_02_rename_price",
+  "seed": 115322649,
+  "run_seed": 5,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-28T04:06:07Z",
+  "wall_start": 1793160367.411565,
+  "wall_end": 1793160387.3910773,
+  "elapsed_s": 20.0,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 3,
+  "tokens_in": 22875,
+  "tokens_out": 315,
+  "tool_sequence": [
+    "glob",
+    "grep",
+    "read",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": true,
+      "detail": "23 words, all checks ok"
+    }
+  ],
+  "final_answer": "1. **Delay computation function**: `miniq/retry.py:20` (`next_delay`)\n2. **Default maximum delay**: `miniq/config.py:9` (30.0 seconds)\n3. **Default max attempts before stopping retries**: `miniq/config.py:7` (5 attempts)",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-28T04:06:07Z"
+    }
+  ]
+}

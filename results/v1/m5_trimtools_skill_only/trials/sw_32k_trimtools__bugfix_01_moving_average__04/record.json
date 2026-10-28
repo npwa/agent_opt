@@ -1,0 +1,57 @@
+{
+  "trial_id": "sw_32k_trimtools__bugfix_01_moving_average__04",
+  "task": "bugfix_01_moving_average",
+  "config": "sw_32k_trimtools",
+  "model": "ollama/qwen3.6-32k",
+  "k": 4,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_trimtools__coding_05_scientific_lan__01",
+  "prev_task": "coding_05_scientific_lan",
+  "seed": 944287867,
+  "run_seed": 5,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-28T04:39:15Z",
+  "wall_start": 1793162355.1436768,
+  "wall_end": 1793162388.5741785,
+  "elapsed_s": 33.4,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 40669,
+  "tokens_out": 582,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 5 tests pass. The bug was an off-by-one error on line 9 of `stats_utils.py`: `range(len(values) - window)` excluded the final valid window start index, so it was off by one. Changed to `range(len(values) - window + 1)`.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-28T04:39:15Z"
+    }
+  ]
+}

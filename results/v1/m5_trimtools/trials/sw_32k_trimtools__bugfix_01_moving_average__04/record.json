@@ -1,0 +1,58 @@
+{
+  "trial_id": "sw_32k_trimtools__bugfix_01_moving_average__04",
+  "task": "bugfix_01_moving_average",
+  "config": "sw_32k_trimtools",
+  "model": "ollama/qwen3.6-32k",
+  "k": 4,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_trimtools__coding_05_scientific_lan__04",
+  "prev_task": "coding_05_scientific_lan",
+  "seed": 944287867,
+  "run_seed": 5,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-28T05:08:34Z",
+  "wall_start": 1793164114.4823015,
+  "wall_end": 1793164152.2134845,
+  "elapsed_s": 37.7,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 6,
+  "tokens_in": 37810,
+  "tokens_out": 730,
+  "tool_sequence": [
+    "read",
+    "bash",
+    "read",
+    "read",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 1,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Fixed the off-by-one error in `stats_utils.py:9`. The range was missing `+ 1`, causing it to skip the last window position.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-28T05:08:34Z"
+    }
+  ]
+}

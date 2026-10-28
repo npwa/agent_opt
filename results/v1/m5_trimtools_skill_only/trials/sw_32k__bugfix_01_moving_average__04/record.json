@@ -1,0 +1,57 @@
+{
+  "trial_id": "sw_32k__bugfix_01_moving_average__04",
+  "task": "bugfix_01_moving_average",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 4,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__coding_01_my_sqrt_review__03",
+  "prev_task": "coding_01_my_sqrt_review",
+  "seed": 858270263,
+  "run_seed": 5,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-28T04:42:23Z",
+  "wall_start": 1793162543.1751442,
+  "wall_end": 1793162575.254235,
+  "elapsed_s": 32.1,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 42114,
+  "tokens_out": 547,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 5 tests pass. The off-by-one error was on line 9 of `stats_utils.py` \u2014 the range excluded the last valid window position.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-28T04:42:23Z"
+    }
+  ]
+}

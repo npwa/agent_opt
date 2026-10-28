@@ -1,0 +1,78 @@
+{
+  "trial_id": "sw_32k_trimtools__refactor_02_rename_price__02",
+  "task": "refactor_02_rename_price",
+  "config": "sw_32k_trimtools",
+  "model": "ollama/qwen3.6-32k",
+  "k": 2,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_trimtools__repoqa_05_retry_policy__00",
+  "prev_task": "repoqa_05_retry_policy",
+  "seed": 399986801,
+  "run_seed": 5,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-28T04:04:51Z",
+  "wall_start": 1793160291.3840857,
+  "wall_end": 1793160367.2700565,
+  "elapsed_s": 75.9,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 44525,
+  "tokens_out": 1849,
+  "tool_sequence": [
+    "glob",
+    "grep",
+    "read",
+    "read",
+    "read",
+    "read",
+    "read",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "type": "command",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "Done \u2014 `calc_price` renamed to `compute_total_price` in all 6 files:\n\n- **pricing.py**: definition + docstring\n- **cart.py**: import + call site\n- **report.py**: import + call site\n- **test_cart.py**: import, test method name, all call sites\n- **README.md**: documentation reference\n\nAll 4 tests pass.",
+  "files": [
+    "README.md",
+    "cart.py",
+    "pricing.py",
+    "report.py",
+    "test_cart.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-28T04:04:51Z"
+    }
+  ]
+}

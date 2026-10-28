@@ -424,3 +424,20 @@ def test_every_trial_gets_the_same_temp_dir_so_prompts_share_their_prefix(fake_o
     assert first == str(tmp_path / "scratch" / "shared_tmp")
     fake_oc("ok")
     assert (tmp_path / "calls.tmpdir").read_text() == first and "fizzbuzz" not in first and "__" not in first
+
+
+def test_deny_tools_config_and_permission(tmp_path):
+    from harness import calibrate
+    from harness.taskspec import load_task
+    cfg = runner.load_config(ROOT / "configs/sweep/sw_32k_trimtools.yaml")
+    assert cfg.deny_tools == ["task", "todowrite", "skill", "webfetch"]
+    assert runner.load_config(ROOT / "configs/sweep/sw_32k.yaml").deny_tools == []
+    f = tmp_path / "c.yaml"
+    f.write_text("id: a\nmodel: p/m\ndeny_tools: task\n")
+    with pytest.raises(ValueError, match="deny_tools"):
+        runner.load_config(f)
+    spec = load_task(ROOT / "tasks/coding_01_my_sqrt_review.yaml")
+    perm = calibrate.build_config(spec, "ollama/m", None, deny_tools=cfg.deny_tools)["permission"]
+    assert perm["*"] == "allow" and perm["task"] == perm["webfetch"] == "deny" and "bash" not in perm
+    assert "tools" not in calibrate.build_config(spec, "ollama/m", None, deny_tools=cfg.deny_tools)  # would conflict with the denies
+    assert calibrate.build_config(spec, "ollama/m", None)["permission"] == "allow"

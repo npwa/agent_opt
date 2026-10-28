@@ -1,0 +1,57 @@
+{
+  "trial_id": "sw_32k_trimtools__bugfix_01_moving_average__00",
+  "task": "bugfix_01_moving_average",
+  "config": "sw_32k_trimtools",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_trimtools__coding_01_my_sqrt_review__01",
+  "prev_task": "coding_01_my_sqrt_review",
+  "seed": 496450653,
+  "run_seed": 5,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-28T05:18:53Z",
+  "wall_start": 1793164733.865927,
+  "wall_end": 1793164783.3479047,
+  "elapsed_s": 49.5,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 32022,
+  "tokens_out": 1096,
+  "tool_sequence": [
+    "bash",
+    "read",
+    "read",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 5 tests pass. The bug was on line 9 in `stats_utils.py` \u2014 the range upper bound was `len(values) - window`, which is exclusive and missed the last valid sliding window position. Changed it to `+ 1` so all full windows are included.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-28T05:18:53Z"
+    }
+  ]
+}

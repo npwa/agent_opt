@@ -48,7 +48,7 @@ from harness.workdir import prepare_workdir
 
 ROOT = Path(__file__).resolve().parent.parent
 FINAL_STATUSES = {"pass", "fail", "timeout", "harness_failed"}
-CONFIG_KEYS = {"id", "model", "description", "seed_mode", "options", "server", "agents"}
+CONFIG_KEYS = {"id", "model", "description", "seed_mode", "options", "server", "agents", "deny_tools"}
 CONFINE = True  # run OpenCode under Landlock (harness/landlock.py); --no-confine turns it off
 STALL_S = 300.0  # no events + idle GPU + no working child for this long = stalled trial (0 disables); set by --stall-s
 
@@ -66,6 +66,7 @@ class RunConfig:
     options: dict = field(default_factory=dict)
     server: dict | None = None  # settings of a private Ollama server for this config (harness/server.py)
     agents: dict = field(default_factory=dict)  # task agent name -> OpenCode agent to use instead ("default" = the built-in one)
+    deny_tools: list = field(default_factory=list)  # OpenCode tools removed from the prompt (permission deny); the task-level `tools:` key has no effect in OpenCode 1.18
 
 
 def load_config(path: Path) -> RunConfig:
@@ -84,6 +85,8 @@ def load_config(path: Path) -> RunConfig:
         raise ValueError(f"{path}: id must be alphanumeric/_/-")
     if "agents" in data and not (isinstance(data["agents"], dict) and all(isinstance(k, str) and isinstance(v, str) and v for k, v in data["agents"].items())):
         raise ValueError(f"{path}: agents must map agent names to agent names")
+    if "deny_tools" in data and not (isinstance(data["deny_tools"], list) and all(isinstance(t, str) and t for t in data["deny_tools"])):
+        raise ValueError(f"{path}: deny_tools must be a list of tool names")
     if "server" in data and (errs := serverlib.validate_server(data["server"])):
         raise ValueError(f"{path}: " + "; ".join(errs))
     return RunConfig(**data)
@@ -281,7 +284,7 @@ def run_attempt(spec: TaskSpec, cfg: RunConfig, tid: str, attempt: int, seed: in
     opencode_json.write_text(json.dumps(
         calibrate.build_config(
             spec, cfg.model, comm_dir, tid if instrumented else None, attempt, options,
-            base_url=calibrate.PROXY_URL if instrumented else OLLAMA_DIRECT_URL), indent=2))
+            base_url=calibrate.PROXY_URL if instrumented else OLLAMA_DIRECT_URL, deny_tools=cfg.deny_tools), indent=2))
     xdg = scratch / "xdg"
     env = {**os.environ, "OPENCODE_CONFIG": str(opencode_json), "OPENCODE_CONFIG_DIR": str(cfg_dir),
            "XDG_CONFIG_HOME": str(xdg / "config"), "XDG_DATA_HOME": str(xdg / "data"),

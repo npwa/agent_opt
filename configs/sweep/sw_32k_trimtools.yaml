@@ -1,0 +1,10 @@
+# H1 success guard: the same server as the control sw_32k; four tool schemas that none of the baseline tasks used
+# (task, todowrite, skill; webfetch only matters to research) are removed from the prompt with a permission deny.
+# (The task-level `tools:` key of the task specs does not remove anything in OpenCode 1.18, checked with a stub server.)
+id: sw_32k_trimtools
+model: ollama/qwen3.6-32k
+description: qwen3.6 35B-A3B, 32k context; tools task, todowrite, skill and webfetch removed from the prompt
+seed_mode: per_trial
+server:
+  num_ctx: 32768
+deny_tools: [task, todowrite, skill, webfetch]

@@ -1,0 +1,57 @@
+{
+  "trial_id": "sw_32k_trimtools__bugfix_01_moving_average__03",
+  "task": "bugfix_01_moving_average",
+  "config": "sw_32k_trimtools",
+  "model": "ollama/qwen3.6-32k",
+  "k": 3,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k_trimtools__coding_02_fizzbuzz_gen__00",
+  "prev_task": "coding_02_fizzbuzz_gen",
+  "seed": 2060689274,
+  "run_seed": 5,
+  "status": "pass",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-28T05:27:19Z",
+  "wall_start": 1793165239.8294206,
+  "wall_end": 1793165275.910171,
+  "elapsed_s": 36.1,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 5,
+  "tokens_in": 31504,
+  "tokens_out": 671,
+  "tool_sequence": [
+    "read",
+    "bash",
+    "read",
+    "read",
+    "edit",
+    "bash"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": true,
+  "verifier_results": [
+    {
+      "type": "py_test",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "final_answer": "All 5 tests pass. The bug was an off-by-one error in the range of `moving_average` \u2014 it used `len(values) - window` but needed `len(values) - window + 1` to include the last valid window position.",
+  "files": [
+    "stats_utils.py"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "pass",
+      "reason": null,
+      "started_utc": "2026-10-28T05:27:19Z"
+    }
+  ]
+}

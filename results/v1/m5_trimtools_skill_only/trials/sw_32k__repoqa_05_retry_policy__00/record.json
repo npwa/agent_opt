@@ -1,0 +1,54 @@
+{
+  "trial_id": "sw_32k__repoqa_05_retry_policy__00",
+  "task": "repoqa_05_retry_policy",
+  "config": "sw_32k",
+  "model": "ollama/qwen3.6-32k",
+  "k": 0,
+  "instrumented": true,
+  "prev_trial_id": "sw_32k__coding_01_my_sqrt_review__00",
+  "prev_task": "coding_01_my_sqrt_review",
+  "seed": 131161904,
+  "run_seed": 5,
+  "status": "fail",
+  "reason": null,
+  "attempt": 1,
+  "started_utc": "2026-10-28T04:28:27Z",
+  "wall_start": 1793161707.4323285,
+  "wall_end": 1793161743.3622437,
+  "elapsed_s": 35.9,
+  "timed_out": false,
+  "stalled": false,
+  "exit_codes": [
+    0
+  ],
+  "steps": 4,
+  "tokens_in": 32479,
+  "tokens_out": 762,
+  "tool_sequence": [
+    "glob",
+    "grep",
+    "read",
+    "read",
+    "read"
+  ],
+  "tool_errors": 0,
+  "expected_sequence_matched": true,
+  "verdict_passed": false,
+  "verifier_results": [
+    {
+      "type": "rubric",
+      "passed": false,
+      "detail": "missing 'delay_function_cited'; missing 'max_delay_value'; missing 'max_delay_citation'; missing 'max_attempts_value'; missing 'max_attempts_citation'"
+    }
+  ],
+  "final_answer": "**(1)** Function that computes delay before retry: **`calculate_retry_delay()`** \u2014 found in `mini/worker.py`. Returns an integer (likely seconds) for how long to wait before retrying the job.\n\n**(2)** Default maximum delay: **\"30\"** seconds \u2014 defined in `mini/queue.go` at line 74. This value caps any exponential backoff so delays never exceed half a minute.\n\n**(3)** Default number of attempts after which a job stops being retried: **15** \u2014 found in `main.go` at line 29, set as the `Attempts` field on the Job struct via the Jobs() helper function, serving as the upper bound for retry attempts.",
+  "files": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "fail",
+      "reason": null,
+      "started_utc": "2026-10-28T04:28:27Z"
+    }
+  ]
+}
